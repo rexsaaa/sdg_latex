@@ -1,14 +1,56 @@
-\documentclass{article}
-\usepackage{graphicx} % Required for inserting images
+\documentclass[a4paper,12pt]{article}
 
-\title{sdg论文}
-\author{Rass Destiny}
-\date{March 2026}
+% 中文支持
+\usepackage[UTF8,fontset=fandol]{ctex}
+
+% 基础宏包
+\usepackage{graphicx}       % 图片
+\usepackage{amsmath,amssymb} % 数学公式
+\usepackage{hyperref}        % 超链接和交叉引用
+\usepackage{soulutf8}        % 高亮 \hl{}
+\usepackage{geometry}        % 页面布局
+\usepackage{booktabs}        % 表格美化
+\usepackage{enumitem}        % 列表定制
+
+% `soul` is brittle with mixed Chinese/English content; keep the text and skip highlighting.
+\renewcommand{\hl}[1]{#1}
+
+% Unnumbered in-section headings like "A. 域泛化".
+\newcommand{\letteredsubsection}[1]{%
+  \par\medskip
+  \noindent\textbf{#1}\par\smallskip
+}
+
+% 页面设置
+\geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+
+% 图片路径
+\graphicspath{{./images/}}
+
+% 超链接设置
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\title{面向多标签眼科疾病识别的可解释与隐私保护单域泛化}
+\author{}
+\date{}
 
 \begin{document}
 
 \maketitle
+\thispagestyle{empty}
 
-\section{Introduction}
+% Split the paper into maintainable section files.
+\input{sections/00_frontmatter.tex}
+\input{sections/01_introduction.tex}
+\input{sections/02_related_work.tex}
+\input{sections/03_method.tex}
+\input{sections/04_experiments.tex}
+\input{sections/05_conclusion.tex}
+\input{sections/06_references.tex}
 
 \end{document}

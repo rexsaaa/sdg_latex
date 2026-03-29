@@ -1,0 +1,19 @@
+% Chapter 4 Experiments - Table 2
+% Generalization performance on ODIR and RFMiD.
+\begin{table}[htbp]
+\centering
+\caption{不同测试集上的泛化性能比较}
+\label{tab:generalization}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lccccc}
+\toprule
+\multirow{2}{*}{Model} & \multicolumn{2}{c}{Off-set} & \multicolumn{2}{c}{On-set} & RFMiD \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-6}
+& Monocular & Binocular & Monocular & Binocular & Monocular \\
+\midrule
+ResNet50 & 79.08 & 75.45 & 76.16 & 73.21 & 64.84 \\
+Ours & 81.96 & 78.83 & 78.44 & 76.76 & 68.49 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

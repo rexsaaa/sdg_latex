@@ -1,0 +1,21 @@
+% Chapter 4 Experiments - Table 3
+% Hyperparameter scan for adaptive Gaussian differential privacy.
+\begin{table}[htbp]
+\centering
+\caption{自适应高斯差分隐私超参数扫描结果}
+\label{tab:privacy-scan}
+\begin{tabular}{lccc}
+\toprule
+Setting & noise\_multiplier & noise\_decay\_rate & $\epsilon$ / 80 epoch \\
+\midrule
+setting1 & 0.65 & 1.5e-6 & 5.01 \\
+setting2 & 0.50 & 2e-6 & 6.80 \\
+setting3 & 0.40 & 4e-6 & 8.71 \\
+setting4 & 0.35 & 2e-6 & 9.96 \\
+setting5 & 0.35 & 4e-6 & 10.15 \\
+setting6 & 0.30 & 2e-6 & 11.91 \\
+setting7 & 0.25 & 2e-6 & 15.11 \\
+setting8 & 0.25 & 4e-6 & 20.01 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,17 @@
+% Chapter 4 Experiments - Table 6
+% Ablation study of DFE and ARC modules.
+\begin{table}[htbp]
+\centering
+\caption{消融实验结果}
+\label{tab:ablation}
+\begin{tabular}{lcccc}
+\toprule
+Model & Kappa & F1 & AUC & Final \\
+\midrule
+ResNet50 & 51.68 & 87.82 & 86.84 & 75.45 \\
+ResNet50+DFE & 55.01 & 88.40 & 90.25 & 77.88 \\
+ResNet50+ARC & 53.18 & 87.45 & 90.29 & 76.97 \\
+ResNet50+DFE+ARC (Ours) & 57.01 & 88.92 & 90.57 & 78.83 \\
+\bottomrule
+\end{tabular}
+\end{table}
