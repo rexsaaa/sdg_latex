@@ -12,6 +12,7 @@ Icon?
 .Trashes
 
 # LaTeX auxiliary files
+build/
 *.aux
 *.log
 *.out
@@ -34,3 +35,9 @@ Icon?
 *.swp
 *.swo
 *.bak
+
+
+#
+*.pdf
+!releases/*.pdf
+*.vsdx
