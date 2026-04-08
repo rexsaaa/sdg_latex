@@ -38,6 +38,4 @@ build/
 
 
 #
-*.pdf
-!releases/*.pdf
 *.vsdx

@@ -30,7 +30,7 @@
 
 本文的其余部分安排如下：第二节介绍了近年来的相关工作。 所提出方法的具体阐述于第三节介绍，第四节展示完整的实验设置和结果。第五节得出结论并展开未来工作的讨论。
 
-\includegraphics[width=5.75764in,height=4.38889in]{./images/media/image1.png}
+\includegraphics[width=5.75764in,height=4.38889in]{./images/media/image1_padded.pdf}
 
 \subsection{2.相关工作}\label{ux76f8ux5173ux5de5ux4f5c}
 
@@ -56,7 +56,7 @@
 
 所提出的面向多标签眼科疾病分类的可解释单域泛化框架概述图如图2所示，分为两个主要部分：Part1.双分支引导域不变特征提取，Part2.自适应标签-特征关联性构建。Part1的作用是以疾病CAM图引导模型学习，结合双分支对比学习，提取单域的疾病相关特征，减少噪声特征学习，使决策边界更鲁棒，便于泛化到其他域，同时CAM图可提供模型决策时的关注区域可视化，增强可解释性。在保证Part1的域不变特征提取的基础上，Part2通过注意力机制建立标签与标签、标签与特征间的关联性，解决多标签分类中的误检漏检问题。最终将双分支的各注意力向量计算特征一致性，由此提升多标签识别的单域泛化能力。另一方面，为了保证隐私，训练过程中添加高斯差分隐私机制，追求隐私-性能间的效益平衡。综合以上，所提出的方法构建了一个具有隐私保护的多标签眼病识别可解释单域泛化框架。以下分三小节详细描述各模块的实现细节。
 
-\includegraphics[width=5.76458in,height=3.21181in]{./images/media/image2.png}
+\includegraphics[width=5.76458in,height=3.21181in]{./images/media/image2_padded.pdf}
 
 A.双分支引导域不变特征提取
 
@@ -126,7 +126,7 @@ C. 隐私保护集成
 
 医疗图像数据高度敏感，训练过程中共享梯度易被梯度逆向攻击恢复原始图像，导致患者隐私泄露。为了在单域泛化框架中实现隐私与性能的有效平衡，我们引入自适应高斯差分隐私（Adaptive Gaussian Differential Privacy, AdaGDP）机制，相比传统的高斯差分隐私有显著改进。整体的隐私保护框架图如图3所示。
 
-\includegraphics[width=5.74514in,height=3.13611in,alt={privacy-sdg}]{./images/media/image3.jpeg}
+\includegraphics[width=5.74514in,height=3.13611in,alt={privacy-sdg}]{./images/media/image3_v2.png}
 
 高斯差分隐私（Gaussian DP）通过在每步梯度更新时加入独立同分布的高斯噪声实现(ε, δ)-差分隐私。对于相邻数据集D和D\textquotesingle（仅相差一个样本），若随机算法M对任意输出集合S满足：
 
@@ -155,9 +155,9 @@ A．数据集
 
 为全面评估模型的单域泛化与跨域泛化能力，除ODIR同域测试外，我们额外引入RIADD挑战赛提供的RFMiD\hyperref[_Ref213949409]{{[}50{]}}数据集作为独立跨域测试集。RFMiD包含3200张彩色眼底图像，涵盖45种视网膜疾病或异常，由专业视网膜专家标注。其45类标签中含有部分与ODIR的8类标签重合的类别，这为模型泛化提供了基础，同时RFMiD与ODIR在成像设备、光照条件、患者种族等方面存在显著域差异，是检验单域泛化能力的优秀外部测试集，\hl{图5（a）到（h）选择性地展示了45种类别中的8类图像}。
 
-\includegraphics[width=5.76597in,height=2.52222in]{./images/media/image5.png}
+\includegraphics[width=5.76597in,height=2.52222in]{./images/media/image5_padded.pdf}
 
-\includegraphics[width=5.75903in,height=2.49653in]{./images/media/image6.png}
+\includegraphics[width=5.75903in,height=2.49653in]{./images/media/image6_padded.pdf}
 
 B．实验设置\\
 所有实验均以ResNet-50作为骨干网络，并在PyTorch框架下实现。评估指标沿用ODIR官方标准：Kappa系数、F1、AUC以及三者平均值Final score。Kappa阈值固定为0.5，F1采用micro平均方式以缓和类别不平衡影响。
@@ -197,7 +197,7 @@ D．消融实验结果\\
 \item
   ResNet50+DFE+ARC（完整框架，ours）：同时启用两大模块协同后，Final score进一步升至78.83（较基线+3.38），Kappa达到57.01（+5.33），F1与AUC分别达到88.92（+1.10）和90.57（+3.73）。总增益接近两模块增益相加（2.43+1.52=3.95 \textless{} 3.38），体现了显著的正向协同：DFE为ARC提供纯净的域不变疾病特征，使Transformer能更精准地学习标签依赖与特征-标签匹配；ARC的一致性损失反过来进一步约束双分支输出分布，提升域不变特征稳定性。
 
-  \includegraphics[width=5.75972in,height=1.96181in]{./images/media/image8.png}
+  \includegraphics[width=5.75972in,height=1.96181in]{./images/media/image8_padded.pdf}
 \end{itemize}
 
 消融结果证明：双分支引导域不变特征提取（DFE）是框架泛化能力提升的主要来源，而自适应标签-特征关联性构建（ARC）在多标签共现建模与误检抑制方面发挥了不可替代的作用。两模块的深度融合协同使得所提框架在仅使用单域数据训练的情况下，性能进一步提升，体现了本方法设计的科学性与高效性。
