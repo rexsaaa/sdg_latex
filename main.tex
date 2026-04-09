@@ -12,6 +12,8 @@
 \usepackage{booktabs}        % 表格美化
 \usepackage{enumitem}        % 列表定制
 \usepackage{multirow}        % 复杂表头
+\usepackage{float}           % 控制浮动体位置
+\usepackage{titlesec}        % 标题间距
 
 % `soul` is brittle with mixed Chinese/English content; keep the text and skip highlighting.
 \renewcommand{\hl}[1]{#1}
@@ -21,9 +23,19 @@
   \par\medskip
   \noindent\textbf{#1}\par\smallskip
 }
+\newcommand{\figref}[1]{\hyperref[#1]{图~\ref*{#1}}}
+\newcommand{\figsubref}[2]{\hyperref[#1]{图~\ref*{#1}.#2}}
+\newcommand{\tabref}[1]{\hyperref[#1]{表~\ref*{#1}}}
+
+\titlespacing*{\section}{0pt}{1.2ex plus 0.4ex minus 0.2ex}{0.8ex plus 0.2ex minus 0.1ex}
 
 % 页面设置
 \geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{6pt}
+\setlength{\belowcaptionskip}{2pt}
 
 % 图片路径
 \graphicspath{{./images/}}
@@ -42,7 +54,10 @@
 
 \begin{document}
 
-\maketitle
+\begin{center}
+{\zihao{2}\bfseries 面向多标签眼科疾病识别的可解释与隐私保护单域泛化\par}
+\end{center}
+\vspace{0.8em}
 \thispagestyle{empty}
 
 % Split the paper into maintainable section files.

@@ -1,10 +1,10 @@
 \section{提出的方法}\label{ux63d0ux51faux7684ux65b9ux6cd5}
 
-所提出的面向多标签眼科疾病分类的可解释单域泛化框架概述如图~\ref{fig:method-framework}所示，分为两个主要部分：Part1.双分支引导域不变特征提取，Part2.自适应标签-特征关联性构建。Part1的作用是以疾病CAM图引导模型学习，结合双分支对比学习，提取单域的疾病相关特征，减少噪声特征学习，使决策边界更鲁棒，便于泛化到其他域，同时CAM图可提供模型决策时的关注区域可视化，增强可解释性。在保证Part1的域不变特征提取的基础上，Part2通过注意力机制建立标签与标签、标签与特征间的关联性，解决多标签分类中的误检漏检问题。最终将双分支的各注意力向量计算特征一致性，由此提升多标签识别的单域泛化能力。另一方面，为了保证隐私，训练过程中添加高斯差分隐私机制，追求隐私-性能间的效益平衡。综合以上，所提出的方法构建了一个具有隐私保护的多标签眼病识别可解释单域泛化框架。以下分三小节详细描述各模块的实现细节。
+所提出的面向多标签眼科疾病分类的可解释单域泛化框架概述如\figref{fig:method-framework}所示，分为两个主要部分：Part1.双分支引导域不变特征提取，Part2.自适应标签-特征关联性构建。Part1的作用是以疾病CAM图引导模型学习，结合双分支对比学习，提取单域的疾病相关特征，减少噪声特征学习，使决策边界更鲁棒，便于泛化到其他域，同时CAM图可提供模型决策时的关注区域可视化，增强可解释性。在保证Part1的域不变特征提取的基础上，Part2通过注意力机制建立标签与标签、标签与特征间的关联性，解决多标签分类中的误检漏检问题。最终将双分支的各注意力向量计算特征一致性，由此提升多标签识别的单域泛化能力。另一方面，为了保证隐私，训练过程中添加高斯差分隐私机制，追求隐私-性能间的效益平衡。综合以上，所提出的方法构建了一个具有隐私保护的多标签眼病识别可解释单域泛化框架。以下分三小节详细描述各模块的实现细节。
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \centering
-\includegraphics[width=\textwidth]{./images/media/image2_padded.pdf}
+\includegraphics[width=0.96\textwidth]{./images/media/image2_padded.pdf}
 \caption{所提出的可解释单域泛化框架总览}
 \label{fig:method-framework}
 \end{figure}
@@ -13,9 +13,9 @@
 
 训练域只有单域数据，但其中存在可泛化到其他域的域不变信息，若能有效提取，可以实现对未知域的鲁棒泛化。受对比学习启发，将原图利用风格扰动等增强技术创建增强图，用于模拟未知域可能出现的各种分布差异。具体而言，原图\(I_{ori}\)代表训练域的原始眼底图像，而增强图\(I_{aug}\)通过风格扰动（如MixStyle方法或随机调整亮度、对比度、饱和度）生成。这种增强模拟了跨域场景中的成像设备、光照环境或患者群体差异，但保留了图像的语义内容（疾病病变区域）。
 
-首先，如图~\ref{fig:method-framework}(a)部分所示，\(I^{ori}\)和\(I^{aug}\)二者共同送入骨干网络提取特征得到\(F^{ori}\)和\(F^{aug}\)。令\(F^{ori} \in \mathbb{R}^{C \times H \times W}\)和\(F^{aug} \in \mathbb{R}^{C \times H \times W}\)，其中\(C\)、\(H\)、\(W\)分别为骨干网络的最终特征图尺寸通道数、高度和宽度。本方法选择ResNet-50作为骨干网络，因为其在医疗图像分类中表现出色，具有较好的特征提取能力和计算效率。然而，仅靠\(F^{ori}\)和\(F^{aug}\)的对比学习效果有限，因为在提取域不变信息的同时，模型可能会学到噪声特征（如背景纹理或无关光影），这些噪声会干扰决策边界，导致泛化性能下降。
+首先，如\figsubref{fig:method-framework}{a}部分所示，\(I^{ori}\)和\(I^{aug}\)二者共同送入骨干网络提取特征得到\(F^{ori}\)和\(F^{aug}\)。令\(F^{ori} \in \mathbb{R}^{C \times H \times W}\)和\(F^{aug} \in \mathbb{R}^{C \times H \times W}\)，其中\(C\)、\(H\)、\(W\)分别为骨干网络的最终特征图尺寸通道数、高度和宽度。本方法选择ResNet-50作为骨干网络，因为其在医疗图像分类中表现出色，具有较好的特征提取能力和计算效率。然而，仅靠\(F^{ori}\)和\(F^{aug}\)的对比学习效果有限，因为在提取域不变信息的同时，模型可能会学到噪声特征（如背景纹理或无关光影），这些噪声会干扰决策边界，导致泛化性能下降。
 
-为此，我们引入图~\ref{fig:method-framework}(b)部分的类别特征引导模块，以提升特征的疾病相关性和可解释性。预先使用基线模型（ResNet-50 + BCE损失）在训练集上生成类激活图（CAM）。CAM突出模型对不同疾病区域的关注，例如糖尿病视网膜病变（DR）关注血管区，年龄相关性黄斑变性（AMD）关注黄斑区。其计算公式为：
+为此，我们引入\figsubref{fig:method-framework}{b}部分的类别特征引导模块，以提升特征的疾病相关性和可解释性。预先使用基线模型（ResNet-50 + BCE损失）在训练集上生成类激活图（CAM）。CAM突出模型对不同疾病区域的关注，例如糖尿病视网膜病变（DR）关注血管区，年龄相关性黄斑变性（AMD）关注黄斑区。其计算公式为：
 
 \[I^{cam} = \sum_{k = 1}^{C}w_{k} \cdot A_{k},
 \]
@@ -27,14 +27,19 @@
 
 其中\(\alpha\)和\(\beta\)分别为控制\(s_{w}\)和\(c_{w}\)增强程度的超参数。残差加权方式确保了CAM引导提供疾病特征的关联信息，使模型训练时更有方向性，减少噪声信息的学习，提高了其域不变特征与噪声特征的对比度。在此基础上再提取域不变特征效果更好，同时CAM热图的可视化直接增强了模型的可解释性，帮助临床医生理解预测依据，例如通过叠加热图观察模型是否关注正确病变区。
 
-接下来是双分支域不变特征提取方法，如图~\ref{fig:method-framework}(c)部分所示，我们采用mask掩码方法，思路为将原图引导特征和增强图引导特征在特征分布层面计算相似度，相似度高的部分（域不变）保留，低的部分（域特定噪声）剔除。掩码矩阵\(M \in \mathbb{R}^{C \times H \times W}\)的计算基于标准化距离：
+接下来是双分支域不变特征提取方法，如\figsubref{fig:method-framework}{c}所示，我们采用mask掩码方法，思路为将原图引导特征和增强图引导特征在特征分布层面计算相似度，相似度高的部分（域不变）保留，低的部分（域特定噪声）剔除。掩码矩阵\(M \in \mathbb{R}^{C \times H \times W}\)的计算基于标准化距离：
 
-\[M_{ij} = \{\begin{matrix}
-1 & \text{if } \mid \frac{F_{\text{guide,ori}}^{ij} - \mu_{1}}{\sqrt{\sigma_{1}^{2} + \epsilon}} - \frac{F_{\text{guide,aug}}^{ij} - \mu_{2}}{\sqrt{\sigma_{2}^{2} + \epsilon}} \mid \leq \alpha \\
-0 & \text{otherwise}
-\end{matrix}\]
+\[
+M_{ij} =
+\left\{
+\begin{array}{ll}
+1, & \text{if } \left| \dfrac{F_{guide}^{ori,ij} - \mu_{1}}{\sqrt{\sigma_{1}^{2} + \epsilon}} - \dfrac{F_{guide}^{aug,ij} - \mu_{2}}{\sqrt{\sigma_{2}^{2} + \epsilon}} \right| \leq \tau, \\
+0, & \text{otherwise.}
+\end{array}
+\right.
+\]
 
-其中\(\mu_{1},\sigma_{1}\)和\(\mu_{2},\sigma_{2}\)分别是两个引导特征的均值和方差，\(\epsilon = 10^{- 5}\)为稳定性常数，\(ij\)表示特征图位置。然后根据阈值\(\alpha\)将相似部分置1，不相似置0。最终将掩码矩阵分别应用到\(F_{guide}^{ori}\)和\(F_{guide}^{aug}\)提取域不变特征，具体为：
+其中\(\mu_{1},\sigma_{1}\)和\(\mu_{2},\sigma_{2}\)分别是两个引导特征的均值和方差，\(\epsilon = 10^{-5}\)为稳定性常数，\(i,j\)表示特征图位置。然后根据阈值\(\tau\)将相似部分置1，不相似置0。最终将掩码矩阵分别应用到\(F_{guide}^{ori}\)和\(F_{guide}^{aug}\)提取域不变特征，具体为：
 
 \[F_{invariant}^{ori} = F_{guide}^{ori} \odot M,F_{invariant}^{aug} = F_{guide}^{aug} \odot M,
 \]
@@ -43,28 +48,31 @@
 
 \letteredsubsection{B. 自适应标签-特征关联性构建}
 
-多标签眼科疾病分类面临疾病共现挑战（如DR与AMD同时出现），传统方法忽略标签依赖易导致漏检。为了提高多标签识别性能，需要构建关联性。为此，嵌入Transformer注意力机制，在标签和特征层面构建相关性，实现自适应多标签预测。具体模块如图~\ref{fig:method-framework}(d)和(e)所示，包括多标签相关性构建和注意力特征对齐。
+多标签眼科疾病分类面临疾病共现挑战（如DR与AMD同时出现），传统方法忽略标签依赖易导致漏检。为了提高多标签识别性能，需要构建关联性。为此，嵌入Transformer注意力机制，在标签和特征层面构建相关性，实现自适应多标签预测。具体模块如\figsubref{fig:method-framework}{d}和\figsubref{fig:method-framework}{e}所示，包括多标签相关性构建和注意力特征对齐。
 
 首先，将8类标签（ODIR数据集：正常、DR、AMD等）建模为可学习向量\(L = \lbrack L_{1},\ldots,L_{8}\rbrack \in \mathbb{R}^{8 \times d}\)，其中\(d = 512\)是嵌入维度。这些向量初始化为随机高斯分布，并在训练中优化，捕捉标签语义（如DR和AMD的共现概率）。标签向量输入到Transformer自注意力机制（Self-Attention），建模内部关联：
 
-\[V_{self} = softmax(\frac{QK^{T}}{\sqrt{d_{k}}})V,
+\[
+V_{self} = \operatorname{softmax}\left(\frac{QK^{T}}{\sqrt{d_{k}}}\right)V,
 \]
 
 其中\(Q = LW_{Q},K = LW_{K},V = LW_{V}\)，\(W_{Q},W_{K},W_{V}\)是可学习投影矩阵，\(d_{k} = d/heads\)（多头注意力，heads=8）。自注意力输出\(V_{self}\)捕捉标签依赖，该机制允许标签间动态交互，强化共现疾病的权重。
 
 接下来，使用交叉注意力（Cross-Attention）将标签与域不变特征结合。因为Transformer需要接收序列输入，我们先将Part1输出的\(F_{invariant}^{ori}\)和\(F_{invariant}^{aug}\)展平（Flatten），作为Key和Value，与标签向量\(V_{self}\)作为Query，进行交叉注意力计算。计算公式为：
 
-\[V_{cross}^{ori} = softmax(\frac{V_{self}W_{Q}(F_{invariant}^{ori}W_{K})^{T}}{\sqrt{d_{k}}})(F_{invariant}^{ori}W_{V}),
+\[
+V_{cross}^{ori} = \operatorname{softmax}\left(\frac{V_{self}W_{Q}(F_{invariant}^{ori}W_{K})^{T}}{\sqrt{d_{k}}}\right)(F_{invariant}^{ori}W_{V}),
 \]
 
 类似计算\(V_{cross}^{aug}\)。通过多层交叉注意力机制，标签与对应疾病特征进行匹配，形成注意力向量\(V \in \mathbb{R}^{8 \times d}\)，突出疾病相关区域（如像素级乘法增强病变区）。由于自注意力机制各标签之间有关联，结果即为，查询出某个标签在图像的存在性之后，会增大概率检索其他关联标签的存在性，例如检测到DR后，更易激活AMD的查询。该设计在特征和标签层面同时构建疾病共现依赖，减少多标签识别的误检漏检。
 
 为了确保双分支向量输出一致，我们引入注意力特征对齐模块，计算一致性损失。该损失使得在构建关联性的同时，不破坏原图和增强图向量的相似性，保留泛化性。具体计算方式为均方误差（MSE），公式为：
 
-\[L_{consist} = \frac{1}{8 \cdot d}\sum_{k = 1}^{8}{\sum_{j = 1}^{d}\left( \text{softmax}\left( V_{k,j}^{ori} \right) - \text{softmax}\left( V_{k,j}^{aug} \right) \right)^{2}},
+\[
+L_{consist} = \frac{1}{N \cdot d}\sum_{k = 1}^{N}\sum_{j = 1}^{d}\left( \operatorname{softmax}\left( V_{k,j}^{ori} \right) - \operatorname{softmax}\left( V_{k,j}^{aug} \right) \right)^{2},
 \]
 
-其中\(8\)是标签数， \(d = 512\)是嵌入维，softmax确保概率分布一致。该损失强制分支间注意力向量对齐，提升模型在域偏移下的稳定性。
+其中\(N = 8\)是标签数，\(d = 512\)是嵌入维度，Softmax确保概率分布一致。该损失强制分支间注意力向量对齐，提升模型在域偏移下的稳定性。
 
 最终，注意力向量输入多标签分类器，首先对类别查询特征施加LayerNorm与Dropout以进行轻量级特征增强，以规范化和正则化查询特征，随后通过逐类别的线性变换获得每个类别的logits，经Sigmoid激活后，得到各类别的预测概率\(p^{ori}\)，类似得到\(p^{aug}\)。分类损失采用二元交叉熵（BCE）：
 
@@ -75,30 +83,30 @@
 
 \letteredsubsection{C. 隐私保护集成}
 
-医疗图像数据高度敏感，训练过程中共享梯度易被梯度逆向攻击恢复原始图像，导致患者隐私泄露。为了在单域泛化框架中实现隐私与性能的有效平衡，我们引入自适应高斯差分隐私（Adaptive Gaussian Differential Privacy, AdaGDP）机制，相比传统的高斯差分隐私有显著改进。整体的隐私保护框架如图~\ref{fig:privacy-framework}所示。
+医疗图像数据高度敏感，训练过程中共享梯度易被梯度逆向攻击恢复原始图像，导致患者隐私泄露。为了在单域泛化框架中实现隐私与性能的有效平衡，我们引入自适应高斯差分隐私（Adaptive Gaussian differential privacy, AdaGDP）机制，相比传统的高斯差分隐私有显著改进。整体的隐私保护框架如\figref{fig:privacy-framework}所示。
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \centering
-\includegraphics[width=\textwidth]{./images/media/image3_v2.png}
+\includegraphics[width=0.82\textwidth]{./images/media/image3_v2.png}
 \caption{自适应高斯差分隐私在单域泛化训练中的集成方式}
 \label{fig:privacy-framework}
 \end{figure}
 
-高斯差分隐私（Gaussian DP）通过在每步梯度更新时加入独立同分布的高斯噪声实现(ε, δ)-差分隐私。对于相邻数据集D和D\textquotesingle（仅相差一个样本），若随机算法M对任意输出集合S满足：
+高斯差分隐私（Gaussian DP）通过在每步梯度更新时加入独立同分布的高斯噪声实现\((\epsilon, \delta)\)-差分隐私。对于相邻数据集\(D\)和\(D'\)（仅相差一个样本），若随机算法\(M\)对任意输出集合\(S\)满足：
 
 \[\Pr\lbrack M(D) \in S\rbrack \leq e^{\epsilon}\Pr\lbrack M(D') \in S\rbrack + \delta,
 \]
 
-则称M满足(ε, δ)-DP，其中ε衡量隐私损失，δ为松弛概率（通常设为10⁻⁵）。在DP-SGD框架下，每次迭代对每个样本梯度g先进行L2范数裁剪：
+则称\(M\)满足\((\epsilon, \delta)\)-DP，其中\(\epsilon\)衡量隐私损失，\(\delta\)为松弛概率，通常设为\(10^{-5}\)。在DP-SGD框架下，每次迭代对每个样本梯度\(g\)先进行L2范数裁剪：
 
 \[g' = g/max(1, \parallel g \parallel_{2}/C),
 \]
 
-然后加入高斯噪声\(n \sim \mathcal{N}(0,\sigma^{2}C^{2}I)\)，噪声方差σ由隐私预算决定：
+然后加入高斯噪声\(n \sim \mathcal{N}(0,\sigma^{2}C^{2}I)\)，噪声方差\(\sigma\)由隐私预算决定：
 
 \[\sigma = \sqrt{2\ln(1.25/\delta)}/\epsilon.
 \]
 
-噪声梯度\(\widetilde{g} = g' + n\)，更新\(\theta \leftarrow \theta - \eta\widetilde{g}/B\)，B是批次大小。该过程通过注入噪声模糊梯度，防止逆向攻击恢复原始图像或标签。有关隐私保护机制及其安全性的详细证明，请参阅Dwork C etal.\hyperref[_Ref214903493]{{[}48{]}}的工作。
+噪声梯度\(\widetilde{g} = g' + n\)，更新\(\theta \leftarrow \theta - \eta\widetilde{g}/B\)，其中\(B\)是批次大小。该过程通过注入噪声模糊梯度，防止逆向攻击恢复原始图像或标签。有关隐私保护机制及其安全性的详细证明，请参阅Dwork C etal.\hyperref[_Ref214903493]{{[}48{]}}的工作。
 
-然而，传统高斯DP在整个训练过程中使用固定σ，导致训练后期仍注入大量噪声，严重损害模型收敛和最终性能。为此，我们采用自适应高斯差分隐私优化器（AdaGaussian），其核心在于动态衰减噪声强度：训练初期使用较大噪声乘数以快速消耗隐私预算、提供强保护；随着模型逐渐收敛，根据预设衰减策略逐步降低噪声乘数，使后期扰动最小化，从而在相同最终ε下显著提升模型可用性。由于噪声强度随训练动态衰减，该机制虽无法像固定噪声那样对每一轮提供严格的ε会计，但整体仍能满足松弛的(ε, δ)-差分隐私保证。最终实验验证，在确保中等隐私保护下，泛化性能可持平基线，验证了自适应高斯差分隐私在眼科多标签单域泛化任务中的优越性。
+然而，传统高斯DP在整个训练过程中使用固定\(\sigma\)，导致训练后期仍注入大量噪声，严重损害模型收敛和最终性能。为此，我们采用自适应高斯差分隐私优化器（AdaGaussian），其核心在于动态衰减噪声强度：训练初期使用较大噪声乘数以快速消耗隐私预算、提供强保护；随着模型逐渐收敛，根据预设衰减策略逐步降低噪声乘数，使后期扰动最小化，从而在相同最终\(\epsilon\)下显著提升模型可用性。由于噪声强度随训练动态衰减，该机制虽无法像固定噪声那样对每一轮提供严格的\(\epsilon\)会计，但整体仍能满足松弛的\((\epsilon, \delta)\)-差分隐私保证。最终实验验证，在确保中等隐私保护下，泛化性能可持平基线，验证了自适应高斯差分隐私在眼科多标签单域泛化任务中的优越性。
