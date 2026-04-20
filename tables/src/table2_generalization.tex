@@ -1,18 +1,20 @@
 % Chapter 4 Experiments - Table 4
-% Generalization performance on ODIR and RFMiD.
-\begin{table}[htbp]
+% Generalization performance on ODIR, RFMiD/RIADD, and EDID.
+\begin{table}[!htb]
 \centering
 \caption{不同测试集上的泛化性能比较}
 \label{tab:generalization}
 \resizebox{\textwidth}{!}{
-\begin{tabular}{lccccc}
+\begin{tabular}{lcccccccc}
 \toprule
-\multirow{2}{*}{Model} & \multicolumn{2}{c}{Off-set} & \multicolumn{2}{c}{On-set} & RFMiD \\
-\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-6}
-& Monocular & Binocular & Monocular & Binocular & Monocular \\
+\multirow{3}{*}{Model} & \multicolumn{4}{c}{Off-set $\rightarrow$ On-set} & \multicolumn{2}{c}{Off-set $\rightarrow$ RFMiD} & \multicolumn{2}{c}{Off-set $\rightarrow$ EDID} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
+& \multicolumn{2}{c}{Off-set} & \multicolumn{2}{c}{On-set} & Off-set & RFMiD & Off-set & EDID \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
+& Monocular & Binocular & Monocular & Binocular & Monocular & Monocular & Monocular & Monocular \\
 \midrule
-ResNet50 & 79.08 & 75.45 & 76.16 & 73.21 & 64.84 \\
-\textbf{Ours} & \textbf{81.96} & \textbf{78.83} & \textbf{78.44} & \textbf{76.76} & \textbf{68.49} \\
+ResNet50 & 79.37 & 76.19 & 77.30 & 75.23 & 94.39 & 83.86 & 94.30 & 52.16 \\
+\textbf{Ours} & \textbf{81.71} & \textbf{78.79} & \textbf{78.98} & \textbf{77.49} & \textbf{95.94} & \textbf{85.06} & \textbf{96.03} & \textbf{55.35} \\
 \bottomrule
 \end{tabular}
 }
