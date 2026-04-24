@@ -2,7 +2,7 @@
 % Generalization performance on ODIR, RFMiD/RIADD, and EDID.
 \begin{table}[!htb]
 \centering
-\caption{不同测试集上的泛化性能比较}
+\caption{不同测试集上的泛化性能比较。比较了 Baseline 与 Ours 在 ODIR 内部泛化（Off-set $\rightarrow$ On-set）以及 ODIR 到 RFMiD、EDID 外部泛化中的表现，比较的指标均为Final score。其中，Off-set $\rightarrow$ On-set 同时报告了单目与双目结果，外部泛化部分报告了各数据集对齐三类标签空间后的单目结果；每个方向均在候选权重中选择目标测试集表现最优的模型进行报告。总体上，所提方法在各测试方向上均优于基线。}
 \label{tab:generalization}
 \resizebox{\textwidth}{!}{
 \begin{tabular}{lcccccccc}

@@ -2,7 +2,7 @@
 % Epsilon-performance evolution during privacy training.
 \begin{table}[!htb]
 \centering
-\caption{隐私训练过程中 $\epsilon$ 与性能的演化}
+\caption{隐私训练过程中 $\epsilon$ 与性能的演化。表中使用的是\tabref{tab:privacy-scan}中 setting5 的加噪策略，评估指标是单目下的Final score，随着训练推进，隐私预算逐步消耗、模型性能总体上升，并在 e74 达到峰值（红色部分）。此权重将作为本文在隐私约束下采用的最佳性能检查点。}
 \label{tab:privacy-evolution}
 \begin{tabular}{lccccc}
 \toprule
@@ -17,7 +17,7 @@ e49 & 7.65 & 40.64 & 87.01 & 85.17 & 70.94 \\
 e52 & 7.92 & 42.16 & 87.46 & 85.00 & 71.54 \\
 e64 & 8.94 & 42.45 & 87.38 & 85.89 & 71.91 \\
 e68 & 9.27 & 43.59 & 87.76 & 86.18 & 72.51 \\
-e74 & 9.76 & 45.12 & 87.91 & 86.42 & 73.15 \\
+\textcolor{red}{e74} & \textcolor{red}{9.76} & \textcolor{red}{45.12} & \textcolor{red}{87.91} & \textcolor{red}{86.42} & \textcolor{red}{73.15} \\
 e79 & 10.15 & 43.16 & 87.51 & 86.47 & 72.38 \\
 \bottomrule
 \end{tabular}

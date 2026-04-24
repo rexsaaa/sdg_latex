@@ -2,14 +2,14 @@
 
 \letteredsubsection{A. 数据集}
 
-本实验主要采用ODIR-5K（Ocular Disease Intelligent Recognition）\hyperref[_Ref213949402]{{[}46{]}}数据集作为单域训练集。ODIR包含5000名患者的10000张彩色眼底图像（左右眼各5000张），由3名具有2年以上临床经验的眼科医生初步标注，并由3名10年以上经验的专家进行最终仲裁。数据集定义了8个互不排斥的类别：正常（N）、糖尿病视网膜病变（D）、青光眼（G）、白内障（C）、年龄相关性黄斑变性（A）、高血压视网膜病变（H）、病理性近视（M）和其他异常（O），如\figsubref{fig:odir-samples}{a}到\figsubref{fig:odir-samples}{h}所示，属于典型的多标签眼科疾病识别任务。每张图像可能同时具有多个疾病标签，患者级标签由其左右眼诊断关键词综合确定。官方将5000名患者划分为3个子集，训练集（3500人）用于模型训练，Off-set集（500人）用于模型选择，On-set集（1000人）用于测试模型域内泛化性能。各类别分布如\tabref{tab:dataset-distribution}所示，存在类别不平衡问题。
+本实验主要采用ODIR-5K（Ocular Disease Intelligent Recognition）\hyperref[_Ref213949402]{{[}46{]}}数据集作为单域训练集。ODIR包含5000名患者的10000张彩色眼底图像（左右眼各5000张），由3名具有2年以上临床经验的眼科医生初步标注，并由3名10年以上经验的专家进行最终仲裁。数据集定义了8个互不排斥的类别：正常（N）、糖尿病视网膜病变（D）、青光眼（G）、白内障（C）、年龄相关性黄斑变性（A）、高血压视网膜病变（H）、病理性近视（M）和其他异常（O），如\figsubref{fig:odir-samples}{a}到\figsubref{fig:odir-samples}{h}所示，属于典型的多标签眼科疾病识别任务。每张图像可能同时具有多个疾病标签，患者级标签由其左右眼诊断关键词综合确定。官方将5000名患者划分为3个子集，训练集（3500人）用于模型训练，Off-set测试集（500人）用于模型选择，On-set测试集（1000人）用于测试模型域内泛化性能。各类别分布如\tabref{tab:dataset-distribution}所示，存在类别不平衡问题。
 
 \input{tables/src/table1_dataset_distribution.tex}
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.86\textwidth]{./images/media/image5_padded.pdf}
-\caption{ODIR 数据集中 8 类典型眼底图像示例}
+\caption{ODIR 数据集中 8 类眼底图像的示例样本，对应本文使用的 8 个非互斥类别。其中(a)-(h)分别代表(a) 正常（N），(b) 糖尿病视网膜病变（D），(c) 青光眼（G），(d) 白内障（C），(e) 年龄相关性黄斑变性（A），(f) 高血压视网膜病变（H），(g) 病理性近视（M），(h) 其他异常（O）。}
 \label{fig:odir-samples}
 \end{figure}
 
@@ -18,7 +18,7 @@
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.86\textwidth]{./images/media/image6_padded.pdf}
-\caption{RFMiD 数据集中选取的 8 类典型眼底图像示例}
+\caption{RFMiD 数据集中选取的 8 类眼底图像示例，其中(a)-(h)分别对应 DR、AMD、MYA、MS、RS、CSR、CRVO 和 ODE。RFMiD 作为外部测试集使用，实验中与 ODIR 对齐后的共有标签空间为 D/A/M 三类，用于评估跨数据集泛化性能。}
 \label{fig:rfmid-samples}
 \end{figure}
 
@@ -27,22 +27,22 @@
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.86\textwidth]{./images/media/edid_samples_padded.pdf}
-\caption{EDID 数据集中选取的 8 类典型眼底图像示例}
+\caption{EDID 数据集中选取的 8 类眼底图像示例，其中(a)-(h)分别对应 D、G、M、RD、RP、DE、MS 和 CS。EDID 为单标签外部测试集，实验中与 ODIR 对齐后的共有标签空间为 D/G/M 三类，用于评估不同数据来源和标签组织方式下的泛化性能。}
 \label{fig:edid-samples}
 \end{figure}
 
 与RFMiD类似，考虑到EDID与ODIR的完整标签空间并不一致，本文选取二者共有的糖尿病视网膜病变（D）、青光眼（G）和病理性近视（M）三类构建外部测试集，共得到3358张图像，其中D、G、M的样本数分别为1509、1349和500。由于EDID为单标签数据集，本文将其视为多标签任务中的一种特殊情形，即每张图像仅有一个阳性标签，并在D/G/M三类空间下进行外部泛化评估。相应地，在ODIR侧构建D/G/M三类训练子集，共包含1871张图像，其中D、G、M的样本数分别为1401、227和243。
 
 \letteredsubsection{B. 实验设置}
-所有实验均以ResNet-50作为骨干网络，并在PyTorch框架下实现。评估指标沿用ODIR官方标准：Kappa系数、F1、AUC以及三者平均值Final score。Kappa阈值固定为0.5，F1采用micro平均方式以缓和类别不平衡影响。
+所有实验均以ResNet50作为骨干网络，并在PyTorch框架下实现。评估指标沿用ODIR官方标准：Kappa系数、F1、AUC以及三者平均值Final score。Kappa阈值固定为0.5，F1采用micro平均方式以缓和类别不平衡影响。
 
-对于基准框架，我们参考ODIR原始的ResNet-50的实现，并在此基础上进行了改进：原论文采用双目样本成对输入，尝试不同的特征层融合策略（如concat、prod、sum）后接8个独立的分类头进行患者级预测。我们的基准框架改为单眼图像为输入样本，样本同时带有所属患者的编号，分类器统一为单个多标签分类头，输出8维logits后经Sigmoid激活得到各疾病概率，损失函数为标准二元交叉熵（BCE）。推理阶段，将同一患者左右眼的单眼预测结果按逻辑合并得到患者级预测，从而与官方指标完全对齐。该改进避免了特征融合带来的噪声放大和个体差异信息稀释，尤其在双眼病变程度不一致时更有优势。
+对于基准框架，我们参考ODIR原始的ResNet50的实现，并在此基础上进行了改进：原论文采用双目样本成对输入，尝试不同的特征层融合策略（如concat、prod、sum）后接8个独立的分类头进行患者级预测。我们的基准框架改为单眼图像为输入样本，样本同时带有所属患者的编号，分类器统一为单个多标签分类头，输出8维logits后经Sigmoid激活得到各疾病概率，损失函数为标准二元交叉熵（BCE）。推理阶段，将同一患者左右眼的单眼预测结果按逻辑合并得到患者级预测，从而与官方指标完全对齐。该改进避免了特征融合带来的噪声放大和个体差异信息稀释，尤其在双眼病变程度不一致时更有优势。
 
 训练配置如下：优化器选择Adam，初始学习率\(1 \times 10^{-5}\)，采用OneCycleLR调度策略（前10\%轮次线性升温至峰值\(1 \times 10^{-5}\)，有助于模型快速跳出局部最优，后90\%轮次退火，有助于收敛和找到更优解），训练epoch为50，batch size为32，输入分辨率为448×448。所提框架在2张RTX 4080 Super上完成训练。后续实验结果表明，我们的改进基准框架（Off-set双目Final score 76.19）比起ODIR原文实现（Off-set双目Final score 68.00）能达到更好的效果。
 
 \letteredsubsection{C. 与现有方法对比}
 
-为评估所提方法在ODIR数据集上的分类性能，我们选取了四个典型的多标签眼科疾病分类方法，包括ODIR数据集论文提供的官方基线（Li et al.\hyperref[_Ref213949402]{{[}46{]}}）以及三项后续工作（Gour and Khanna、He et al.、Ou et al.）。这些方法主要聚焦于提升Final score，未考虑跨域泛化或隐私保护。
+为评估所提方法在ODIR数据集上的分类性能，我们选取了四个典型的多标签眼科疾病分类方法，包括ODIR数据集论文提供的官方基线（Li et al.\hyperref[_Ref213949402]{{[}46{]}}）以及三项后续工作（Gour and Khanna\hyperref[_Ref214903299]{{[}49{]}}、He et al.\hyperref[_Ref213950338]{{[}20{]}}、Ou et al.\hyperref[_Ref214903327]{{[}50{]}}）。这些方法主要聚焦于提升Final score，未考虑跨域泛化或隐私保护。
 
 Gour and Khanna\hyperref[_Ref214903299]{{[}49{]}}提出基于转移学习的CNN框架，骨干网络采用VGG16，通过数据增强方法扩充ODIR数据集，然后采用SGD优化器细调模型，焦点在于利用预训练权重捕捉血管、视盘、黄斑等结构异常，以提升多类共存场景的识别性能。
 
@@ -50,7 +50,7 @@ He et al.\hyperref[_Ref213950338]{{[}20{]}}开发密集相关网络（DCNet）�
 
 Ou et al.\hyperref[_Ref214903327]{{[}50{]}}设计双流交互CNN，使用特征增强模块通过注意力机制捕捉双眼局部-全局依赖，并多尺度模块叠加不同分辨率特征以丰富表示。其原理在于利用双流交互强化病变区域（如微血管瘤、出血点），提升多标签预测，但未考虑隐私或跨域场景。
 
-\tabref{tab:sota-compare}报告了Off-set和On-set测试集上的双目指标对比，对比结果显示，所提方法在Off-set集的Final score为78.85，领先BFENet 0.85；在On-set集为77.49，领先BFENet 0.79。该结果证明了双分支引导特征学习与自适应标签关联构建在ODIR多标签识别任务中的有效性。
+\tabref{tab:sota-compare}报告了Off-set和On-set测试集上的双目指标对比。对比结果显示，所提方法在Off-set集的Final score为78.85，领先BFENet [50] 0.85；在On-set集为77.49，领先BFENet [50] 0.79。该结果证明了双分支引导特征学习与自适应标签关联构建在ODIR多标签识别任务中的有效性。
 
 \input{tables/src/table7_sota_compare.tex}
 
@@ -63,22 +63,22 @@ Ou et al.\hyperref[_Ref214903327]{{[}50{]}}设计双流交互CNN，使用特征�
 
 \begin{itemize}
 \item
-  纯ResNet-50基线：仅使用单分支ResNet-50与标准多标签分类头，Final score为76.19，Kappa为52.75，AUC是88.00。
+  纯ResNet50基线：仅使用单分支ResNet50与标准多标签分类头，Final score为76.19，Kappa为52.75，AUC是88.00。
 \item
-  ResNet50+DFE：仅引入完整的双分支引导域不变特征提取模块，Final score提升至78.37（+2.18），Kappa提升3.45，AUC提升2.10。性能提升主要源于CAM引导残差加权与掩码机制有效抑制了域特定噪声，使模型更关注可迁移的疾病相关特征，是整体性能提升的重要来源。如\figref{fig:cam-visualization}可视化结果显示，CAM热力图对图像边缘、光照伪影的关注减少，关注区域更收敛到眼球、血管等核心疾病区，模型可解释性增强。
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=0.92\textwidth]{./images/media/image8_padded.pdf}
-\caption{基线方法与所提方法的 CAM 可视化对比}
-\label{fig:cam-visualization}
-\end{figure}
+  ResNet50+DFE：仅引入完整的双分支引导域不变特征提取模块，Final score提升至78.37（+2.18），Kappa提升3.45，AUC提升2.10。性能提升主要源于CAM引导残差加权与掩码机制有效抑制了域特定噪声，使模型更关注可迁移的疾病相关特征，是整体性能提升的重要来源。
 
 \item
   ResNet50+ARC：仅引入自适应标签-特征关联性构建模块，Final score提升至76.98（+0.78），Kappa提升0.44，AUC提升2.29。该模块通过显式建模疾病共现关系（如DR与AMD、近视与视盘异常）降低了漏检率，多标签分类性能提高。
 \item
-  ResNet50+DFE+ARC（完整框架，ours）：同时启用两大模块协同后，Final score进一步升至78.85（较基线+2.66），Kappa达到57.05（+4.30），F1与AUC分别达到89.03（+1.20）和90.48（+2.48）。总增益与两模块增益之和接近（2.66 \textless{} 2.18+0.78=2.96），体现了两模块之间的正向协同：DFE为ARC提供更稳定的疾病相关特征，使Transformer能更精准地学习标签依赖与特征-标签匹配；ARC的一致性损失反过来进一步约束双分支输出分布，提升特征表示的稳定性。
+  ResNet50+DFE+ARC（完整框架，ours）：同时启用两大模块协同后，Final score进一步升至78.85（较基线+2.66），Kappa达到57.05（+4.30），F1与AUC分别达到89.03（+1.20）和90.48（+2.48）。总增益与两模块增益之和接近（2.66 \textless{} 2.18+0.78=2.96），体现了两模块之间的正向协同：DFE为ARC提供更稳定的疾病相关特征，使Transformer能更精准地学习标签依赖与特征-标签匹配；ARC的一致性损失反过来进一步约束双分支输出分布，提升特征表示的稳定性。进一步从\figref{fig:cam-visualization}的可视化结果可以看出，相比基线模型，完整框架的CAM热力图对图像边缘、光照伪影的关注减少，关注区域更收敛到眼球、血管等核心疾病区，模型可解释性增强。
 \end{itemize}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.92\textwidth]{./images/media/image8_padded.pdf}
+\caption{基线方法与所提方法在 Off-set 数据集部分样本上的 CAM 可视化对比，其中(a)--(j) 为不同测试样本。相比基线模型，所提方法的关注区域更集中于眼球、血管和病灶相关区域，对图像边缘、光照伪影等无关背景的响应更弱，说明完整框架能够有效抑制域特定噪声并增强可解释性。}
+\label{fig:cam-visualization}
+\end{figure}
 
 消融结果证明：自适应标签-特征关联性构建（ARC）验证了标签关联建模对多疾病共存场景的有效性，双分支引导域不变特征提取（DFE）验证了在多机构联合训练难以满足时，仅利用单一源域学习可迁移疾病相关特征的必要性。两模块的深度融合协同使得所提框架在仅使用单域数据训练的情况下进一步提升多标签识别性能，并为后续跨域泛化结果提供支撑，体现了本方法设计的科学性与高效性。
 
@@ -92,7 +92,7 @@ Ou et al.\hyperref[_Ref214903327]{{[}50{]}}设计双流交互CNN，使用特征�
 
 \input{tables/src/table2_generalization.tex}
 
-在ODIR内部泛化测试中，目标测试集为On-set，\tabref{tab:generalization}同时报告单目（Monocular）和双目（Binocular）两种评估方式。ResNet-50基线对应权重在Off-set和On-set上的双目指标分别为76.19和75.23，而所提方法对应权重将指标提升至78.79和77.49，增幅分别达2.60和2.26个百分点；单目指标同样由79.37和77.30提升至81.71和78.98。这说明双分支引导特征学习与CAM引导注意力能够增强模型对疾病相关区域的关注。其中双目指标低于单目指标的原因是，模型本身以单目数据进行训练，推理阶段将同一患者左右眼预测结果合并时，任一只眼的错误预测都可能影响患者级判断，从而放大单眼小错误对最终指标的影响。
+在ODIR内部泛化测试中，目标测试集为On-set，\tabref{tab:generalization}同时报告单目（Monocular）和双目（Binocular）两种评估方式。ResNet50基线对应权重在Off-set和On-set上的双目指标分别为76.19和75.23，而所提方法对应权重将指标提升至78.79和77.49，增幅分别达2.60和2.26个百分点；单目指标同样由79.37和77.30提升至81.71和78.98。这说明双分支引导特征学习与CAM引导注意力能够增强模型对疾病相关区域的关注。其中双目指标低于单目指标的原因是，模型本身以单目数据进行训练，推理阶段将同一患者左右眼预测结果合并时，任一只眼的错误预测都可能影响患者级判断，从而放大单眼小错误对最终指标的影响。
 
 在外部跨数据集测试中，RFMiD和EDID与ODIR的完整标签空间并不一致，因此本文先重构共有三类标签空间，再进行泛化评估。其中RFMiD实验对齐D/A/M三类，EDID实验对齐D/G/M三类；EDID虽然为单标签数据集，但同样可在三类共有标签空间下作为外部泛化测试集。考虑到外部数据集与ODIR在成像设备、采集流程、光照条件、疾病组成和标签定义上存在更明显差异，本文同样基于前5个候选权重进行模型选择与评估，并同步报告该组权重在三类ODIR Off-set和目标数据集上的单眼Final score。
 
@@ -114,6 +114,6 @@ Ou et al.\hyperref[_Ref214903327]{{[}50{]}}设计双流交互CNN，使用特征�
 
 实验证明，该策略改善了收敛稳定性，最终在\(\epsilon = 9.76\)时取得了73.15的Final score，明显优于固定噪声或低学习率配置。
 
-（4）隐私保护下的最终泛化性能 结果如\tabref{tab:privacy-final}所示。最优隐私模型在ODIR同域双目指标上的Off-set和On-set Final score分别为68.96和68.42，相较无隐私版本下降约10个百分点，但已接近或略优于ODIR原文官方基线（68.8），实现了在中等隐私预算下与公开基准持平的性能，充分体现了自适应高斯差分隐私机制的有效性。
+（4）隐私保护下的最终泛化性能 结果如\tabref{tab:privacy-final}所示。最优隐私模型在ODIR同域双目指标上的Off-set和On-set Final score分别为68.96和68.42，相较无隐私版本下降约10个百分点，但已接近 Li et al.\hyperref[_Ref213949402]{{[}46{]}} 报告的 ODIR 官方基线结果，并在Off-set上略优于该基线（68.00 vs. 68.96），说明在中等隐私预算下，所提方法能够在保持隐私保护的同时达到与公开基准接近的性能水平，充分体现了自适应高斯差分隐私机制的有效性。
 
 \input{tables/src/table5_privacy_final.tex}

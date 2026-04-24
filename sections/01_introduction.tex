@@ -9,7 +9,7 @@
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.72\textwidth]{./images/media/image1_padded.pdf}
-\caption{常规模型与双分支模型的决策边界示意图}
+\caption{域偏移场景下常规模型与双分支模型决策边界示意图。(a) 展示源域（训练域）、增强后的源域和目标域（测试域）的数据分布关系，其中增强后的源域用于模拟目标域可能出现的分布扰动；(b) 仅利用源域训练时，模型学习到的决策边界可能不适用于目标域，因而在目标域样本上产生分类错误；(c) 利用源域与增强后的源域构建双分支结构，并结合对比学习与 CAM 引导，学习可迁移的疾病相关特征后，模型能够学习到更适用于目标域的决策边界。}
 \label{fig:intro-domain-gap}
 \end{figure}
 
