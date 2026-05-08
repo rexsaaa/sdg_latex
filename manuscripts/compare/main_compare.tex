@@ -1,0 +1,75 @@
+\documentclass[a4paper,12pt]{article}
+
+% 中文支持
+\usepackage[UTF8,fontset=fandol]{ctex}
+
+% 基础宏包
+\usepackage{graphicx}       % 图片
+\usepackage{amsmath,amssymb} % 数学公式
+\usepackage{hyperref}        % 超链接和交叉引用
+\usepackage{geometry}        % 页面布局
+\usepackage{booktabs}        % 表格美化
+\usepackage{enumitem}        % 列表定制
+\usepackage{multirow}        % 复杂表头
+\usepackage{xcolor}          % 文字颜色
+\usepackage{float}           % 控制浮动体位置
+\usepackage{placeins}        % 防止浮动体跨章节
+\usepackage{caption}         % 图表标题格式
+\usepackage{titlesec}        % 标题间距
+
+% Unnumbered in-section headings like "A. 域泛化".
+\newcommand{\letteredsubsection}[1]{%
+  \par\medskip
+  \noindent\textbf{#1}\par\smallskip
+}
+\newcommand{\figref}[1]{\hyperref[#1]{图~\ref*{#1}}}
+\newcommand{\figsubref}[2]{\hyperref[#1]{图~\ref*{#1}.#2}}
+\newcommand{\tabref}[1]{\hyperref[#1]{表~\ref*{#1}}}
+
+\titlespacing*{\section}{0pt}{1.2ex plus 0.4ex minus 0.2ex}{0.8ex plus 0.2ex minus 0.1ex}
+
+% 页面设置
+\geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{6pt}
+\setlength{\belowcaptionskip}{2pt}
+\captionsetup{font=small}
+
+% 图片路径
+\graphicspath{{./images/}}
+
+% 超链接设置
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\title{面向多标签眼科疾病识别的可解释与隐私保护单域泛化}
+\author{}
+\date{}
+
+\begin{document}
+
+\begin{center}
+{\zihao{2}\bfseries 面向多标签眼科疾病识别的可解释与隐私保护单域泛化\par}
+
+{\zihao{2}\bfseries Privacy-Preserving Interpretable Single Domain Generalization for Multi-Label Ocular Disease Recognition\par}
+\end{center}
+\vspace{-0.2em}
+\thispagestyle{empty}
+
+% Compare draft: keep each Chinese paragraph/table together with its English translation.
+\input{manuscripts/compare/sections/00_frontmatter_compare.tex}
+\input{manuscripts/compare/sections/01_introduction_compare.tex}
+\input{manuscripts/compare/sections/02_related_work_compare.tex}
+\input{manuscripts/compare/sections/03_method_compare.tex}
+\input{manuscripts/compare/sections/04_experiments_compare.tex}
+\FloatBarrier
+\input{manuscripts/compare/sections/05_conclusion_compare.tex}
+\input{manuscripts/compare/sections/06_references_compare.tex}
+
+\end{document}

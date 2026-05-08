@@ -39,6 +39,4 @@ build/
 
 #
 *.vsdx
-.latexmkrc
-src
-!tables/src
+/src/

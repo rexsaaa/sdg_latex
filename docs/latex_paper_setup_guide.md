@@ -23,29 +23,25 @@
 
 ```bash
 # 推荐：用 latexmk 一键编译（自动处理多次编译和参考文献）
-latexmk -pdf main.tex
-
-# 手动编译
-pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
-
-# 如果论文包含中文
-latexmk -xelatex main.tex
+latexmk -xelatex manuscripts/zh/main_zh.tex
+latexmk -xelatex manuscripts/compare/main_compare.tex
+latexmk -xelatex manuscripts/trans/main_trans.tex
 ```
 
 ## 项目结构
 
 ```
 paper-project/
-├── main.tex                 ← 主文件（用 \input{} 引用各章节）
-├── references.bib           ← BibTeX 参考文献
-├── figures/                 ← 图片素材
-├── sections/                ← 各章节拆分
-│   ├── introduction.tex
-│   ├── method.tex
-│   ├── experiments.tex
-│   └── conclusion.tex
+├── manuscripts/             ← 三版论文源文件
+│   ├── zh/                  ← 中文稿
+│   ├── compare/             ← 中英对照稿
+│   └── trans/               ← 英文稿
+├── images/                  ← 三版共用图片素材
+├── docs/                    ← 项目说明、术语和流程文档
+├── releases/                ← 正式导出的 PDF
+├── build/                   ← latexmk 编译产物
+├── .latexmkrc               ← 按入口文件分流输出目录
 ├── .gitignore               ← 忽略编译产物
-├── Makefile                 ← 一键编译（可选）
 └── README.md
 ```
 
@@ -67,24 +63,11 @@ paper-project/
 *.fls
 ```
 
-### `Makefile`（可选）
-
-```makefile
-all:
-	latexmk -pdf main.tex
-
-clean:
-	latexmk -C
-
-watch:
-	latexmk -pdf -pvc main.tex
-```
-
 ## 工作流
 
 1. 用 Antigravity 打开 Mac 本机的论文项目目录
 2. 告诉 Agent 要修改的内容 → Agent 编辑 `.tex` 文件
-3. Agent 运行 `latexmk -pdf main.tex` 编译生成 PDF
+3. Agent 运行 `latexmk -xelatex manuscripts/compare/main_compare.tex` 等命令编译生成 PDF
 4. 本地查看 PDF 效果
 5. 满意后 Agent 帮忙 `git commit` 记录版本
 

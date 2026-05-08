@@ -1,0 +1,94 @@
+一、论文题目
+
+面向多标签眼科疾病识别的可解释与隐私保护单域泛化
+Privacy-Preserving Interpretable Single Domain Generalization for Multi-Label Ocular Disease Recognition
+
+多标签眼科疾病识别
+multi-label ocular disease recognition
+
+眼底筛查
+fundus screening
+
+眼底图像
+fundus images
+
+二、泛化与跨域设置
+
+域泛化
+domain generalization
+
+单域泛化
+single domain generalization
+
+跨域泛化
+cross-domain generalization
+
+域内泛化
+in-domain generalization
+
+未知域
+unseen domain
+
+域偏移
+domain shift
+
+分布差异
+distribution shift
+
+
+三、方法框架与模块
+
+可解释单域泛化框架
+interpretable single domain generalization framework
+
+自适应标签-特征关联性构建模块
+Adaptive Label-Feature Relevance Construction 
+
+双分支引导域不变特征提取模块
+Dual-Branch Guided Domain-Invariant Feature Extraction 
+
+四、标签关系与特征建模
+
+标签关联
+label relevance
+
+疾病共现依赖
+disease co-occurrence dependencies
+
+域不变特征
+domain-invariant features
+
+域特定噪声
+domain-specific noise
+
+风格扰动
+style disturbance
+
+注意力一致性损失
+attention consistency loss
+
+五、隐私保护与差分隐私
+
+隐私保护
+privacy preservation
+
+隐私保护机制
+privacy-preserving mechanism
+
+隐私-性能平衡
+privacy-performance trade-off
+
+六、实验与评价指标
+
+基线模型
+baseline
+
+检查点
+checkpoint
+
+单目
+monocular
+
+双目
+binocular
+

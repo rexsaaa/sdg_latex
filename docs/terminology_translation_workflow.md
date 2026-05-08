@@ -1,6 +1,6 @@
 # 术语统一与英文翻译执行计划
 
-TAG：当前任务为 Step 2.3（按文献口径确认存疑术语；1--7 组推荐英文译法清单已初步完成）。
+TAG：当前任务为 Step 3（作者已确认术语英文译法；开始在 `_compare.tex` 对照稿中逐段添加英文翻译）。
 
 本文档承接 `docs/paper_revision_plan.md` 中当前任务 4 和任务 5：
 
@@ -35,13 +35,13 @@ TAG：当前任务为 Step 2.3（按文献口径确认存疑术语；1--7 组推
 
 输入范围：
 
-- `sections/00_frontmatter.tex`
-- `sections/01_introduction.tex`
-- `sections/02_related_work.tex`
-- `sections/03_method.tex`
-- `sections/04_experiments.tex`
-- `sections/05_conclusion.tex`
-- `tables/src/*.tex`
+- `manuscripts/zh/sections/00_frontmatter.tex`
+- `manuscripts/zh/sections/01_introduction.tex`
+- `manuscripts/zh/sections/02_related_work.tex`
+- `manuscripts/zh/sections/03_method.tex`
+- `manuscripts/zh/sections/04_experiments.tex`
+- `manuscripts/zh/sections/05_conclusion.tex`
+- `manuscripts/zh/tables/src/*.tex`
 
 执行内容：
 
@@ -97,6 +97,13 @@ TAG：当前任务为 Step 2.3（按文献口径确认存疑术语；1--7 组推
 ### Step 3：按术语表翻译英文版本
 
 目的：在术语表约束下完成英文稿。
+
+执行载体：
+
+- 原中文稿保持不动。
+- 已复制 `manuscripts/compare/main_compare.tex`、`manuscripts/compare/sections/*_compare.tex` 和 `manuscripts/compare/tables/src/*_compare.tex` 作为中英对照翻译稿。
+- 翻译阶段先在每段中文后追加对应英文译文，便于作者逐段校对。
+- 校对完成后，再删除中文段落并保留英文内容，形成最终英文版本。
 
 执行内容：
 

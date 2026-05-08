@@ -1,0 +1,21 @@
+% Chapter 4 Experiments - Table 5
+% Hyperparameter scan for adaptive Gaussian differential privacy.
+\begin{table}[!htb]
+\centering
+\caption{自适应高斯差分隐私超参数扫描结果。表中比较了不同噪声乘数与噪声衰减速率组合在 80 epoch 差分隐私训练设置下对应的隐私预算 $\epsilon$。其中，setting1 下噪声注入较强，虽然隐私保护更好，但模型性能下滑较大；setting8 下噪声注入相对较缓，模型性能下滑较小，但隐私保护较弱。而红色的 setting5 为本文最终采用的设置，在隐私保护与模型性能之间取得了较好平衡。 Hyperparameter scan results for Adaptive Gaussian Differential Privacy. The table compares the privacy budget $\epsilon$ under 80-epoch differential privacy training with different combinations of noise multiplier and noise decay rate. Setting 1 injects stronger noise and provides better privacy preservation, but causes a larger performance drop. Setting 8 injects relatively weaker noise and yields a smaller performance drop, but provides weaker privacy preservation. The red Setting 5 is the final setting used in this study and achieves a better balance between privacy preservation and model performance.}
+\label{tab:privacy-scan}
+\begin{tabular}{lccc}
+\toprule
+Setting & noise\_multiplier & noise\_decay\_rate & $\epsilon$ / 80 epoch \\
+\midrule
+setting1 & 0.65 & 1.5e-6 & 5.01 \\
+setting2 & 0.50 & 2e-6 & 6.80 \\
+setting3 & 0.40 & 4e-6 & 8.71 \\
+setting4 & 0.35 & 2e-6 & 9.96 \\
+\textcolor{red}{setting5} & \textcolor{red}{0.35} & \textcolor{red}{4e-6} & \textcolor{red}{10.15} \\
+setting6 & 0.30 & 2e-6 & 11.91 \\
+setting7 & 0.25 & 2e-6 & 15.11 \\
+setting8 & 0.25 & 4e-6 & 20.01 \\
+\bottomrule
+\end{tabular}
+\end{table}

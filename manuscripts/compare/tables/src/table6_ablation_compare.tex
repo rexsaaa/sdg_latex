@@ -1,0 +1,17 @@
+% Chapter 4 Experiments - Table 3
+% Ablation study of DFE and ARC modules.
+\begin{table}[!htb]
+\centering
+\caption{消融实验结果。表中报告了在 ODIR Off-site test集下的双目指标。结果显示，DFE 和 ARC 相比 ResNet50（baseline）在 Final score 上均带来性能提升，分别提升 2.18 和 0.79；二者协同后进一步取得更高的指标提升，总体提升 2.66，并在四项指标上达到最佳结果，体现了两模块之间的正向协同作用。 Ablation study results. The table reports binocular metrics on the ODIR Off-site test set. Compared with ResNet50 (baseline), DFE and ARC improve Final score by 2.18 and 0.79, respectively. Combining the two modules further increases the overall gain to 2.66 and achieves the best results on all four metrics, indicating positive synergy between the two modules.}
+\label{tab:ablation}
+\begin{tabular}{lcccc}
+\toprule
+Model & Kappa & F1 & AUC & Final \\
+\midrule
+ResNet50 & 52.75 & 87.83 & 88.00 & 76.19 \\
+ResNet50+DFE & 56.20 & 88.80 & 90.10 & 78.37 \\
+ResNet50+ARC & 53.19 & 87.45 & 90.29 & 76.98 \\
+\textbf{ResNet50+DFE+ARC (Ours)} & \textbf{57.05} & \textbf{89.03} & \textbf{90.48} & \textbf{78.85} \\
+\bottomrule
+\end{tabular}
+\end{table}

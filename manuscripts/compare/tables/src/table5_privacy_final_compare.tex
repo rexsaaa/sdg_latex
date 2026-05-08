@@ -1,0 +1,15 @@
+% Chapter 4 Experiments - Table 7
+% Final generalization performance under privacy mode.
+\begin{table}[!htb]
+\centering
+\caption{隐私保护下的泛化性能对比。表中报告 ODIR 域内双目 Final score，其中 Ours（privacy）采用的是\tabref{tab:privacy-evolution}中选取的最优隐私检查点。在中等隐私预算下，所提方法在 Off-site 上略优于 Li et al. \hyperref[_Ref213949402]{{[}46{]}} 报告的官方基线，并在 On-site 上保持接近性能。 Comparison of generalization performance under privacy preservation. The table reports ODIR in-domain binocular Final score. Ours (privacy) uses the optimal privacy checkpoint selected in \tabref{tab:privacy-evolution}. Under a moderate privacy budget, the proposed method slightly outperforms the official baseline reported by Li et al. \hyperref[_Ref213949402]{{[}46{]}} on Off-site and maintains comparable performance on On-site.}
+\label{tab:privacy-final}
+\begin{tabular}{lcc}
+\toprule
+Model & Off-site & On-site \\
+\midrule
+Li et al. \hyperref[_Ref213949402]{{[}46{]}} & 68.00 & 68.80 \\
+\textbf{Ours (privacy)} & \textbf{68.96} & \textbf{68.42} \\
+\bottomrule
+\end{tabular}
+\end{table}

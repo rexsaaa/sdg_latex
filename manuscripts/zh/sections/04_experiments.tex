@@ -4,7 +4,7 @@
 
 本实验采用ODIR-5K（Ocular Disease Intelligent Recognition）\hyperref[_Ref213949402]{{[}46{]}}数据集作为单一源域。ODIR包含5000名患者的10000张彩色眼底图像（左右眼各5000张），由3名具有2年以上临床经验的眼科医生初步标注，并由3名10年以上经验的专家进行最终仲裁。数据集定义了8个互不排斥的类别：正常（N）、糖尿病视网膜病变（D）、青光眼（G）、白内障（C）、年龄相关性黄斑变性（A）、高血压视网膜病变（H）、病理性近视（M）和其他异常（O），如\figsubref{fig:odir-samples}{a}到\figsubref{fig:odir-samples}{h}所示，属于典型的多标签眼科疾病识别任务。每张图像可能同时具有多个疾病标签，患者级标签由其左右眼诊断关键词综合确定。官方将5000名患者划分为3个子集，训练集（3500人）用于模型训练，Off-site test集（500人）用于模型选择，On-site test集（1000人）用于测试模型域内泛化性能。各类别分布如\tabref{tab:dataset-distribution}所示，存在类别不平衡问题。
 
-\input{tables/src/table1_dataset_distribution.tex}
+\input{manuscripts/zh/tables/src/table1_dataset_distribution.tex}
 
 \begin{figure}[!htb]
 \centering
@@ -52,14 +52,14 @@ Ou et al.\hyperref[_Ref214903327]{{[}50{]}}设计双流交互CNN，使用特征�
 
 \tabref{tab:sota-compare}报告了Off-site test和On-site test集上的双目指标对比。对比结果显示，所提方法在Off-site的Final score为78.85，领先BFENet [50] 0.85；在On-site为77.49，领先BFENet [50] 0.79。该结果证明了双分支引导特征学习与自适应标签-特征关联性构建在ODIR多标签识别任务中的有效性。
 
-\input{tables/src/table7_sota_compare.tex}
+\input{manuscripts/zh/tables/src/table7_sota_compare.tex}
 
 需要指出的是，现有对比方法主要围绕ODIR内部多标签识别指标进行优化，较少同时考虑域泛化和隐私保护。相比之下，本文除在ODIR Off-site和On-site上取得更高Final score外，还在RFMiD和EDID两个跨域泛化数据集上验证了未知域性能，并进一步评估隐私保护训练下的性能衰减。上述结果共同说明，所提方法不仅追求单一数据集上识别性能，也面向更贴近临床部署的数据共享受限和隐私保护场景。
 
 \letteredsubsection{D. 消融实验结果}
 为系统验证所提方法中两大核心模块，即双分支引导域不变特征提取（DFE）与自适应标签-特征关联性构建（ARC）的独立贡献及协同增益，同时考察CAM引导对模型可解释性的提升，我们在ODIR Off-site双目指标上进行了逐模块消融实验，结果如\tabref{tab:ablation}所示。
 
-\input{tables/src/table6_ablation.tex}
+\input{manuscripts/zh/tables/src/table6_ablation.tex}
 
 \begin{itemize}
 \item
@@ -90,7 +90,7 @@ Ou et al.\hyperref[_Ref214903327]{{[}50{]}}设计双流交互CNN，使用特征�
 
 （1）非隐私条件下的泛化性能 结果如\tabref{tab:generalization}所示，表中报告了基线模型与所提方法在不同测试集上的Final score。泛化实验按三个评估方向组织：ODIR域内的Off-site \(\rightarrow\) On-site、ODIR到RFMiD的跨域泛化，以及ODIR到EDID的跨域泛化。每个方向均基于训练过程中保存的前5个候选检查点进行模型选择与评估，即分别在基线模型和所提方法的候选检查点中确定测试集表现最优的一组检查点，并同步报告该组检查点在源域Off-site和目标域上的结果。
 
-\input{tables/src/table2_generalization.tex}
+\input{manuscripts/zh/tables/src/table2_generalization.tex}
 
 在ODIR域内泛化中，测试集为On-site，\tabref{tab:generalization}同时报告单目（Monocular）和双目（Binocular）两种评估方式。基线模型对应检查点在Off-site和On-site上的双目指标分别为76.19和75.23，而所提方法对应检查点将指标提升至78.79和77.49，增幅分别达2.60和2.26个百分点；单目指标同样由79.37和77.30提升至81.71和78.98。这说明双分支引导特征学习与CAM引导注意力能够增强模型对疾病相关区域的关注。其中双目指标低于单目指标的原因是，模型本身以单目数据进行训练，推理阶段将同一患者左右眼预测结果合并时，任一只眼的错误预测都可能影响患者级判断，从而放大单目小错误对最终指标的影响。
 
@@ -100,11 +100,11 @@ Ou et al.\hyperref[_Ref214903327]{{[}50{]}}设计双流交互CNN，使用特征�
 
 （2）自适应高斯差分隐私超参数扫描 结果如\tabref{tab:privacy-scan}所示。引入隐私保护后，噪声注入速率会一定程度影响模型收敛行为与最终性能。实验发现，噪声乘数（noise\_multiplier）与噪声衰减速率（noise\_decay\_rate）共同决定了每轮噪声注入速率，并进一步影响每轮隐私预算消耗：过强的初始噪声会导致训练剧烈震荡甚至不收敛，而过快的衰减则使隐私预算在模型尚未充分学习时提前耗尽。其中，setting1（noise\_multiplier=0.65）提供了极强的隐私保护，但因初始噪声过大，导致\(\epsilon\)值仅为5.01，使模型性能严重下降；setting8（noise\_multiplier=0.25，decay\_rate=4e-6）虽然使得模型性能接近非隐私情况，但是\(\epsilon \approx 20\)隐私保护弱。综合性能与隐私预算，我们最终选取setting5（noise\_multiplier=0.35，decay\_rate=4e-6），在80 epoch后\(\epsilon \approx 10.15\)，实现了较优的隐私-性能平衡。
 
-\input{tables/src/table3_privacy_scan.tex}
+\input{manuscripts/zh/tables/src/table3_privacy_scan.tex}
 
 （3）隐私训练过程中的\(\epsilon\)-性能演化与优化策略 结果如\tabref{tab:privacy-evolution}所示。采用setting5的噪声速率后，我们记录了训练过程中\(\epsilon\)消耗与单目指标的逐epoch变化。结果显示，随着\(\epsilon\)从第0轮的0.94逐步增长至第79轮的10.15，隐私逐步消耗，模型性能持续提升，至第74轮附近达到峰值（Final=73.15）。这表明自适应衰减策略允许模型在隐私预算内充分学习。第74轮的检查点是兼具隐私保护和性能的最佳平衡点。经过大量实验验证，隐私场景需对优化策略进行针对性调整：
 
-\input{tables/src/table4_privacy_evolution.tex}
+\input{manuscripts/zh/tables/src/table4_privacy_evolution.tex}
 
 1. 学习率从\(1 \times 10^{-5}\)提升至\(7.5 \times 10^{-5}\)。
 
@@ -116,4 +116,4 @@ Ou et al.\hyperref[_Ref214903327]{{[}50{]}}设计双流交互CNN，使用特征�
 
 （4）隐私保护下的最终泛化性能 结果如\tabref{tab:privacy-final}所示。最优隐私模型在ODIR域内双目指标上的Off-site和On-site Final score分别为68.96和68.42，相较无隐私版本下降约10个百分点，但已接近 Li et al.\hyperref[_Ref213949402]{{[}46{]}} 报告的 ODIR 官方基线结果，并在Off-site上略优于该基线（68.00 vs. 68.96），说明在中等隐私预算下，所提方法能够在保持隐私保护的同时达到与公开基准接近的性能水平，充分体现了自适应高斯差分隐私机制的有效性。
 
-\input{tables/src/table5_privacy_final.tex}
+\input{manuscripts/zh/tables/src/table5_privacy_final.tex}

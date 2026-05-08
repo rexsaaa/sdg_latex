@@ -1,0 +1,21 @@
+% Chapter 4 Experiments - Table 4
+% Generalization performance on ODIR, RFMiD/RIADD, and EDID.
+\begin{table}[!htb]
+\centering
+\caption{Comparison of generalization performance on different test sets. The table compares the baseline and the proposed method on ODIR in-domain generalization (Off-site $\rightarrow$ On-site) and cross-domain generalization from ODIR to RFMiD and EDID, using Final score as the metric. Off-site $\rightarrow$ On-site reports both monocular and binocular results, while cross-domain generalization reports monocular results after aligning each dataset to a three-class label space. For each direction, the checkpoint with the best test-set performance is selected from candidate checkpoints. Overall, the proposed method outperforms the baseline in all evaluation directions.}
+\label{tab:generalization}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lcccccccc}
+\toprule
+\multirow{3}{*}{Model} & \multicolumn{4}{c}{Off-site $\rightarrow$ On-site} & \multicolumn{2}{c}{Off-site $\rightarrow$ RFMiD} & \multicolumn{2}{c}{Off-site $\rightarrow$ EDID} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
+& \multicolumn{2}{c}{Off-site} & \multicolumn{2}{c}{On-site} & Off-site & RFMiD & Off-site & EDID \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
+& Monocular & Binocular & Monocular & Binocular & Monocular & Monocular & Monocular & Monocular \\
+\midrule
+ResNet50 & 79.37 & 76.19 & 77.30 & 75.23 & 94.39 & 83.86 & 94.30 & 52.16 \\
+\textbf{Ours} & \textbf{81.71} & \textbf{78.79} & \textbf{78.98} & \textbf{77.49} & \textbf{95.94} & \textbf{85.06} & \textbf{96.03} & \textbf{55.35} \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

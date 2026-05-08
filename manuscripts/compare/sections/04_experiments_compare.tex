@@ -1,0 +1,195 @@
+\section{实验}\label{ux5b9eux9a8c}
+
+\section*{Experiments}
+
+\letteredsubsection{A. 数据集}
+
+\letteredsubsection{A. Datasets}
+
+本实验采用ODIR-5K（Ocular Disease Intelligent Recognition）\hyperref[_Ref213949402]{{[}46{]}}数据集作为单一源域。ODIR包含5000名患者的10000张彩色眼底图像（左右眼各5000张），由3名具有2年以上临床经验的眼科医生初步标注，并由3名10年以上经验的专家进行最终仲裁。数据集定义了8个互不排斥的类别：正常（N）、糖尿病视网膜病变（D）、青光眼（G）、白内障（C）、年龄相关性黄斑变性（A）、高血压视网膜病变（H）、病理性近视（M）和其他异常（O），如\figsubref{fig:odir-samples}{a}到\figsubref{fig:odir-samples}{h}所示，属于典型的多标签眼科疾病识别任务。每张图像可能同时具有多个疾病标签，患者级标签由其左右眼诊断关键词综合确定。官方将5000名患者划分为3个子集，训练集（3500人）用于模型训练，Off-site test集（500人）用于模型选择，On-site test集（1000人）用于测试模型域内泛化性能。各类别分布如\tabref{tab:dataset-distribution}所示，存在类别不平衡问题。
+
+This experiment uses the ODIR-5K (Ocular Disease Intelligent Recognition)\hyperref[_Ref213949402]{{[}46{]}} dataset as the single source domain. ODIR contains 10,000 color fundus images from 5,000 patients, with one left-eye and one right-eye image for each patient. The images were initially annotated by three ophthalmologists with more than two years of clinical experience and then adjudicated by three experts with more than ten years of experience. The dataset defines eight non-mutually exclusive classes: normal (N), Diabetic Retinopathy (D), Glaucoma (G), Cataract (C), Age-related Macular Degeneration (A), Hypertension (H), Myopia (M), and Others (O), as shown in \hyperref[fig:odir-samples]{Fig.~\ref*{fig:odir-samples}.a} to \hyperref[fig:odir-samples]{Fig.~\ref*{fig:odir-samples}.h}. This setting is a typical multi-label ocular disease recognition task. Each image may have multiple disease labels, and patient-level labels are determined by combining diagnostic keywords from both eyes. The official split divides the 5,000 patients into three subsets: the training set with 3,500 patients for model training, the Off-site test set with 500 patients for model selection, and the On-site test set with 1,000 patients for evaluating in-domain generalization performance. The class distribution is shown in \hyperref[tab:dataset-distribution]{Table~\ref*{tab:dataset-distribution}}, indicating class imbalance.
+
+\input{manuscripts/compare/tables/src/table1_dataset_distribution_compare.tex}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.86\textwidth]{./images/media/image5_padded.pdf}
+\caption{ODIR 数据集中 8 类眼底图像的示例样本，对应本文使用的 8 个非互斥类别。其中(a)-(h)分别代表(a) 正常（N），(b) 糖尿病视网膜病变（D），(c) 青光眼（G），(d) 白内障（C），(e) 年龄相关性黄斑变性（A），(f) 高血压视网膜病变（H），(g) 病理性近视（M），(h) 其他异常（O）。 Example fundus images of the eight classes in the ODIR dataset, corresponding to the eight non-mutually exclusive classes used in this study. (a)--(h) denote (a) normal (N), (b) Diabetic Retinopathy (D), (c) Glaucoma (G), (d) Cataract (C), (e) Age-related Macular Degeneration (A), (f) Hypertension (H), (g) Myopia (M), and (h) Others (O), respectively.}
+\label{fig:odir-samples}
+\end{figure}
+
+为全面评估模型的域泛化能力，除ODIR域内泛化外，本文额外引入RIADD挑战赛提供的RFMiD\hyperref[_Ref213949409]{{[}47{]}}数据集作为第一个独立跨域泛化数据集。RFMiD包含3200张彩色眼底图像，训练集、验证集和测试集分别包含1920、640和640张图像，涵盖45种视网膜疾病或异常，由专业视网膜专家标注。其45类标签中含有部分与ODIR的8类标签重合的类别，这为模型泛化提供了基础。\figsubref{fig:rfmid-samples}{a}到\figsubref{fig:rfmid-samples}{h}选择性地展示了45种类别中的8类图像。考虑到RFMiD与ODIR的完整标签空间并不一致，本文选取二者共有的糖尿病视网膜病变（D）、年龄相关性黄斑变性（A）和病理性近视（M）三类进行跨域泛化。在该设置下，ODIR侧构建得到1907张D/A/M三类训练图像，其中D、A、M的标签数分别为1425、255和253；RFMiD侧使用验证集中的119张三类图像进行测试，其中D、A、M的标签数分别为83、24和21。
+
+To comprehensively evaluate domain generalization capability, in addition to ODIR in-domain generalization, this study introduces RFMiD\hyperref[_Ref213949409]{{[}47{]}}, provided by the RIADD challenge, as the first independent cross-domain generalization dataset. RFMiD contains 3,200 color fundus images, with 1,920, 640, and 640 images in the training, validation, and test sets, respectively. It covers 45 retinal diseases or abnormalities annotated by professional retina specialists. Some of its 45 labels overlap with the eight labels in ODIR, providing a basis for model generalization. \hyperref[fig:rfmid-samples]{Fig.~\ref*{fig:rfmid-samples}.a} to \hyperref[fig:rfmid-samples]{Fig.~\ref*{fig:rfmid-samples}.h} show representative images from eight of the 45 categories. Since the complete label spaces of RFMiD and ODIR are inconsistent, this study selects their shared classes, Diabetic Retinopathy (D), Age-related Macular Degeneration (A), and Myopia (M), for cross-domain generalization. Under this setting, 1,907 D/A/M training images are constructed on the ODIR side, with 1,425, 255, and 253 labels for D, A, and M, respectively. On the RFMiD side, 119 validation images from these three classes are used for testing, with 83, 24, and 21 labels for D, A, and M, respectively.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.86\textwidth]{./images/media/image6_padded.pdf}
+\caption{RFMiD 数据集中选取的 8 类眼底图像示例，其中(a)-(h)分别对应(a) 糖尿病视网膜病变（D），(b) 年龄相关性黄斑变性（A），(c) 近视（M），(d) 黄斑瘢痕（MS），(e) 视网膜炎（RS），(f) 中心性浆液性脉络膜视网膜病变（CSR），(g) 视网膜中央静脉阻塞（CRVO），(h) 视盘水肿（DE）。RFMiD 作为跨域泛化数据集使用，实验中与 ODIR 对齐后的共有标签空间为 D/A/M 三类，用于评估跨域泛化性能。 Examples of eight selected fundus image classes in the RFMiD dataset. (a)--(h) correspond to (a) Diabetic Retinopathy (D), (b) Age-related Macular Degeneration (A), (c) Myopia (M), (d) Macular Scar (MS), (e) Retinitis (RS), (f) Central Serous retinopathy (CSR), (g) Central Retinal Vein Occlusion (CRVO), and (h) Disc Edema (DE), respectively. RFMiD is used as a cross-domain generalization dataset. In the experiments, the shared label space aligned with ODIR consists of D/A/M classes and is used to evaluate cross-domain generalization performance.}
+\label{fig:rfmid-samples}
+\end{figure}
+
+此外，本文引入来自于 Anawara Hamida 和 B.N.S.B. Zahurul Haque 眼科医院采集的EDID\hyperref[_RefEDID2024]{{[}48{]}}数据集作为第二个独立跨域泛化数据集，以进一步验证所提方法在不同数据来源和不同标签组织方式下的泛化性能。EDID原始数据共包含5335张眼底图像，覆盖10个单标签类别，包括中心性浆液性脉络膜视网膜病变、糖尿病视网膜病变、视盘水肿、青光眼、正常眼底、黄斑瘢痕、近视、翼状胬肉、视网膜脱离和视网膜色素变性，对应样本数分别为101、1509、127、1349、1024、444、500、17、125和139。\figsubref{fig:edid-samples}{a}到\figsubref{fig:edid-samples}{h}展示了EDID数据集中选取的8类典型眼底图像示例。
+
+In addition, this study introduces the EDID\hyperref[_RefEDID2024]{{[}48{]}} dataset collected from Anawara Hamida and B.N.S.B. Zahurul Haque Eye Hospital as the second independent cross-domain generalization dataset, further validating the generalization performance of the proposed method across different data sources and label organizations. The original EDID dataset contains 5,335 fundus images covering 10 single-label classes, including Central Serous retinopathy, Diabetic Retinopathy, Disc Edema, Glaucoma, normal, Macular Scar, Myopia, Pterygium, Retinal Detachment, and Retinitis Pigmentosa, with 101, 1,509, 127, 1,349, 1,024, 444, 500, 17, 125, and 139 samples, respectively. \hyperref[fig:edid-samples]{Fig.~\ref*{fig:edid-samples}.a} to \hyperref[fig:edid-samples]{Fig.~\ref*{fig:edid-samples}.h} show examples of eight representative fundus image classes selected from EDID.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.86\textwidth]{./images/media/edid_samples_padded.pdf}
+\caption{EDID 数据集中选取的 8 类眼底图像示例，其中(a)-(h)分别对应(a) 糖尿病视网膜病变（D），(b) 青光眼（G），(c) 近视（M），(d) 视网膜脱离（RD），(e) 视网膜色素变性（RP），(f) 视盘水肿（DE），(g) 黄斑瘢痕（MS），(h) 中心性浆液性脉络膜视网膜病变（CSR）。EDID 为单标签跨域泛化数据集，实验中与 ODIR 对齐后的共有标签空间为 D/G/M 三类，用于评估不同数据来源和标签组织方式下的泛化性能。 Examples of eight selected fundus image classes in the EDID dataset. (a)--(h) correspond to (a) Diabetic Retinopathy (D), (b) Glaucoma (G), (c) Myopia (M), (d) Retinal Detachment (RD), (e) Retinitis Pigmentosa (RP), (f) Disc Edema (DE), (g) Macular Scar (MS), and (h) Central Serous retinopathy (CSR), respectively. EDID is used as a single-label cross-domain generalization dataset. In the experiments, the shared label space aligned with ODIR consists of D/G/M classes and is used to evaluate generalization performance under different data sources and label organizations.}
+\label{fig:edid-samples}
+\end{figure}
+
+与RFMiD类似，考虑到EDID与ODIR的完整标签空间并不一致，本文选取二者共有的糖尿病视网膜病变（D）、青光眼（G）和病理性近视（M）三类构建跨域泛化数据集，共得到3358张图像，其中D、G、M的样本数分别为1509、1349和500。由于EDID为单标签数据集，本文将其视为多标签识别任务中的一种特殊情形，即每张图像仅有一个阳性标签，并在D/G/M三类空间下进行跨域泛化评估。相应地，在ODIR侧构建D/G/M三类训练子集，共包含1871张图像，其中D、G、M的样本数分别为1401、227和243。
+
+Similar to RFMiD, since the complete label spaces of EDID and ODIR are inconsistent, this study selects their shared classes, Diabetic Retinopathy (D), Glaucoma (G), and Myopia (M), to construct a cross-domain generalization dataset with 3,358 images, including 1,509, 1,349, and 500 samples for D, G, and M, respectively. Since EDID is a single-label dataset, it is treated as a special case of the multi-label recognition task, where each image has only one positive label, and cross-domain generalization is evaluated in the D/G/M three-class space. Correspondingly, a D/G/M training subset is constructed on the ODIR side, containing 1,871 images, with 1,401, 227, and 243 samples for D, G, and M, respectively.
+
+\letteredsubsection{B. 实验设置}
+
+\letteredsubsection{B. Experimental Settings}
+
+所有实验均以ResNet50作为骨干网络，并在PyTorch框架下实现。评估指标沿用ODIR官方标准：Kappa系数、F1、AUC以及三者平均值Final score。Kappa阈值固定为0.5，F1采用micro平均方式以缓和类别不平衡影响。
+
+All experiments use ResNet50 as the backbone and are implemented in PyTorch. The evaluation metrics follow the official ODIR standard: Kappa, F1, AUC, and their average value, Final score. The Kappa threshold is fixed at 0.5, and F1 uses micro averaging to alleviate the influence of class imbalance.
+
+对于基线模型，我们参考ODIR原始的ResNet50的实现，并在此基础上进行了改进：原论文采用双目样本成对输入，尝试不同的特征层融合策略（如concat、prod、sum）后接8个独立的分类头进行患者级预测。而我们改为以单目图像为输入样本，样本同时带有所属患者的编号，分类器统一为单个多标签分类头，输出8维logits后经Sigmoid激活得到各疾病概率，损失函数为标准二元交叉熵（BCE）。推理阶段，将同一患者左右眼的单目预测结果按逻辑合并得到患者级预测，从而与官方指标完全对齐。该改进避免了特征融合带来的噪声放大和个体差异信息稀释，尤其在双目病变程度不一致时更有优势。
+
+For the baseline, we follow the original ResNet50 implementation of ODIR and modify it for our setting. The original paper uses paired binocular samples as input, evaluates different feature-level fusion strategies such as concat, prod, and sum, and then uses eight independent classification heads for patient-level prediction. In contrast, we use monocular images as input samples, with each sample carrying its corresponding patient identifier. The classifier is implemented as a single multi-label classification head, which outputs eight-dimensional logits and obtains disease probabilities through Sigmoid activation. The loss function is standard binary cross entropy (BCE). During inference, monocular predictions from the left and right eyes of the same patient are logically merged to obtain patient-level predictions, fully aligning with the official metrics. This modification avoids noise amplification caused by feature fusion and dilution of individual-difference information, and is especially advantageous when disease severity differs between the two eyes.
+
+训练配置如下：优化器选择Adam，初始学习率\(1 \times 10^{-5}\)，采用OneCycleLR调度策略（前10\%轮次线性升温至峰值\(1 \times 10^{-5}\)，有助于模型快速跳出局部最优，后90\%轮次退火，有助于收敛和找到更优解），训练epoch为50，batch size为32，输入分辨率为448×448。所提方法在2张RTX 4080 Super上完成训练。后续实验结果表明，我们的改进基线模型（Off-site双目Final score 76.19）比起ODIR原文ResNet50实现（Off-site双目Final score 68.00）能达到更好的效果。
+
+The training configuration is as follows. Adam is used as the optimizer, with an initial learning rate of \(1 \times 10^{-5}\). OneCycleLR is adopted as the scheduling strategy: the learning rate linearly warms up to the peak value of \(1 \times 10^{-5}\) during the first 10\% of epochs and then anneals during the remaining 90\% of epochs to facilitate convergence. The number of training epochs is 50, the batch size is 32, and the input resolution is \(448 \times 448\). The proposed method is trained on two RTX 4080 Super GPUs. Experimental results show that our improved baseline model, with an Off-site binocular Final score of 76.19, outperforms the ResNet50 implementation in the original ODIR paper, which reports an Off-site binocular Final score of 68.00.
+
+\letteredsubsection{C. 与现有方法对比}
+
+\letteredsubsection{C. Comparison with Existing Methods}
+
+为评估所提方法在ODIR数据集上的识别性能，我们选取了四个典型的多标签眼科疾病识别方法，包括ODIR数据集论文提供的官方基线（Li et al.\hyperref[_Ref213949402]{{[}46{]}}）以及三项后续工作（Gour and Khanna\hyperref[_Ref214903299]{{[}49{]}}、He et al.\hyperref[_Ref213950338]{{[}20{]}}、Ou et al.\hyperref[_Ref214903327]{{[}50{]}}）。这些方法主要聚焦于提升Final score，未考虑跨域泛化或隐私保护。
+
+To evaluate the recognition performance of the proposed method on the ODIR dataset, we select four representative multi-label ocular disease recognition methods, including the official baseline provided in the ODIR dataset paper by Li et al.\hyperref[_Ref213949402]{{[}46{]}} and three subsequent works by Gour and Khanna\hyperref[_Ref214903299]{{[}49{]}}, He et al.\hyperref[_Ref213950338]{{[}20{]}}, and Ou et al.\hyperref[_Ref214903327]{{[}50{]}}. These methods mainly focus on improving Final score and do not consider cross-domain generalization or privacy preservation.
+
+Gour and Khanna\hyperref[_Ref214903299]{{[}49{]}}提出基于转移学习的CNN框架，骨干网络采用VGG16，通过数据增强方法扩充ODIR数据集，然后采用SGD优化器细调模型，焦点在于利用预训练权重捕捉血管、视盘、黄斑等结构异常，以提升多类共存场景的识别性能。
+
+Gour and Khanna\hyperref[_Ref214903299]{{[}49{]}} proposed a transfer-learning-based CNN framework with VGG16 as the backbone. The ODIR dataset is expanded through data augmentation, and the model is fine-tuned using the SGD optimizer. The method uses pretrained weights to capture structural abnormalities involving vessels, optic discs, and maculae, thereby improving recognition performance in multi-class co-occurrence scenarios.
+
+He et al.\hyperref[_Ref213950338]{{[}20{]}}开发密集相关网络（DCNet），包括骨干CNN提取双目特征、空间相关模块捕捉像素级相关性，以及分类器生成患者级分类结果。核心原理是通过密集卷积块融合双目特征，建模DR与AMD等疾病共现，但需依赖双目输入。
+
+He et al.\hyperref[_Ref213950338]{{[}20{]}} developed a dense correlation network (DCNet), which includes a backbone CNN for extracting binocular features, a spatial correlation module for capturing pixel-level relevance, and a classifier for generating patient-level classification results. Its core idea is to fuse binocular features through dense convolutional blocks and model disease co-occurrence such as DR and AMD, but it relies on binocular input.
+
+Ou et al.\hyperref[_Ref214903327]{{[}50{]}}设计双流交互CNN，使用特征增强模块通过注意力机制捕捉双目局部-全局依赖，并多尺度模块叠加不同分辨率特征以丰富表示。其原理在于利用双流交互强化病变区域（如微血管瘤、出血点），提升多标签识别性能，但未考虑隐私或跨域场景。
+
+Ou et al.\hyperref[_Ref214903327]{{[}50{]}} designed a two-stream interactive CNN. A feature enhancement module captures local-global binocular dependencies through an attention mechanism, and a multi-scale module aggregates features at different resolutions to enrich representations. The method enhances lesion regions, such as microaneurysms and hemorrhages, through two-stream interaction to improve multi-label recognition performance, but it does not consider privacy or cross-domain scenarios.
+
+\tabref{tab:sota-compare}报告了Off-site test和On-site test集上的双目指标对比。对比结果显示，所提方法在Off-site的Final score为78.85，领先BFENet [50] 0.85；在On-site为77.49，领先BFENet [50] 0.79。该结果证明了双分支引导特征学习与自适应标签-特征关联性构建在ODIR多标签识别任务中的有效性。
+
+\hyperref[tab:sota-compare]{Table~\ref*{tab:sota-compare}} compares binocular metrics on the Off-site test and On-site test sets. The proposed method achieves a Final score of 78.85 on Off-site, outperforming BFENet [50] by 0.85, and achieves 77.49 on On-site, outperforming BFENet [50] by 0.79. These results demonstrate the effectiveness of dual-branch guided feature learning and adaptive label-feature relevance construction on the ODIR multi-label recognition task.
+
+\input{manuscripts/compare/tables/src/table7_sota_compare_compare.tex}
+
+需要指出的是，现有对比方法主要围绕ODIR内部多标签识别指标进行优化，较少同时考虑域泛化和隐私保护。相比之下，本文除在ODIR Off-site和On-site上取得更高Final score外，还在RFMiD和EDID两个跨域泛化数据集上验证了未知域性能，并进一步评估隐私保护训练下的性能衰减。上述结果共同说明，所提方法不仅追求单一数据集上识别性能，也面向更贴近临床部署的数据共享受限和隐私保护场景。
+
+Existing comparison methods mainly optimize internal multi-label recognition metrics on ODIR and rarely consider domain generalization and privacy preservation simultaneously. In contrast, in addition to achieving higher Final scores on ODIR Off-site and On-site, this study validates unseen-domain performance on two cross-domain generalization datasets, RFMiD and EDID, and further evaluates performance degradation under privacy-preserving training. These results indicate that the proposed method is not limited to improving recognition performance on a single dataset, but is also designed for clinically relevant settings where data sharing is restricted and privacy preservation is required.
+
+\letteredsubsection{D. 消融实验结果}
+
+\letteredsubsection{D. Ablation Study Results}
+
+为系统验证所提方法中两大核心模块，即双分支引导域不变特征提取（DFE）与自适应标签-特征关联性构建（ARC）的独立贡献及协同增益，同时考察CAM引导对模型可解释性的提升，我们在ODIR Off-site双目指标上进行了逐模块消融实验，结果如\tabref{tab:ablation}所示。
+
+To assess the independent contributions and synergistic gains of the two core modules in the proposed method, namely Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) and Adaptive Label-Feature Relevance Construction (ARC), and to examine the improvement in model interpretability brought by CAM guidance, we conduct module-wise ablation experiments using ODIR Off-site binocular metrics. The results are shown in \hyperref[tab:ablation]{Table~\ref*{tab:ablation}}.
+
+\input{manuscripts/compare/tables/src/table6_ablation_compare.tex}
+
+\begin{itemize}
+\item
+  ResNet50：仅使用单分支ResNet50与标准多标签分类头，Final score为76.19，Kappa为52.75，AUC是88.00。
+
+  ResNet50: only a single-branch ResNet50 and a standard multi-label classification head are used. The Final score is 76.19, Kappa is 52.75, and AUC is 88.00.
+\item
+  ResNet50+DFE：仅引入完整的双分支引导域不变特征提取模块，Final score提升至78.37（+2.18），Kappa提升3.45，AUC提升2.10。性能提升主要源于CAM引导残差加权与掩码机制有效抑制了域特定噪声，使模型更关注域不变特征，是整体性能提升的重要来源。
+
+  ResNet50+DFE: only the complete Dual-Branch Guided Domain-Invariant Feature Extraction module is introduced. The Final score increases to 78.37 (+2.18), Kappa increases by 3.45, and AUC increases by 2.10. The improvement mainly comes from CAM-guided residual weighting and the mask mechanism, which effectively suppress domain-specific noise and encourage the model to focus on domain-invariant features.
+
+\item
+  ResNet50+ARC：仅引入自适应标签-特征关联性构建模块，Final score提升至76.98（+0.78），Kappa提升0.44，AUC提升2.29。该模块通过显式建模疾病共现依赖（如DR与AMD、近视与视盘异常）降低了漏检率，多标签识别性能提高。
+
+  ResNet50+ARC: only the Adaptive Label-Feature Relevance Construction module is introduced. The Final score increases to 76.98 (+0.78), Kappa increases by 0.44, and AUC increases by 2.29. By explicitly modeling disease co-occurrence dependencies, such as DR and AMD or Myopia and optic-disc abnormalities, this module reduces the false-negative rate and improves multi-label recognition performance.
+\item
+  ResNet50+DFE+ARC（所提方法，ours）：同时启用两大模块协同后，Final score进一步升至78.85（较基线+2.66），Kappa达到57.05（+4.30），F1与AUC分别达到89.03（+1.20）和90.48（+2.48）。总增益与两模块增益之和接近（2.66 \textless{} 2.18+0.78=2.96），体现了两模块之间的正向协同：DFE为ARC提供更稳定的域不变特征，使Transformer能更精准地学习标签-标签关联性与标签-特征关联性；ARC的注意力一致性损失反过来进一步约束双分支输出分布，提升特征表示的稳定性。进一步从\figref{fig:cam-visualization}的可视化结果可以看出，相比baseline，所提方法得到的CAM，其模型关注区域对图像边缘、光照伪影的响应减少，更收敛到眼球、血管等疾病相关区域，模型可解释性增强。
+
+  ResNet50+DFE+ARC (the proposed method, ours): when both modules are enabled, the Final score further increases to 78.85 (+2.66 over the baseline), Kappa reaches 57.05 (+4.30), and F1 and AUC reach 89.03 (+1.20) and 90.48 (+2.48), respectively. The total gain is close to the sum of the gains from the two modules (\(2.66 < 2.18 + 0.78 = 2.96\)), suggesting positive synergy between them. DFE provides more stable domain-invariant features for ARC, enabling Transformer to learn label-label relevance and label-feature relevance more accurately. Conversely, the attention consistency loss of ARC further constrains the output distributions of the two branches and improves feature stability. In addition, the visualization results in \hyperref[fig:cam-visualization]{Fig.~\ref*{fig:cam-visualization}} show that, compared with the baseline, the CAMs obtained by the proposed method respond less to image edges and illumination artifacts, and the model-attended regions concentrate more on the eyeball, vessels, and other disease-related regions, indicating enhanced model interpretability.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{./images/media/image8_padded.pdf}
+\caption{基线方法与所提方法在 ODIR Off-site 部分样本上的 CAM的 模型关注区域可视化对比，其中(a)--(j) 为不同测试样本。相比基线模型，所提方法的模型关注区域更集中于眼球、血管和疾病相关区域，对图像边缘、光照伪影等无关背景的响应更弱，说明所提方法能够有效抑制域特定噪声并增强可解释性。 Comparison of CAM-based model-attended region visualizations between the baseline and the proposed method on selected ODIR Off-site samples, where (a)--(j) denote different test samples. Compared with the baseline, the model-attended regions of the proposed method are more concentrated on the eyeball, vessels, and disease-related regions, with weaker responses to irrelevant background factors such as image edges and illumination artifacts. This indicates that the proposed method effectively suppresses domain-specific noise and enhances interpretability.}
+\label{fig:cam-visualization}
+\end{figure}
+
+消融结果证明：自适应标签-特征关联性构建（ARC）验证了标签关联建模对多疾病共存场景的有效性，双分支引导域不变特征提取（DFE）验证了在多机构联合训练难以满足时，仅利用单一源域学习域不变特征的必要性。两模块的深度融合协同使得所提方法在仅使用单一源域训练的情况下进一步提升多标签识别性能，并为后续跨域泛化结果提供支撑，体现了本方法设计的科学性与高效性。
+
+The ablation results show that Adaptive Label-Feature Relevance Construction (ARC) improves label relevance modeling in multi-disease co-occurrence scenarios, while Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) supports learning domain-invariant features from a single source domain when multi-institutional joint training is restricted. The integration of the two modules further improves multi-label recognition performance under single-source-domain training and provides a basis for the subsequent cross-domain generalization results.
+
+\letteredsubsection{E. 泛化性能结果}
+
+\letteredsubsection{E. Generalization Performance Results}
+
+为全面验证所提方法在单一源域训练条件下的泛化能力以及隐私保护机制的有效性，我们分别在非隐私和隐私保护两种场景下进行了系统性评估，涵盖ODIR域内泛化（Off-site与On-site）和跨域泛化（RFMiD与EDID）。
+
+To comprehensively validate the generalization capability of the proposed method under single-source-domain training and the effectiveness of the privacy-preserving mechanism, we conduct systematic evaluations under both non-private and privacy-preserving scenarios, covering ODIR in-domain generalization (Off-site and On-site) and cross-domain generalization (RFMiD and EDID).
+
+
+（1）非隐私条件下的泛化性能 结果如\tabref{tab:generalization}所示，表中报告了基线模型与所提方法在不同测试集上的Final score。泛化实验按三个评估方向组织：ODIR域内的Off-site \(\rightarrow\) On-site、ODIR到RFMiD的跨域泛化，以及ODIR到EDID的跨域泛化。每个方向均基于训练过程中保存的前5个候选检查点进行模型选择与评估，即分别在基线模型和所提方法的候选检查点中确定测试集表现最优的一组检查点，并同步报告该组检查点在源域Off-site和目标域上的结果。
+
+(1) Generalization performance under the non-private setting. The results are shown in \hyperref[tab:generalization]{Table~\ref*{tab:generalization}}, which reports the Final scores of the baseline and the proposed method on different test sets. The generalization experiments are organized along three evaluation directions: ODIR in-domain Off-site \(\rightarrow\) On-site, cross-domain generalization from ODIR to RFMiD, and cross-domain generalization from ODIR to EDID. For each direction, model selection and evaluation are based on the top five candidate checkpoints saved during training. Specifically, the checkpoint group with the best test-set performance is selected from the candidate checkpoints of the baseline and the proposed method, respectively, and the results of this checkpoint group on the source-domain Off-site set and the target domain are reported simultaneously.
+
+\input{manuscripts/compare/tables/src/table2_generalization_compare.tex}
+
+在ODIR域内泛化中，测试集为On-site，\tabref{tab:generalization}同时报告单目（Monocular）和双目（Binocular）两种评估方式。基线模型对应检查点在Off-site和On-site上的双目指标分别为76.19和75.23，而所提方法对应检查点将指标提升至78.79和77.49，增幅分别达2.60和2.26个百分点；单目指标同样由79.37和77.30提升至81.71和78.98。这说明双分支引导特征学习与CAM引导注意力能够增强模型对疾病相关区域的关注。其中双目指标低于单目指标的原因是，模型本身以单目数据进行训练，推理阶段将同一患者左右眼预测结果合并时，任一只眼的错误预测都可能影响患者级判断，从而放大单目小错误对最终指标的影响。
+
+For ODIR in-domain generalization, the test set is On-site, and \hyperref[tab:generalization]{Table~\ref*{tab:generalization}} reports both monocular and binocular evaluation protocols. The baseline checkpoint achieves binocular scores of 76.19 and 75.23 on Off-site and On-site, respectively, whereas the corresponding checkpoint of the proposed method improves these scores to 78.79 and 77.49, with gains of 2.60 and 2.26 percentage points. The monocular metrics also increase from 79.37 and 77.30 to 81.71 and 78.98. This indicates that dual-branch guided feature learning and CAM-guided attention can enhance the model's focus on disease-related regions. Binocular metrics are lower than monocular metrics because the model is trained with monocular data. During inference, when the left-eye and right-eye predictions of the same patient are merged, an incorrect prediction from either eye may affect patient-level judgment, amplifying the effect of small monocular errors on the final metric.
+
+在跨域泛化中，RFMiD和EDID与ODIR的完整标签空间并不一致，因此本文先重构共有三类标签空间，再进行泛化评估。其中RFMiD实验对齐D/A/M三类，EDID实验对齐D/G/M三类；EDID虽然为单标签数据集，但同样可在三类共有标签空间下作为跨域泛化数据集。考虑到跨域泛化数据集与ODIR在成像设备、采集流程、光照条件、疾病组成和标签定义上存在更明显差异，本文同样基于前5个候选检查点进行模型选择与评估，并同步报告该组检查点在三类ODIR Off-site和跨域泛化数据集上的单目Final score。
+
+For cross-domain generalization, the complete label spaces of RFMiD, EDID, and ODIR are inconsistent. Therefore, this study first reconstructs shared three-class label spaces before generalization evaluation. RFMiD is aligned using D/A/M classes, while EDID is aligned using D/G/M classes. Although EDID is a single-label dataset, it can still be used as a cross-domain generalization dataset under the three-class shared label space. Considering that the cross-domain generalization datasets differ more significantly from ODIR in imaging devices, acquisition procedures, illumination conditions, disease composition, and label definitions, model selection and evaluation are also based on the top five candidate checkpoints. The monocular Final scores of the selected checkpoint group on the three-class ODIR Off-site set and the cross-domain generalization dataset are reported simultaneously.
+
+结果显示，在RFMiD D/A/M跨域泛化中，基线模型对应检查点的ODIR Off-site的Final score为94.39，目标域的Final score为83.86；所提方法对应检查点的ODIR Off-site的Final score为95.94，目标域Final score为85.06，分别提升1.55和1.20个百分点。进一步从细分指标看，所提方法在RFMiD上的Kappa、F1和AUC分别为73.95、87.96和93.27，均高于基线模型的72.08、87.11和92.39。在EDID D/G/M跨域泛化中，基线模型对应检查点的ODIR Off-site的Final score为94.30，目标域Final score为52.16；所提方法对应检查点的ODIR Off-site的Final score为96.03，目标域Final score为55.35，分别提升1.73和3.19个百分点。所提方法在EDID上的Kappa、F1和AUC分别为27.20、67.22和71.63，较基线模型的23.83、65.54和67.09均有提升。综合来看，RFMiD结果验证了模型在多标签数据集上的跨域泛化能力；EDID结果进一步说明，在单标签数据集被纳入三类泛化评估框架的情况下，所提方法仍能保持有效提升。
+
+In RFMiD D/A/M cross-domain generalization, the baseline checkpoint obtains a Final score of 94.39 on ODIR Off-site and 83.86 on the target domain. The corresponding checkpoint of the proposed method obtains a Final score of 95.94 on ODIR Off-site and 85.06 on the target domain, improving by 1.55 and 1.20 percentage points, respectively. Detailed metrics show that the Kappa, F1, and AUC of the proposed method on RFMiD are 73.95, 87.96, and 93.27, all higher than the baseline values of 72.08, 87.11, and 92.39. In EDID D/G/M cross-domain generalization, the baseline checkpoint obtains a Final score of 94.30 on ODIR Off-site and 52.16 on the target domain. The proposed method obtains 96.03 on ODIR Off-site and 55.35 on the target domain, improving by 1.73 and 3.19 percentage points, respectively. The Kappa, F1, and AUC of the proposed method on EDID are 27.20, 67.22, and 71.63, which are higher than the baseline values of 23.83, 65.54, and 67.09. Overall, the RFMiD results validate the cross-domain generalization capability of the model on a multi-label dataset, while the EDID results further indicate that the proposed method remains effective when a single-label dataset is incorporated into a three-class generalization evaluation framework.
+
+（2）自适应高斯差分隐私超参数扫描 结果如\tabref{tab:privacy-scan}所示。引入隐私保护后，噪声注入速率会一定程度影响模型收敛行为与最终性能。实验发现，噪声乘数（noise\_multiplier）与噪声衰减速率（noise\_decay\_rate）共同决定了每轮噪声注入速率，并进一步影响每轮隐私预算消耗：过强的初始噪声会导致训练剧烈震荡甚至不收敛，而过快的衰减则使隐私预算在模型尚未充分学习时提前耗尽。其中，setting1（noise\_multiplier=0.65）提供了极强的隐私保护，但因初始噪声过大，导致\(\epsilon\)值仅为5.01，使模型性能严重下降；setting8（noise\_multiplier=0.25，decay\_rate=4e-6）虽然使得模型性能接近非隐私情况，但是\(\epsilon \approx 20\)隐私保护弱。综合性能与隐私预算，我们最终选取setting5（noise\_multiplier=0.35，decay\_rate=4e-6），在80 epoch后\(\epsilon \approx 10.15\)，实现了较优的隐私-性能平衡。
+
+\begin{sloppypar}
+(2) Hyperparameter scan of Adaptive Gaussian Differential Privacy. The results are shown in \hyperref[tab:privacy-scan]{Table~\ref*{tab:privacy-scan}}. After introducing privacy preservation, the noise injection rate affects model convergence behavior and final performance. The experiments show that the noise multiplier and noise decay rate jointly determine the per-epoch noise injection rate and further affect privacy budget consumption in each epoch. Excessive initial noise causes severe training oscillation or even non-convergence, whereas overly fast decay exhausts the privacy budget before the model has learned sufficiently. Setting 1 (noise\_multiplier=0.65) provides very strong privacy preservation, but the excessive initial noise yields \(\epsilon=5.01\) and severely degrades model performance. Setting 8 (noise\_multiplier=0.25, noise\_decay\_rate=4e\mbox{-}6) brings model performance close to the non-private setting, but \(\epsilon \approx 20\) indicates weak privacy preservation. Considering both performance and privacy budget, we finally select Setting 5 (noise\_multiplier=0.35, noise\_decay\_rate=4e\mbox{-}6), which reaches \(\epsilon \approx 10.15\) after 80 epochs and achieves a better privacy-performance trade-off.
+\end{sloppypar}
+
+\input{manuscripts/compare/tables/src/table3_privacy_scan_compare.tex}
+
+（3）隐私训练过程中的\(\epsilon\)-性能演化与优化策略 结果如\tabref{tab:privacy-evolution}所示。采用setting5的噪声速率后，我们记录了训练过程中\(\epsilon\)消耗与单目指标的逐epoch变化。结果显示，随着\(\epsilon\)从第0轮的0.94逐步增长至第79轮的10.15，隐私逐步消耗，模型性能持续提升，至第74轮附近达到峰值（Final=73.15）。这表明自适应衰减策略允许模型在隐私预算内充分学习。第74轮的检查点是兼具隐私保护和性能的最佳平衡点。经过大量实验验证，隐私场景需对优化策略进行针对性调整：
+
+(3) \(\epsilon\)-performance evolution and optimization strategy during privacy-preserving training. The results are shown in \hyperref[tab:privacy-evolution]{Table~\ref*{tab:privacy-evolution}}. After adopting the noise rate of Setting 5, we record epoch-by-epoch changes in \(\epsilon\) consumption and monocular metrics during training. As \(\epsilon\) increases from 0.94 at epoch 0 to 10.15 at epoch 79, the privacy budget is progressively spent and model performance improves, reaching a peak around epoch 74 (Final=73.15). This indicates that the adaptive decay strategy allows the model to learn sufficiently within the privacy budget. The checkpoint at epoch 74 provides the best balance between privacy preservation and performance. Extensive experiments show that the optimization strategy needs to be adjusted for privacy-preserving scenarios:
+
+\input{manuscripts/compare/tables/src/table4_privacy_evolution_compare.tex}
+
+1. 学习率从\(1 \times 10^{-5}\)提升至\(7.5 \times 10^{-5}\)。
+
+1. The learning rate is increased from \(1 \times 10^{-5}\) to \(7.5 \times 10^{-5}\).
+
+2. 学习率调度改为``先线性衰减后恒定''： 以lr\_decay\_ratio和lr\_final\_factor控制衰减轮次和衰减比例，所取值分别为0.75和0.8，即学习率在前75\%轮次内线性衰减至原值的80\%，之后保持恒定训练。
+
+2. The learning-rate schedule is changed to linear decay followed by constant training. The learning rate decay ratio and final learning rate factor control the decay epochs and decay ratio, and are set to 0.75 and 0.8, respectively. That is, the learning rate linearly decays to 80\% of its original value during the first 75\% of epochs and then remains constant.
+
+原因在于，隐私情况下的模型训练和常规情况下的模型训练不一样。对于学习率的取值来说，隐私情况下，每一次回传的梯度中都会叠加噪声，这使得每一次模型优化时的损失值在原基础上波动，增大了陷入局部最优的概率，因此学习率需要适当增大。对于学习率调度策略，在常规情况下当模型收敛到最优值附近时，非隐私训练的学习速率通常会逐步减小；相比之下，隐私情况下的学习过程不需要将学习率降低到一个非常小的值，因为差分隐私训练会以隐私消耗不断增大的代价持续优化，却未必真正达到模型收敛。因此，以相对较大的学习率开始，然后在一定周期内线性衰减到较小的值，并在之后保持恒定，性能会更好。
+
+This adjustment is motivated by the differences between privacy-preserving training and conventional training. For the learning rate, noise is added to each backpropagated gradient under privacy-preserving training, causing the loss at each optimization step to fluctuate and increasing the risk of poor local optima. A moderately larger learning rate is therefore needed. For the learning-rate schedule, conventional non-private training usually decreases the learning rate as the model approaches an optimum. In contrast, privacy-preserving training does not need to reduce the learning rate to a very small value, because differential privacy training continues optimization while privacy loss accumulates, but may not fully converge. Starting with a relatively large learning rate, linearly decaying it to a smaller value over a certain period, and then keeping it constant therefore yields better performance.
+
+实验证明，该策略改善了收敛稳定性，最终在\(\epsilon = 9.76\)时取得了73.15的Final score，明显优于固定噪声或低学习率配置。
+
+Experiments demonstrate that this strategy improves convergence stability and achieves a Final score of 73.15 at \(\epsilon = 9.76\), clearly outperforming fixed-noise or low-learning-rate configurations.
+
+（4）隐私保护下的最终泛化性能 结果如\tabref{tab:privacy-final}所示。最优隐私模型在ODIR域内双目指标上的Off-site和On-site Final score分别为68.96和68.42，相较无隐私版本下降约10个百分点，但已接近 Li et al.\hyperref[_Ref213949402]{{[}46{]}} 报告的 ODIR 官方基线结果，并在Off-site上略优于该基线（68.00 vs. 68.96），说明在中等隐私预算下，所提方法能够在保持隐私保护的同时达到与公开基准接近的性能水平，充分体现了自适应高斯差分隐私机制的有效性。
+
+(4) Final generalization performance under privacy preservation. The results are shown in \hyperref[tab:privacy-final]{Table~\ref*{tab:privacy-final}}. The optimal privacy checkpoint achieves Off-site and On-site Final scores of 68.96 and 68.42 on ODIR in-domain binocular metrics, respectively. Although this is about 10 percentage points lower than the non-private version, it is close to the official ODIR baseline reported by Li et al.\hyperref[_Ref213949402]{{[}46{]}} and slightly outperforms that baseline on Off-site (68.00 vs. 68.96). This indicates that, under a moderate privacy budget, the proposed method can preserve privacy while achieving performance close to a public benchmark, demonstrating the effectiveness of the Adaptive Gaussian Differential Privacy mechanism.
+\input{manuscripts/compare/tables/src/table5_privacy_final_compare.tex}

@@ -1,6 +1,6 @@
 # 术语英文译法清单
 
-TAG：Step 2 推荐英文译法清单已完成。
+TAG：Step 2 推荐英文译法清单已由作者确认，后续全文英文翻译需以本文档为约束。
 
 用途：从 `docs/terminology_glossary.md` 提取中文稿中的固定表达，后续在“推荐英文译法”列补充英文主译法。
 
@@ -75,11 +75,11 @@ TAG：Step 2 推荐英文译法清单已完成。
 
 ## 3. 方法框架、DFE 与 CAM
 
-组内口径：标题采用 `Interpretable Single Domain Generalization with Privacy-Preserving for Multi-Label Ocular Disease Recognition`，不加冠词和 `framework`；正文中若明确指“框架”，加 `framework`，如 `the Interpretable Single Domain Generalization framework with Privacy-Preserving  for ...` 或 `the proposed method`。DFE 是本文模块名，首次出现使用 `Dual-Branch Guided Domain-Invariant Feature Extraction (DFE)`，后文用 `DFE module`。`domain-invariant features`、`domain-specific noise`、`Class Activation Mapping (CAM)` 为文献中常见表达；`source-domain` 作复合形容词时保留连字符。`style disturbance` 与图2表述保持一致。
+组内口径：标题采用 `Privacy-Preserving Interpretable Single Domain Generalization for Multi-Label Ocular Disease Recognition`，不加冠词和 `framework`；正文中若明确指“框架”，加 `framework`，如 `the Privacy-Preserving Interpretable Single Domain Generalization framework for ...` 或 `the proposed method`。DFE 是本文模块名，首次出现使用 `Dual-Branch Guided Domain-Invariant Feature Extraction (DFE)`，后文用 `DFE module`。`domain-invariant features`、`domain-specific noise`、`Class Activation Mapping (CAM)` 为文献中常见表达；`source-domain` 作复合形容词时保留连字符。`style disturbance` 与图2表述保持一致。
 
 | 表达 | 推荐英文译法 | 标记 |
 | --- | --- | --- |
-| 面向多标签眼科疾病识别的可解释与隐私保护单域泛化框架 | Interpretable Single Domain Generalization with Privacy-Preserving framework for multi-label ocular disease recognition | 【推荐译法】 |
+| 面向多标签眼科疾病识别的可解释与隐私保护单域泛化框架 | Privacy-Preserving Interpretable Single Domain Generalization framework for multi-label ocular disease recognition | 【推荐译法】 |
 | 所提方法 | the proposed method | 【通用术语】 |
 | 可解释单域泛化框架 | interpretable single domain generalization framework | 【推荐译法】 |
 | 所提可解释单域泛化框架 | the proposed interpretable single domain generalization framework | 【推荐译法】 |
