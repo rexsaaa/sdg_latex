@@ -1,13 +1,13 @@
-# 术语统一与英文翻译执行计划
+# 术语统一与英文翻译执行记录
 
-TAG：当前任务为 Step 3（作者已确认术语英文译法；开始在 `_compare.tex` 对照稿中逐段添加英文翻译）。
+TAG：Step 3 已完成。已按术语表生成 `manuscripts/compare/` 中英对照稿和 `manuscripts/trans/` 英文稿，并在 v1.0 导出对应 PDF。Step 4 保留为后续人工复核项。
 
 本文档承接 `docs/paper_revision_plan.md` 中当前任务 4 和任务 5：
 
 - 任务 4：整理术语中英文对照表。
 - 任务 5：按术语表统一全文英文翻译。
 
-该任务可能跨多个 session 执行。每次新 session 默认先阅读本文档和 `docs/paper_revision_plan.md` 的当前 tag，再从尚未完成的 step 继续。
+该任务已完成主要翻译交付。后续新 session 如涉及英文稿校对，默认先阅读本文档、`docs/paper_revision_plan.md` 和 `docs/terminology_translation_terms.md`，再按需执行 Step 4 复核。
 
 ## 1. 目标
 
@@ -98,6 +98,8 @@ TAG：当前任务为 Step 3（作者已确认术语英文译法；开始在 `_c
 
 目的：在术语表约束下完成英文稿。
 
+状态：已完成。v1.0 已生成中英对照稿和英文纯稿。
+
 执行载体：
 
 - 原中文稿保持不动。
@@ -115,13 +117,15 @@ TAG：当前任务为 Step 3（作者已确认术语英文译法；开始在 `_c
 
 输出：
 
-- 英文版论文 `.tex` 文件或英文分支内容。
-- 翻译过程中发现的新增术语，回填到 `docs/terminology_glossary.md`。
+- `manuscripts/compare/`：中英对照稿。
+- `manuscripts/trans/`：英文纯稿。
+- `releases/main_zh_v1.0.pdf` 和 `releases/main_trans_v1.0.pdf`。
+- 翻译过程中发现的新增术语已按需回填到术语相关文档。
 
 停止点：
 
-- 作者 review 英文稿的学术含义和整体表达。
-- 作者确认后进入 Step 4。
+- 英文稿和中英对照稿已形成 v1.0 版本。
+- 后续如需提交导师前终稿，可进入 Step 4 做最终一致性复核。
 
 ### Step 4：最终一致性检查
 
@@ -145,18 +149,27 @@ TAG：当前任务为 Step 3（作者已确认术语英文译法；开始在 `_c
 
 ## 3. 最终交付物
 
-最终建议准备三类材料：
+v1.0 已形成三类材料：
 
 1. `docs/terminology_glossary.md`：中英文术语对照表。
 2. 英文版论文：按术语表统一后的翻译版本。
-3. 术语一致性检查说明：说明已检查全文、图表、caption 和表头。
+3. 中英对照稿：用于逐段校对英文含义。
+
+待补充：
+
+- 术语一致性检查说明：提交导师前可补充全文、图表、caption 和表头的最终复核结果。
 
 ## 4. 跨 Session 接手规则
 
 每次新 session 开始时：
 
 1. 先阅读 `docs/paper_revision_plan.md` 的当前任务状态。
-2. 再阅读本文档，确认当前应执行的 step。
+2. 再阅读本文档，确认是否需要执行 Step 4 最终复核。
 3. 如果 `docs/terminology_glossary.md` 已存在，优先以该文件为术语依据。
-4. 不跳步：Step 1 未确认前不进入英文文献定稿；Step 2 未确认前不全文翻译；Step 3 未完成前不做最终一致性检查。
-5. 每完成一个 step，在 `docs/paper_revision_plan.md` 或本文件中记录进度。
+4. 如继续修改英文稿，优先同时参考 `docs/terminology_translation_terms.md`。
+5. 每完成一次复核或重要修改，在 `docs/paper_revision_plan.md` 或本文件中记录进度。
+
+## 5. 更新记录
+
+- 2026-05-08：按术语表完成全文英文翻译，形成 `manuscripts/compare/` 中英对照稿和 `manuscripts/trans/` 英文稿，并导出 v1.0 PDF。
+- 2026-05-19：补充 v1.0 后状态归档，将 Step 3 更新为已完成，Step 4 保留为后续人工复核项。
