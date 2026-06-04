@@ -2,16 +2,20 @@
 % Ablation study of DFE and ARC modules.
 \begin{table}[!htb]
 \centering
-\caption{消融实验结果。表中报告了在 ODIR Off-site test集下的双目指标。结果显示，DFE 和 ARC 相比 ResNet50（baseline）在 Final score 上均带来性能提升，分别提升 2.18 和 0.79；二者协同后进一步取得更高的指标提升，总体提升 2.66，并在四项指标上达到最佳结果，说明两模块功能互补、组合时无明显冲突。}
+\caption{消融实验结果。表中报告了在 ODIR Off-site test 集下的单目（Monocular）与双目（Binocular）指标。结果显示，DFE 和 ARC 相比 ResNet50（baseline）在双目 Final score 上均带来性能提升，分别提升 2.18 和 0.79；二者协同后进一步取得更高的指标提升，总体提升 2.66，并在双目四项指标上达到最佳结果，说明两模块功能互补、组合时无明显冲突。单目指标呈现一致的提升趋势。}
 \label{tab:ablation}
-\begin{tabular}{lcccc}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lcccccccc}
 \toprule
-Model & Kappa & F1 & AUC & Final \\
+\multirow{2}{*}{Model} & \multicolumn{4}{c}{Monocular} & \multicolumn{4}{c}{Binocular} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}
+& Kappa & F1 & AUC & Final & Kappa & F1 & AUC & Final \\
 \midrule
-ResNet50 & 52.75 & 87.83 & 88.00 & 76.19 \\
-ResNet50+DFE & 56.20 & 88.80 & 90.10 & 78.37 \\
-ResNet50+ARC & 53.19 & 87.45 & 90.29 & 76.98 \\
-\textbf{ResNet50+DFE+ARC (Ours)} & \textbf{57.05} & \textbf{89.03} & \textbf{90.48} & \textbf{78.85} \\
+ResNet50 & 58.52 & 90.18 & 89.40 & 79.37 & 52.75 & 87.83 & 88.00 & 76.19 \\
+ResNet50+DFE & 62.09 & 91.04 & 91.64 & 81.59 & 56.20 & 88.80 & 90.10 & 78.37 \\
+ResNet50+ARC & 59.41 & 90.14 & 91.74 & 80.43 & 53.19 & 87.45 & 90.29 & 76.98 \\
+\textbf{ResNet50+DFE+ARC (Ours)} & \textbf{62.61} & \textbf{91.08} & \textbf{92.33} & \textbf{82.00} & \textbf{57.05} & \textbf{89.03} & \textbf{90.48} & \textbf{78.85} \\
 \bottomrule
 \end{tabular}
+}
 \end{table}

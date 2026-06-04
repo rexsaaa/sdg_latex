@@ -50,16 +50,30 @@ He et al. \hyperref[_Ref213950338]{{[}20{]}}开发密集相关网络（DCNet）�
 
 Ou et al. \hyperref[_Ref214903327]{{[}50{]}}设计双流交互 CNN（BFENet），使用特征增强模块通过注意力机制捕捉双目局部-全局依赖，并通过多尺度模块叠加不同分辨率特征以丰富表示。其原理在于利用双流交互强化病变区域（如微血管瘤、出血点），提升多标签识别性能，但未考虑隐私或跨域场景。
 
-\tabref{tab:sota-compare}报告了 Off-site test 和 On-site test 集上的双目指标对比。对比结果显示，所提方法在 Off-site 的 Final score 为78.85，领先 BFENet \hyperref[_Ref214903327]{{[}50{]}} 0.85；在 On-site 为77.49，领先 BFENet \hyperref[_Ref214903327]{{[}50{]}} 0.79。该结果证明了双分支引导特征学习与自适应标签-特征关联性构建在 ODIR 多标签识别任务中的有效性。
+\tabref{tab:sota-compare}与\figref{fig:sota-compare}报告了 Off-site test 和 On-site test 集上的双目指标对比。对比结果显示，所提方法在 Off-site 的 Final score 为78.85，领先 BFENet \hyperref[_Ref214903327]{{[}50{]}} 0.85；在 On-site 为77.49，领先 BFENet \hyperref[_Ref214903327]{{[}50{]}} 0.79。该结果证明了双分支引导特征学习与自适应标签-特征关联性构建在 ODIR 多标签识别任务中的有效性。
 
 \input{manuscripts/zh/tables/src/table7_sota_compare.tex}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.96\textwidth]{./images/plots/fig_sota_compare.pdf}
+\caption{与现有方法在 ODIR 上的指标对比可视化，(a) Off-site test 与 (b) On-site test 分别对应\tabref{tab:sota-compare}中的两组双目指标。柱状图按 Kappa、F1、AUC 和 Final score 四项指标分组，各指标中红色数值标注最优结果、蓝色标注次优结果。所提方法（Ours）在两个测试集的 Kappa 与 Final score 上均取得最优。}
+\label{fig:sota-compare}
+\end{figure}
 
 需要指出的是，现有对比方法主要围绕 ODIR 内部多标签识别指标进行优化，较少同时考虑域泛化和隐私保护。相比之下，本文除在 ODIR Off-site 和 On-site 上取得更高 Final score 外，还在 RFMiD 和 EDID 两个跨域泛化数据集上验证了未知域性能，并进一步评估隐私保护训练下的性能衰减。上述结果共同说明，所提方法不仅追求单一数据集上识别性能，也面向更贴近临床部署的数据共享受限和隐私保护场景。
 
 \letteredsubsection{D. 消融实验结果}
-为系统验证所提方法中两大核心模块，即双分支引导域不变特征提取（DFE）与自适应标签-特征关联性构建（ARC）的独立贡献及协同增益，同时考察 CAM 引导对模型可解释性的提升，我们在 ODIR Off-site 双目指标上进行了逐模块消融实验，结果如\tabref{tab:ablation}所示。
+为系统验证所提方法中两大核心模块，即双分支引导域不变特征提取（DFE）与自适应标签-特征关联性构建（ARC）的独立贡献及协同增益，同时考察 CAM 引导对模型可解释性的提升，我们在 ODIR Off-site 双目指标上进行了逐模块消融实验，结果如\tabref{tab:ablation}所示，并在\figref{fig:ablation-radar}中以雷达图直观对比各模型的指标分布。\tabref{tab:ablation}同时给出单目与双目两组指标，二者呈现一致的提升趋势；为与官方患者级评估标准对齐、并保持正文简洁，下文仅就双目指标展开分析。
 
 \input{manuscripts/zh/tables/src/table6_ablation.tex}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.92\textwidth]{./images/plots/fig_ablation_radar.pdf}
+\caption{消融实验中各模型在 ODIR Off-site 上的指标雷达图，分别给出 (a) 单目（Monocular）与 (b) 双目（Binocular）两种评估方式下的结果，二者均与\tabref{tab:ablation}一致。每个轴对应一项指标（Kappa、F1、AUC、Final），并按该轴取值范围独立归一化以放大模型间差异，多边形越向外表示指标越高。所提方法（Ours）在各项指标上整体外扩，优于仅引入 DFE 或 ARC 的变体及基线。}
+\label{fig:ablation-radar}
+\end{figure}
 
 \begin{itemize}
 \item
@@ -84,7 +98,7 @@ Ou et al. \hyperref[_Ref214903327]{{[}50{]}}设计双流交互 CNN（BFENet）�
 
 \letteredsubsection{E. 泛化性能结果}
 
-为全面验证所提方法在单一源域训练条件下的泛化能力以及隐私保护机制的有效性，我们按照"域内识别 \(\rightarrow\) 跨域泛化 \(\rightarrow\) 隐私保护"的递进逻辑组织评估：首先在 ODIR 域内（Off-site 与 On-site）验证多标签识别性能，再在 RFMiD 与 EDID 两个未知域上考察跨域泛化能力，最后评估引入隐私保护机制后的性能保留情况。其中前两步在非隐私保护条件下完成，第三步在隐私保护条件下完成。
+为全面验证所提方法在单一源域训练条件下的泛化能力以及隐私保护机制的有效性，我们按照"域内泛化 \(\rightarrow\) 跨域泛化 \(\rightarrow\) 隐私保护"的递进逻辑组织评估：首先在 ODIR 域内（Off-site 与 On-site）验证多标签识别性能，再在 RFMiD 与 EDID 两个未知域上考察跨域泛化能力，最后评估引入隐私保护机制后的性能保留情况。其中前两步在非隐私保护条件下完成，第三步在隐私保护条件下完成。
 
 
 
@@ -96,15 +110,51 @@ Ou et al. \hyperref[_Ref214903327]{{[}50{]}}设计双流交互 CNN（BFENet）�
 
 在跨域泛化中，RFMiD 和 EDID 与 ODIR 的完整标签空间并不一致，因此本文先重构共有三类标签空间，再进行泛化评估。其中 RFMiD 实验对齐 D/A/M 三类，EDID 实验对齐 D/G/M 三类；EDID 虽然为单标签数据集，但同样可在三类共有标签空间下作为跨域泛化数据集。考虑到跨域泛化数据集与 ODIR 在成像设备、采集流程、光照条件、疾病组成和标签定义上存在更明显差异，本文同样基于前5个候选检查点进行模型选择与评估，并同步报告该组检查点在三类 ODIR Off-site 和跨域泛化数据集上的单目 Final score。
 
-结果显示，在 RFMiD D/A/M 跨域泛化中，基线模型对应检查点的 ODIR Off-site 的 Final score 为94.39，目标域的 Final score 为83.86；所提方法对应检查点的 ODIR Off-site 的 Final score 为95.94，目标域 Final score 为85.06，分别提升1.55和1.20个百分点。进一步从细分指标看，所提方法在 RFMiD 上的 Kappa、F1 和 AUC 分别为73.95、87.96和93.27，均高于基线模型的72.08、87.11和92.39。在 EDID D/G/M 跨域泛化中，基线模型对应检查点的 ODIR Off-site 的 Final score 为94.30，目标域 Final score 为52.16；所提方法对应检查点的 ODIR Off-site 的 Final score 为96.03，目标域 Final score 为55.35，分别提升1.73和3.19个百分点。所提方法在 EDID 上的 Kappa、F1 和 AUC 分别为27.20、67.22和71.63，较基线模型的23.83、65.54和67.09均有提升。综合来看，RFMiD 结果验证了模型在多标签数据集上的跨域泛化能力；EDID 结果进一步说明，在单标签数据集被纳入三类泛化评估框架的情况下，所提方法仍能保持有效提升。
+结果显示，在 RFMiD D/A/M 跨域泛化中，基线模型对应检查点的 ODIR Off-site 的 Final score 为94.39，目标域的 Final score 为83.86；所提方法对应检查点的 ODIR Off-site 的 Final score 为95.94，目标域 Final score 为85.06，分别提升1.55和1.20个百分点。进一步从细分指标看，所提方法在 RFMiD 上的 Kappa、F1 和 AUC 分别为73.95、87.96和93.27，均高于基线模型的72.08、87.11和92.39。在 EDID D/G/M 跨域泛化中，基线模型对应检查点的 ODIR Off-site 的 Final score 为94.30，目标域 Final score 为52.16；所提方法对应检查点的 ODIR Off-site 的 Final score 为96.03，目标域 Final score 为55.35，分别提升1.73和3.19个百分点。所提方法在 EDID 上的 Kappa、F1 和 AUC 分别为27.20、67.22和71.63，较基线模型的23.83、65.54和67.09均有提升。综合来看，RFMiD 结果验证了模型在多标签数据集上的跨域泛化能力；EDID 结果进一步说明，在单标签数据集被纳入三类泛化评估框架的情况下，所提方法仍能保持有效提升。\figref{fig:tsne}进一步以 t-SNE 对三个泛化方向下的特征分布进行可视化，相比 baseline，所提方法在多数方向上同类样本更紧凑、源域与目标域同类样本更靠近，与上述指标提升基本一致。
+
+\begin{figure}[p]
+\centering
+\begin{subfigure}{\textwidth}
+\centering
+\includegraphics[width=0.60\textwidth]{./images/plots/tsne_odir8_panel1_tx.png}
+\caption{ODIR Off-site \(\rightarrow\) On-site（域内泛化，8 类）}
+\label{fig:tsne-odir}
+\end{subfigure}
+
+\vspace{4pt}
+\begin{subfigure}{\textwidth}
+\centering
+\includegraphics[width=0.60\textwidth]{./images/plots/tsne_rfmid_panel1_tx.png}
+\caption{ODIR Off-site \(\rightarrow\) RFMiD（D/A/M 三类对齐）}
+\label{fig:tsne-rfmid}
+\end{subfigure}
+
+\vspace{4pt}
+\begin{subfigure}{\textwidth}
+\centering
+\includegraphics[width=0.60\textwidth]{./images/plots/tsne_edid_panel1_tx.png}
+\caption{ODIR Off-site \(\rightarrow\) EDID（D/G/M 三类对齐）}
+\label{fig:tsne-edid}
+\end{subfigure}
+\captionsetup{font=small}
+\caption{三个评估方向下目标域样本特征的 t-SNE 可视化，(a)--(c) 分别对应 ODIR 域内（Off-site \(\rightarrow\) On-site）、ODIR \(\rightarrow\) RFMiD 与 ODIR \(\rightarrow\) EDID 三个泛化方向。每个子图内部左侧为 baseline、右侧为所提方法（Ours），不同颜色代表不同类别，圆点为源域样本、三角为目标域样本。(a) 域内 Off-site 与 On-site 同源、域差异本身较小，两种方法的同类样本均合理重叠，Ours 在小样本疾病类（G、A、M）上呈现更清晰的局部簇结构。(b) 在 RFMiD 泛化设置下，Ours 将 D/A/M 三类组织为更独立的簇，且每个簇内源域与目标域同类样本紧密混合，而 baseline D 类内部存在多个分离子簇，三类局部聚集相对松散。(c) 在 EDID 泛化设置下，baseline 虽形成多个局部簇，但某些同一疾病类的源域与目标域样本各自聚成相邻但分离的子簇（如 D 类和 G 类存在明显的两域边界）；Ours 簇数虽有所减少，但其将同类的两域样本更加混合，大致形成 D/G/M 三个按类别（而非按域）组织的区域。最终结果证明，所提方法有更强的域泛化能力。}
+\label{fig:tsne}
+\end{figure}
 
 2. 自适应高斯差分隐私超参数扫描 结果如\tabref{tab:privacy-scan}所示。引入隐私保护后，噪声注入速率会一定程度影响模型收敛行为与最终性能。实验发现，噪声乘数（noise\_multiplier）与噪声衰减速率（noise\_decay\_rate）共同决定了每轮噪声注入速率，并进一步影响每轮隐私预算消耗：过强的初始噪声会导致训练剧烈震荡甚至不收敛，而过快的衰减则使隐私预算在模型尚未充分学习时提前耗尽。其中，setting1（noise\_multiplier=0.65）提供了极强的隐私保护，但因初始噪声过大，导致\(\epsilon\)值仅为5.01，使模型性能严重下降；setting8（noise\_multiplier=0.25，decay\_rate=4e-6）虽然使得模型性能接近非隐私保护条件，但是\(\epsilon \approx 20\)隐私保护弱。综合性能与隐私预算，我们最终选取 setting5（noise\_multiplier=0.35，decay\_rate=4e-6），在80 epoch 后\(\epsilon \approx 10.15\)，实现了较优的隐私-性能平衡。
 
 \input{manuscripts/zh/tables/src/table3_privacy_scan.tex}
 
-3. 隐私训练过程中的\(\epsilon\)-性能演化与优化策略 结果如\tabref{tab:privacy-evolution}所示。采用 setting5 的噪声速率后，我们记录了训练过程中\(\epsilon\)消耗与单目指标的逐 epoch 变化。结果显示，随着\(\epsilon\)从第0轮的0.94逐步增长至第79轮的10.15，隐私逐步消耗，模型性能持续提升，至第74轮附近达到峰值（Final=73.15）。这表明自适应衰减策略允许模型在隐私预算内充分学习。第74轮的检查点是兼具隐私保护和性能的最佳平衡点。经过大量实验验证，隐私保护条件下需对优化策略进行针对性调整：
+3. 隐私训练过程中的\(\epsilon\)-性能演化与优化策略 结果如\tabref{tab:privacy-evolution}所示，并在\figref{fig:privacy-tradeoff}中以隐私-性能权衡曲线直观呈现。采用 setting5 的噪声速率后，我们记录了训练过程中\(\epsilon\)消耗与单目指标的逐 epoch 变化。结果显示，随着\(\epsilon\)从第0轮的0.94逐步增长至第79轮的10.15，隐私逐步消耗，模型性能持续提升，至第74轮附近达到峰值（Final=73.15）。这表明自适应衰减策略允许模型在隐私预算内充分学习。第74轮的检查点是兼具隐私保护和性能的最佳平衡点。经过大量实验验证，隐私保护条件下需对优化策略进行针对性调整：
 
 \input{manuscripts/zh/tables/src/table4_privacy_evolution.tex}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.78\textwidth]{./images/plots/fig_privacy_tradeoff.pdf}
+\caption{隐私训练过程中的隐私-性能（\(\epsilon\)-Final score）权衡曲线，数据对应\tabref{tab:privacy-evolution}。横轴为累积隐私预算\(\epsilon\)（越靠左隐私保护越强），纵轴为单目 Final score，每个点对应一个 epoch 检查点并按训练轮次着色，轨迹展示了随训练推进的隐私-性能演化。第74轮（e74）为 Pareto 拐点，即在\(\epsilon \approx 9.76\)处取得最优 Final score（73.15），是兼顾隐私与性能的最佳工作点。}
+\label{fig:privacy-tradeoff}
+\end{figure}
 
 （1）学习率从\(1 \times 10^{-5}\)提升至\(7.5 \times 10^{-5}\)。
 

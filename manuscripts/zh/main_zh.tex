@@ -5,6 +5,7 @@
 
 % 基础宏包
 \usepackage{graphicx}       % 图片
+\usepackage{subcaption}      % 子图 (a)(b)(c) 自动编号
 \usepackage{amsmath,amssymb} % 数学公式
 \usepackage{hyperref}        % 超链接和交叉引用
 \usepackage{geometry}        % 页面布局
@@ -34,6 +35,15 @@
 \setlength{\intextsep}{8pt plus 2pt minus 2pt}
 \setlength{\abovecaptionskip}{6pt}
 \setlength{\belowcaptionskip}{2pt}
+
+% 浮动体放置参数：放宽默认限制，使图表更靠近其正文引用位置
+\renewcommand{\topfraction}{0.92}      % 页面顶部最多可被浮动体占用比例
+\renewcommand{\bottomfraction}{0.85}   % 页面底部最多可被浮动体占用比例
+\renewcommand{\textfraction}{0.08}     % 含浮动体的页面上正文最少占比
+\renewcommand{\floatpagefraction}{0.75}% 整页浮动页上浮动体最少占比
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{5}
 
 % 图片路径
 \graphicspath{{./images/}}
