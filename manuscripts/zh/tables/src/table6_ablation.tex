@@ -2,7 +2,7 @@
 % Ablation study of DFE and ARC modules.
 \begin{table}[!htb]
 \centering
-\caption{消融实验结果。表中报告了在 ODIR Off-site test 集下的单目（Monocular）与双目（Binocular）指标。结果显示，DFE 和 ARC 相比 ResNet50（baseline）在双目 Final score 上均带来性能提升，分别提升 2.18 和 0.79；二者协同后进一步取得更高的指标提升，总体提升 2.66，并在双目四项指标上达到最佳结果，说明两模块功能互补、组合时无明显冲突。单目指标呈现一致的提升趋势。}
+\caption{消融实验结果。表中报告了在 ODIR Off-site test 集下的单目（Monocular）与双目（Binocular）指标。相比 ResNet50（baseline），DFE 与 ARC 单独引入及二者协同均带来性能提升。}
 \label{tab:ablation}
 \resizebox{\textwidth}{!}{
 \begin{tabular}{lcccccccc}

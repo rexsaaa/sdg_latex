@@ -19,7 +19,7 @@ To comprehensively evaluate domain generalization capability, in addition to ODI
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.86\textwidth]{./images/media/image6_padded.pdf}
-\caption{Examples of eight selected fundus image classes in the RFMiD dataset. (a)--(h) correspond to (a) Diabetic Retinopathy (D), (b) Age-Related Macular Degeneration (A), (c) Myopia (M), (d) Macular Scar (MS), (e) Retinitis (RS), (f) Central Serous Retinopathy (CSR), (g) Central Retinal Vein Occlusion (CRVO), and (h) Disc Edema (DE), respectively. RFMiD is used as a cross-domain generalization dataset. In the experiments, the shared label space aligned with ODIR consists of D/A/M classes and is used to evaluate cross-domain generalization performance.}
+\caption{Examples of eight selected fundus image classes in the RFMiD dataset. (a)--(h) correspond to (a) Diabetic Retinopathy (D), (b) Age-Related Macular Degeneration (A), (c) Myopia (M), (d) Macular Scar (MS), (e) Retinitis (RS), (f) Central Serous Retinopathy (CSR), (g) Central Retinal Vein Occlusion (CRVO), and (h) Disc Edema (DE), respectively.}
 \label{fig:rfmid-samples}
 \end{figure}
 
@@ -28,7 +28,7 @@ In addition, this study introduces the EDID \hyperref[_RefEDID2024]{{[}48{]}} da
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.86\textwidth]{./images/media/edid_samples_padded.pdf}
-\caption{Examples of eight selected fundus image classes in the EDID dataset. (a)--(h) correspond to (a) Diabetic Retinopathy (D), (b) Glaucoma (G), (c) Myopia (M), (d) Retinal Detachment (RD), (e) Retinitis Pigmentosa (RP), (f) Disc Edema (DE), (g) Macular Scar (MS), and (h) Central Serous Retinopathy (CSR), respectively. EDID is used as a single-label cross-domain generalization dataset. In the experiments, the shared label space aligned with ODIR consists of D/G/M classes and is used to evaluate generalization performance under different data sources and label organizations.}
+\caption{Examples of eight selected fundus image classes in the EDID dataset. (a)--(h) correspond to (a) Diabetic Retinopathy (D), (b) Glaucoma (G), (c) Myopia (M), (d) Retinal Detachment (RD), (e) Retinitis Pigmentosa (RP), (f) Disc Edema (DE), (g) Macular Scar (MS), and (h) Central Serous Retinopathy (CSR), respectively.}
 \label{fig:edid-samples}
 \end{figure}
 
@@ -50,9 +50,9 @@ Gour and Khanna \hyperref[_Ref214903299]{{[}49{]}} proposed a transfer-learning-
 
 He et al. \hyperref[_Ref213950338]{{[}20{]}} developed a dense correlation network (DCNet), which includes a backbone CNN for extracting binocular features, a spatial correlation module for capturing pixel-level relevance, and a classifier for generating patient-level classification results. Its core idea is to fuse binocular features through dense convolutional blocks and model disease co-occurrence such as DR and AMD, but it relies on binocular input.
 
-Ou et al. \hyperref[_Ref214903327]{{[}50{]}} designed a two-stream interactive CNN (BFENet). A feature enhancement module captures local-global binocular dependencies through an attention mechanism, and a multi-scale module aggregates features at different resolutions to enrich representations. The method enhances lesion regions, such as microaneurysms and hemorrhages, through two-stream interaction to improve multi-label recognition performance, but it does not consider privacy or cross-domain scenarios.
+Ou et al. \hyperref[_Ref214903327]{{[}50{]}} designed a two-stream interactive CNN. A feature enhancement module captures local-global binocular dependencies through an attention mechanism, and a multi-scale module aggregates features at different resolutions to enrich representations. The method enhances lesion regions, such as microaneurysms and hemorrhages, through two-stream interaction to improve multi-label recognition performance, but it does not consider privacy or cross-domain scenarios.
 
-\hyperref[tab:sota-compare]{Table~\ref*{tab:sota-compare}} and \hyperref[fig:sota-compare]{Fig.~\ref*{fig:sota-compare}} compare binocular metrics on the Off-site test and On-site test sets. The proposed method achieves a Final score of 78.85 on Off-site, outperforming BFENet \hyperref[_Ref214903327]{{[}50{]}} by 0.85, and achieves 77.49 on On-site, outperforming BFENet \hyperref[_Ref214903327]{{[}50{]}} by 0.79. These results demonstrate the effectiveness of dual-branch guided feature learning and adaptive label-feature relevance construction on the ODIR multi-label recognition task.
+\hyperref[tab:sota-compare]{Table~\ref*{tab:sota-compare}} and \hyperref[fig:sota-compare]{Fig.~\ref*{fig:sota-compare}} compare binocular metrics on the Off-site test and On-site test sets. The proposed method achieves a Final score of 78.85 on Off-site, outperforming Ou et al. \hyperref[_Ref214903327]{{[}50{]}} by 0.85, and achieves 77.49 on On-site, outperforming Ou et al. \hyperref[_Ref214903327]{{[}50{]}} by 0.79. These results demonstrate the effectiveness of dual-branch guided feature learning and adaptive label-feature relevance construction on the ODIR multi-label recognition task.
 
 \input{manuscripts/trans/tables/src/table7_sota_trans.tex}
 
@@ -74,7 +74,7 @@ To assess the independent contributions and synergistic gains of the two core mo
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.92\textwidth]{./images/plots/fig_ablation_radar.pdf}
-\caption{Radar charts of the metrics of each model on ODIR Off-site in the ablation study, showing the results under (a) monocular and (b) binocular evaluation protocols, both consistent with \hyperref[tab:ablation]{Table~\ref*{tab:ablation}}. Each axis corresponds to one metric (Kappa, F1, AUC, Final) and is independently normalized according to the value range of that axis to amplify differences among models; the further the polygon extends outward, the higher the metric. The proposed method (Ours) expands outward on all metrics overall, outperforming the variants that introduce only DFE or only ARC as well as the baseline.}
+\caption{Radar charts of the metrics of each model on ODIR Off-site in the ablation study, showing the results under (a) monocular and (b) binocular evaluation protocols, both consistent with \hyperref[tab:ablation]{Table~\ref*{tab:ablation}}. Each axis corresponds to one metric (Kappa, F1, AUC, Final) and is independently normalized according to the value range of that axis to amplify differences among models; the further the polygon extends outward, the higher the metric.}
 \label{fig:ablation-radar}
 \end{figure}
 
@@ -97,7 +97,7 @@ To assess the independent contributions and synergistic gains of the two core mo
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.92\textwidth]{./images/media/image8_padded.pdf}
-\caption{Comparison of CAM-based model-attended region visualizations between the baseline and the proposed method on selected ODIR Off-site samples, where (a)--(j) denote different test samples. Compared with the baseline, the model-attended regions of the proposed method are more concentrated on the eyeball, vessels, and disease-related regions, with weaker responses to irrelevant background factors such as image edges and illumination artifacts. This indicates that the proposed method effectively suppresses domain-specific noise and enhances interpretability.}
+\caption{Comparison of CAM-based model-attended region visualizations between the baseline and the proposed method on selected ODIR Off-site samples, where (a)--(j) denote different test samples. Compared with the baseline, the model-attended regions of the proposed method are more concentrated on the eyeball, vessels, and disease-related regions, with weaker responses to irrelevant background factors such as image edges and illumination artifacts.}
 \label{fig:cam-visualization}
 \end{figure}
 
@@ -115,9 +115,9 @@ For ODIR in-domain generalization, the test set is On-site, and \hyperref[tab:ge
 
 For cross-domain generalization, the complete label spaces of RFMiD, EDID, and ODIR are inconsistent. Therefore, this study first reconstructs shared three-class label spaces before generalization evaluation. RFMiD is aligned using D/A/M classes, while EDID is aligned using D/G/M classes. Although EDID is a single-label dataset, it can still be used as a cross-domain generalization dataset under the three-class shared label space. Considering that the cross-domain generalization datasets differ more significantly from ODIR in imaging devices, acquisition procedures, illumination conditions, disease composition, and label definitions, model selection and evaluation are also based on the top five candidate checkpoints. The monocular Final scores of the selected checkpoint group on the three-class ODIR Off-site set and the cross-domain generalization dataset are reported simultaneously.
 
-In RFMiD D/A/M cross-domain generalization, the baseline checkpoint obtains a Final score of 94.39 on ODIR Off-site and 83.86 on the target domain. The corresponding checkpoint of the proposed method obtains a Final score of 95.94 on ODIR Off-site and 85.06 on the target domain, improving by 1.55 and 1.20 percentage points, respectively. Detailed metrics show that the Kappa, F1, and AUC of the proposed method on RFMiD are 73.95, 87.96, and 93.27, all higher than the baseline values of 72.08, 87.11, and 92.39. In EDID D/G/M cross-domain generalization, the baseline checkpoint obtains a Final score of 94.30 on ODIR Off-site and 52.16 on the target domain. The proposed method obtains 96.03 on ODIR Off-site and 55.35 on the target domain, improving by 1.73 and 3.19 percentage points, respectively. The Kappa, F1, and AUC of the proposed method on EDID are 27.20, 67.22, and 71.63, which are higher than the baseline values of 23.83, 65.54, and 67.09. Overall, the RFMiD results validate the cross-domain generalization capability of the model on a multi-label dataset, while the EDID results further indicate that the proposed method remains effective when a single-label dataset is incorporated into a three-class generalization evaluation framework. \hyperref[fig:tsne]{Fig.~\ref*{fig:tsne}} further visualizes the feature distributions of the three generalization directions using t-SNE. Compared with the baseline, the proposed method makes samples of the same class more compact and brings same-class samples of the source and target domains closer in most directions, which is largely consistent with the metric improvements above.
+In RFMiD D/A/M cross-domain generalization, the baseline checkpoint obtains a Final score of 94.39 on ODIR Off-site and 83.86 on the target domain. The corresponding checkpoint of the proposed method obtains a Final score of 95.94 on ODIR Off-site and 85.06 on the target domain, improving by 1.55 and 1.20 percentage points, respectively. Detailed metrics show that the Kappa, F1, and AUC of the proposed method on RFMiD are 73.95, 87.96, and 93.27, all higher than the baseline values of 72.08, 87.11, and 92.39. In EDID D/G/M cross-domain generalization, the baseline checkpoint obtains a Final score of 94.30 on ODIR Off-site and 52.16 on the target domain. The proposed method obtains 96.03 on ODIR Off-site and 55.35 on the target domain, improving by 1.73 and 3.19 percentage points, respectively. The Kappa, F1, and AUC of the proposed method on EDID are 27.20, 67.22, and 71.63, which are higher than the baseline values of 23.83, 65.54, and 67.09. Overall, the RFMiD results validate the cross-domain generalization capability of the model on a multi-label dataset, while the EDID results further indicate that the proposed method remains effective when a single-label dataset is incorporated into a three-class generalization evaluation framework. \hyperref[fig:tsne]{Fig.~\ref*{fig:tsne}} further visualizes the target-domain feature distributions under selected evaluation directions using t-SNE. In the ODIR in-domain direction (\figsubref{fig:tsne}{a}), Off-site and On-site share the same source and the domain gap itself is small, so same-class samples of both methods overlap reasonably, while Ours shows clearer local cluster structures on the small-sample disease classes (G, A, M). In the RFMiD cross-domain direction (\figsubref{fig:tsne}{b}), Ours organizes the D/A/M classes into more independent clusters, with source- and target-domain samples of the same class closely mixed within each cluster, whereas the baseline has multiple separated sub-clusters within class D and looser local aggregation of the three classes.
 
-\begin{figure}[p]
+\begin{figure}[H]
 \centering
 \begin{subfigure}{\textwidth}
 \centering
@@ -133,16 +133,8 @@ In RFMiD D/A/M cross-domain generalization, the baseline checkpoint obtains a Fi
 \caption{ODIR Off-site \(\rightarrow\) RFMiD (D/A/M three-class alignment)}
 \label{fig:tsne-rfmid}
 \end{subfigure}
-
-\vspace{4pt}
-\begin{subfigure}{\textwidth}
-\centering
-\includegraphics[width=0.60\textwidth]{./images/plots/tsne_edid_panel1_tx.png}
-\caption{ODIR Off-site \(\rightarrow\) EDID (D/G/M three-class alignment)}
-\label{fig:tsne-edid}
-\end{subfigure}
 \captionsetup{font=small}
-\caption{t-SNE visualization of target-domain sample features under three evaluation directions, where (a)--(c) correspond to ODIR in-domain (Off-site \(\rightarrow\) On-site), ODIR \(\rightarrow\) RFMiD, and ODIR \(\rightarrow\) EDID, respectively. In each subfigure, the left side is the baseline and the right side is the proposed method (Ours); different colors denote different classes, dots denote source-domain samples, and triangles denote target-domain samples. (a) In-domain Off-site and On-site share the same source and the domain gap itself is small, so same-class samples of both methods overlap reasonably, and Ours shows clearer local cluster structures on the small-sample disease classes (G, A, M). (b) Under the RFMiD generalization setting, Ours organizes the D/A/M classes into more independent clusters, with source- and target-domain samples of the same class closely mixed within each cluster, whereas the baseline has multiple separated sub-clusters within class D and looser local aggregation of the three classes. (c) Under the EDID generalization setting, the baseline also forms several local clusters, but for some classes the source- and target-domain samples of the same disease aggregate into adjacent but separated sub-clusters (for example, classes D and G show a clear two-domain boundary); Ours yields fewer clusters but mixes the two-domain samples of the same class more thoroughly, roughly forming three regions organized by class (D/G/M) rather than by domain. These results demonstrate that the proposed method has stronger domain generalization capability.}
+\caption{t-SNE visualization of target-domain sample features under selected evaluation directions, where (a)--(b) correspond to ODIR in-domain (Off-site \(\rightarrow\) On-site) and ODIR \(\rightarrow\) RFMiD, respectively. In each subfigure, the left side is the baseline and the right side is the proposed method (Ours); different colors denote different classes, dots denote source-domain samples, and triangles denote target-domain samples.}
 \label{fig:tsne}
 \end{figure}
 

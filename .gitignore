@@ -40,3 +40,5 @@ build/
 #
 *.vsdx
 /src/
+
+submit/els-cas-templates
