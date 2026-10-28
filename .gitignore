@@ -12,7 +12,6 @@ Icon?
 .Trashes
 
 # LaTeX auxiliary files
-build/
 *.aux
 *.log
 *.out
@@ -41,4 +40,6 @@ build/
 *.vsdx
 /src/
 
+build/
 submit/els-cas-templates
+!submit/build

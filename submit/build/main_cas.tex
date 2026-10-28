@@ -1,0 +1,90 @@
+%% Elsevier CAS conversion of manuscripts/trans/main_trans.tex.
+%% Build from this directory with: pdflatex main_cas.tex
+
+\documentclass[a4paper,fleqn]{cas-sc}
+
+\usepackage[numbers]{natbib}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{placeins}
+
+\graphicspath{{./images/}}
+\emergencystretch=2em
+
+\providecommand{\figref}[1]{\hyperref[#1]{Fig.~\ref*{#1}}}
+\providecommand{\figsubref}[2]{\hyperref[#1]{Fig.~\ref*{#1}.#2}}
+\renewcommand{\tabref}[1]{\hyperref[#1]{Table~\ref*{#1}}}
+
+\begin{document}
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+
+\shorttitle{Privacy-Preserving Interpretable Single-Domain Generalization}
+\shortauthors{Q. Jin et~al.}
+
+\title[mode=title]{Privacy-Preserving Interpretable Single-Domain Generalization for Multi-Label Ocular Disease Recognition}
+
+\author[1]{Qiang Jin}
+
+\author[1]{Xinyi Liu}
+
+\author[1]{Li Yi}
+
+\author[2]{Tian-Tian Zhang}
+
+\author[3]{Yanhua Chen}
+
+\author[1]{Zhi-Ri Tang}[orcid=0000-0002-0900-6500]
+\cormark[1]
+\ead{tangzhiri@jnu.edu.cn}
+
+\author[4]{Rammohan Mallipeddi}
+
+\affiliation[1]{organization={School of Intelligent Systems Science and Engineering/JNU-Industry School of Artificial Intelligence, Jinan University},
+                country={China}}
+
+\affiliation[2]{organization={Department of Electronic Engineering and Computer Science, Hong Kong Metropolitan University},
+                city={Hong Kong},
+                country={Hong Kong}}
+
+\affiliation[3]{organization={Division of Science, Engineering and Health Studies, School of Professional Education and Executive Development, The Hong Kong Polytechnic University},
+                city={Hong Kong},
+                country={Hong Kong}}
+
+\affiliation[4]{organization={Department of Artificial Intelligence, School of Electronics Engineering, Kyungpook National University},
+                city={Daegu},
+                country={Republic of Korea}}
+
+\cortext[cor1]{Corresponding author: Prof. Zhi-Ri Tang}
+
+\begin{abstract}
+Early fundus screening is effective for ocular disease diagnosis. Deep learning has provided tools for fundus image analysis. However, clinical deployment still faces three major challenges: (1) multiple diseases often co-occur in a single eye, causing false positives and false negatives when modeled independently; (2) cross-institutional deployment suffers from domain shift, yet conventional cross-domain methods typically require target-domain or multi-source data, often infeasible; (3) medical data are privacy-sensitive, further restricting cross-institutional sharing and invalidating the multi-source assumption, calling for generalization with local privacy preservation. To address these three challenges in order, we first propose an Adaptive Label-Feature Relevance Construction (ARC) module that captures disease co-occurrence dependencies via Transformer attention to reduce false positives and negatives. Then, we design a Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) module that learns domain-invariant features from a single source domain under Class Activation Mapping (CAM) guidance, improving unseen-domain generalization and interpretability. Finally, we integrate an Adaptive Gaussian Differential Privacy (AdaGDP) mechanism into training, preserving privacy through dynamic gradient noise injection with controlled performance loss. Experiments show that our method reaches a Final score of 78.85 on ODIR, outperforming representative multi-label ocular disease recognition methods, and yields a 3.19-point gain on EDID. Overall, we establish an interpretable and privacy-preserving single-domain generalization framework for multi-label ocular disease recognition, improving cross-domain performance and providing insights into ocular diagnosis under privacy constraints.
+\end{abstract}
+
+\begin{highlights}
+\item Models label-feature disease relevance with Transformer-based attention.
+\item Learns CAM-guided domain-invariant features from a single source domain.
+\item Balances privacy and generalization via adaptive Gaussian gradient noise.
+\end{highlights}
+
+\begin{keywords}
+Domain Generalization \sep Multi-Label Ocular Disease Recognition \sep Data Privacy \sep Interpretability
+\end{keywords}
+
+\maketitle
+
+\input{sections/01_introduction_trans.tex}
+\input{sections/02_related_work_trans.tex}
+\input{sections/03_method_trans.tex}
+\input{sections/04_experiments_trans.tex}
+\FloatBarrier
+\input{sections/05_conclusion_trans.tex}
+
+\input{sections/06_references_trans.tex}
+
+\end{document}
