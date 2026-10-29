@@ -44,7 +44,7 @@ The training configuration is as follows. Adam is used as the optimizer, with an
 
 \subsection{Comparison with Existing Methods}
 
-To evaluate the recognition performance of the proposed method on the ODIR dataset, we compare it with four published multi-label ocular disease recognition methods, including the official baseline provided in the ODIR dataset paper by Li et al. \cite{_Ref213949402} and three subsequent works reporting results on this dataset by Gour and Khanna \cite{_Ref214903299}, He et al. \cite{_Ref213950338}, and Ou et al. \cite{_Ref214903327}. These methods mainly focus on improving Final score and do not consider cross-domain generalization or privacy preservation.
+To compare classification performance on a common benchmark, we select four representative methods that report multi-label ocular disease recognition results on ODIR using its official Kappa, F1, AUC, and Final metrics. These include the benchmark baseline of Li et al. \cite{_Ref213949402} and the methods of Gour and Khanna \cite{_Ref214903299}, He et al. \cite{_Ref213950338}, and Ou et al. \cite{_Ref214903327}. Their results are taken from the corresponding publications, whereas the results of our method are obtained in our experiments.
 
 Gour and Khanna \cite{_Ref214903299} proposed a transfer-learning-based CNN framework with VGG16 as the backbone. The ODIR dataset is expanded through data augmentation, and the model is fine-tuned using the SGD optimizer. The method uses pretrained weights to capture structural abnormalities involving vessels, optic discs, and maculae, thereby improving recognition performance in multi-class co-occurrence scenarios.
 
@@ -63,7 +63,7 @@ Ou et al. \cite{_Ref214903327} designed a two-stream interactive CNN. A feature 
 \label{fig:sota-compare}
 \end{figure}
 
-Existing comparison methods mainly optimize internal multi-label recognition metrics on ODIR and rarely consider domain generalization and privacy preservation simultaneously. In contrast, in addition to achieving higher Final scores on ODIR Off-site and On-site, this study validates unseen-domain performance on two cross-domain generalization datasets, RFMiD and EDID, and further evaluates performance degradation under privacy-preserving training. These results indicate that the proposed method is not limited to improving recognition performance on a single dataset, but is also designed for clinically relevant settings where data sharing is restricted and privacy preservation is required.
+The methods listed in Table 2 mainly focus on improving in-domain multi-label classification on ODIR. To address cross-institutional application needs and restrictions on medical data sharing, our framework extends multi-label recognition by incorporating single-source domain generalization and privacy protection. The proposed method achieves higher Final scores than the four compared methods on both ODIR Off-site and On-site. We also evaluate cross-dataset generalization on RFMiD and EDID under single-source training and examine classification performance under privacy-preserving training. These results suggest the framework’s potential for clinical ocular disease recognition where generalization and privacy protection are required.
 
 \subsection{Ablation Study Results}
 
