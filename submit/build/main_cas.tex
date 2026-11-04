@@ -10,47 +10,20 @@
 \usepackage{subcaption}
 \usepackage{xcolor}
 \usepackage{soul}
-\usepackage[quiet]{marginnote}
+% Accept margin-note records in auxiliary files from earlier revision builds.
+\providecommand{\newmarginnote}[2]{}
 \newif\ifshowrevisions
-\newif\ifmixedrevisions
-\newenvironment{mixedrevisions}{\par\mixedrevisionstrue}{\par}
-% Define \RevisionClean before inputting this file to hide all revision markup.
+% Define \RevisionClean before inputting this file to hide revision highlighting.
 \ifdefined\RevisionClean
   \showrevisionsfalse
 \else
   \showrevisionstrue
 \fi
-\setlength{\marginparwidth}{11mm}
-\setlength{\marginparsep}{2mm}
-\newcommand{\revisionmark}[1]{%
-  \marginnote{\raggedright\sffamily\fontsize{7}{8}\selectfont
-    \color{blue!60!black}#1}%
-}
-% Use the starred form for more changes in a paragraph already marked on the same page.
-% Multiple comment IDs can be supplied as R3-1, R5-4.
-% Wrap mixed-comment paragraphs in mixedrevisions to label every highlighted span.
-\NewDocumentCommand{\revision}{s m m}{%
+\newcommand{\revision}[1]{%
   \ifshowrevisions
-    \ifmixedrevisions\else
-      \IfBooleanF{#1}{\revisionmark{#2}}%
-    \fi
-    \hl{#3}%
-    \ifmixedrevisions
-      \nobreak\textsuperscript{\sffamily\color{blue!60!black}[#2]}%
-    \fi
+    \hl{#1}%
   \else
-    #3%
-  \fi
-}
-\newcommand{\revisionlegend}{%
-  \ifshowrevisions
-    \par\smallskip
-    \begingroup\small\sffamily\color{blue!60!black}
-    \noindent Yellow highlighting marks revised text. Margin labels identify reviewer
-    comments. In mixed-comment paragraphs, superscript labels identify each highlighted
-    span. R1 denotes Reviewer 1's unnumbered comment.
-    R4-2 denotes Reviewer 4, comment 2. Multiple labels indicate a shared revision.
-    \par\endgroup\smallskip
+    #1%
   \fi
 }
 \usepackage{float}
@@ -107,7 +80,7 @@
 \cortext[cor1]{Corresponding author: Prof. Zhi-Ri Tang}
 
 \begin{abstract}
-Early fundus screening is effective for ocular disease diagnosis. Deep learning has provided tools for fundus image analysis. However, clinical deployment still faces three major challenges: (1) multiple diseases often co-occur in a single eye, causing false positives and false negatives when modeled independently; (2) cross-institutional deployment suffers from domain shift, yet conventional cross-domain methods typically require target-domain or multi-source data, often infeasible; (3) medical data are privacy-sensitive, further restricting cross-institutional sharing and invalidating the multi-source assumption, calling for generalization with local privacy preservation. To address these three challenges in order, \revision{R1}{the proposed framework first incorporates an} Adaptive Label-Feature Relevance Construction (ARC) module that captures disease co-occurrence dependencies via Transformer attention to reduce false positives and negatives. \revision*{R1}{The framework also includes a} Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) module that learns domain-invariant features from a single source domain under Class Activation Mapping (CAM) guidance, improving unseen-domain generalization and interpretability. Finally, \revision*{R1}{an Adaptive Gaussian Differential Privacy (AdaGDP) mechanism is integrated into training}, preserving privacy through dynamic gradient noise injection with controlled performance loss. Experiments show that our method reaches a Final score of 78.85 on the ODIR dataset, outperforming representative multi-label ocular disease recognition methods, and yields a 3.19-point gain on the EDID dataset. \revision*{R1}{Overall, this study presents an} interpretable and privacy-preserving single-domain generalization framework for multi-label ocular disease recognition, improving cross-domain performance and providing insights into ocular diagnosis under privacy constraints.
+Early fundus screening is effective for ocular disease diagnosis. Deep learning has provided tools for fundus image analysis. However, clinical deployment still faces three major challenges: (1) multiple diseases often co-occur in a single eye, causing false positives and false negatives when modeled independently; (2) cross-institutional deployment suffers from domain shift, yet conventional cross-domain methods typically require target-domain or multi-source data, often infeasible; (3) medical data are privacy-sensitive, further restricting cross-institutional sharing and invalidating the multi-source assumption, calling for generalization with local privacy preservation. To address these three challenges in order, \revision{the proposed framework first incorporates an} Adaptive Label-Feature Relevance Construction (ARC) module that captures disease co-occurrence dependencies via Transformer attention to reduce false positives and negatives. \revision{The framework also includes a} Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) module that learns domain-invariant features from a single source domain under Class Activation Mapping (CAM) guidance, improving unseen-domain generalization and interpretability. Finally, \revision{an Adaptive Gaussian Differential Privacy (AdaGDP) mechanism is integrated into training}, preserving privacy through dynamic gradient noise injection with controlled performance loss. Experiments show that our method reaches a Final score of 78.85 on the ODIR dataset, outperforming representative multi-label ocular disease recognition methods, and yields a 3.19-point gain on the EDID dataset. \revision{Overall, this study presents an} interpretable and privacy-preserving single-domain generalization framework for multi-label ocular disease recognition, improving cross-domain performance and providing insights into ocular diagnosis under privacy constraints.
 \end{abstract}
 
 \begin{highlights}
@@ -121,7 +94,6 @@ Domain Generalization \sep Multi-Label Ocular Disease Recognition \sep Data Priv
 \end{keywords}
 
 \maketitle
-\revisionlegend
 
 \input{sections/01_introduction_trans.tex}
 \input{sections/02_related_work_trans.tex}

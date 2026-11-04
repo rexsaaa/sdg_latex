@@ -30,31 +30,19 @@ The compiled full CAS PDF is `main_cas_full.pdf`. The separate highlights PDF is
 - Remaining submission metadata to confirm before direct journal upload: full postal affiliation addresses, funding statement, declaration of competing interests, data availability statement, and author biographies/photos if requested by the submission system.
 - Original article-style float options such as `[!htb]` and `[H]` were removed in the copied build files so that CAS controls float placement.
 
-## Reviewer revision markup
+## Revision highlighting and Git history
 
-The baseline for this round is the Git tag `准备审稿人意见返修`. Highlight the final text changed from that baseline and use the same comment IDs in the manuscript and response letter. Keep original reviewer numbering where present. Assign stable point IDs to separate issues in unnumbered reviews. Reviewer 1 has one unnumbered comment and uses `R1`.
+Following the supervisor's guidance confirmed on 2026-11-04, accumulate all reviewer-driven changes in one PDF using yellow highlighting. The baseline for this round is the Git tag `准备审稿人意见返修`.
 
-- For a paragraph addressing one comment, use `\revision{R1}{Revised text}` at its first change. Use `\revision*{R1}{Further revised text}` for later changes on the same page. Repeat the unstarred form after a page break and check the positions in the final PDF.
-- For a paragraph addressing different comments, wrap the paragraph in `mixedrevisions`. Every highlighted span receives a superscript comment label. The starred form also shows its superscript label in this environment. The labels distinguish different reviewers and different points from the same reviewer.
-- For one span addressing several comments, supply all applicable IDs, such as `\revision{R3-1, R5-4}{Revised text}`. In a mixed paragraph these IDs appear together after that span.
-- When a later edit replaces earlier wording, reassess the applicable IDs against the final text. Update the relevant reviewer responses and check their page references after pagination is final.
+Use `\revision{Revised text}` for each changed passage. Keep earlier revisions highlighted as later reviewer comments are addressed. When a passage changes again, highlight its final wording relative to the revision baseline.
 
-The following is a markup example for maintainers.
+Keep the response letter organized by reviewer and comment. Locate changes using section and final page references. Record each completed revision group in a Git commit identified by the reviewer and relevant points so that its changes can be inspected separately. Git operations are performed in the Mac checkout.
 
-```latex
-\begin{mixedrevisions}
-\revision{R1}{Reworded sentence.}
-Unchanged connecting text.
-\revision{R2-1}{Clarification of the method.}
-\revision{R3-1, R5-4}{Explanation addressing both comments.}
-\end{mixedrevisions}
-```
-
-The response letter should name the same IDs and identify the relevant sections and final page numbers. Yellow highlighting, margin labels, superscript labels and the revision guide are controlled together by `\RevisionClean`.
+Defining `\RevisionClean` before loading the manuscript hides the yellow highlighting for the clean version.
 
 ## Revision builds
 
-Build the highlighted version twice to resolve references and margin positions. After edits that affect pagination, check the labels in the resulting PDF and rerun compilation if positions have changed.
+Build the highlighted version twice to resolve references. Check pagination and response-letter page references after the revisions are integrated.
 
 ```sh
 pdflatex -interaction=nonstopmode -halt-on-error -jobname=main_cas_revised_highlight_full main_cas.tex
