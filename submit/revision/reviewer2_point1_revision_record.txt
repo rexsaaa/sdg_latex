@@ -1,0 +1,42 @@
+审稿人 2 主要意见第 1 条：修改记录
+日期：2026-11-04（北京时间）
+
+本记录供内部追溯，回复正文见 point1_reply_zh.txt。
+
+正式稿位置：Mac /Users/jq/Desktop/sdg_latex/submit/build/
+本轮基准：标签“准备审稿人意见返修”，提交 4f62d422ce992cb2f082e96f5286d0c3f77f432f。
+执行方式：在最新正式稿上累计落实用户批准的六组修改；保留审稿人 1 修改及黄色高亮。
+
+修改位置（页码以本次 23 页正文 PDF 为准）：
+1. 第 1 节框架介绍，第 2 页：从单源训练的共同问题引出整体框架。
+2. 第 1 节贡献列表，第 4 页：明确 ARC、DFE 与 AdaGDP 的技术作用和联系；保留三处 We。
+3. 第 3 节方法总述，第 6 页：说明 DFE 特征筛选与 ARC 标签表示一致性的连接方式。
+4. 第 3.1 节公式（5）—（6）附近，第 8—9 页：补充掩码筛选依据、阈值作用及适用条件。
+5. 第 3.2 节，第 9—10 页：说明一致性约束与掩码的互补作用及共同训练目标。
+6. 第 4.2 节，第 14 页：明确固定阈值 τ = 0.25。
+
+修改文件：
+submit/build/sections/01_introduction_trans.tex
+submit/build/sections/03_method_trans.tex
+submit/build/sections/04_experiments_trans.tex
+
+完成状态：
+- 六组修改已翻译为英文并编入正式源文件，新增文字统一使用 \revision{} 黄色高亮。
+- 已生成并检查高亮版、清洁版；两版正文均为 23 页，正文文字一致。
+- 已核对新增高亮、公式与分页；交叉引用和文献引用均已解析。
+- 保留模板原有的标题盒宽、关键词盒宽及空锚点提示；本次新增段落没有引入编译错误。
+- 点 1 回复中正文修改均改为已完成，并更新章节、公式和页码。
+- 此次工作为正文说明完善，使用稿件已有实验数据。表格数值未改动，未新增或重跑实验；阈值深入分析在回复中仍明确为后续研究方向。
+- 正式写回和读回校验的逐文件结果见 writeback_journal.json；全部条目 verified 为 true 才表示远端同步完成。
+- Mac 受限接口不支持 Git 操作，本次未创建 Mac Git 提交。独立差异保存在 reviewer2_point1.patch。
+
+后续处理规则：
+- 后续每条意见仍对照固定基准理解原始问题；在当前稿上累计实现已批准的修订。
+- 审稿人 2 次要意见第 5 条精简重复时，区分基准稿的重复内容与本点新增的机制解释。若需删减、改写本点已经批准的内容，先说明影响和处理方式，由用户审核。
+- 后续返修可能改变分页；整份回复信完成后统一复核最终页码。
+
+构建：
+从 Mac 读取当前稿件与编译依赖后，在服务器副本上使用 pdflatex 编译；采用独立 jobname，未覆盖原投稿 main_cas.pdf。
+高亮版：pdflatex -interaction=nonstopmode -halt-on-error -jobname=main_cas_revised_highlight_full main_cas.tex
+清洁版：pdflatex -interaction=nonstopmode -halt-on-error -jobname=main_cas_revised_full '\def\RevisionClean{1}\input{main_cas.tex}'
+各版重复编译直至引用稳定。使用 pypdf 保留原字体与链接，仅移除单独的研究亮点首页，得到 23 页正文 PDF。
