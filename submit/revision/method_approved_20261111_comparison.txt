@@ -1,0 +1,179 @@
+第三章审核通过后的累计修改对照
+日期：2026年11月11日
+
+原始版本：首次处理审稿人2点1前的英文快照（已含审稿人1语言修改）。
+修改后：本轮审核通过并落实的英文。每处原始英文、原始中文、修改后英文、修改后中文相邻排列。
+本轮改动六处；其余早期修改按审核结论保留。以下10项覆盖第三章累计文字修改，公式及实验数值不变。
+
+第3章：早期修改经审核后的累计中英文对照
+
+3.1 方法总述：统一掩码操作称谓（第3节总述）
+
+【原始英文】
+Part 1 uses CAM guidance together with a dual-branch mask-based contrastive learning mechanism
+
+【原始中文】
+第1部分结合CAM引导与基于双分支掩码的对比学习机制
+
+【修改后英文】
+Part 1 uses CAM guidance together with a \revision{dual-branch feature filtering mechanism}
+
+【修改后中文】
+第1部分结合CAM引导与双分支特征筛选机制
+
+【改动说明】
+2026年11月11日用户审核通过后落实；此处为本轮调整。
+
+3.2 方法总述：DFE与ARC的技术联系（第3节总述）
+
+【原始英文】
+These two parts are coupled through feature filtering and attention consistency constraints: Part 1 provides more stable domain-invariant features for Part 2, while Part 2 further constrains the consistency of dual-branch attention features, jointly improving domain generalization performance.
+
+【原始中文】
+这两个部分通过特征筛选和注意力一致性约束相互耦合：第1部分为第2部分提供更稳定的域不变特征，第2部分进一步约束双分支注意力特征的一致性，共同提升域泛化性能。
+
+【修改后英文】
+\revision{DFE and ARC are connected through feature filtering and label-representation consistency. DFE first selects feature components with small normalized differences between the two views as inputs to ARC. ARC then extracts a representation for each disease label and constrains the corresponding representations to remain close across the two views. The classification and consistency objectives jointly guide feature learning, applying the stability requirement under appearance perturbations to the representations associated with disease labels.}
+
+【修改后中文】
+DFE与ARC通过特征筛选和标签表示一致性相互连接。DFE首先选取两个视图之间归一化差异较小的特征成分，作为ARC的输入。随后，ARC为每个疾病标签提取表示，并约束对应表示在两个视图之间保持接近。分类目标与一致性目标共同引导特征学习，将外观扰动下的稳定性要求落实到疾病标签对应的表示上。
+
+【改动说明】
+早期修改经本轮重新审核后保留；该段本轮没有再次改写。
+
+3.3 方法总述：单源训练与训练信息保护的衔接（第3节总述末尾）
+
+【原始英文】
+Finally, an Adaptive Gaussian Differential Privacy mechanism is integrated during training to reduce the impact of privacy preservation on model performance and to balance privacy preservation with model performance.
+
+【原始中文】
+最后，在训练过程中整合自适应高斯差分隐私机制，以减少隐私保护对模型性能的影响，并平衡隐私保护与模型性能。
+
+【修改后英文】
+\revision{The framework adopts single-source domain generalization, restricting training updates to the accessible source domain and reducing the need to access target-domain training data or pool raw data across institutions. Building on this setting, AdaGDP is applied to the training updates of the joint DFE and ARC model to further protect source-domain training information. Its noise schedule aims to preserve recognition performance as much as possible.}
+
+【修改后中文】
+整体框架采用单源域泛化设定，将训练更新限定于可访问的源域，减少对目标域训练数据访问及跨机构原始数据汇集的需求。在此基础上，AdaGDP作用于DFE与ARC联合模型的训练更新，进一步保护源域训练信息。其噪声调度旨在尽可能维持识别性能。
+
+【改动说明】
+2026年11月11日用户审核通过后落实；此处为本轮调整。
+
+3.4 图2图注：统一掩码操作称谓（图2图注）
+
+【原始英文】
+(c) a dual-branch mask-based contrastive learning mechanism retains highly similar components
+
+【原始中文】
+（c）基于双分支掩码的对比学习机制保留高度相似的成分
+
+【修改后英文】
+(c) a \protect\revision{dual-branch feature filtering mechanism} retains highly similar components
+
+【修改后中文】
+（c）双分支特征筛选机制保留高度相似的成分
+
+【改动说明】
+2026年11月11日用户审核通过后落实；此处为本轮调整。
+
+3.5 公式（5）之前：双视图特征筛选的依据（第3.1节）
+
+【原始英文】
+\revision{Next, the framework applies the domain-invariant feature filtering module}, as shown in \hyperref[fig:method-framework]{Fig.~\ref*{fig:method-framework}.c}. This study adopts a dual-branch mask-based contrastive learning mechanism to compute the similarity between guided features from original source-domain images and augmented source-domain images at the feature-distribution level. Highly similar components represent disease-related regions that remain stable under style disturbance and are therefore retained, whereas low-similarity components are more likely to contain domain-specific noise caused by illumination, device style, or style disturbance and are therefore suppressed. The mask matrix \(M \in \mathbb{R}^{C \times H \times W}\) is calculated from the normalized distance:
+
+【原始中文】
+接下来，该框架采用域不变特征筛选模块，如图2.c所示。本文采用基于双分支掩码的对比学习机制，在特征分布层面计算原始源域图像与增强源域图像的引导特征之间的相似性。高度相似的成分代表在风格扰动下保持稳定的疾病相关区域，因此予以保留；而相似性较低的成分更可能包含由光照、设备风格或风格扰动引起的域特有噪声，因此予以抑制。掩码矩阵M∈R^(C×H×W)根据归一化距离计算如下：
+
+【修改后英文】
+\revision{Next, the framework applies a dual-branch feature filtering mechanism}, as shown in \hyperref[fig:method-framework]{Fig.~\ref*{fig:method-framework}.c}. \revision{The original and augmented images provide two views of the same source-domain sample under different appearance conditions. After instance normalization of the guided features from both views, their differences are compared element by element, and components with small differences are retained to reduce the influence of features that are sensitive to the selected appearance perturbations on subsequent label-representation learning.} The mask matrix \(M \in \mathbb{R}^{C \times H \times W}\) is calculated from the normalized distance:
+
+【修改后中文】
+接下来，该框架采用双分支特征筛选机制，如图2.c所示。原始图像和增强图像提供了同一源域样本在不同外观条件下的两个视图。对两个视图的引导特征进行实例归一化后，逐元素比较其差异，并保留差异较小的成分，以减少对所选外观扰动敏感的特征对后续标签表示学习的影响。掩码矩阵M∈R^(C×H×W)根据归一化距离计算如下：
+
+【改动说明】
+早期修改保留；准确说明公式操作及其对标签表示学习的作用。
+
+3.6 公式（5）之后：阈值的控制作用（第3.1节）
+
+【原始英文】
+Components satisfying the threshold \(\tau\) are assigned 1, while the remaining components are assigned 0.
+
+【原始中文】
+满足阈值τ条件的成分被赋值为1，其余成分被赋值为0。
+
+【修改后英文】
+Components satisfying the threshold \(\tau\) are assigned 1, while the remaining components are assigned 0. \revision{The threshold $\tau$ controls the feature differences allowed between the two views. For a fixed pair of feature maps, a smaller threshold imposes stricter filtering, whereas a larger threshold retains more features. It therefore controls the trade-off between information retention and perturbation suppression. Overly strict filtering may remove useful information that is sensitive to augmentation, whereas a more permissive threshold may retain more components affected by appearance variations.}
+
+【修改后中文】
+满足阈值τ条件的成分被赋值为1，其余成分被赋值为0。阈值τ控制两个视图之间允许的特征差异。对于一对固定的特征图，较小的阈值使筛选更加严格，而较大的阈值会保留更多特征。因此，阈值控制着信息保留与扰动抑制之间的取舍。过于严格的筛选可能移除对增强敏感的有效信息，而更宽松的阈值则可能保留更多受外观变化影响的成分。
+
+【改动说明】
+早期机制解释保留；第4.2节表2提供六组阈值的实验依据。
+
+3.7 公式（6）之后：筛选结果用途及可能失效情形（第3.1节）
+
+【原始英文】
+Here, \(\odot\) denotes pixel-wise element-wise multiplication, ensuring that only shared disease-related features, such as vascular or macular textures, are retained while illumination or device noise is removed. The resulting \(F_{invariant}^{ori}\) and \(F_{invariant}^{aug}\) are used as inputs for subsequent label-feature relevance construction, enabling multi-label relevance learning to be built on more stable domain-invariant features.
+
+【原始中文】
+其中，⊙表示逐像素的逐元素乘法，确保仅保留共同的疾病相关特征，例如血管或黄斑纹理，同时去除光照或设备噪声。得到的F_invariant^ori和F_invariant^aug用作后续标签—特征相关性构建的输入，使多标签相关性学习建立在更稳定的域不变特征之上。
+
+【修改后英文】
+Here, \(\odot\) denotes pixel-wise element-wise multiplication. \revision{The filtered features from both branches are passed to the subsequent label-feature relevance module, allowing disease-label queries to operate on feature components that are relatively consistent across the two views. This mechanism is designed on the premise that augmentation preserves disease information shared by both views. When augmentation alters subtle lesion cues, the normalized feature differences between the views may increase beyond the threshold, causing features useful for disease discrimination to be filtered out. When background interference remains stable across both views, its feature differences may still satisfy the retention criterion, allowing it to pass through the mask. Its operation should therefore be understood in relation to the augmentation strategy and the quality of CAM guidance.}
+
+【修改后中文】
+其中，⊙表示逐像素的逐元素乘法。两个分支经过筛选的特征被传入后续标签—特征相关性模块，使疾病标签查询作用于两个视图之间相对一致的特征成分。该机制以增强操作保留两个视图共同的疾病信息为设计前提。当增强改变细微病变线索时，相关特征的归一化跨视图差异可能增大并超过阈值，使有助于疾病判别的信息被筛除；当背景干扰在两个视图中均保持稳定时，其特征差异可能仍满足保留条件，从而通过筛选。因此，应结合增强策略与CAM引导质量理解该机制的作用。
+
+【改动说明】
+保留早期补充的用途与适用条件，本轮把“筛选结果可能受到影响”细化为有效信息被筛除、背景干扰被保留的因果解释；没有新增失效案例实验。
+
+3.8 公式（9）之前：疾病标签表示一致性（第3.2节）
+
+【原始英文】
+To ensure consistency between the outputs of the two branches, \revision{an attention consistency constraint is imposed through an attention consistency loss}. Original source-domain images and augmented source-domain images share the same disease labels and differ only in style. Therefore, the corresponding label attention vectors should remain close. This loss encourages consistent attention features across the two branches, enabling the model to learn similar label-feature relevance from inputs with different styles. It is calculated using mean squared error (MSE):
+
+【原始中文】
+为保证两个分支输出的一致性，通过注意力一致性损失施加注意力一致性约束。原始源域图像与增强源域图像具有相同的疾病标签，仅在风格上存在差异。因此，对应的标签注意力向量应保持接近。该损失促使两个分支的注意力特征保持一致，使模型能够从不同风格的输入中学习相似的标签—特征相关性。该损失采用均方误差（MSE）计算：
+
+【修改后英文】
+\revision{Provided that augmentation preserves disease semantics, the original image and its augmented view share the same disease labels. To encourage the representations associated with each disease label to remain consistent under appearance perturbations, a consistency constraint is imposed on the corresponding label representations after Softmax normalization in the two branches. This constraint complements the preceding mask: the mask filters the input features, whereas the consistency loss constrains the outputs of the two branches at the level of label-associated representations. The loss is calculated using mean squared error (MSE):}
+
+【修改后中文】
+在增强保留疾病语义的前提下，原始图像及其增强视图共享相同的疾病标签。为使疾病标签对应的表示在外观扰动下保持一致，模型对两个分支中经Softmax归一化的对应标签表示施加一致性约束。该约束与前面的掩码相互补充：掩码筛选输入特征，而一致性损失在标签对应表示的层面约束两个分支的输出。该损失采用均方误差（MSE）计算：
+
+【改动说明】
+保留掩码与一致性约束的互补关系，本轮明确疾病语义前提及公式（9）实际比较的Softmax归一化表示；公式不变。
+
+3.9 总损失之后：共同训练目标（第3.2节）
+
+【原始英文】
+Through this design, the DFE module provides disease-related domain-invariant features for the ARC module, and the ARC module further models label-label relevance and label-feature relevance. The two modules work together to improve multi-label recognition capability in cross-domain scenarios.
+
+【原始中文】
+通过这一设计，DFE模块为ARC模块提供疾病相关的域不变特征，而ARC模块进一步建模标签—标签相关性与标签—特征相关性。两个模块共同提升跨域场景中的多标签识别能力。
+
+【修改后英文】
+\revision{The classification and consistency losses jointly optimize the representations of the two branches, connecting feature filtering and disease-label learning through a shared training objective and combining representation stability under appearance perturbations with multi-label discrimination.}
+
+【修改后中文】
+分类损失与一致性损失共同优化两个分支的表示，通过共享的训练目标连接特征筛选与疾病标签学习，将外观扰动下的表示稳定性与多标签判别结合起来。
+
+【改动说明】
+早期修改保留；总损失表达式及λ的解释不变。
+
+3.10 第3.3节开头：承接单源训练设定（第3.3节开头）
+
+【原始英文】
+Medical image data are highly sensitive, and gradients or model parameters generated during training may leak sample information.
+
+【原始中文】
+医疗图像数据高度敏感，训练过程中生成的梯度或模型参数可能泄露样本信息。
+
+【修改后英文】
+\revision{Under the source-only training setting described above, training gradients and model parameters may still carry information about source-domain samples.}
+
+【修改后中文】
+在上述单源训练设定下，训练梯度和模型参数仍可能携带源域样本信息。
+
+【改动说明】
+2026年11月11日用户审核通过后落实；此处为本轮调整。
+

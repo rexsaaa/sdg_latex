@@ -1,0 +1,148 @@
+第4章实验：累计修改前后中英对照与章节调整记录
+初始记录日期：2026年11月10日；补全日期：2026年11月11日
+对照起点：11月4日首次处理点1之前的实际英文快照。修改后对应Mac当前正式稿。
+本文件已补齐实际正文、表格与表号指引的前后对照；当前阈值分析位于4.2，第14页表2。
+
+4.1 第4.2节：默认掩码阈值
+当前位置：第14页。
+【修改前】
+训练轮数为50，批量大小为32，输入分辨率为448×448。
+
+【修改后／当前正文】
+训练轮数为50，批量大小为32，输入分辨率为448×448。双分支特征筛选的默认掩码阈值为τ=0.25，用于规定实例归一化后两个视图之间的特征保留准则。
+
+【改动说明】
+累计修改包含先补充阈值设置、再将“固定阈值”调整为“默认阈值”。当前没有“敏感性分析见4.4”的旧指引。
+
+【修改前英文原文】
+The number of training epochs is 50, the batch size is 32, and the input resolution is \(448 \times 448\).
+
+【修改后英文原文】
+The number of training epochs is 50, the batch size is 32, and the input resolution is \(448 \times 448\). \revision{The default mask threshold for dual-branch feature filtering is $\tau=0.25$, specifying the feature retention criterion between the two views after instance normalization.}
+
+
+4.2 第4.2节：新增六组阈值实验说明
+当前位置：第14页。
+【修改前】
+【新增内容说明，非原文引文】点1修改前，本处没有六组阈值敏感性实验的设置说明。
+
+【修改后／当前正文】
+为考察双分支掩码阈值τ对识别性能的影响，在非隐私训练设置下，对DFE与ARC联合模型分别采用τ=0.05、0.10、0.20、0.25、0.30和0.50进行训练。各组保持数据划分、模型结构、增强策略及其他训练参数一致。各组均训练50轮，批量大小为32，随机种子固定为42，并使用相同的源域验证规则选择最佳单眼Final得分对应的检查点。
+
+【改动说明】
+该段当前直接位于4.2训练设置段之后，以自然段呈现，没有独立“Mask threshold sensitivity.”小标题。
+
+【修改前英文原文】
+（原文无此新增内容。）
+
+【修改后英文原文】
+\revision{To examine the effect of the dual-branch mask threshold $\tau$ on recognition performance, the joint DFE and ARC model is trained under the non-private setting with $\tau=0.05$, $0.10$, $0.20$, $0.25$, $0.30$, and $0.50$. All runs use the same data split, model architecture, augmentation strategy, and other training parameters. Each run is trained for 50 epochs with a batch size of 32 and a fixed random seed of 42. The checkpoint with the best monocular Final score is selected using the same source-domain validation rule for all runs.}
+
+
+4.3 第4.2节：新增横向阈值结果表（当前表2）
+当前位置：第14页。
+【修改前】
+【新增内容说明，非原文引文】点1修改前，正文没有六组阈值结果表。
+
+【修改后／当前正文】
+表2：掩码阈值敏感性。报告相同训练预算与检查点选择规则下，ODIR Off-site源域验证集上的最佳单眼Final得分。默认阈值为τ=0.25。
+
+τ       0.05    0.10    0.20    0.25    0.30    0.50
+Final   81.65   81.81   81.59   81.77   81.52   81.72
+
+【改动说明】
+表格当前为两行横向展示，紧接实验说明。11月10日中间版本曾逐行列出阈值，后按用户要求改为横向；原数值未改变。
+
+【修改前英文原文】
+（原文无此新增内容。）
+
+【修改后英文原文】
+% Reviewer 2 major point 1: mask-threshold sensitivity.
+\begin{table}[pos=H]
+\centering
+\caption{\protect\revision{Mask threshold sensitivity. Best monocular Final scores on the ODIR Off-site source-domain validation set are reported under the same training budget and checkpoint-selection rule. The default threshold is $\tau=0.25$.}}
+\label{tab:tau-sensitivity}
+\begin{tabular}{lcccccc}
+\toprule
+\revision{$\tau$} & \revision{0.05} & \revision{0.10} & \revision{0.20} & \revision{0.25} & \revision{0.30} & \revision{0.50} \\
+\midrule
+\revision{Final} & \revision{81.65} & \revision{81.81} & \revision{81.59} & \revision{81.77} & \revision{81.52} & \revision{81.72} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+4.4 第4.2节：阈值结果解释与默认值依据
+当前位置：第14页。
+【修改前】
+【新增内容说明，非原文引文】点1修改前，本处没有六组阈值结果的分析文字。
+
+【修改后／当前正文】
+表2报告ODIR Off-site源域验证结果。六组阈值对应的最佳单眼Final介于81.52与81.81之间，最大差异为0.29个百分点。默认阈值τ=0.25取得81.77，比最高得分低0.04个百分点。在本次测试的六个阈值及统一选模规则下，各组最佳源域验证表现较为接近，默认设置保持了接近最高值的性能。因此，继续采用τ=0.25作为默认阈值。
+
+【改动说明】
+报告的是单次seed42、统一选模规则下的最佳源域单眼验证表现；本处没有替换原有模块消融得分。
+
+【修改前英文原文】
+（原文无此新增内容。）
+
+【修改后英文原文】
+\hyperref[tab:tau-sensitivity]{\revision{Table}~\ref*{tab:tau-sensitivity}} \revision{reports the ODIR Off-site source-domain validation results. The best monocular Final scores range from 81.52 to 81.81 across the six thresholds, with a maximum difference of 0.29 percentage points. The default threshold $\tau=0.25$ achieves 81.77, which is 0.04 percentage points below the highest score. Under the six tested thresholds and the common model-selection rule, the best source-domain validation performances are close, and the default setting remains close to the highest value. The threshold $\tau=0.25$ is therefore retained as the default.}
+
+
+4.5 第4.3节：方法比较表的交叉引用
+当前位置：第14页。
+【修改前】
+表2中四种文献方法的结果取自其对应发表文献。
+
+【修改后／当前正文】
+表3中四种文献方法的结果取自其对应发表文献。
+
+【改动说明】
+新增阈值表后，方法比较表变为表3。英文源码由写死的“Table 2”改为自动引用，内容含义不变。
+
+【修改前英文原文】
+The results of the four literature methods in Table 2 are taken from their corresponding publications.
+
+【修改后英文原文】
+The results of the four literature methods in \hyperref[tab:sota-compare]{\revision{Table}~\ref*{tab:sota-compare}} are taken from their corresponding publications.
+
+
+4.6 第4.3节：方法比较表的交叉引用
+当前位置：第15页。
+【修改前】
+表2所列方法主要关注提升ODIR上的域内多标签分类性能。
+
+【修改后／当前正文】
+表3所列方法主要关注提升ODIR上的域内多标签分类性能。
+
+【改动说明】
+新增阈值表后，方法比较表变为表3。英文源码由写死的“Table 2”改为自动引用，内容含义不变。
+
+【修改前英文原文】
+The methods listed in Table 2 mainly focus on improving in-domain multi-label classification on ODIR.
+
+【修改后英文原文】
+The methods listed in \hyperref[tab:sota-compare]{\revision{Table}~\ref*{tab:sota-compare}} mainly focus on improving in-domain multi-label classification on ODIR.
+
+
+附记一：阈值分析的中间排版调整（与上述累计对照起点区分）
+11月10日初次加入时：实验说明、结果解释和表格位于4.4，曾标为表4（第18页），有“Mask threshold sensitivity.”独立小标题；4.2含“敏感性分析见4.4”的指引。
+当前版本：实验说明、横向表和结果解释集中于4.2，阈值表为第14页表2；独立小标题和旧的4.4指引已删除。4.4保留原有模块消融，不重复放置阈值分析。
+此前纵向表的两列内容已改为横向两行：第一行τ，第二行Final。两种排版的六个数值完全相同。
+后续表号随插入表2自动顺延，方法比较表为表3，模块消融表为表4。λ或FLOPs的新结果尚未写入本次正文对照。
+
+附记二：本次引言调整涉及的文献编号
+修改前：域偏移文献[11]，DA文献[12]，Bertino医疗数据隐私文献[13]，没有ConDiSR条目。
+当前：DA文献[11]，域偏移文献[12]，Bertino[13]，新增ConDiSR[14]。
+ConDiSR当前在隐私方案段（第3页）支持单源设定的隐私与数据获取动机，不放在挑战2或挑战3的问题段中；参考文献条目位于第23页。
+Bertino引用目前位于挑战3开头的医疗信息保护背景句，原来的梯度恢复论述已从该段移除。
+
+审核文件位置
+Mac总对照：submit/revision/reviewer2_point1_changes_comparison_zh.txt。
+第1章中英逐项对照：submit/revision/introduction_approved_20261111_comparison.txt。
+第4章中英逐项对照：submit/revision/reviewer2_point1_settings_reorganization_20261110_zh.txt（现已补入累计对照，并标明本次更新日期）。
+当前英文正文：submit/build/sections/01_introduction_trans.tex、04_experiments_trans.tex。
+阈值表：submit/build/tables/src/table_tau_sensitivity_trans.tex。
+本次快照、英文对照字段、文档差异、写回日志：服务器revision_drafts/reviewer2/chapter1_4_comparison_20261111/。

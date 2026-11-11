@@ -1,0 +1,478 @@
+第1、3、4章：逐项中英文修改对照
+更新日期：2026年11月11日
+
+阅读方式
+每一处改动的四段内容连续排列：原始英文 → 原始中文 → 修改后英文 → 修改后中文。
+各项同时标注当前位置和改动说明。第1章10项，第3章10项，第4章6项。
+原始版本为11月4日首次处理审稿人2点1前的实际英文快照（已含审稿人1语言修改）；修改后为当前已审核内容，包含最新引言调整及本轮审核通过的第三章修改。
+英文保留对应LaTeX原文以便核对；中文与其逐项对应。新增内容明确标注原文无对应段落。
+
+1.1 开篇的三项挑战概括（第2页）
+
+【原始英文】
+Nevertheless, in real-world clinical deployment, CNN-based ocular disease recognition methods still face challenges including multi-disease co-occurrence, degraded generalization performance across institutions, and privacy preservation.
+
+【原始中文】
+然而，在真实临床部署中，基于CNN的眼病识别方法仍面临多病共存、跨机构泛化性能下降和隐私保护等挑战。
+
+【修改后英文】
+Nevertheless, in real-world clinical deployment, CNN-based ocular disease recognition methods still face challenges including multi-disease co-occurrence, degraded generalization performance across institutions, and \revision{privacy preservation during cross-institutional deployment}.
+
+【修改后中文】
+然而，在真实临床部署中，基于CNN的眼病识别方法仍面临多病共存、跨机构泛化性能下降，以及跨机构部署过程中的隐私保护等挑战。
+
+【改动说明】
+明确隐私问题所处的跨机构部署场景。
+
+1.2 第二项挑战：数据稀缺、迁移复用与单源泛化问题（第2页）
+
+【原始英文】
+2. Medical images differ from natural images because their annotations usually require professional physicians, making both data acquisition and annotation costly. In addition, data sharing restrictions and inconsistent label spaces across medical institutions often limit access to multi-source-domain data and collaborative training. Even when a model performs well on the training set of one medical institution, applying it to another institution can introduce domain shift in the target domain because of differences in imaging devices, illumination conditions, and manual processing procedures \cite{_Ref213949348}, resulting in performance degradation. As shown in \hyperref[fig:intro-domain-gap]{Fig.~\ref*{fig:intro-domain-gap}.a1} and \hyperref[fig:intro-domain-gap]{Fig.~\ref*{fig:intro-domain-gap}.a3}, the distributions of the source domain and target domain differ. The decision boundary learned by a base model trained only on the source domain (\hyperref[fig:intro-domain-gap]{Fig.~\ref*{fig:intro-domain-gap}.b1}) may not fit the target-domain distribution (\hyperref[fig:intro-domain-gap]{Fig.~\ref*{fig:intro-domain-gap}.b2}). Common domain adaptation (DA) methods align domain distributions by jointly using source-domain and target-domain data during model training \cite{_Ref213949354}, but this requires access to target-domain data during training. Although multi-source domain generalization methods avoid access to the target domain, they usually rely on joint training across multiple source domains. In practical settings where collaborative training with medical data is restricted, these assumptions are often hard to meet. Therefore, exploring single-domain generalization methods that extract domain-invariant features using only a single source domain better matches the needs of cross-institutional deployment.
+
+【原始中文】
+医学图像与自然图像不同，其标注通常需要专业医生参与，因此数据采集与标注的成本都较高。此外，数据共享限制和不同医疗机构之间标签空间的不一致，往往限制多源域数据的获取及协同训练。即使模型在某一医疗机构的训练集上表现良好，将其应用到另一机构时，也可能因成像设备、光照条件和人工处理流程的差异而在目标域产生域偏移[11]，导致性能下降。如图1(a1)和图1(a3)所示，源域和目标域的数据分布不同。仅使用源域训练的基础模型所学习到的决策边界〔图1(b1)〕，可能无法适应目标域分布〔图1(b2)〕。常见的域适应（DA）方法通过在模型训练过程中联合使用源域与目标域数据来对齐域分布[12]，但这需要在训练过程中访问目标域数据。尽管多源域泛化方法避免访问目标域，但它们通常依赖多个源域之间的联合训练。在医疗数据协同训练受到限制的实际场景中，这些假设往往难以满足。因此，探索仅使用单一源域提取域不变特征的单域泛化方法，更符合跨机构部署的需求。
+
+【修改后英文】
+2. \revision{The high cost of medical image acquisition and expert annotation motivates effective use of limited annotated data to support model transfer and reuse across medical institutions. Common domain adaptation (DA) methods use target-domain data to adapt models to target distributions} \cite{_Ref213949354}; \revision{multi-source domain generalization methods use data from multiple source domains to learn representations that transfer to unseen domains. However, restrictions on data sharing and differences in label spaces across medical institutions often constrain collaborative training involving the target domain or access to data from multiple source domains, making the conditions required by these methods difficult to satisfy in practice. This creates a practical need for single-source domain generalization, in which a model is trained on a single source domain for deployment to unseen domains.}
+
+\revision{However, a single source domain cannot fully cover imaging variations across medical institutions. Differences in imaging devices, illumination conditions, and image processing procedures can induce domain shifts} \cite{_Ref213949348}. As shown in \hyperref[fig:intro-domain-gap]{Fig.~\ref*{fig:intro-domain-gap}.a1} and \hyperref[fig:intro-domain-gap]{Fig.~\ref*{fig:intro-domain-gap}.a3}, the distributions of the source domain and target domain differ. The decision boundary learned by a base model trained only on the source domain (\hyperref[fig:intro-domain-gap]{Fig.~\ref*{fig:intro-domain-gap}.b1}) may not fit the target-domain distribution (\hyperref[fig:intro-domain-gap]{Fig.~\ref*{fig:intro-domain-gap}.b2}). \revision{A key challenge for cross-institutional deployment is therefore to learn disease-discriminative representations from a single source domain that remain effective under imaging variations not covered by that domain.}
+
+【修改后中文】
+2. 医疗图像数据的采集与专家标注成本较高，因此需要充分利用有限的已标注数据，支持模型向其他医疗机构迁移与复用。常见的域适应（DA）方法利用目标域数据，使模型适应目标域分布[11]；多源域泛化方法则利用多个源域的数据学习能够迁移至未知域的表示。然而，数据共享限制和不同医疗机构之间标签空间的不一致，往往制约目标域协同训练或多源域数据的获取，使这些方法所依赖的条件在实际应用中难以满足。在此背景下，仅利用单一源域进行训练、面向未知域部署的单源域泛化具有现实需求。
+
+然而，单一源域难以覆盖不同医疗机构之间的成像变化。成像设备、光照条件和图像处理流程的差异可能引起域偏移[12]。如图1(a1)和图1(a3)所示，源域与目标域的数据分布存在差异，仅使用源域训练的基础模型所学习到的决策边界〔图1(b1)〕，可能无法适应目标域分布〔图1(b2)〕。因此，如何仅利用单一源域学习具有疾病判别能力的表示，使其在源域未覆盖的成像变化下仍然有效，是跨机构部署中需要解决的关键问题。
+
+【改动说明】
+按数据成本和模型复用需求、DA/多源DG、现实约束、单源设定、图1中的域偏移及待解决问题展开。
+
+1.3 第三项挑战：跨域学习与部署中的隐私问题（第2页）
+
+【原始英文】
+3. In fact, one of the key reasons behind the aforementioned restrictions on cross-institutional data sharing and multi-source collaborative training is precisely the privacy sensitivity of medical image data itself. Medical data are more sensitive than natural images and therefore involve higher privacy leakage risk. Common attack methods can recover patient data from model training gradients \cite{_Ref213949393}. To address this issue, privacy-preserving methods such as federated learning, homomorphic encryption, secure multi-party computation, and differential privacy have been investigated. However, privacy preservation usually comes with a privacy-performance trade-off. In DA scenarios in particular, source-domain and target-domain data must participate in training simultaneously, which can complicate the integration of privacy mechanisms and cause more severe performance degradation across domains. Therefore, a more reasonable approach is to explore the balance between privacy preservation and model performance within the local training process of a single source domain, without introducing cross-institutional data sharing.
+
+【原始中文】
+事实上，上述跨机构数据共享和多源协同训练受到限制的一个关键原因，正是医学图像数据本身的隐私敏感性。医疗数据比自然图像更加敏感，因此涉及更高的隐私泄露风险。常见的攻击方法能够从模型训练梯度中恢复患者数据[13]。为应对这一问题，已有研究探索了联邦学习、同态加密、安全多方计算和差分隐私等隐私保护方法。然而，隐私保护通常伴随着隐私与性能之间的权衡。尤其在DA场景中，源域与目标域数据必须同时参与训练，这可能使隐私机制的整合更加复杂，并造成更严重的跨域性能下降。因此，更合理的做法是在不引入跨机构数据共享的情况下，在单一源域的本地训练过程中探索隐私保护与模型性能之间的平衡。
+
+【修改后英文】
+3. \revision{Indeed, the need to protect sensitive patient information in cross-institutional use of medical data is a key reason for these restrictions on data sharing and collaborative training across multiple sources} \cite{_Ref213949393}. \revision{Medical images contain information about patients' health and clinical care, placing stringent privacy requirements on their access and use. In cross-domain learning, adaptation methods that require target-domain samples introduce additional data access and interaction requirements, which may increase privacy risks and complicate the integration of privacy mechanisms, while the privacy constraints introduced in this process may further affect model optimization and recognition performance. Another key challenge is therefore to reduce data exposure during cross-domain learning and deployment while protecting training information and preserving cross-domain recognition performance as much as possible.}
+
+【修改后中文】
+3. 事实上，上述跨机构数据共享和多源协同训练受到限制的一个关键原因，正是医疗数据的跨机构使用需要保护敏感的患者信息[13]。医疗图像涉及患者的健康状况与诊疗信息，对其访问和使用提出了严格的隐私保护要求。在跨域学习中，需要访问目标域样本的适应方法会引入额外的数据访问与交互需求，这可能增加隐私暴露风险，并使隐私机制的整合更加复杂，同时，在此过程中引入的隐私约束还可能进一步影响模型优化和识别性能。因此，如何在跨域学习与部署过程中减少数据暴露风险，并在保护训练信息的同时尽可能保持模型的跨域识别性能，是另一项需要解决的关键问题。
+
+【改动说明】
+问题段以数据暴露风险、隐私机制整合和模型性能的要求收尾；将单源方案的隐私作用移至后文。已包含最后确认的“在此过程中引入的隐私约束”衔接。
+
+1.4 框架总述：研究要求与联合设计（第2页）
+
+【原始英文】
+To address the above three key challenges, \revision{this study presents a privacy-preserving interpretable} single-domain generalization framework for multi-label ocular disease recognition.
+
+【原始中文】
+为应对上述三个关键挑战，本文提出一种兼顾隐私保护与可解释性的单域泛化框架，用于多标签眼病识别。
+
+【修改后英文】
+\revision{To address these interrelated requirements, this study presents a privacy-preserving interpretable single-domain generalization framework for multi-label ocular disease recognition. The framework adopts a single-source learning route that combines multi-label representation learning with protection of source-domain training information. Within this setting, CAM-guided dual-view feature filtering and disease-label representation consistency are jointly optimized to learn disease-discriminative features under appearance variations.}
+
+【修改后中文】
+为应对这些相互关联的要求，本文提出一种具有隐私保护和可解释性的单域泛化框架，用于多标签眼病识别。该框架采用单源学习路线，将多标签表示学习与源域训练信息保护相结合。在这一设定下，通过联合优化CAM引导的双视图特征筛选与疾病标签表示一致性，学习外观变化下具有疾病判别能力的特征。
+
+【改动说明】
+完整呈现当前总述，替换总对照中停留在早期概括性列举的版本。框架总述、ARC、DFE和隐私方案现分别成段。
+
+1.5 DFE引入句（第3页）
+
+【原始英文】
+To handle restricted multi-institutional data access together with cross-institutional domain shift, \revision{the framework includes a Dual-Branch} Guided Domain-Invariant Feature Extraction (DFE) module.
+
+【原始中文】
+为应对多机构数据获取受限与跨机构域偏移，框架引入双分支引导的域不变特征提取（DFE）模块。
+
+【修改后英文】
+\revision{To learn representations that transfer across imaging conditions,} \revision{the framework includes a Dual-Branch} Guided Domain-Invariant Feature Extraction (DFE) module.
+
+【修改后中文】
+为学习能够跨成像条件迁移的表示，框架引入双分支引导的域不变特征提取（DFE）模块。
+
+【改动说明】
+使模块的引入直接回应第二项挑战；后续DFE机制说明保留。
+
+1.6 隐私方案：单源数据隔离与AdaGDP训练保护（第3—4页）
+
+【原始英文】
+To address the privacy-preservation demand that becomes more prominent when cross-institutional data sharing is restricted, \revision{the framework integrates an Adaptive Gaussian Differential Privacy} (AdaGDP) mechanism into the single-domain generalization training process and provide privacy preservation by injecting noise during gradient updates. Under a moderate privacy budget, this mechanism provides effective privacy preservation at a controllable performance cost, and the resulting private model still attains performance comparable to or even slightly better than the public official baseline, thereby jointly supporting cross-domain generalization and privacy preservation.
+
+【原始中文】
+为应对跨机构数据共享受到限制时更加突出的隐私保护需求，框架将自适应高斯差分隐私（AdaGDP）机制纳入单域泛化训练过程，并通过在梯度更新中注入噪声提供隐私保护。在适中的隐私预算下，该机制以可控的性能代价提供有效隐私保护，得到的隐私模型仍能达到与公开官方基线相当甚至略好的表现，从而共同支持跨域泛化与隐私保护。
+
+【修改后英文】
+\revision{To address privacy requirements in cross-domain applications, the single-source domain generalization approach adopted in this study restricts training updates to source-domain data. This reduces the need to access target-domain training data or pool raw data across institutions, providing protection through data isolation. Research on medical single-source domain generalization likewise identifies privacy and data access constraints as motivations for this setting} \cite{_RefMatsun2025ConDiSR}. \revision{Building on this setting, the framework incorporates an Adaptive Gaussian Differential Privacy (AdaGDP) mechanism into the joint optimization of DFE and ARC. Gradient clipping and dynamic noise injection impose privacy constraints on parameter updates to further protect source-domain training information. The noise schedule and optimization settings aim to minimize the impact of privacy-preserving training on cross-domain recognition performance.}
+
+【修改后中文】
+针对跨域应用中的隐私保护需求，本文采用的单源域泛化路线将训练更新限定于源域，减少了目标域训练数据访问及跨机构原始数据汇集的需求，从而提供数据隔离层面的保护。已有医学单源域泛化研究同样将隐私与数据获取限制作为采用这一设定的动机[14]。在此基础上，框架将自适应高斯差分隐私（AdaGDP）机制纳入DFE与ARC的联合优化，通过梯度裁剪与动态噪声注入，对参数更新施加隐私约束，进一步保护源域训练信息。同时，结合噪声调度与优化设置，尽可能减少隐私保护训练对跨域识别性能的影响。
+
+【改动说明】
+集中说明单源路线的数据隔离作用、ConDiSR依据、AdaGDP对源域训练信息的保护和优化目标；位于DFE之后、实验概括之前。
+
+1.7 实验概括的评估范围（第4页）
+
+【原始英文】
+Finally, generalization experiments on several representative fundus image datasets show that the framework improves cross-domain multi-label recognition performance while maintaining good interpretability, and it remains stable under privacy-preserving scenarios.
+
+【原始中文】
+最后，在多个具有代表性的眼底图像数据集上的泛化实验表明，框架在保持良好可解释性的同时提升了跨域多标签识别性能，并在隐私保护场景下保持稳定。
+
+【修改后英文】
+\revision{Under non-private training, experiments on several representative fundus image datasets show improved recognition performance over the corresponding ResNet50 baselines in the evaluated in-domain and cross-domain settings. CAM visualizations illustrate the regions attended by the model. Privacy-preserving experiments further quantify the recognition performance achieved at the reported privacy budgets.}
+
+【修改后中文】
+在非隐私训练条件下，多个具有代表性的眼底图像数据集上的实验表明，该框架在所评估的域内与跨域设置中，相较对应的ResNet50基线取得了更好的识别表现。CAM可视化展示了模型关注的图像区域。隐私保护实验进一步量化了所报告隐私预算下的识别表现。
+
+【改动说明】
+分别概括非隐私训练下的识别/泛化结果，以及隐私预算实验的识别结果。引言使用“多个具有代表性的眼底图像数据集”统称，具体数据集名称和引用在实验部分介绍。
+
+1.8 ARC贡献（第4页）
+
+【原始英文】
+We propose an Adaptive Label-Feature Relevance Construction (ARC) module. Based on Transformer self-attention and cross-attention mechanisms, ARC models disease co-occurrence dependencies at both the label and feature levels, effectively reducing false positives and false negatives in multi-label ocular disease recognition.
+
+【原始中文】
+我们提出一种自适应标签—特征相关性构建（ARC）模块。该模块基于 Transformer 自注意力和交叉注意力机制，在标签层面和特征层面建模疾病共现依赖关系，有效减少多标签眼病识别中的假阳性和假阴性。
+
+【修改后英文】
+\revision{We develop an Adaptive Label-Feature Relevance Construction (ARC) module that uses disease-label queries to extract corresponding image representations. A cross-view consistency constraint encourages the representation associated with each disease label to remain close across the original and augmented images, linking feature stability learning to multi-label discrimination.}
+
+【修改后中文】
+1. 我们开发了自适应标签—特征关联构建（ARC）模块，利用疾病标签查询提取相应的图像表示。跨视图一致性约束促使同一疾病标签对应的表示在原始图像与增强图像之间保持接近，将特征稳定性学习与多标签判别联系起来。
+
+【改动说明】
+保留已批准的具体技术表述。
+
+1.9 DFE贡献（第4页）
+
+【原始英文】
+We design a Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) module. For scenarios where joint training with multi-institutional data is restricted and cross-institutional deployment involves domain shift, this module learns domain-invariant features from a single source domain through joint guidance from style disturbance and CAM. It improves generalization performance on unseen domains and enhances the interpretability of model predictions.
+
+【原始中文】
+我们设计一种双分支引导的域不变特征提取（DFE）模块。针对多机构数据联合训练受限、跨机构部署存在域偏移的场景，该模块通过风格扰动与 CAM 的共同引导，从单一源域中学习域不变特征。它提高了模型在未见域上的泛化性能，并增强了模型预测的可解释性。
+
+【修改后英文】
+\revision{We design a Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) module that combines CAM guidance with a mask based on normalized feature differences to filter features from the original and augmented images. It provides ARC with representations that are relatively stable under the selected appearance perturbations and uses CAM to visualize the regions attended by the model.}
+
+【修改后中文】
+2. 我们设计了双分支引导的域不变特征提取（DFE）模块，将CAM引导与基于归一化特征差异的掩码相结合，对原始图像与增强图像的特征进行筛选。该模块为ARC提供在所采用外观扰动下相对稳定的表示，并利用CAM可视化模型关注的区域。
+
+【改动说明】
+保留已批准的具体技术表述。
+
+1.10 隐私训练设计贡献（第4页）
+
+【原始英文】
+We integrate an Adaptive Gaussian Differential Privacy (AdaGDP) mechanism into the single-domain generalization training process. Without introducing target-domain data, the proposed mechanism achieves an effective balance between privacy preservation and cross-domain generalization performance, and shows that model performance can remain close to the public official baseline under moderate privacy preservation.
+
+【原始中文】
+我们将自适应高斯差分隐私（AdaGDP）机制融入单域泛化训练过程。在不引入目标域数据的情况下，该机制实现了隐私保护与跨域泛化性能之间的有效平衡，并表明在适度隐私保护下，模型性能仍可接近公开的官方基线。
+
+【修改后英文】
+\revision{We combine single-source generalization with privacy-constrained optimization of the joint DFE and ARC model. Source-only training updates limit the data required for cross-domain learning, while AdaGDP applies gradient clipping and scheduled noise injection to protect source-domain training information. The training design is evaluated in terms of privacy budget and recognition performance.}
+
+【修改后中文】
+3. 我们将单源泛化与DFE—ARC联合模型在隐私约束下的优化相结合。仅基于源域的训练更新限定了跨域学习所需的数据范围，AdaGDP则通过梯度裁剪与按调度注入的噪声保护源域训练信息。该训练设计从隐私预算和识别性能两个方面进行评估。
+
+【改动说明】
+由单独集成AdaGDP，调整为单源泛化与联合模型隐私优化相结合的设计。
+
+第3章：早期修改经审核后的累计中英文对照
+
+3.1 方法总述：统一掩码操作称谓（第3节总述）
+
+【原始英文】
+Part 1 uses CAM guidance together with a dual-branch mask-based contrastive learning mechanism
+
+【原始中文】
+第1部分结合CAM引导与基于双分支掩码的对比学习机制
+
+【修改后英文】
+Part 1 uses CAM guidance together with a \revision{dual-branch feature filtering mechanism}
+
+【修改后中文】
+第1部分结合CAM引导与双分支特征筛选机制
+
+【改动说明】
+2026年11月11日用户审核通过后落实；此处为本轮调整。
+
+3.2 方法总述：DFE与ARC的技术联系（第3节总述）
+
+【原始英文】
+These two parts are coupled through feature filtering and attention consistency constraints: Part 1 provides more stable domain-invariant features for Part 2, while Part 2 further constrains the consistency of dual-branch attention features, jointly improving domain generalization performance.
+
+【原始中文】
+这两个部分通过特征筛选和注意力一致性约束相互耦合：第1部分为第2部分提供更稳定的域不变特征，第2部分进一步约束双分支注意力特征的一致性，共同提升域泛化性能。
+
+【修改后英文】
+\revision{DFE and ARC are connected through feature filtering and label-representation consistency. DFE first selects feature components with small normalized differences between the two views as inputs to ARC. ARC then extracts a representation for each disease label and constrains the corresponding representations to remain close across the two views. The classification and consistency objectives jointly guide feature learning, applying the stability requirement under appearance perturbations to the representations associated with disease labels.}
+
+【修改后中文】
+DFE与ARC通过特征筛选和标签表示一致性相互连接。DFE首先选取两个视图之间归一化差异较小的特征成分，作为ARC的输入。随后，ARC为每个疾病标签提取表示，并约束对应表示在两个视图之间保持接近。分类目标与一致性目标共同引导特征学习，将外观扰动下的稳定性要求落实到疾病标签对应的表示上。
+
+【改动说明】
+早期修改经本轮重新审核后保留；该段本轮没有再次改写。
+
+3.3 方法总述：单源训练与训练信息保护的衔接（第3节总述末尾）
+
+【原始英文】
+Finally, an Adaptive Gaussian Differential Privacy mechanism is integrated during training to reduce the impact of privacy preservation on model performance and to balance privacy preservation with model performance.
+
+【原始中文】
+最后，在训练过程中整合自适应高斯差分隐私机制，以减少隐私保护对模型性能的影响，并平衡隐私保护与模型性能。
+
+【修改后英文】
+\revision{The framework adopts single-source domain generalization, restricting training updates to the accessible source domain and reducing the need to access target-domain training data or pool raw data across institutions. Building on this setting, AdaGDP is applied to the training updates of the joint DFE and ARC model to further protect source-domain training information. Its noise schedule aims to preserve recognition performance as much as possible.}
+
+【修改后中文】
+整体框架采用单源域泛化设定，将训练更新限定于可访问的源域，减少对目标域训练数据访问及跨机构原始数据汇集的需求。在此基础上，AdaGDP作用于DFE与ARC联合模型的训练更新，进一步保护源域训练信息。其噪声调度旨在尽可能维持识别性能。
+
+【改动说明】
+2026年11月11日用户审核通过后落实；此处为本轮调整。
+
+3.4 图2图注：统一掩码操作称谓（图2图注）
+
+【原始英文】
+(c) a dual-branch mask-based contrastive learning mechanism retains highly similar components
+
+【原始中文】
+（c）基于双分支掩码的对比学习机制保留高度相似的成分
+
+【修改后英文】
+(c) a \protect\revision{dual-branch feature filtering mechanism} retains highly similar components
+
+【修改后中文】
+（c）双分支特征筛选机制保留高度相似的成分
+
+【改动说明】
+2026年11月11日用户审核通过后落实；此处为本轮调整。
+
+3.5 公式（5）之前：双视图特征筛选的依据（第3.1节）
+
+【原始英文】
+\revision{Next, the framework applies the domain-invariant feature filtering module}, as shown in \hyperref[fig:method-framework]{Fig.~\ref*{fig:method-framework}.c}. This study adopts a dual-branch mask-based contrastive learning mechanism to compute the similarity between guided features from original source-domain images and augmented source-domain images at the feature-distribution level. Highly similar components represent disease-related regions that remain stable under style disturbance and are therefore retained, whereas low-similarity components are more likely to contain domain-specific noise caused by illumination, device style, or style disturbance and are therefore suppressed. The mask matrix \(M \in \mathbb{R}^{C \times H \times W}\) is calculated from the normalized distance:
+
+【原始中文】
+接下来，该框架采用域不变特征筛选模块，如图2.c所示。本文采用基于双分支掩码的对比学习机制，在特征分布层面计算原始源域图像与增强源域图像的引导特征之间的相似性。高度相似的成分代表在风格扰动下保持稳定的疾病相关区域，因此予以保留；而相似性较低的成分更可能包含由光照、设备风格或风格扰动引起的域特有噪声，因此予以抑制。掩码矩阵M∈R^(C×H×W)根据归一化距离计算如下：
+
+【修改后英文】
+\revision{Next, the framework applies a dual-branch feature filtering mechanism}, as shown in \hyperref[fig:method-framework]{Fig.~\ref*{fig:method-framework}.c}. \revision{The original and augmented images provide two views of the same source-domain sample under different appearance conditions. After instance normalization of the guided features from both views, their differences are compared element by element, and components with small differences are retained to reduce the influence of features that are sensitive to the selected appearance perturbations on subsequent label-representation learning.} The mask matrix \(M \in \mathbb{R}^{C \times H \times W}\) is calculated from the normalized distance:
+
+【修改后中文】
+接下来，该框架采用双分支特征筛选机制，如图2.c所示。原始图像和增强图像提供了同一源域样本在不同外观条件下的两个视图。对两个视图的引导特征进行实例归一化后，逐元素比较其差异，并保留差异较小的成分，以减少对所选外观扰动敏感的特征对后续标签表示学习的影响。掩码矩阵M∈R^(C×H×W)根据归一化距离计算如下：
+
+【改动说明】
+早期修改保留；准确说明公式操作及其对标签表示学习的作用。
+
+3.6 公式（5）之后：阈值的控制作用（第3.1节）
+
+【原始英文】
+Components satisfying the threshold \(\tau\) are assigned 1, while the remaining components are assigned 0.
+
+【原始中文】
+满足阈值τ条件的成分被赋值为1，其余成分被赋值为0。
+
+【修改后英文】
+Components satisfying the threshold \(\tau\) are assigned 1, while the remaining components are assigned 0. \revision{The threshold $\tau$ controls the feature differences allowed between the two views. For a fixed pair of feature maps, a smaller threshold imposes stricter filtering, whereas a larger threshold retains more features. It therefore controls the trade-off between information retention and perturbation suppression. Overly strict filtering may remove useful information that is sensitive to augmentation, whereas a more permissive threshold may retain more components affected by appearance variations.}
+
+【修改后中文】
+满足阈值τ条件的成分被赋值为1，其余成分被赋值为0。阈值τ控制两个视图之间允许的特征差异。对于一对固定的特征图，较小的阈值使筛选更加严格，而较大的阈值会保留更多特征。因此，阈值控制着信息保留与扰动抑制之间的取舍。过于严格的筛选可能移除对增强敏感的有效信息，而更宽松的阈值则可能保留更多受外观变化影响的成分。
+
+【改动说明】
+早期机制解释保留；第4.2节表2提供六组阈值的实验依据。
+
+3.7 公式（6）之后：筛选结果用途及可能失效情形（第3.1节）
+
+【原始英文】
+Here, \(\odot\) denotes pixel-wise element-wise multiplication, ensuring that only shared disease-related features, such as vascular or macular textures, are retained while illumination or device noise is removed. The resulting \(F_{invariant}^{ori}\) and \(F_{invariant}^{aug}\) are used as inputs for subsequent label-feature relevance construction, enabling multi-label relevance learning to be built on more stable domain-invariant features.
+
+【原始中文】
+其中，⊙表示逐像素的逐元素乘法，确保仅保留共同的疾病相关特征，例如血管或黄斑纹理，同时去除光照或设备噪声。得到的F_invariant^ori和F_invariant^aug用作后续标签—特征相关性构建的输入，使多标签相关性学习建立在更稳定的域不变特征之上。
+
+【修改后英文】
+Here, \(\odot\) denotes pixel-wise element-wise multiplication. \revision{The filtered features from both branches are passed to the subsequent label-feature relevance module, allowing disease-label queries to operate on feature components that are relatively consistent across the two views. This mechanism is designed on the premise that augmentation preserves disease information shared by both views. When augmentation alters subtle lesion cues, the normalized feature differences between the views may increase beyond the threshold, causing features useful for disease discrimination to be filtered out. When background interference remains stable across both views, its feature differences may still satisfy the retention criterion, allowing it to pass through the mask. Its operation should therefore be understood in relation to the augmentation strategy and the quality of CAM guidance.}
+
+【修改后中文】
+其中，⊙表示逐像素的逐元素乘法。两个分支经过筛选的特征被传入后续标签—特征相关性模块，使疾病标签查询作用于两个视图之间相对一致的特征成分。该机制以增强操作保留两个视图共同的疾病信息为设计前提。当增强改变细微病变线索时，相关特征的归一化跨视图差异可能增大并超过阈值，使有助于疾病判别的信息被筛除；当背景干扰在两个视图中均保持稳定时，其特征差异可能仍满足保留条件，从而通过筛选。因此，应结合增强策略与CAM引导质量理解该机制的作用。
+
+【改动说明】
+保留早期补充的用途与适用条件，本轮把“筛选结果可能受到影响”细化为有效信息被筛除、背景干扰被保留的因果解释；没有新增失效案例实验。
+
+3.8 公式（9）之前：疾病标签表示一致性（第3.2节）
+
+【原始英文】
+To ensure consistency between the outputs of the two branches, \revision{an attention consistency constraint is imposed through an attention consistency loss}. Original source-domain images and augmented source-domain images share the same disease labels and differ only in style. Therefore, the corresponding label attention vectors should remain close. This loss encourages consistent attention features across the two branches, enabling the model to learn similar label-feature relevance from inputs with different styles. It is calculated using mean squared error (MSE):
+
+【原始中文】
+为保证两个分支输出的一致性，通过注意力一致性损失施加注意力一致性约束。原始源域图像与增强源域图像具有相同的疾病标签，仅在风格上存在差异。因此，对应的标签注意力向量应保持接近。该损失促使两个分支的注意力特征保持一致，使模型能够从不同风格的输入中学习相似的标签—特征相关性。该损失采用均方误差（MSE）计算：
+
+【修改后英文】
+\revision{Provided that augmentation preserves disease semantics, the original image and its augmented view share the same disease labels. To encourage the representations associated with each disease label to remain consistent under appearance perturbations, a consistency constraint is imposed on the corresponding label representations after Softmax normalization in the two branches. This constraint complements the preceding mask: the mask filters the input features, whereas the consistency loss constrains the outputs of the two branches at the level of label-associated representations. The loss is calculated using mean squared error (MSE):}
+
+【修改后中文】
+在增强保留疾病语义的前提下，原始图像及其增强视图共享相同的疾病标签。为使疾病标签对应的表示在外观扰动下保持一致，模型对两个分支中经Softmax归一化的对应标签表示施加一致性约束。该约束与前面的掩码相互补充：掩码筛选输入特征，而一致性损失在标签对应表示的层面约束两个分支的输出。该损失采用均方误差（MSE）计算：
+
+【改动说明】
+保留掩码与一致性约束的互补关系，本轮明确疾病语义前提及公式（9）实际比较的Softmax归一化表示；公式不变。
+
+3.9 总损失之后：共同训练目标（第3.2节）
+
+【原始英文】
+Through this design, the DFE module provides disease-related domain-invariant features for the ARC module, and the ARC module further models label-label relevance and label-feature relevance. The two modules work together to improve multi-label recognition capability in cross-domain scenarios.
+
+【原始中文】
+通过这一设计，DFE模块为ARC模块提供疾病相关的域不变特征，而ARC模块进一步建模标签—标签相关性与标签—特征相关性。两个模块共同提升跨域场景中的多标签识别能力。
+
+【修改后英文】
+\revision{The classification and consistency losses jointly optimize the representations of the two branches, connecting feature filtering and disease-label learning through a shared training objective and combining representation stability under appearance perturbations with multi-label discrimination.}
+
+【修改后中文】
+分类损失与一致性损失共同优化两个分支的表示，通过共享的训练目标连接特征筛选与疾病标签学习，将外观扰动下的表示稳定性与多标签判别结合起来。
+
+【改动说明】
+早期修改保留；总损失表达式及λ的解释不变。
+
+3.10 第3.3节开头：承接单源训练设定（第3.3节开头）
+
+【原始英文】
+Medical image data are highly sensitive, and gradients or model parameters generated during training may leak sample information.
+
+【原始中文】
+医疗图像数据高度敏感，训练过程中生成的梯度或模型参数可能泄露样本信息。
+
+【修改后英文】
+\revision{Under the source-only training setting described above, training gradients and model parameters may still carry information about source-domain samples.}
+
+【修改后中文】
+在上述单源训练设定下，训练梯度和模型参数仍可能携带源域样本信息。
+
+【改动说明】
+2026年11月11日用户审核通过后落实；此处为本轮调整。
+
+4.1 第4.2节：默认掩码阈值（第14页）
+
+【原始英文】
+The number of training epochs is 50, the batch size is 32, and the input resolution is \(448 \times 448\).
+
+【原始中文】
+训练轮数为50，批量大小为32，输入分辨率为448×448。
+
+【修改后英文】
+The number of training epochs is 50, the batch size is 32, and the input resolution is \(448 \times 448\). \revision{The default mask threshold for dual-branch feature filtering is $\tau=0.25$, specifying the feature retention criterion between the two views after instance normalization.}
+
+【修改后中文】
+训练轮数为50，批量大小为32，输入分辨率为448×448。双分支特征筛选的默认掩码阈值为τ=0.25，用于规定实例归一化后两个视图之间的特征保留准则。
+
+【改动说明】
+累计修改包含先补充阈值设置、再将“固定阈值”调整为“默认阈值”。当前没有“敏感性分析见4.4”的旧指引。
+
+4.2 第4.2节：新增六组阈值实验说明（第14页）
+
+【原始英文】
+（原文无此新增内容。）
+
+【原始中文】
+【新增内容说明，非原文引文】点1修改前，本处没有六组阈值敏感性实验的设置说明。
+
+【修改后英文】
+\revision{To examine the effect of the dual-branch mask threshold $\tau$ on recognition performance, the joint DFE and ARC model is trained under the non-private setting with $\tau=0.05$, $0.10$, $0.20$, $0.25$, $0.30$, and $0.50$. All runs use the same data split, model architecture, augmentation strategy, and other training parameters. Each run is trained for 50 epochs with a batch size of 32 and a fixed random seed of 42. The checkpoint with the best monocular Final score is selected using the same source-domain validation rule for all runs.}
+
+【修改后中文】
+为考察双分支掩码阈值τ对识别性能的影响，在非隐私训练设置下，对DFE与ARC联合模型分别采用τ=0.05、0.10、0.20、0.25、0.30和0.50进行训练。各组保持数据划分、模型结构、增强策略及其他训练参数一致。各组均训练50轮，批量大小为32，随机种子固定为42，并使用相同的源域验证规则选择最佳单眼Final得分对应的检查点。
+
+【改动说明】
+该段当前直接位于4.2训练设置段之后，以自然段呈现，没有独立“Mask threshold sensitivity.”小标题。
+
+4.3 第4.2节：新增横向阈值结果表（当前表2）（第14页）
+
+【原始英文】
+（原文无此新增内容。）
+
+【原始中文】
+【新增内容说明，非原文引文】点1修改前，正文没有六组阈值结果表。
+
+【修改后英文】
+% Reviewer 2 major point 1: mask-threshold sensitivity.
+\begin{table}[pos=H]
+\centering
+\caption{\protect\revision{Mask threshold sensitivity. Best monocular Final scores on the ODIR Off-site source-domain validation set are reported under the same training budget and checkpoint-selection rule. The default threshold is $\tau=0.25$.}}
+\label{tab:tau-sensitivity}
+\begin{tabular}{lcccccc}
+\toprule
+\revision{$\tau$} & \revision{0.05} & \revision{0.10} & \revision{0.20} & \revision{0.25} & \revision{0.30} & \revision{0.50} \\
+\midrule
+\revision{Final} & \revision{81.65} & \revision{81.81} & \revision{81.59} & \revision{81.77} & \revision{81.52} & \revision{81.72} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+【修改后中文】
+表2：掩码阈值敏感性。报告相同训练预算与检查点选择规则下，ODIR Off-site源域验证集上的最佳单眼Final得分。默认阈值为τ=0.25。
+
+τ       0.05    0.10    0.20    0.25    0.30    0.50
+Final   81.65   81.81   81.59   81.77   81.52   81.72
+
+【改动说明】
+表格当前为两行横向展示，紧接实验说明。11月10日中间版本曾逐行列出阈值，后按用户要求改为横向；原数值未改变。
+
+4.4 第4.2节：阈值结果解释与默认值依据（第14页）
+
+【原始英文】
+（原文无此新增内容。）
+
+【原始中文】
+【新增内容说明，非原文引文】点1修改前，本处没有六组阈值结果的分析文字。
+
+【修改后英文】
+\hyperref[tab:tau-sensitivity]{\revision{Table}~\ref*{tab:tau-sensitivity}} \revision{reports the ODIR Off-site source-domain validation results. The best monocular Final scores range from 81.52 to 81.81 across the six thresholds, with a maximum difference of 0.29 percentage points. The default threshold $\tau=0.25$ achieves 81.77, which is 0.04 percentage points below the highest score. Under the six tested thresholds and the common model-selection rule, the best source-domain validation performances are close, and the default setting remains close to the highest value. The threshold $\tau=0.25$ is therefore retained as the default.}
+
+【修改后中文】
+表2报告ODIR Off-site源域验证结果。六组阈值对应的最佳单眼Final介于81.52与81.81之间，最大差异为0.29个百分点。默认阈值τ=0.25取得81.77，比最高得分低0.04个百分点。在本次测试的六个阈值及统一选模规则下，各组最佳源域验证表现较为接近，默认设置保持了接近最高值的性能。因此，继续采用τ=0.25作为默认阈值。
+
+【改动说明】
+报告的是单次seed42、统一选模规则下的最佳源域单眼验证表现；本处没有替换原有模块消融得分。
+
+4.5 第4.3节：方法比较表的交叉引用（第14页）
+
+【原始英文】
+The results of the four literature methods in Table 2 are taken from their corresponding publications.
+
+【原始中文】
+表2中四种文献方法的结果取自其对应发表文献。
+
+【修改后英文】
+The results of the four literature methods in \hyperref[tab:sota-compare]{\revision{Table}~\ref*{tab:sota-compare}} are taken from their corresponding publications.
+
+【修改后中文】
+表3中四种文献方法的结果取自其对应发表文献。
+
+【改动说明】
+新增阈值表后，方法比较表变为表3。英文源码由写死的“Table 2”改为自动引用，内容含义不变。
+
+4.6 第4.3节：方法比较表的交叉引用（第15页）
+
+【原始英文】
+The methods listed in Table 2 mainly focus on improving in-domain multi-label classification on ODIR.
+
+【原始中文】
+表2所列方法主要关注提升ODIR上的域内多标签分类性能。
+
+【修改后英文】
+The methods listed in \hyperref[tab:sota-compare]{\revision{Table}~\ref*{tab:sota-compare}} mainly focus on improving in-domain multi-label classification on ODIR.
+
+【修改后中文】
+表3所列方法主要关注提升ODIR上的域内多标签分类性能。
+
+【改动说明】
+新增阈值表后，方法比较表变为表3。英文源码由写死的“Table 2”改为自动引用，内容含义不变。
+
+补充位置与引用说明
+阈值实验在11月10日中间版本中曾放在4.4，表格曾采用纵向排列。当前实验说明、横向两行表和结果解释均在4.2；独立小标题及“见4.4”的指引已经删除。六个得分未改变。
+当前阈值表为表2，方法比较表为表3，模块消融表为表4。
+当前DA文献为[11]、域偏移文献为[12]、Bertino为[13]、ConDiSR为[14]。ConDiSR位于引言后部的隐私方案段，参考文献条目在第23页。
+本次补充审核材料，没有新增λ或FLOPs结果，没有修改正文或PDF。
