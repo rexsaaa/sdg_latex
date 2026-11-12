@@ -2,7 +2,7 @@
 % Epsilon-performance evolution during privacy training.
 \begin{table}
 \centering
-\caption{Evolution of $\epsilon$ and performance during privacy-preserving training. The table uses the noise injection strategy of Setting 5 in \tabref{tab:privacy-scan}, and the evaluation metric is monocular Final score. As training proceeds, the privacy budget is progressively spent and model performance generally increases, reaching its peak at e74 (red). This checkpoint is used as the optimal privacy checkpoint under privacy preservation in this study. Kappa $\uparrow$, F1 $\uparrow$, AUC $\uparrow$, Final $\uparrow$; $\epsilon\downarrow$ indicates stronger privacy.}
+\caption{\revision{Evolution of $\epsilon$ and performance during privacy-preserving training. The table uses the noise injection strategy of Setting 5 in \mbox{\tabref{tab:privacy-scan}}, and the evaluation metric is monocular Final score. As training proceeds, cumulative $\epsilon$ increases and model performance generally improves, reaching its highest Final score of 73.15 at e74 (red). Considering its recognition performance and corresponding $\epsilon$ of 9.76, this checkpoint is selected for the final evaluation in \mbox{\tabref{tab:privacy-final}}. Kappa $\uparrow$, F1 $\uparrow$, AUC $\uparrow$, Final $\uparrow$; $\epsilon\downarrow$ indicates stronger privacy for the same $\delta$ and adjacency relation.}}
 \label{tab:privacy-evolution}
 \begin{tabular}{lccccc}
 \toprule

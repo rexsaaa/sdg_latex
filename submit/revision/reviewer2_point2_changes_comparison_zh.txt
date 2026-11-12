@@ -1,0 +1,292 @@
+审稿人2主要意见2：已落实修改的中英文前后对照
+
+日期：2026年11月12日；对应25页修订稿。各处按“原始英文—原始中文—修改后英文—修改后中文”连续排列，供逐项复核。
+
+范围：7组中的12处已通过文字，以及4条配套参考文献。原有公式、图3及其图注、Highlights保持原样。按落实阶段的最新要求，图11图片与所有图内文字保持原样，包括 e74: Pareto knee；图注中的 Pareto knee point 也保留，其余图注沿用已通过文字。
+
+回复映射：第1组→（3）；第2组→（2）；第3a处→（2），衔接（3）；第4组→（2）；第5组a/c/d→（1）、b→（3）；第6组→（1）；第7组a→（1）、b→（3）并与（1）（2）衔接。
+
+【第1处：AdaGDP的作用与定位】
+
+位置：第3.3节末段。原稿第11页；修订稿第11—12页。
+对应回复：（3）。
+
+原始英文
+However, conventional GDP uses a fixed σ throughout training, so substantial noise is still injected in later training stages, which can affect model convergence and final performance. Therefore, an Adaptive Gaussian Differential Privacy optimizer is adopted. A larger noise multiplier is used early in training to provide stronger protection, and the noise intensity is then gradually reduced according to a predefined noise decay rate to limit the impact of noise on model convergence in later stages. During training, this study accumulates the privacy budget according to the noise multiplier, noise decay rate, and sampling process of each epoch, and records ε consumption and model performance at different training epochs to analyze performance evolution as the privacy budget increases. The final experiments show that, under a moderate privacy budget, the proposed method can alleviate the performance degradation caused by noise injection and achieve a good balance between privacy preservation and model performance.
+
+原始中文
+然而，传统 GDP 在整个训练过程中使用固定的 σ，因此在训练后期仍会注入较大的噪声，这可能影响模型收敛和最终性能。因此，本文采用自适应高斯差分隐私优化器。在训练初期使用较大的噪声乘数以提供更强的保护，随后按照预设的噪声衰减率逐步降低噪声强度，以限制噪声对训练后期模型收敛的影响。在训练过程中，本文根据各轮的噪声乘数、噪声衰减率和采样过程累积隐私预算，并记录不同训练轮次的 ε 消耗及模型性能，以分析随着隐私预算增加而产生的性能变化。最终实验表明，在适中的隐私预算下，所提出的方法能够缓解噪声注入导致的性能下降，并在隐私保护与模型性能之间取得良好的平衡。
+
+修改后英文
+However, when a fixed noise multiplier is used throughout training, noise perturbations in the later stages may still affect model convergence and final recognition performance. To address this issue, this study adopts an Adaptive Gaussian Differential Privacy (AdaGDP) mechanism in training the joint DFE–ARC model. A larger noise multiplier is used early in training for source-domain training-information protection, and the noise intensity is then gradually reduced according to a predefined decay rate to limit its impact on later-stage optimization. The learning rate and its schedule are configured in conjunction with the noise schedule to support disease-discriminative learning under gradient perturbation. During training, cumulative ε values and recognition performance are recorded at different epochs to examine recognition utility as the reported privacy budget increases. The results in Section 4.5 show that this training configuration retains recognition performance close to the official non-private ODIR ResNet50 baseline, illustrating the trade-off between training-information protection and recognition utility.
+
+修改后中文
+然而，当训练全程采用固定的噪声乘数时，训练后期的噪声扰动仍可能影响模型收敛和最终识别性能。为此，本文在 DFE 与 ARC 联合模型的训练中采用自适应高斯差分隐私（AdaGDP）机制。训练初期使用较大的噪声乘数以保护源域训练信息，随后按照预设的衰减率逐步降低噪声强度，以减轻其对后期优化的影响。学习率及其调度与噪声安排相配合，以支持梯度扰动条件下的疾病判别学习。在训练过程中，记录不同轮次的累计 ε 值与识别性能，以考察报告的隐私预算增加时模型的识别效用。第 4.5 节的结果表明，在这一训练配置下，模型仍能保持接近 ODIR 官方非隐私 ResNet50 基线水平的识别性能，体现了训练信息保护与识别效用之间的权衡。
+
+【第2处：训练信息保护的理论依据】
+
+位置：第3.3节参数更新表达式之后。原稿第11页；修订稿第11页。
+对应回复：（2）。
+
+原始英文
+This process obscures gradients through noise injection and prevents inversion attacks from recovering original images or labels. Detailed theoretical guarantees for privacy-preserving mechanisms are provided by Dwork C et al. [46].
+
+原始中文
+这一过程通过注入噪声来模糊梯度，并防止反演攻击恢复原始图像或标签。关于隐私保护机制的详细理论保证，可参见 Dwork 等的研究［46］。
+
+修改后英文
+Differential privacy relates the noise required for information protection to the sensitivity of the released quantity [46]. For neural-network training, Abadi et al. [47] combine per-example gradient clipping, Gaussian noise added to aggregated gradients, and privacy accounting across repeated updates. This construction bounds the influence of individual training examples and quantifies the cumulative privacy loss of training.
+
+For mechanisms satisfying Rényi differential privacy, Balle et al. [48] derive an upper bound on reconstruction success given a prior over the target sample, a reconstruction error measure, and a specified accuracy threshold. Their analysis links the privacy parameters of a training mechanism to the risk of reconstructing an individual training sample. Together, these studies provide a theoretical basis for incorporating gradient perturbation into the proposed single-source framework to address leakage of source-domain training information.
+
+修改后中文
+差分隐私将信息保护所需的噪声与所发布量的敏感度联系起来（Dwork 等［46］）。针对神经网络训练，Abadi 等［47］将逐样本梯度裁剪、聚合梯度中的高斯噪声注入，以及多次更新的隐私核算结合起来。这一构造限制单个训练样本的影响，并量化训练过程中的累计隐私损失。
+
+对于满足 Rényi 差分隐私的机制，Balle 等［48］在给定目标样本先验、重建误差度量及精度阈值的条件下，推导了重建成功概率的上界。其分析将训练机制的隐私参数与单个训练样本的重建风险联系起来。上述研究共同为本文在单源框架中引入梯度扰动、处理源域训练信息的泄露风险提供了理论依据。
+
+【第3a处：样本定义、预算参数与报告方式】
+
+位置：第3.3节DP定义公式前后；公式原样保留。原稿第10页；修订稿第10—11页。
+对应回复：（2），衔接（3）。
+
+原始英文
+Gaussian differential privacy (GDP) provides (ε, δ)-differential privacy by adding independent and identically distributed Gaussian noise at each gradient update. For adjacent datasets D and D′, which differ by only one sample, a randomized algorithm M satisfies (ε, δ)-DP if, for any output set S, it satisfies:
+
+Pr[M(D) ∈ S] ≤ e^ε Pr[M(D′) ∈ S] + δ,
+
+where ε measures the degree of privacy preservation, and δ is the relaxation parameter, usually set to 10⁻⁵.
+
+原始中文
+高斯差分隐私（GDP）通过在每次梯度更新时加入独立同分布的高斯噪声，提供 (ε,δ)-差分隐私。对于仅相差一个样本的相邻数据集 D 与 D′，如果随机算法 M 对任意输出集合 S 满足下式，则称其满足 (ε,δ)-DP：
+
+Pr[M(D)∈ S]≤ e^ε Pr[M(D′)∈ S]+δ.
+
+其中，ε 衡量隐私保护程度，δ 为松弛参数，通常设置为 10⁻⁵。
+
+修改后英文
+Differential privacy characterizes the influence of an individual training example on the output distribution of a randomized algorithm. The privacy definition in this study is formulated at the example level, where each example consists of a fundus image and its associated multi-label annotation. Two datasets D and D′ are adjacent when they differ in one training example. A randomized algorithm M satisfies (ε,δ)-DP if, for every pair of adjacent datasets and every measurable output set S,
+
+Pr[M(D) ∈ S] ≤ e^ε Pr[M(D′) ∈ S] + δ,
+
+Here, ε controls the multiplicative bound on output probabilities, while δ is the additive relaxation term. Under the same adjacency definition and δ, a smaller ε specifies a tighter privacy constraint. The privacy experiments in this study use δ=10⁻⁵ and report cumulative ε values alongside recognition performance.
+
+修改后中文
+差分隐私刻画单个训练样本对随机算法输出分布的影响。本文在训练样本层面定义隐私，其中每个样本由一幅眼底图像及其对应的多标签标注组成。当两个数据集 D 与 D′ 仅在一个训练样本上存在差异时，称二者相邻。如果随机算法 M 对任意一对相邻数据集及任意可测输出集合 S 满足下式，则称其满足 (ε,δ)-DP：
+
+Pr[M(D)∈ S]≤ e^ε Pr[M(D′)∈ S]+δ.
+
+其中，ε 控制输出概率之间的乘性界限，δ 为加性松弛项。在相同的邻接定义和 δ 下，更小的 ε 对应更严格的隐私约束。本文隐私实验设置 δ=10⁻⁵，并将累计 ε 记录值与识别性能一并报告。
+
+落实说明：定义公式的LaTeX源码逐字保留，仅修改其前后的解释文字；下游梯度公式与原有更新表达式均未改。
+
+【第4处：预算配置选择及实践依据】
+
+位置：第4.5节第2项。原稿第19页；修订稿第19—20页。
+对应回复：（2）。
+
+原始英文
+2. Hyperparameter scan of Adaptive Gaussian Differential Privacy. The results are shown in Table 6. After introducing privacy preservation, the noise injection rate affects model convergence behavior and final performance. The experiments show that the noise multiplier and noise decay rate jointly determine the per-epoch noise injection rate and further affect privacy budget consumption in each epoch. Excessive initial noise causes severe training oscillation or even non-convergence, whereas overly fast decay exhausts the privacy budget before the model has learned sufficiently. Setting 1 (noise_multiplier=0.65) provides very strong privacy preservation, but the excessive initial noise yields ε=5.01 and severely degrades model performance. Setting 8 (noise_multiplier=0.25, noise_decay_rate=4e-6) brings model performance close to the non-private setting, but ε ≈ 20 indicates weak privacy preservation. Considering both performance and privacy budget, Setting 5 is selected (noise_multiplier=0.35, noise_decay_rate=4e-6), which reaches ε ≈ 10.15 after 80 epochs and achieves a better privacy-performance trade-off.
+
+原始中文
+2. 自适应高斯差分隐私的超参数扫描。结果如表 6 所示。引入隐私保护后，噪声注入率会影响模型的收敛行为和最终性能。实验表明，噪声乘数和噪声衰减率共同决定每轮的噪声注入率，并进一步影响各轮的隐私预算消耗。过大的初始噪声会导致训练剧烈振荡，甚至无法收敛；过快的衰减则会在模型充分学习之前耗尽隐私预算。Setting 1（noise_multiplier＝0.65）提供了很强的隐私保护，但过大的初始噪声使 ε＝5.01，并严重降低模型性能。Setting 8（noise_multiplier＝0.25，noise_decay_rate＝4×10⁻⁶）使模型性能接近非隐私设置，但 ε≈20 表明隐私保护较弱。综合考虑性能与隐私预算，本文选择 Setting 5（noise_multiplier＝0.35，noise_decay_rate＝4×10⁻⁶），其在训练 80 轮后达到 ε≈10.15，并取得了更好的隐私—性能权衡。
+
+修改后英文
+2. Noise configuration and privacy-budget selection. Table 6 summarizes the ε values recorded after 80 epochs for eight combinations of initial noise multiplier and noise decay rate, ranging from 5.01 to 20.01. The initial noise multiplier controls the starting perturbation strength, while the decay rate determines how the noise multiplier changes over training.
+
+Privacy budgets are considered together with the utility retained on the recognition task. Ponomareva et al. [54] discuss budgets around ε=10 as a practical choice for retaining utility in complex machine-learning models. In medical imaging, Tayebi Arasteh et al. [55] report an average AUROC of 87.36% for multi-label chest-radiograph classification at ε=7.89 and δ=6×10⁻⁶. These studies provide context for examining budget settings alongside disease-recognition performance.
+
+Setting 5 is selected for the subsequent training analysis, with an initial noise multiplier of 0.35 and a noise decay rate of 4×10⁻⁶. With δ=10⁻⁵, this configuration records ε=10.15 after 80 epochs. The following analysis examines its epoch-wise budget records and recognition performance to explain the checkpoint choice and the recognition utility retained under this training configuration.
+
+修改后中文
+2. 噪声配置与隐私预算选择。表 6 汇总了八组初始噪声乘数与噪声衰减率组合在训练 80 轮后的 ε 记录值，其范围为 5.01—20.01。初始噪声乘数控制训练起始阶段的扰动强度，衰减率则决定噪声乘数随训练推进的变化方式。
+
+隐私预算需要结合识别任务所保留的效用进行理解。Ponomareva 等［54］讨论了将 ε=10 附近的预算作为复杂机器学习模型保留效用的一种实践选择。在医学影像领域，Tayebi Arasteh 等［55］在 ε=7.89、δ=6×10⁻⁶ 的设置下，报告胸片多标签识别的平均 AUROC 为 87.36%。这些研究为结合疾病识别表现考察预算设置提供了参考。
+
+本文选择 Setting 5 进行后续训练分析，其初始噪声乘数为 0.35，噪声衰减率为 4×10⁻⁶。在 δ=10⁻⁵ 的设置下，该配置训练 80 轮后的预算记录为 ε=10.15。下文结合这一配置的逐轮预算记录与识别性能，说明检查点的选择及相应训练条件下保留的识别效用。
+
+【第5a处：训练轨迹与检查点选择】
+
+位置：第4.5节第3项开头。原稿第19页；修订稿第21页。
+对应回复：（1）后半部分。
+
+原始英文
+3. ε-performance evolution and optimization strategy during privacy-preserving training. The results are shown in Table 7 and are intuitively presented as a privacy-performance trade-off curve in Fig. 11. With the noise configuration of Setting 5, the training log records epoch-by-epoch changes in ε consumption and monocular metrics during training. As ε increases from 0.94 at epoch 0 to 10.15 at epoch 79, the privacy budget is progressively spent and model performance improves, reaching a peak around epoch 74 (Final=73.15). This indicates that the adaptive decay strategy allows the model to learn sufficiently within the privacy budget. The checkpoint at epoch 74 provides the best balance between privacy preservation and performance. Extensive experiments show that the optimization strategy needs to be adjusted for privacy-preserving scenarios:
+
+原始中文
+3. 隐私保护训练过程中的 ε—性能演变与优化策略。结果如表 7 所示，并在图 11 中以隐私—性能权衡曲线直观展示。在 Setting 5 的噪声配置下，训练日志逐轮记录训练过程中的 ε 消耗及单眼指标变化。随着 ε 从第 0 轮的 0.94 增至第 79 轮的 10.15，隐私预算逐步消耗，模型性能提高，并在第 74 轮附近达到峰值（Final＝73.15）。这表明自适应衰减策略使模型能够在隐私预算内充分学习。第 74 轮检查点在隐私保护与性能之间提供了最佳平衡。大量实验表明，隐私保护场景下需要调整优化策略：
+
+修改后英文
+3. ε-performance evolution and optimization strategy during privacy-preserving training. The results are shown in Table 7 and are intuitively presented as a privacy-performance trade-off curve in Fig. 11. With the noise configuration of Setting 5, the training log records epoch-by-epoch changes in ε consumption and monocular metrics during training. As ε increases from 0.94 at epoch 0 to 10.15 at epoch 79, model performance generally improves, reaching its highest Final score at epoch 74 (73.15). These results indicate that the adaptive decay strategy, together with the accompanying optimization settings, supports continued learning and good recognition performance within the reported privacy-budget range. At e74, ε is 9.76 and the Final score is 73.15, compared with ε=10.15 and a Final score of 72.38 at e79. Thus, e74 achieves higher recognition performance at a lower recorded budget than the final checkpoint and is selected for the final evaluation in Table 8, taking both recognition utility and budget consumption into account. In privacy-preserving training, gradient clipping and noise perturbations change the optimization conditions, requiring corresponding adjustments to the optimization strategy to support effective learning within a finite number of epochs. The specific adjustments are as follows:
+
+修改后中文
+3. 隐私保护训练过程中的 ε—性能演变与优化策略。结果如表 7 所示，并在图 11 中以隐私—性能权衡曲线直观展示。在 Setting 5 的噪声配置下，训练日志逐轮记录训练过程中的 ε 消耗及单眼指标变化。随着 ε 从第 0 轮的 0.94 增至第 79 轮的 10.15，模型性能总体提高，并在第 74 轮取得最高 Final 得分（73.15）。这些结果表明，自适应衰减策略与配套优化设置相结合，使模型能够在所报告的隐私预算范围内持续学习，并取得较好的识别性能。在 e74，ε 为 9.76，Final 得分为 73.15；相比之下，e79 的 ε 为 10.15，Final 得分为 72.38。因此，e74 相较于最后一个检查点，在较低的记录预算下取得了更高的识别性能。本文据此选择 e74 进行表 8 的最终评估，兼顾识别效用与预算消耗。隐私保护场景下，梯度裁剪与噪声扰动改变了优化条件，因此需要相应调整优化策略，以支持模型在有限训练轮次内的有效学习。具体调整如下：
+
+【第5b处：学习率调整的原因、安排与作用】
+
+位置：第4.5节第3项学习率说明。原稿第19—20页；修订稿第21页。
+对应回复：（3）第二段。
+
+原始英文
+(1) The learning rate is increased from 1 × 10⁻⁵ to 7.5 × 10⁻⁵.
+
+(2) The learning-rate schedule is changed to linear decay followed by constant training. The learning rate decay ratio and final learning rate factor control the decay epochs and decay ratio, and are set to 0.75 and 0.8, respectively. That is, the learning rate linearly decays to 80% of its original value during the first 75% of epochs and then remains constant.
+
+This adjustment is motivated by the differences between privacy-preserving training and non-private training. For the learning rate, noise is added to each backpropagated gradient under privacy-preserving training, causing the loss at each optimization step to fluctuate and increasing the risk of poor local optima. A moderately larger learning rate is therefore needed. For the learning-rate schedule, non-private training usually decreases the learning rate as the model approaches an optimum. In contrast, privacy-preserving training does not need to reduce the learning rate to a very small value, because differential privacy training continues optimization while privacy loss accumulates, but may not fully converge. Starting with a relatively large learning rate, linearly decaying it to a smaller value over a certain period, and then keeping it constant therefore yields better performance.
+
+Experiments demonstrate that this strategy improves convergence stability and achieves a Final score of 73.15 at ε = 9.76, clearly outperforming fixed-noise or low-learning-rate configurations.
+
+原始中文
+（1）学习率由 1×10⁻⁵ 提高至 7.5×10⁻⁵。
+
+（2）学习率调度改为线性衰减后保持恒定。学习率衰减比例和最终学习率因子分别控制衰减轮次与衰减比例，设为 0.75 和 0.8。即在前 75% 的训练轮次中，学习率线性衰减至初始值的 80%，随后保持不变。
+
+这一调整源于隐私保护训练与非隐私训练之间的差异。对于学习率，隐私保护训练会向每次反向传播的梯度加入噪声，导致每步优化的损失波动，并增加陷入较差局部最优解的风险，因此需要适度增大学习率。对于学习率调度，非隐私训练通常会在模型接近最优解时降低学习率。相比之下，隐私保护训练不需要将学习率降至很小，因为差分隐私训练在隐私损失累积的同时继续优化，但可能无法完全收敛。因此，从相对较大的学习率开始，在一段时间内线性衰减至较小值，随后保持恒定，可以获得更好的性能。
+
+实验表明，这一策略提高了收敛稳定性，并在 ε＝9.76 时取得 Final 得分 73.15，明显优于固定噪声或低学习率配置。
+
+修改后英文
+(1) The learning rate is increased from 1 × 10⁻⁵ to 7.5 × 10⁻⁵.
+
+(2) The learning-rate schedule is changed to linear decay followed by constant training. The learning rate decay ratio and final learning rate factor control the decay epochs and decay ratio, and are set to 0.75 and 0.8, respectively. That is, the learning rate linearly decays to 80% of its original value during the first 75% of epochs and then remains constant.
+
+This adjustment is motivated by the differences between privacy-preserving training and non-private training. For the learning rate, gradient clipping limits gradient magnitude, while noise injection perturbs the update direction and introduces additional variability. The learning rate therefore needs to be adjusted together with the perturbation settings. A moderately larger initial learning rate is adopted to provide sufficient step sizes for learning within a finite number of training epochs. For the learning-rate schedule, non-private training usually decreases the learning rate as the model approaches an optimum. Privacy-preserving training also needs to account for ongoing gradient perturbations and cumulative privacy expenditure. The learning rate is therefore first decreased linearly to balance learning progress and update variability, and then kept at an appropriate constant value to sustain learning of disease-discriminative information. This use of a relatively large initial learning rate followed by linear decay and a constant phase is also consistent with the practice reported by Abadi et al. [47] for differentially private training.
+
+With this optimization strategy and adaptive noise decay, the model achieves a Final score of 73.15 at a recorded ε of 9.76. This result shows that the training configuration supports effective disease recognition while incorporating gradient perturbations into training.
+
+修改后中文
+（1）学习率由 1×10⁻⁵ 提高至 7.5×10⁻⁵。
+
+（2）学习率调度改为线性衰减后保持恒定。学习率衰减比例和最终学习率因子分别控制衰减轮次与衰减比例，设为 0.75 和 0.8。即在前 75% 的训练轮次中，学习率线性衰减至初始值的 80%，随后保持不变。
+
+这一调整源于隐私保护训练与非隐私训练之间的差异。对于学习率，梯度裁剪限制了梯度幅度，而噪声注入进一步扰动更新方向并引入额外波动，因此学习率需要与加噪设置共同调整。本文适度提高初始学习率，为有限训练轮次内的参数学习提供足够的更新步长。对于学习率调度，非隐私训练通常会在模型接近最优解时降低学习率。隐私保护训练还需要考虑持续的梯度扰动与累计隐私预算，因此本文先通过线性衰减逐步减小步长，以兼顾学习进展与更新波动，再保持适当的恒定学习率，使模型能够继续学习疾病判别信息。这种较大初始学习率、线性衰减后保持恒定的调度思路，也与 Abadi 等［47］在差分隐私训练中的实践相一致。
+
+在上述优化策略与自适应噪声衰减的配合下，模型在记录的 ε＝9.76 时取得 Final 得分 73.15。这一结果表明，该训练配置能够在实施梯度扰动的同时，保留有效的疾病识别能力。
+
+【第5c处：表7表注】
+
+位置：第4.5节表7表注。原稿第21页；修订稿第21页。
+对应回复：（1）后半部分。
+
+原始英文
+Evolution of ε and performance during privacy-preserving training. The table uses the noise injection strategy of Setting 5 in Table 6, and the evaluation metric is monocular Final score. As training proceeds, the privacy budget is progressively spent and model performance generally increases, reaching its peak at e74 (red). This checkpoint is used as the optimal privacy checkpoint under privacy preservation in this study. Kappa ↑, F1 ↑, AUC ↑, Final ↑; ε↓ indicates stronger privacy.
+
+原始中文
+隐私保护训练中的 ε 与性能演变。本表采用表 6 中 Setting 5 的噪声注入策略，评价指标为单眼 Final 得分。随着训练进行，隐私预算逐步消耗，模型性能总体提高，并在 e74（红色）达到峰值。本文将该检查点作为隐私保护条件下的最优隐私检查点。Kappa、F1、AUC 和 Final 越高越好；ε 越低表示隐私保护越强。
+
+修改后英文
+Evolution of ε and performance during privacy-preserving training. The table uses the noise injection strategy of Setting 5 in Table 6, and the evaluation metric is monocular Final score. As training proceeds, cumulative ε increases and model performance generally improves, reaching its highest Final score of 73.15 at e74 (red). Considering its recognition performance and corresponding ε of 9.76, this checkpoint is selected for the final evaluation in Table 8. Kappa ↑, F1 ↑, AUC ↑, Final ↑; ε↓ indicates stronger privacy for the same δ and adjacency relation.
+
+修改后中文
+隐私保护训练中的 ε 与性能演变。本表采用表 6 中 Setting 5 的噪声注入策略，评价指标为单眼 Final 得分。随着训练进行，累计 ε 增加，模型性能总体提高，并在 e74（红色）取得最高 Final 得分 73.15。综合考虑其识别表现及对应的 ε＝9.76，本文选择该检查点进行表 8 的最终评估。Kappa ↑、F1 ↑、AUC ↑、Final ↑；ε↓ 表示在相同 δ 及邻接关系下隐私保护更强。
+
+【第5d处：图11图注】
+
+位置：第4.5节图11图注；图内文字和图片原样保留。原稿第21页；修订稿第22页。
+对应回复：（1）后半部分。
+
+原始英文
+Privacy-performance (ε-Final score) trade-off curve during privacy-preserving training, with data corresponding to Table 7. The horizontal axis is the cumulative privacy budget ε (stronger privacy preservation toward the left), and the vertical axis is the monocular Final score. Each point corresponds to an epoch checkpoint and is colored by training epoch; the trajectory shows the privacy-performance evolution as training proceeds. Epoch 74 (e74) is the Pareto knee point, achieving the best Final score (73.15) at ε ≈ 9.76, and is the best operating point that balances privacy and performance.
+
+原始中文
+隐私保护训练中的隐私—性能（ε—Final 得分）权衡曲线，数据对应表 7。横轴为累计隐私预算 ε（越靠左隐私保护越强），纵轴为单眼 Final 得分。每个点对应一个训练轮次的检查点，并以颜色表示训练轮次；轨迹展示训练推进过程中的隐私—性能演变。第 74 轮（e74）是帕累托拐点，在 ε≈9.76 时取得最佳 Final 得分（73.15），是平衡隐私与性能的最佳工作点。
+
+修改后英文
+Privacy-performance (ε-Final score) trade-off curve during privacy-preserving training, with data corresponding to Table 7. The horizontal axis is the cumulative privacy budget ε (stronger privacy preservation toward the left), and the vertical axis is the monocular Final score. Each point corresponds to an epoch checkpoint and is colored by training epoch; the trajectory shows the privacy-performance evolution as training proceeds. Epoch 74 (e74) is the Pareto knee point, achieving the highest Final score in the plotted trajectory (73.15) at ε≈9.76. Considering its recognition performance and corresponding budget, this checkpoint is selected for the final evaluation.
+
+修改后中文
+隐私保护训练中的隐私—性能（ε—Final 得分）权衡曲线，数据对应表 7。横轴为累计隐私预算 ε（越靠左隐私保护越强），纵轴为单眼 Final 得分。每个点对应一个训练轮次的检查点，并以颜色表示训练轮次；轨迹展示训练推进过程中的隐私—性能演变。第 74 轮（e74）是帕累托拐点，在 ε≈9.76 时取得所示轨迹中的最高 Final 得分（73.15）。综合考虑其识别表现及对应预算，本文选择该检查点进行最终评估。
+
+落实说明：图11原PDF文件逐字节保留；图内 e74: Pareto knee 及其他标注不改。图注中的 Pareto knee point 也按用户要求保留。上面的前后对照仅针对图注。
+
+【第6a处：最终识别效用及参考对象】
+
+位置：第4.5节第4项。原稿第22页；修订稿第22页。
+对应回复：（1）前半部分。
+
+原始英文
+4. Final generalization performance under privacy preservation. The results are shown in Table 8. Since existing generalization studies on multi-label ocular disease recognition rarely report metrics under privacy-preserving training, this study uses the official ODIR ResNet50 baseline provided by Li et al. [47] as a public reference point to assess whether privacy-preserving training can maintain performance comparable to a public benchmark. Under their respective training configurations, our non-private and private models achieve Off-site Final scores of 78.85 and 68.96, and On-site Final scores of 77.49 and 68.42, respectively. The differences of 9.89 and 9.07 percentage points quantify the recognition performance cost associated with privacy-preserving training. Compared with the official baseline, the proposed method is slightly better on Off-site (68.96 vs. 68.00) and slightly lower on On-site (68.42 vs. 68.80), remaining around the public benchmark overall. This indicates that, under a moderate privacy budget, the Adaptive Gaussian Differential Privacy mechanism can provide effective privacy preservation while keeping performance within an acceptable range.
+
+原始中文
+4. 隐私保护条件下的最终泛化性能。结果如表 8 所示。由于现有多标签眼病识别泛化研究很少报告隐私保护训练下的指标，本文采用 Li 等［47］提供的 ODIR 官方 ResNet50 基线作为公开参考，以评估隐私保护训练能否保持与公开基准相当的性能。在各自的训练配置下，本文非隐私模型与隐私模型的 Off-site Final 得分分别为 78.85 和 68.96，On-site Final 得分分别为 77.49 和 68.42。9.89 和 9.07 个百分点的差异量化了隐私保护训练所对应的识别性能代价。与官方基线相比，本文方法在 Off-site 上略高（68.96 对 68.00），在 On-site 上略低（68.42 对 68.80），总体保持在公开基准附近。这表明，在中等隐私预算下，自适应高斯差分隐私机制能够提供有效的隐私保护，同时将性能保持在可接受范围内。
+
+修改后英文
+4. Final generalization performance under privacy preservation. The results are shown in Table 8. Since existing generalization studies on multi-label ocular disease recognition rarely report metrics under privacy-preserving training, this study uses the official non-private ODIR ResNet50 baseline reported by Li et al. [49] as a public reference point to assess whether privacy-preserving training can maintain performance comparable to this official baseline. Under their respective training configurations, our non-private and private models achieve Off-site binocular Final scores of 78.85 and 68.96, and On-site binocular Final scores of 77.49 and 68.42, respectively. The differences of 9.89 and 9.07 percentage points quantify the recognition performance cost associated with privacy-preserving training. Compared with the official baseline, the proposed method is slightly better on Off-site (68.96 vs. 68.00) and slightly lower on On-site (68.42 vs. 68.80), remaining close to this official baseline overall. This indicates that, with AdaGDP incorporated into the single-source training framework for training-information protection, the model can maintain recognition performance close to the official ODIR baseline.
+
+修改后中文
+4. 隐私保护条件下的最终泛化性能。结果如表 8 所示。由于现有多标签眼病识别泛化研究很少报告隐私保护训练下的指标，本文采用 Li 等［49］报告的 ODIR 官方非隐私 ResNet50 基线作为公开参考，以评估隐私保护训练能否保持与这一官方基线相当的性能。在各自的训练配置下，本文非隐私模型与隐私模型的 Off-site 双眼 Final 得分分别为 78.85 和 68.96，On-site 双眼 Final 得分分别为 77.49 和 68.42。9.89 和 9.07 个百分点的差异量化了隐私保护训练所对应的识别性能代价。与官方基线相比，本文方法在 Off-site 上略高（68.96 对 68.00），在 On-site 上略低（68.42 对 68.80），总体保持接近这一官方基线的水平。这表明，在单源训练框架中引入面向训练信息保护的 AdaGDP 后，模型仍能保持接近 ODIR 官方基线水平的识别性能。
+
+【第6b处：表8表注】
+
+位置：第4.5节表8表注。原稿第22页；修订稿第22页。
+对应回复：（1）。
+
+原始英文
+Comparison of generalization performance under privacy preservation. The table reports ODIR in-domain binocular Final score (↑). Ours (privacy) uses the optimal privacy checkpoint selected in Table 7, with the official baseline reported by Li et al. [47] as a public reference.
+
+原始中文
+隐私保护条件下的泛化性能比较。本表报告 ODIR 域内双眼 Final 得分（↑）。Ours (privacy) 使用表 7 中选出的最优隐私检查点，并以 Li 等［47］报告的官方基线作为公开参考。
+
+修改后英文
+Comparison of generalization performance under privacy preservation. The table reports ODIR in-domain binocular Final score (↑). Ours (privacy) uses the e74 checkpoint selected in Table 7, with the official non-private baseline reported by Li et al. [49] as a public reference.
+
+修改后中文
+隐私保护条件下的泛化性能比较。本表报告 ODIR 域内双眼 Final 得分（↑）。Ours (privacy) 使用表 7 中选出的 e74 检查点，并以 Li 等［49］报告的官方非隐私基线作为公开参考。
+
+【第7a处：摘要结果概括】
+
+位置：摘要结果句。原稿第1页；修订稿第1页。
+对应回复：（1）。
+
+原始英文
+Experiments show that our method reaches a Final score of 78.85 on the ODIR dataset, outperforming representative multi-label ocular disease recognition methods, and yields a 3.19-point gain on the EDID dataset.
+
+原始中文
+实验表明，本文方法在 ODIR 数据集上取得 78.85 的 Final 得分，优于具有代表性的多标签眼病识别方法，并在 EDID 数据集上取得 3.19 个百分点的提升。
+
+修改后英文
+Experiments under non-private training show that our method reaches a Final score of 78.85 on the ODIR dataset, outperforming representative multi-label ocular disease recognition methods, and yields a 3.19-point gain on the EDID dataset. With AdaGDP, ODIR recognition performance remains close to the official non-private ResNet50 baseline.
+
+修改后中文
+非隐私训练实验表明，本文方法在 ODIR 数据集上取得 78.85 的 Final 得分，优于具有代表性的多标签眼病识别方法，并在 EDID 数据集上取得 3.19 个百分点的提升。引入 AdaGDP 后，模型在 ODIR 上的识别性能仍接近官方非隐私 ResNet50 基线水平。
+
+【第7b处：结论AdaGDP贡献概括】
+
+位置：第5节贡献第（3）项。原稿第22页；修订稿第23页。
+对应回复：（3），兼顾（1）（2）。
+
+原始英文
+(3) the Adaptive Gaussian Differential Privacy (AdaGDP) mechanism dynamically decays noise intensity to achieve a balance between privacy preservation and model performance under a moderate privacy budget (ε ≈ 10).
+
+原始中文
+（3）自适应高斯差分隐私（AdaGDP）机制通过动态衰减噪声强度，在中等隐私预算（ε≈10）下实现隐私保护与模型性能之间的平衡。
+
+修改后英文
+(3) the Adaptive Gaussian Differential Privacy (AdaGDP) mechanism dynamically decays noise intensity to balance source-domain training-information protection and recognition performance. At a reported ε≈10, the model retains recognition performance close to the official non-private ODIR ResNet50 baseline.
+
+修改后中文
+（3）自适应高斯差分隐私（AdaGDP）机制通过动态衰减噪声强度，兼顾源域训练信息保护与识别性能。在记录的 ε≈10 时，模型仍能保持接近 ODIR 官方非隐私 ResNet50 基线水平的识别表现。
+
+落实说明：结论中的其他贡献及其后的讨论、未来工作原样保留。
+
+【配套参考文献】
+
+以下4条参考文献已加入修订稿并标黄；原Dwork仍为［46］，原Li等ODIR文献由［47］顺延为［49］。正文交叉引用由LaTeX统一编号。
+
+原始英文／原始中文
+无这4条条目。
+
+修改后英文
+[47] Abadi M, Chu A, Goodfellow I, et al. Deep learning with differential privacy. In: Proceedings of the 2016 ACM SIGSAC conference on computer and communications security; 2016. p. 308–318.
+[48] Balle B, Cherubin G, Hayes J. Reconstructing training data with informed adversaries. In: 2022 IEEE symposium on security and privacy (SP); 2022. doi:10.1109/SP46214.2022.00127.
+[54] Ponomareva N, Hazimeh H, Kurakin A, et al. How to DP-fy ML: A practical guide to machine learning with differential privacy. Journal of Artificial Intelligence Research 2023;77: 1113–1201.
+[55] Tayebi Arasteh S, Ziller A, Kuhl C, et al. Preserving fairness and diagnostic accuracy in private large-scale AI models for medical imaging. Communications Medicine 2024;4: 46.
+
+修改后中文（题名释义，参考文献表保留英文）
+［47］Abadi等：《具有差分隐私保护的深度学习》，2016年ACM计算机与通信安全会议，308—318页。
+［48］Balle、Cherubin与Hayes：《知情攻击者条件下的训练数据重建》，2022年IEEE安全与隐私研讨会。
+［54］Ponomareva等：《如何将差分隐私用于机器学习：实用指南》，Journal of Artificial Intelligence Research，2023，77：1113—1201。
+［55］Tayebi Arasteh等：《在保护隐私的医学影像大规模AI模型中保持公平性与诊断准确性》，Communications Medicine，2024，4：46。
+
+位置与回复对应
+［47］［48］位于修订稿第24页，对应回复（2）；［47］另用于回复（3）的学习率安排。
+［54］［55］位于第25页，对应回复（2）的预算实践依据。
