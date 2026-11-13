@@ -1,0 +1,94 @@
+审稿人2主要意见3：DG代码可行性核查与比较方案
+日期：2026-11-12（北京时间）
+状态：最终配置六组短程验证全部通过；用户已授权六组50轮正式训练，后台队列已启动，尚待完整结果。每候选评价从80改为40次，未修改正文。
+
+最新并行调度（2026-11-12 22:50）：按用户授权确认GPU0、3空闲后，正式队列改为两组并行、每组两卡。GPU1、2负责MixStyle RFMiD→FACT On-site→MixStyle EDID；GPU0、3负责FACT RFMiD→FACT EDID→MixStyle On-site。首组已自然完成50轮，交接时保留原评价进程；六组训练/评价命令、配置及原实现不变。当前tmux为odir-dg6-parallel-20261112，queue_status.json分别记录两路。交接与核验见正式实验记录目录parallel_handoff.json、parallel_live_verification.json；无新增正文修改。下文单队列顺序为此前状态。
+
+最新正式执行（2026-11-12晚）：按用户授权，MixStyle/FACT各训练On-site、RFMiD、EDID三套，共六组50轮，使用物理GPU1、2依次执行。每组完成后自动按源域top5和原目标指标择优，导出当前泛化表的八列布局；现有ResNet50/Ours列值从服务器当前表格读取并固定存档。用户随后将新对照每候选推理次数改为40，On-site所选权重源域复测同步40；历史Ours仍为80，汇总中注明。训练和检查点配置保持原样，evaluate命令显式传--repeats 40。22:18只交接后台调度器，首组MixStyle RFMiD原训练进程连续运行，没有重启或丢失步数。记录及自动导出：revision_drafts/experiments/dg_baselines_formal_20261112/；权重/结果：lib/output_dg_baselines_formal_20261112/；tmux：odir-dg6-40-20261112。先读queue_status.json，禁止重复启动。尚不能判断Ours是否高于两方法，完成后依据实测组织本点回复；不改正文。下文未启动训练等描述保留为历史阶段记录。
+
+最新实施（2026-11-12）：用户要求尽量保留作者核心，分类头改用项目头，按原规则选模评价，并明确先不完整训练。已新增lib/dg_baselines/components.py、runner.py、configuration.py、六份configs及验证入口，骨干/分类头、OneCycle、AMP/DDP、原源域随机配对、原指标/患者合并及top5/80次目标择优已接通。FACT原目标以ASL/1000替代CE，再整项乘1000，保留原KL/教师/调度系数；具体说明见同目录README.txt。七项针对性测试、三套数据路径与标签审计、最终配置六组短程均通过，每组16个minibatch、两个真实候选各80次目标推理，八类另含源域80次；top5满额淘汰另经测试核验。MixStyle有效更新8/7/7次、FACT9/8/8次，默认AMP初期缩放跳过其余尝试，均有真实参数更新；每卡峰值allocated约3621/12260MiB。跨卡参数/重载预测/重复预测最大差均为0；最终配置及代码指纹核验一致，initial_configuration旧开发检查不计入。证据为revision_drafts/experiments/dg_baselines_alignment_20261112/validation_summary.json及配置对齐与短程验证结果.txt。所有短程已结束，未执行完整训练及全量比较，不把短程指标写入回复或论文。下文“仅smoke/尚未适配”均为实施前评估。
+
+当前就绪评估（2026-11-12，用户要求判断能否按原表相同设置比较）：技术上可在原表增加MixStyle与FACT两行，每方法三套训练，共六次50轮训练；现有代码仍是最小验证入口，不能直接启动并声称正式配置完全对齐。数据/类别/指标/双眼合并已核实可复用，正式训练调度、全量验证、top5与目标择优输出尚需接入。下列是本次核查后的执行依据，优先于后文历史源域top1候选；本次只评估，没有继续训练或修改方法代码。
+
+1. 公共配置：三套Ours实际config均为448、ImageNet V1 ResNet50、50轮、总源域batch32、seed42、AdamW、峰值lr=1e-5、weight_decay=.002、AMP；训练入口使用OneCycleLR(pct_start=.1)，历史初始lr约4e-7，与smoke一致但smoke未接完整调度。多标签分类实际为ASL，不因论文BCE/Adam文字而换成另一训练协议。
+2. 新发现的骨干差异：lib/models/backbone.py的BackboneBase仅训练layer2/3/4，冻结stem/layer1，骨干BN为FrozenBatchNorm2d；smoke当前为全骨干可训练及普通BN。正式公共配置需明确并对齐，不能只凭“都是ResNet50”记作一致。这可在外部适配器实现，不改MixStyle特征统计混合或FACT幅度谱混合/教师一致性核心。
+3. 分类头差异：smoke沿用作者普通线性分类头；当前项目Base的ResNetGroupWiseLinear含2048→512投影、BN1d、ReLU、Dropout(.7)，Ours另含自己的查询/注意力结构。保留作者头可以用于方法整体比较，但不能写网络结构完全相同或把差值全部归于DG机制。若要做同分类头受控比较，需另行统一Base与两方法的任务分类头配置；当前没有实施这种变更。
+4. FACT损失尺度：项目ASL先按样本/类别平均再×1000，smoke替换CE时暂保留原辅助权重lam_const=2，因此并未完成正式损失权重口径对齐。可评估对整项目标统一缩放的方案，以保留选定的平均多标签监督与原Softmax KL之间的相对系数；这不等于恢复原CE任务的梯度比例，需记录多标签适配定义并在源域核查数值/梯度。不能凭初始一步KL很小就认定长期失效，也不能根据目标表现反向选择权重。
+5. batch与配对：batch32应按主采样源域样本数定义，不把FACT四种输入视图压缩成总共32张从而改变每轮更新步数。原FACT会额外从源域随机取配对图并生成四种输入，即32个主样本对应128张学生输入及教师前向，实际唯一源图数随配对重复而变化。smoke的两图反转配对仅用于检查四视图接口；正式入口需恢复作者的源域随机配对规则。须在实际双卡、每卡16个主样本、448、AMP下验证显存及若干更新，再开始50轮；本次小batch显存不能证明正式batch能装下。
+6. 选模/表格：沿用用户决定的源域top5、目标Final择优；On-site按患者级Final，RFMiD/EDID按单眼Final。选定同一checkpoint后填写本方向源/目标列，不能每列独立选checkpoint。三类源列还须对齐原表取所选checkpoint源域验证分数的来源，八类源列按原单眼/患者级重测流程；不能统一误写成所有源列都来自一次新测试。Ours每候选80次；两新方法保留原生确定性eval，执行同样次数通常重复同一预测，不能声称相同次数等于相同随机候选数量，不擅自加入Ours双分支或测试增强。现表含目标标签参与选择，科学口径事实保留。
+
+最新补查（2026-11-12）：用户追问Off-site→On-site；两方法独立八类输出已通过一次训练更新、Off-site/On-site各两患者四眼的单眼/患者级推理及权重重载。患者级直接复用Ours正常类min、疾病类max的双眼合并，不需要双眼专用训练。On-site原记录确认top5×80、患者级Final择优；保留用户指定协议。详细证据与新JSON见最小验证目录第五节及onsite_provenance.json。两组三类与八类共三套任务均已有最小闭环，正式全量实验尚未执行。
+
+最新执行（2026-11-12）：用户要求克隆MixStyle/FACT、检查跑通情况，并明确选模及推理沿用Ours。两个作者仓库已克隆到third_party/dg_baselines/，上游工作树保持干净；独立smoke适配器通过两方法×RFMiD/EDID四项448输入、两源域图片一次更新及小样本推理检查。详见revision_drafts/experiments/dg_baselines_smoke_20261112/核查与运行记录.txt。源域top5、Ours每候选80次目标择优已由日志确认；后续按用户决定保留，不擅自改成源域top1。此前“只讨论”是历史状态，且下文源域单checkpoint建议未被用户采用。本轮不等于完整训练入口、总batch32、多卡及50轮已验证；科学评估口径事实继续保留。
+
+最新范围澄清（2026-11-12）：用户希望保留作者方法的核心实现，仅做运行兼容和眼病多标签任务所需的小改动，在现有泛化表内增加对照方法；关注公共实验配置是否应完全一致。后续以“公共数据/训练/评价条件对齐，方法专属机制与参数保留”为准，不默认重设计RSC或FACT。原先四指标新表是候选，不替代用户现有Final表结构；现有表可增加方法行，若完整填写所有列，每个新增方法需要ODIR八类、D/A/M三类、D/G/M三类三套训练设置。当前仍只讨论，不启动实验。
+
+一、本轮请求与结论
+
+用户在先前明确“本轮不补实验，依据现有结果回复”之后，进一步要求核查：MixStyle、RSC、FACT是否有源码；如果做域泛化对比，应怎样比较、怎样制表。本轮执行的是公开论文/作者代码只读核查与方案设计，不将探索性提问记作已经决定补实验。原回复首稿继续待审。
+三种方法均有作者公开代码；均存在在单源设置下适配的技术路径。适配难度判断来自静态代码阅读，未在本项目安装运行，不声称已经复现成功。
+
+二、作者来源及代码核查
+
+MixStyle（ICLR 2021）
+论文：https://arxiv.org/pdf/2104.02008
+作者仓库：https://github.com/KaiyangZhou/mixstyle-release
+核对README、imcls/configs/trainers/mixstyle/pacs_random.yaml。仓库树版本16f7cf1fe2c7b1b3c660c72b32817ebb0545397a，README blob fc439eeb327ce8c37050f9c653620427831886d6。
+论文明确给出不依赖域标签的random shuffle方式，讨论同域实例间统计混合；作者实现有mix='random'，训练时混合批次内特征统计、测试时关闭。README给出p=0.5、alpha=0.1，并建议跨任务统一时可放在ResNet的res1/res2之后。
+候选接法：ResNet50的早期残差阶段加入MixStyle，配对样本全部来自ODIR训练子集，不使用RFMiD或EDID图像/统计；保持多标签输出和共同分类损失。插入位置最终按源域规则确定，不能声称res1/res2已是眼病任务最优。
+
+RSC（ECCV 2020）
+论文：https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123470120.pdf
+作者仓库：https://github.com/DeLightCMU/RSC
+核对README、Domain_Generalization/train.py、Domain_Generalization/models/resnet.py。resnet.py blob f663fa68293d31b71d2f5bee5c43d7d2931cae1e，train.py blob1525a98c057a598664bfdd8f60ee0b142cc4977d。
+论文说明不需要域信息。作者代码包含resnet50，核心按真实类别得分的梯度构造空间/通道掩码，并按遮蔽前后真实类别Softmax概率变化选择样本；公开代码是单标签CE流程，且README说明曾更新为curriculum版本。
+候选接法（按用户最小适配要求修正）：保留特征挑战、空间/通道掩码及样本选择的核心逻辑；先核对能否将原代码的真实类别one-hot标签接口扩展为multi-hot，沿用原有目标得分求和和遮蔽前后变化计算。不得默认采用此前提出的正标签均值或将内部Softmax改为Sigmoid，这些都不是已经批准的方案。多标签目标会影响梯度及样本选择，因此这一处是需要单独说明和验证的任务适配，不能声称完全原样复现。分类使用共同多标签监督。
+工程点：源码部分空间掩码写死expand(...,49)，适配448输入时应按实际H×W处理；需记录采用作者哪个版本，不混用原文算法与后续代码变体。
+训练长度还需核查：当前作者代码pecent=0.3+(epoch/10)*0.2，在50轮配置中会超过有效样本比例范围。不能将公共epoch直接替换为50后宣称无需兼容处理；须先核实作者版本和调度意图，再审核训练长度兼容方式。尚未修改任何代码。
+
+FACT（CVPR 2021）
+论文：https://arxiv.org/pdf/2105.11120
+作者仓库：https://github.com/MediaBrain-SJTU/FACT
+核对README、train.py、data/DGDataReader.py、data/DGDataLoader.py和config/PACS/ResNet50.py。仓库树版本a877cc86acc4d29fb7589c8ac571c8aef09e5fd8。
+仓库提供PACS训练/测试demo，已有ResNet50配置。FourierDGDataset.sample_image包含'all'/'inter'/'intra'三种配对；source_list仅包含ODIR时，'all'或'intra'可在源域内部配对，'inter'不适用。由该实现可推断具有单源适配路径，不等于仓库已有现成ODIR单源多标签实验。
+完整FACT包括幅度谱混合、原图/增强图分类、EMA教师及双向co-teacher一致性。代码使用单标签CE与Softmax KL。
+候选接法（按用户最小适配要求修正）：保留完整训练结构；图像对均来自ODIR训练子集；分类监督及最终指标采用共同多标签任务接口。重新阅读train.py确认分类项与co-teacher一致性项分开计算：可保留原Softmax KL作为logit归一化分布之间的辅助一致性，并与逐标签分类监督并存，无须预先改成Bernoulli KL。此前“必须改为逐标签Bernoulli KL”的表述过强，现撤回该默认建议；这不是原样运行已验证的结论，适配仍需检查梯度、尺度和数据接口。原幅度谱混合、教师EMA、双向一致性、温度及权重调度应保留，方法专属参数按作者配置或统一源域调参规则确定。只有幅度谱混合的版本应标作Fourier augmentation/AM，不应标作完整FACT。
+文献检索还找到2023年期刊扩展《Fourier-based augmentation with applications to domain generalization》，摘要涉及SingleDG；本方案核实的是2021代码，不把扩展论文结果或实现混为一谈。
+
+三、建议的比较对象与设置（均待决定）
+
+问题：在相同单源眼病识别任务及训练资源规则下，不同方法在外部数据集上的识别表现如何。
+方法行：ERM/ResNet50、MixStyle、RSC、FACT、Ours（DFE+ARC，不加入AdaGDP）。各DG方法作为独立对照；本文行保留自己的完整表示学习结构，方法专属损失保留。该表比较方法，DFE/ARC模块消融仍单独承担机制分析。
+
+方向A：ODIR D/A/M训练子集→RFMiD D/A/M。仅使用ODIR对应Off-site作为源域验证，目标集沿用已报告119张Evaluation/validation图像，并明确它在本研究中作为外部测试集。
+方向B：ODIR D/G/M训练子集→EDID D/G/M。仅使用ODIR对应Off-site作为源域验证，目标集沿用3358张图像。
+两种类别集合不同，因此每种方法需要分别训练两套模型；不能直接将现有八类模型截取三列等同于当前三类重训协议，也不把ODIR/RFMiD/EDID合起来训练后称为单源。
+
+共同条件：相同源域患者划分、类别映射、ImageNet预训练来源、ResNet50骨干、输入分辨率及基础预处理/增强；相同多标签输出、基础分类损失、指标实现与阈值。公共训练预算明确记录，可从当前448输入、50轮、batch32配置出发；每种方法专属增强、教师和辅助损失保留，并如实记录额外计算。方法超参数采用作者默认或等额的小范围源域验证搜索，不能只充分调整Ours或把针对Ours的超参数强行称为其他方法最优。
+目标域图像、标签及分布统计不参与参数更新、增强样本配对、调参、早停、选权重、选分支或选推理次数。仅在冻结这些规则后评估目标集；目标标签用于计算结果。
+
+模型选择：每次训练按ODIR源域验证Final选择一个checkpoint；分支选择也只基于源域预先确定。测试使用预先固定的推理流程；如方法推理本身有随机增强，固定规则/种子或预设次数并平均预测，不根据目标分数择优。均值/标准差如报告，应来自独立训练种子，不能以top5权重或反复推理代替。
+建议正式比较报告3个预先确定的训练种子，并使用相同种子集合；每项指标报告均值±标准差。只做1个种子时须如实注明，不能编造标准差。完整5方法×2方向×3种子共30次训练；这是规模估算，未包含调参，也未扣除经审核可复用的旧训练。
+
+四、旧结果与真实实现的衔接
+
+现有表5结果存在目标集top5候选选择与Total重复推理择优；旧52.16/55.35、83.86/85.06不能直接与新源域选模结果混成同协议的比较。首先核对原Base/Ours已保存权重和源域验证记录是否足以按同一规则复用，必要时重评；若训练配置或推理协议不一致再确定重训范围。不能预先承诺只训练三个新方法就一定足够。
+当前lib/main_mlc3_3.py实际调用AsymmetricLossOptimized，历史四份base/total配置均记录gamma_pos=0、gamma_neg=2、optim=AdamW。当前论文有BCE/Adam文字，与代码/配置仍有对齐事项。新比较的共同分类损失及优化器应按实际实现核实确定，不能照正文名称直接当成已经一致。本轮未改论文或代码。
+指标保持当前Kappa、F1、AUC、Final口径；F1实现是展平标签后的micro调用，需明确，不悄悄改成另一种多标签聚合方式后混用旧值。
+
+五、推荐表格
+
+以下四指标新表为前轮候选。用户最新要求优先沿用当前表5的Final布局，保留Off-site→On-site、Off-site→RFMiD、Off-site→EDID各组及单眼/双眼列，只新增MixStyle/RSC/FACT行。若只补两个跨数据集方向，则对应方法的域内列应明确未评估，不虚填。表头Off-site不是模型实际训练数据；实际训练仍为相应ODIR训练子集，Off-site报告源域评价。
+
+表题候选：在类别对齐的单源训练设置下，与代表性域泛化方法的跨数据集性能比较。
+同一张表设置两组列：
+Method | RFMiD D/A/M: Kappa↑, F1↑, AUC↑, Final↑ | EDID D/G/M: Kappa↑, F1↑, AUC↑, Final↑
+行：ERM (ResNet50)、MixStyle、RSC、FACT、Ours (DFE+ARC)。
+所有结果位置暂留“待测”。表头或表注明ODIR为唯一训练源、相同ResNet50骨干、非隐私训练、多标签适配、源域验证选模，以及均值±标准差的种子数。若版面过宽，可在同一表内分RFMiD/EDID上下两个panel，各保留四项指标。
+源域Off-site结果用于选模与补充检查，可另附补充表；主表集中呈现两个外部目标。ODIR Off-site→On-site保留原域内评价位置，不混作第三个外部DG目标。现有ODIR文献比较表保留其原有职责。
+优先展示每个目标的分项指标，尤其回应EDID Final质疑。两个目标类别组成不同，不强制增加跨两目标的单一平均排名。
+
+六、实施优先顺序建议
+
+若用户之后决定开展，先确定共同协议与旧权重可复用范围，再实现多标签适配。MixStyle最直接；RSC需要验证特征重要性及样本选择的适配；FACT需要较完整的教师/一致性流程。最终纳入的方法名单在看目标域结果前确定，不根据谁更容易被本文超过筛选方法。
+本次不修改回复第4部分为“已补比较”。待用户决定实验范围及完成后，再依据真实结果重写回复与必要正文对照。

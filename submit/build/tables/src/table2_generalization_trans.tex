@@ -1,8 +1,7 @@
-% Chapter 4 Experiments - Table 4
-% Generalization performance on ODIR, RFMiD/RIADD, and EDID.
+% Reviewer 2 major point 3: best-observed generalization results.
 \begin{table}
 \centering
-\caption{Comparison of generalization performance on different test sets. The table compares the baseline and the proposed method on ODIR in-domain generalization (Off-site $\rightarrow$ On-site) and cross-domain generalization from ODIR to RFMiD and EDID, using Final score ($\uparrow$) as the metric. Off-site $\rightarrow$ On-site reports both monocular and binocular results, while cross-domain generalization reports monocular results after aligning each dataset to a three-class label space. For each direction, the checkpoint with the best test-set performance is selected from candidate checkpoints.}
+\caption{\protect\revision{Best observed generalization results among five candidate checkpoints, measured by Final score (\%, $\uparrow$). For each method and direction, five candidates are retained based on source-domain validation performance. Results are reported for the candidate achieving the highest target-test Final, using binocular evaluation on On-site and monocular evaluation on RFMiD and EDID; source- and target-domain scores correspond to the same checkpoint. Bold values indicate the highest score in each column.}}
 \label{tab:generalization}
 \resizebox{\textwidth}{!}{
 \begin{tabular}{lcccccccc}
@@ -14,7 +13,10 @@
 & Monocular & Binocular & Monocular & Binocular & Monocular & Monocular & Monocular & Monocular \\
 \midrule
 ResNet50 & 79.37 & 76.19 & 77.30 & 75.23 & 94.39 & 83.86 & 94.30 & 52.16 \\
-\textbf{Ours} & \textbf{81.71} & \textbf{78.79} & \textbf{78.98} & \textbf{77.49} & \textbf{95.94} & \textbf{85.06} & \textbf{96.03} & \textbf{55.35} \\
+\revision{MixStyle} & \revision{79.10} & \revision{75.82} & \revision{76.59} & \revision{74.76} & \revision{95.08} & \revision{84.29} & \revision{94.70} & \revision{51.05} \\
+\revision{FACT} & \revision{79.50} & \revision{76.81} & \revision{78.13} & \revision{76.55} & \textbf{\revision{95.99}} & \textbf{\revision{86.72}} & \revision{94.96} & \revision{53.88} \\
+\revision{RSC} & \revision{80.29} & \revision{76.82} & \revision{78.05} & \revision{75.86} & \revision{95.98} & \revision{84.25} & \revision{94.88} & \revision{52.16} \\
+\textbf{Ours} & \textbf{81.71} & \textbf{78.79} & \textbf{78.98} & \textbf{77.49} & 95.94 & 85.06 & \textbf{96.03} & \textbf{55.35} \\
 \bottomrule
 \end{tabular}
 }

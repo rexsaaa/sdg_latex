@@ -1,0 +1,343 @@
+审稿人2主要意见3：必要修改分析与逐处中英文前后对照（第1—8项及附A/B均已落实）
+
+日期：2026-11-13。
+状态：用户已确认本点第1—8项（含1a/1b、7a/7b）及附项A/B，并授权落实。第5项现已按确认版本写入第4.5节，本点全部已确认正文修改均已完成；其余内容、表5/6数值和黄色高亮保持。已按用户最新授权使用服务器原有流程更新高亮版和清洁版PDF，两版均26页；表5/6均位于第19页，排版、全部80格数据和引用跳转均已核对。此次仅构建PDF，正文源文件及其他已确认内容保持不变。
+完成确认（2026-11-14）：用户已确认最终中文回复及其与正文修改的对应关系，本点中文返修阶段已完成；本对照中的已通过内容及论文/PDF均保持。此前审核中间状态按历史记录理解。
+依据：服务器当前submit/build/，不以旧投稿稿覆盖已批准修改。英文引文中的LaTeX引用命令按当前可读编号显示；中文为当前英文的审核译文，不代表另有一份待覆盖的中文正文。
+
+落实位置与编译核验（2026-11-13；以下行号为落实后的当前源码）
+1a：04_experiments_trans.tex第17行；1b：第19行。
+2：第28行；3：第37行；4：第41行。
+A：第43行，分类监督ASL及参数；B：第45行，AdamW名称。
+5：第118、120行，比较目的、三种泛化方法机制与必要多标签适配。
+6：第122、124行，源域top5与表5最佳/表6候选统计的分工。
+7a：tables/src/table2_generalization_trans.tex；7b：tables/src/table_generalization_top5_trans.tex。两表均保留原三层表头和八列，Ours置末，所有80格与既有CSV一致，原16格数值不变。
+8：第136、138行，在原基线分析与t-SNE之间新增已通过的Ours优势分析。
+编译：按用户最新授权，在sdg_latex/下执行python scripts/build_revision.py，使用服务器原有latexmk高亮/清洁入口生成并更新两版正式PDF；命令退出码为0，无未定义引用或重复标签，仅保留此前封面排版/空锚点警告。先前内置编辑器的远端多文件加载限制不影响本次服务器构建。
+PDF与引用核验：两版均26页；表5/6均第19页，表7/8/9分别第21/22/23页。逐一检查两版第19页：表题、三层表头及八列完整，无表格溢出或重叠，Ours置末，按列标优；高亮版修订标黄，清洁版无修订底色。每版80格均与既有CSV一致；正文及表题中表5/6的PDF链接均指向第19页。此次构建前后51个受保护正文源文件、图片、原稿PDF、回复及实验资料指纹不变，正文无需再改。
+正式文件：submit/build/main_cas_revised_highlight.pdf（高亮版）；submit/build/main_cas_revised.pdf（清洁版）。未提交/推送/同步。
+实际源码差异：reviewer2_point3_implementation.diff；机器核验和编译结果：reviewer2_point3_implementation_check.json；内置编译诊断：reviewer2_point3_editor_compile_diagnostics.json。
+
+一、必要修改范围
+
+直接对应已通过回复的修改共8项：第4.1节3项（第1项含1a共同设定与1b类别依据两处），第4.2节1处指标说明，第4.5节的方法比较引入与必要多标签适配（第5项）、最佳结果/候选统计说明、表5及拟新增统计表、结果分析。
+另列A、B两项配置名称核准：BCE与ASL、Adam与AdamW。两项均为既有文字与运行记录的对应检查，不改变方法设计或实验；与主要8项分开审核。合计10个审核项。
+
+已经匹配、应予保留：
+1. ODIR八类任务、原数据划分、样本量、疾病分布及图像示例。
+2. 第4.1节EDID“每张图像只有一个正标签，是多标签任务特殊情况”的原句，以及ODIR D/G/M训练子集说明。第3项只改其前面的类别选择句。
+3. 第4.2节ResNet50骨干、单眼输入与患者级合并逻辑、448输入、50轮及批量32等已匹配设置；已批准的阈值实验及其解释。
+4. 第4.3节已有眼病识别比较及其与泛化实验的衔接；第2节已有MixStyle、FACT、RSC文献介绍。
+5. 第4.5节“域内—跨数据集—隐私”三阶段顺序、已有On-site与RFMiD/EDID对ResNet50的结果、EDID三个组成指标及3.19分提升、已有跨域设置概述、t-SNE图文和隐私部分。
+6. 摘要、方法章节、其他图表、结论不因本点回复整体改写；共有类别说明放在数据集节，新增比较放在现有泛化结果节。
+
+二、逐项审核对照
+
+【第1项：共同评估设定与RFMiD类别依据——1a、1b均已通过，已落实】
+
+【1a：先说明每个评估方向内源域与目标域采用相同类别空间】
+
+位置：第4.1节ODIR介绍及图示之后、RFMiD介绍之前，即04_experiments_trans.tex第17行段前。
+修改原因：先说明域内与跨数据集评估共同采用的类别对应原则，再说明各外部数据集的共有疾病类别，使三类设置具有明确的前置设计依据。类别一致限定在每个评估方向内，不把八类与三类实验写成相同任务，也不将Off-site写成训练集。
+对应回复稿：（1）类别对齐条件下的跨域识别；训练与测试针对相同的疾病识别对象。
+保留范围：原ODIR介绍、数据划分和图表不动；第4.5节不重复新增这一整段。
+审核状态：用户于2026-11-13明确“第1项就按1a和1b这个版本保留”，以下中英文按已展示版本原样保存。
+
+原始英文
+No corresponding paragraph is present. The ODIR description and illustration are followed directly by the RFMiD introduction.
+
+原始中文
+原无对应段落。ODIR介绍及图示后直接进入RFMiD介绍。
+
+修改后英文（已通过）
+To apply a consistent class correspondence principle to in-domain and cross-dataset generalization evaluation, this study uses the same source and target label space within each evaluation direction. In the ODIR in-domain evaluation, Off-site and On-site both use the original eight-class labels. For external datasets, corresponding source-domain training and target-domain evaluation subsets are constructed using the disease classes shared with ODIR, so that training and evaluation address the same disease recognition task.
+
+修改后中文（已通过）
+为使域内与跨数据集泛化评估遵循一致的类别对应原则，本文在每个评估方向内保持源域与目标域的类别空间一致。ODIR域内评估中，Off-site与On-site均采用原有的八类标签。对于外部数据集，则依据其与ODIR的共有疾病类别，构建相应的源域训练子集和目标域评估子集，使训练与测试针对相同的疾病识别任务。
+
+【1b：明确RFMiD三类设置由共有疾病标签决定——已通过】
+
+位置：第4.1节RFMiD段，04_experiments_trans.tex第17行中的类别选择句。
+修改原因：原句已经给出D/A/M，但“this study selects”仍容易被理解为作者从可用类别中主动缩减任务；需要明确三类范围的依据是源、目标数据集中能够直接对应的疾病类别。
+对应回复稿：（1）“三类设置由各外部数据集与ODIR之间可对应的共有疾病类别决定。”
+保留范围：本段数据来源、45类介绍、图示、ODIR训练子集及RFMiD评价样本量全部保留。用“疾病类别”限定范围，不把正常类或其他类混写为具体疾病。
+
+原始英文
+Since the complete label spaces of RFMiD and ODIR are inconsistent, this study selects their shared classes, Diabetic Retinopathy (D), Age-Related Macular Degeneration (A), and Myopia (M), for cross-domain generalization.
+
+原始中文
+由于RFMiD与ODIR的完整标签空间不一致，本文选取二者的共有类别，即糖尿病视网膜病变（D）、年龄相关性黄斑变性（A）和近视（M），开展跨域泛化评估。
+
+修改后英文
+The complete label spaces of RFMiD and ODIR differ, and their directly corresponding disease categories are Diabetic Retinopathy (D), Age-Related Macular Degeneration (A), and Myopia (M). These shared disease labels determine the D/A/M three-class setting used for cross-domain generalization evaluation.
+
+修改后中文
+RFMiD与ODIR的完整标签空间不同，二者能够直接对应的疾病类别为糖尿病视网膜病变（D）、年龄相关性黄斑变性（A）和近视（M）。这些共有疾病标签决定了跨域泛化评估所采用的D/A/M三类设置。
+
+【第2项：补足引入EDID的研究动机——已通过，已落实】
+
+位置：第4.1节EDID介绍段首句，04_experiments_trans.tex第26行。
+修改原因：原文已说明EDID是第二个外部数据集及其用途，但未说明为什么在多标签研究中引入单标签数据集。补足“符合要求的多标签外部数据有限—扩展数据来源—引入EDID”的逻辑。
+对应回复稿：（2）“优先采用眼科多标签数据集；在本研究调研范围内符合要求的数据有限；增加EDID以覆盖另一数据来源和疾病构成。”
+保留范围：医院来源、10类原始类别、5335张图像、各类样本量及图示不动；不新增未经记录的量化筛选门槛。
+审核状态：用户于2026-11-13明确“第2项按这个版本保留”；以下中英文保持已展示版本，现已按该版本落实。
+
+原始英文
+In addition, this study introduces the EDID [51] dataset collected from Anawara Hamida and B.N.S.B. Zahurul Haque Eye Hospital as the second independent cross-domain generalization dataset, further validating the generalization performance of the proposed method across different data sources and label organizations.
+
+原始中文
+此外，本文引入采集自Anawara Hamida和B.N.S.B. Zahurul Haque眼科医院的EDID数据集［51］，作为第二个独立跨域泛化数据集，进一步验证所提出方法在不同数据来源和标签组织形式下的泛化性能。
+
+修改后英文
+In the dataset survey conducted for this study, public ophthalmic multi-label datasets with suitable image quality and corresponding disease labels were limited. To extend external evaluation to another data source in addition to RFMiD, this study introduces the EDID [51] dataset collected from Anawara Hamida and B.N.S.B. Zahurul Haque Eye Hospital as the second independent cross-domain generalization dataset, further assessing generalization across different data sources and label organizations.
+
+修改后中文
+在本研究的数据集调研范围内，图像质量适宜且疾病标签能够对应的公开眼科多标签数据集较为有限。为在RFMiD之外进一步覆盖另一数据来源，本文引入采集自Anawara Hamida和B.N.S.B. Zahurul Haque眼科医院的EDID数据集［51］，作为第二个独立跨域泛化数据集，进一步考察模型在不同数据来源和标签组织形式下的泛化表现。
+
+【第3项：明确EDID共有疾病类别；保留原有单正标签解释——已通过，已落实】
+
+位置：第4.1节EDID图后的首句，04_experiments_trans.tex第35行。
+修改原因：与第1项一致，使D/G/M的设置依据明确；原文随后两句已经解释单标签特殊情况和源域训练子集，无需重复新增或重写。
+对应回复稿：（1）EDID与ODIR的共有疾病类别为D/G/M；（2）EDID纳入逐标签评价体系的解释沿用已有正文。
+保留范围：本句所有样本量，以及后续“Since EDID is a single-label dataset...”和“Correspondingly...”两句原样保留。
+审核状态：用户于2026-11-13明确“第3项按这个版本保留”；以下中英文保持已展示版本，现已按该版本落实。
+
+原始英文
+Similar to RFMiD, since the complete label spaces of EDID and ODIR are inconsistent, this study selects their shared classes, Diabetic Retinopathy (D), Glaucoma (G), and Myopia (M), to construct a cross-domain generalization dataset with 3,358 images, including 1,509, 1,349, and 500 samples for D, G, and M, respectively.
+
+原始中文
+与RFMiD类似，由于EDID与ODIR的完整标签空间不一致，本文选取二者的共有类别，即糖尿病视网膜病变（D）、青光眼（G）和近视（M），构建包含3358张图像的跨域泛化数据集，其中D、G、M分别为1509、1349和500个样本。
+
+修改后英文
+EDID and ODIR have different complete label spaces, with directly corresponding disease categories of Diabetic Retinopathy (D), Glaucoma (G), and Myopia (M). These shared D/G/M classes form the cross-domain generalization dataset of 3,358 images, including 1,509, 1,349, and 500 samples for D, G, and M, respectively.
+
+修改后中文
+EDID与ODIR的完整标签空间不同，二者能够直接对应的疾病类别为糖尿病视网膜病变（D）、青光眼（G）和近视（M）。这些共有D/G/M类别构成了包含3358张图像的跨域泛化数据集，其中D、G、M分别为1509、1349和500个样本。
+
+【第4项：补清Final的计算对象、公式和组成指标含义——已通过，已落实】
+
+位置：第4.2节首段的指标说明，04_experiments_trans.tex第39行；首句ResNet50/PyTorch说明保留。
+修改原因：原文已说Final是三项平均，但未明确计算对象、百分制及分项含义。用正面的定义说明综合分数如何理解，不加入对审稿人判断的反驳。
+对应回复稿：（3）Final＝（Kappa＋micro-F1＋AUC）／3；按图像—类别关系展平计算，并结合三项含义理解EDID结果。
+保留范围：骨干、框架及后文患者级合并规则不动；新增说明与现有SDG_infer3_3.py的展平、0.5阈值和连续分数AUC实现对应。
+审核状态：用户于2026-11-13明确“第4项按这个版本保留”；以下中英文保持已展示版本，现已按该版本落实。
+
+原始英文
+The evaluation metrics follow the official ODIR standard: Kappa, F1, AUC, and their average value, Final score. The Kappa threshold is fixed at 0.5, and F1 uses micro averaging to alleviate the influence of class imbalance.
+
+原始中文
+评价指标遵循ODIR官方标准：Kappa、F1、AUC及其平均值Final。Kappa的阈值固定为0.5，F1采用微平均，以缓解类别不平衡的影响。
+
+修改后英文
+The evaluation metrics follow the official ODIR standard: Kappa, micro-F1, AUC, and their arithmetic mean, Final = (Kappa + micro-F1 + AUC)/3, with all scores reported on a percentage scale. Ground-truth labels and predicted scores are flattened across image–class pairs. Kappa and micro-F1 are computed using predictions binarized at a threshold of 0.5, whereas AUC uses the continuous prediction scores. Kappa accounts for chance agreement, micro-F1 summarizes label predictions, and AUC measures score discrimination; Final combines these three aspects of recognition performance.
+
+修改后中文
+评价指标遵循ODIR官方标准，包括Kappa、micro-F1、AUC及其算术平均值Final＝（Kappa＋micro-F1＋AUC）／3，各项均按百分制报告。真实标签与预测分数按图像—类别关系展平。Kappa和micro-F1使用以0.5为阈值二值化后的预测计算，AUC则使用连续预测分数。Kappa考虑机会一致性，micro-F1汇总标签预测结果，AUC衡量预测分数的判别能力；Final综合反映这三个方面的识别表现。
+
+【第5项：在第4.5节集中介绍比较方法及必要多标签适配——已通过，已落实】
+
+审核与落实状态：用户于2026-11-13明确“第5项也按这个版本落实到第4.5节”。已按下列中英文版本落实，接续原有第6项选模说明；仅适配已有文献键、表格交叉引用和黄色高亮，不改其余已确认内容。
+
+范围决定（2026-11-13）：用户已明确取消原5a在4.2节新增段落的安排，方法介绍与必要多标签适配集中放在4.5节。公共参数不再重复；使用“泛化方法”，不恢复已删除的训练数据/第4.2节指引句。以下具体中英文已获确认并落实。
+位置：第4.5节“1. Generalization performance under the non-private setting.”开头的前两句，现为04_experiments_trans.tex第118、120行；其后接第6项三个评估方向及选模统计。第4.5节三阶段总述不变。
+修改原因：表5从基线与Ours扩展为五方法比较，需要先说明基线及三种DG方法各自提供什么参照，再简述它们如何适用于当前多标签任务。将这两类说明集中放在泛化部分，可以使比较目的、方法介绍和必要适配自然衔接，并避免在4.2重复公共设置。
+对应回复稿：（4）ResNet50提供基线参照，MixStyle、FACT和RSC提供不同机制的直接比较；保留各方法核心机制，对分类输出和多标签监督作任务适配，RSC的特征重要性与置信度评分聚合阳性标签。
+保留范围：4.2不增加原5a段落，不重复ResNet50骨干、448输入、50轮、批量及共同评价参数；非隐私部分标题、三阶段顺序和表后已有分析均保留。BCE/ASL及Adam/AdamW名称已由附A/B分别核准并落实，原5a的独立配置段保持取消。
+
+原始英文
+1. Generalization performance under the non-private setting. The results are shown in Table 5, which reports the Final scores of the baseline and the proposed method on different test sets.
+
+原始中文
+1. 非隐私条件下的泛化性能。结果见表5，该表报告基线与本文方法在不同测试集上的Final得分。
+
+修改后英文
+1. Generalization performance under the non-private setting. To assess the recognition performance of the proposed framework relative to different domain generalization methods under single-source training, Table 5 compares the ResNet50 baseline, MixStyle [30], FACT [32], RSC [33], and the proposed method. ResNet50 provides a reference for measuring the recognition gains of the proposed framework over the base model, while the three domain generalization methods provide comparisons based on different mechanisms. MixStyle mixes feature-style statistics to simulate appearance variation; FACT combines Fourier augmentation with teacher–student consistency learning; and RSC uses self-challenging feature masking to encourage the use of different discriminative cues.
+
+The classification outputs and supervision are adapted to the multi-label task while retaining the core mechanisms of the three methods. For RSC, feature-importance and confidence scores are computed by aggregating scores over the positive labels of each sample.
+
+修改后中文
+1. 非隐私条件下的泛化性能。为考察本文框架在单源训练条件下相对于不同泛化方法的识别表现，表5比较ResNet50基线、MixStyle［30］、FACT［32］、RSC［33］与本文方法。ResNet50用于衡量本文框架相对于基础识别模型的性能改善，三种域泛化方法则提供不同机制的比较参照：MixStyle通过混合特征风格统计模拟外观变化；FACT结合傅里叶增强与教师—学生一致性学习；RSC通过自挑战式特征屏蔽促进模型利用不同的判别线索。
+
+三种方法在保留各自核心机制的基础上，对分类输出与监督形式作多标签任务适配。其中，RSC的特征重要性和置信度评分通过聚合每个样本阳性标签对应的评分计算。
+
+【第6项：区分候选最佳观测结果与候选均值统计——已通过，已落实】
+
+审核状态：用户于2026-11-13明确“第6项按这个版本保留”；下方中英文原样保存。
+
+位置：第4.5节第116行，紧接第5项的方法介绍与必要适配。
+修改原因：用户明确表5用于展示源域top5候选分别进行目标域测试后，在这些候选中观察到的最好结果；均值±SD考虑单列于其后的新表6。需要把两表的报告目的说清楚，同时保留候选产生、逐候选目标测试及取最佳结果的实际流程。
+对应回复稿：（3）所报告的EDID改善及五个候选均值提供互补证据；（4）三方向的五方法比较，最佳结果与候选整体表现共同支持分方向结论。
+保留范围：原三个方向、源域top5、目标指标及同一候选的源域/目标域对应关系不改。最佳只指五个候选中的最佳观测值，不称理论上限、独立部署性能或不涉及目标结果选择；均值/样本SD仍描述同一次训练的五个候选，不称五次独立训练。本文段不宣称每个候选都只推理一次。
+表号说明：候选统计现已新增为表6；原隐私表6/7/8顺延为表7/8/9。两表内容及表题按第7项获批版本落实，已通过回复文字保留。
+
+原始英文
+The generalization experiments are organized along three evaluation directions: ODIR in-domain Off-site → On-site, cross-domain generalization from ODIR to RFMiD, and cross-domain generalization from ODIR to EDID. For each direction, model selection and evaluation are based on the top five candidate checkpoints saved during training. Specifically, the checkpoint group with the best test-set performance is selected from the candidate checkpoints of the baseline and the proposed method, respectively, and the results of this checkpoint group on the source-domain Off-site set and the target domain are reported simultaneously.
+
+原始中文
+泛化实验按三个方向组织：ODIR域内Off-site→On-site、ODIR→RFMiD跨域泛化，以及ODIR→EDID跨域泛化。每个方向的模型选择与评价均基于训练期间保存的前五个候选权重。具体而言，分别从基线和本文方法的候选权重中选择测试集表现最好的权重组，并同时报告该权重组在源域Off-site和目标域上的结果。
+
+修改后英文
+The generalization experiments are organized along three evaluation directions: ODIR in-domain Off-site → On-site, cross-domain generalization from ODIR to RFMiD, and cross-domain generalization from ODIR to EDID. For each method and direction, the five candidate checkpoints with the highest source-domain Off-site validation Final scores are retained from the same training run and evaluated individually on the target test set.
+
+To characterize the best performance observed within this candidate set, Table 5 reports the best target-test results among the five candidates, using binocular Final for On-site and monocular Final for RFMiD and EDID as the comparison metric. The Off-site and target-domain results in each direction correspond to the same checkpoint attaining this result. To complement these best-observed results, Table 6 reports the mean and sample standard deviation of the five candidates' recorded evaluation scores, describing their average performance and variation across checkpoints.
+
+修改后中文
+泛化实验按三个方向组织：ODIR域内Off-site→On-site、ODIR→RFMiD跨域泛化，以及ODIR→EDID跨域泛化。对每种方法及每个方向，从同一次训练中保留源域Off-site验证Final最高的五个候选权重，并分别在目标测试集上进行评价。
+
+为考察这一候选范围内能够观察到的最好表现，表5报告五个候选中的最佳目标域测试结果，其中On-site采用双眼Final，RFMiD和EDID采用单眼Final作为比较指标。每个方向的Off-site与目标域结果均对应取得该结果的同一候选权重。作为最佳观测结果的补充，表6报告五个候选权重已有评价成绩的均值与样本标准差，以呈现这些候选的平均表现及权重间的变化。
+
+【第7项：表5报告最佳结果，新增表6报告top5均值±SD——已通过，已落实】
+
+审核状态：用户于2026-11-13明确“第7项按这个版本保留”，并要求Ours放在最后一行。已保留表题、数值及标优，拟修改表5和拟新增表6统一按ResNet50、MixStyle、FACT、RSC、Ours排序；原始表5作为对照原样保留；修改后表5与新增表6现已写入论文。
+共同样式：沿用原表5的三层分组表头、三个方向、八个数据列及三线表形式。两表方法顺序一致，依次为ResNet50、MixStyle、FACT、RSC、Ours；保留两位小数。表5按各列得分标优，表6按各列均值标优；不单独按SD大小标优。英文表头沿用Model、Monocular、Binocular；中文审核表对应模型、单眼、双眼，双眼指原有患者级合并结果。
+排版预览：同目录reviewer2_point3_tables_review.html，包含原表5、拟修改表5及拟新增表6，可切换中英文查看相同分组样式。此文件仅供审核，不替代论文或编译PDF。
+
+【7a：表5保留最佳结果并加入三种域泛化对照】
+
+位置：tables/src/table2_generalization_trans.tex，当前表5。保留tab:generalization标签。
+修改原因：原表仅含ResNet50和Ours，需增加MixStyle、FACT、RSC以承载回复中的直接泛化方法比较；表题明确“同次训练源域top5候选中的最佳目标测试表现”，与已通过第6项衔接。每个方向源域与目标域列属于同一候选，不将各列分别取最大值。
+对应回复稿：（3）EDID相对于ResNet50提高3.19分的所报结果；（4）三个方向的五方法直接比较，On-site和EDID中的识别优势及RFMiD中的分方向结果。
+保留范围：原三方向、八个数据列、ResNet50/Ours全部16个数值及原评价规则不变。仅新增三行、明确表题并根据五方法比较更新粗体；RFMiD方向两列的最高得分均为FACT。
+
+原始英文（表5表题）
+Comparison of generalization performance on different test sets. The table compares the baseline and the proposed method on ODIR in-domain generalization (Off-site → On-site) and cross-domain generalization from ODIR to RFMiD and EDID, using Final score (↑) as the metric. Off-site → On-site reports both monocular and binocular results, while cross-domain generalization reports monocular results after aligning each dataset to a three-class label space. For each direction, the checkpoint with the best test-set performance is selected from candidate checkpoints.
+
+原始中文（表5表题）
+不同测试集上的泛化性能比较。该表以Final得分（↑）为指标，比较基线与本文方法在ODIR域内泛化（Off-site→On-site）及ODIR→RFMiD和EDID跨域泛化中的表现。Off-site→On-site同时报告单眼和双眼结果；跨域泛化在各数据集对齐至三类标签空间后报告单眼结果。每个方向均从候选权重中选择测试集表现最好的权重。
+
+原始表5（中英文共用数值，双语表头）
+| Model / 模型 | Off→On: Off-site M / 源单 | Off-site B / 源双 | On-site M / 目标单 | On-site B / 目标双 | Off→RFMiD: Off-site M / 源单 | RFMiD M / 目标单 | Off→EDID: Off-site M / 源单 | EDID M / 目标单 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| ResNet50 | 79.37 | 76.19 | 77.30 | 75.23 | 94.39 | 83.86 | 94.30 | 52.16 |
+| Ours | **81.71** | **78.79** | **78.98** | **77.49** | **95.94** | **85.06** | **96.03** | **55.35** |
+
+修改后英文（表5表题）
+Best observed generalization results among five candidate checkpoints, measured by Final score (%, ↑). For each method and direction, five candidates are retained based on source-domain validation performance. Results are reported for the candidate achieving the highest target-test Final, using binocular evaluation on On-site and monocular evaluation on RFMiD and EDID; source- and target-domain scores correspond to the same checkpoint. Bold values indicate the highest score in each column.
+
+修改后中文（表5表题）
+五个候选权重中的最佳观测泛化结果，以Final得分（%，↑）评价。对每种方法及每个方向，根据源域验证表现保留五个候选。表中报告目标测试集Final最高的候选结果，其中On-site采用双眼评价，RFMiD和EDID采用单眼评价；源域与目标域得分对应同一候选权重。粗体表示每列最高得分。
+
+修改后表5（中英文共用数值，双语表头）
+| Model / 模型 | Off→On: Off-site M / 源单 | Off-site B / 源双 | On-site M / 目标单 | On-site B / 目标双 | Off→RFMiD: Off-site M / 源单 | RFMiD M / 目标单 | Off→EDID: Off-site M / 源单 | EDID M / 目标单 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| ResNet50 | 79.37 | 76.19 | 77.30 | 75.23 | 94.39 | 83.86 | 94.30 | 52.16 |
+| MixStyle | 79.10 | 75.82 | 76.59 | 74.76 | 95.08 | 84.29 | 94.70 | 51.05 |
+| FACT | 79.50 | 76.81 | 78.13 | 76.55 | **95.99** | **86.72** | 94.96 | 53.88 |
+| RSC | 80.29 | 76.82 | 78.05 | 75.86 | 95.98 | 84.25 | 94.88 | 52.16 |
+| Ours | **81.71** | **78.79** | **78.98** | **77.49** | 95.94 | 85.06 | **96.03** | **55.35** |
+
+【7b：在表5之后新增同样式的表6，报告五个候选的均值±SD】
+
+位置：第4.5节紧随表5新增，现编号表6，使用独立标签tab:generalization-top5。
+修改原因：表5呈现候选范围内观察到的最好表现；新表6进一步呈现同一组候选的平均表现与候选间变化。分为两表使两种统计含义各自明确，也便于在相同列结构下逐方向对照。
+对应回复稿：（3）EDID五方法的候选均值及其与最佳结果一致的比较趋势；（4）On-site和EDID候选均值优势，以及RFMiD上的分方向比较。
+保留范围：沿用已核验的五方法top5统计，不重新计算或改变成绩来源。每种方法、每个方向均为同次训练的五个候选（n=5），采用样本SD；表体与表5相同的八列、方法顺序和分组样式。RFMiD目标列最高均值为FACT，其余七列为Ours。
+
+原始英文（表6表题与表体）
+No corresponding table is present; this is a new table to be inserted after Table 5.
+
+原始中文（表6表题与表体）
+原稿无对应统计表；本表拟新增在表5之后。
+
+修改后英文（新增表6表题）
+Mean ± sample standard deviation (SD) of generalization Final scores (%, ↑) across the five candidate checkpoints. For each method and direction, the same five candidates as in Table 5 are retained from a single training run based on source-domain validation performance (n = 5). Off-site and target-domain entries summarize the candidates’ recorded source-validation and target-evaluation scores, respectively. Bold values indicate the highest mean in each column.
+
+修改后中文（新增表6表题）
+五个候选权重的泛化Final得分（%，↑）均值±样本标准差（SD）。对每种方法及每个方向，统计对象均为表5所用的、根据源域验证表现从同一次训练中保留的五个候选权重（n＝5）。Off-site列与目标域列分别汇总这些候选已有的源域验证成绩与目标域评价成绩。粗体表示每列最高均值。
+
+修改后表6（中英文共用数值，双语表头）
+| Model / 模型 | Off→On: Off-site M / 源单 | Off-site B / 源双 | On-site M / 目标单 | On-site B / 目标双 | Off→RFMiD: Off-site M / 源单 | RFMiD M / 目标单 | Off→EDID: Off-site M / 源单 | EDID M / 目标单 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| ResNet50 | 79.42±0.08 | 75.84±0.56 | 76.80±0.49 | 74.13±0.69 | 94.47±0.08 | 83.09±0.60 | 94.31±0.11 | 51.50±0.66 |
+| MixStyle | 79.07±0.13 | 75.31±0.39 | 76.23±0.26 | 73.73±0.62 | 95.09±0.06 | 82.76±1.74 | 94.60±0.06 | 49.71±1.25 |
+| FACT | 79.70±0.14 | 76.60±0.19 | 77.30±0.63 | 75.10±0.92 | 96.03±0.05 | **84.63±1.30** | 95.03±0.10 | 53.15±0.97 |
+| RSC | 80.36±0.21 | 76.67±0.20 | 77.48±0.38 | 75.21±0.51 | 95.98±0.05 | 83.42±0.54 | 94.63±0.17 | 51.80±0.26 |
+| Ours | **81.32±0.69** | **78.20±0.75** | **78.11±0.84** | **76.27±1.25** | **96.14±0.37** | 84.22±0.71 | **95.37±0.41** | **54.41±1.06** |
+
+审核显示说明：上述文本表头为便于聊天/纯文本审核使用缩写，M = Monocular / 单眼，B = Binocular / 双眼；正式排版及HTML预览保留原三层表头，不用缩写替换正式列名。
+表号联动：本统计表现为表6，隐私参数扫描、预算演化、隐私最终结果分别顺延为表7、表8、表9；两种模式的编译辅助文件均已确认编号一致。正式PDF未更新，已通过回复文字保留。
+数值依据：revision_drafts/experiments/rsc_formal_20261113/comparison_top5.csv；原表5与当前论文表格逐格核对一致。
+
+【第8项：补充对应表5最佳结果和表6候选统计的泛化方法结果分析——已通过，已落实】
+
+审核状态：用户于2026-11-13明确“第8项按这个版本保留”，以突出Ours优势、合并RFMiD比较的最新中英文为准，正文文字原样保留。
+
+本轮调整（2026-11-13，现已通过）：用户指出上一版反复展开FACT而削弱Ours主线。已将三项对照绝对值改为本文方法的提升幅度，FACT仅在RFMiD合并说明中出现一次；原插入位置及两表分工不变。
+
+位置：第4.5节现有RFMiD/EDID结果段的Overall句之后、t-SNE分析之前，即04_experiments_trans.tex第124行内分段插入。第一段对应表5，第二段以拟新增表6为主，合并一句RFMiD两表比较。图10编号按当前编译稿读取，落实时再核对交叉引用。
+修改原因：原有基线及EDID分项解释保留；新增分析以本文方法在On-site/EDID的优势为主线。表5强调相对于各指标最强DG对照的提升幅度，表6说明候选均值对该优势的支持；RFMiD两表比较合并为一句，简洁保留FACT最高这一事实，不逐段重复对照方法成绩。
+对应回复稿：（3）EDID的候选均值支持已有识别改善，与最佳结果形成一致的比较趋势；（4）On-site和EDID的最佳结果与候选均值优势，以及RFMiD上FACT最高、本文方法高于ResNet50/MixStyle/RSC的分方向比较。
+保留范围：原有全部基线比较、EDID提升3.19分及三个组成指标、Overall总结句和后续t-SNE分析原样保留。仅在二者之间新增两段；第6项统计定义和第7项两表不重复展开。SD沿用五候选样本SD，不据此引申独立训练稳定性或统计显著性，也不写全部方向领先。
+
+原始英文（插入位置前后相邻两句；原稿没有对应的三方法比较与候选均值分析）
+Overall, the RFMiD results validate the cross-domain generalization capability of the model on a multi-label dataset, while the EDID results further indicate that the proposed method remains effective when a single-label dataset is incorporated into a three-class generalization evaluation framework. Fig. 10 further visualizes the target-domain feature distributions under selected evaluation directions using t-SNE.
+
+原始中文（同一位置）
+总体而言，RFMiD结果验证了模型在多标签数据集上的跨域泛化能力，而EDID结果进一步表明，将单标签数据集纳入三类泛化评价框架时，本文方法仍然有效。图10进一步采用t-SNE展示所选评估方向下的目标域特征分布。
+
+修改后英文（在上述两句之间新增以下两段；上述原句保留）
+The best-observed results in Table 5 show that the proposed method achieves Final scores of 78.98 and 77.49 for monocular and binocular evaluation on On-site, respectively, and 55.35 on EDID, outperforming all comparison methods on these target-domain metrics. The improvements over the strongest DG comparator for each metric are 0.85, 0.94, and 1.47 points, respectively.
+
+Table 6 further shows that the proposed method achieves mean Final scores of 78.11 ± 0.84 and 76.27 ± 1.25 for monocular and binocular evaluation on On-site, respectively, and 54.41 ± 1.06 on EDID, again the highest among the compared methods. On RFMiD, its best-observed result and candidate mean both exceed those of ResNet50, MixStyle, and RSC, with FACT attaining the highest values in this direction. Together, the two tables demonstrate the recognition advantage of the proposed method in eight-class ODIR generalization and shared-class cross-dataset evaluation on EDID through both its best-observed performance and its average performance across candidate checkpoints.
+
+修改后中文（在上述两句之间新增以下两段；上述原句保留）
+表5的最佳观测结果显示，本文方法在On-site单眼和双眼评价中的Final分别达到78.98和77.49，在EDID上达到55.35，在这三个目标域指标上均高于所有对照方法。相较于各指标上表现最好的域泛化对照，分别提高0.85、0.94和1.47分。
+
+表6进一步显示，本文方法在On-site单眼和双眼评价中的Final均值分别为78.11±0.84和76.27±1.25，在EDID上为54.41±1.06，同样为比较方法中的最高值。在RFMiD上，本文方法的最佳结果与候选均值均高于ResNet50、MixStyle和RSC，该方向的最高结果由FACT取得。两张表分别从最佳观测表现和候选平均表现，共同体现了本文方法在八类ODIR泛化评估及EDID共有类别跨数据集评估中的识别优势。
+
+衔接顺序：已有On-site及RFMiD/EDID基线分析 → 原Overall总结句 → 新增表5最佳结果比较 → 新增表6均值±SD比较及结论 → 原图10 t-SNE分析。
+数值与结论核对：沿用comparison_top5.csv；表5三项目标指标相对于最强DG对照的增量按显示值计算为78.98−78.13=0.85、77.49−76.55=0.94、55.35−53.88=1.47分。表6上述三项均值中Ours最高。RFMiD目标最佳值与均值均FACT最高，Ours均高于ResNet50、MixStyle、RSC。保留全部真实比较范围，不引申所有方向最佳、候选SD最小或五次独立训练统计。
+
+三、两项配置名称核准（与上述论证修改分开审核）
+
+【附项A：基线分类损失名称BCE→ASL——已通过，已落实】
+
+审核状态：用户于2026-11-13明确“附项A按这个版本保留”；下方中英文原样保留，现已写入论文。
+
+位置：第4.2节基线实现段中的损失句，04_experiments_trans.tex第41行。
+修改原因：原文将基线损失写为standard BCE。核对三方向Base/Ours的六份保存配置、对应运行命令及当前训练入口，配置均为gamma_pos=0、gamma_neg=2、loss_clip=0，分类监督调用AsymmetricLossOptimized，基线单分支也沿用同一criterion；其正负聚焦设置对应ASL。此项将论文名称及参数说明与现有实验依据对齐，仅替换原损失句，不改损失实现、方法公式或结果。
+对应回复稿：（4）公共训练设置与多标签监督的任务适配。附项A使基线分类监督的表述与现有实验配置一致，并与新增DG对照的分类监督设置衔接；当前第5项仅概述多标签监督适配，未将其误记为已明确写出ASL。此处不把ASL作为新的方法贡献，也不将各方法完整训练目标写成相同。
+保留范围：分类头、单眼输入、Sigmoid及双眼合并段全部保留；不将ASL说明扩写成新的方法贡献。旧权重训练时完整源码快照未在本轮重新鉴定，证据为已保存配置、运行命令及对应训练入口，需作为独立核准项审核。
+
+核对来源（2026-11-13）：六份config.json分别位于lib/output_check_train_aug/{offset_base_best,offset_total_best}/、lib/output_check_train_odir2riadd_3_3/{offset_base,offset_total}/、lib/output_check_train_odir2edid_3_3/{offset_base,offset_total}/。相应logger/log.txt记录前两组调用main_mlc.py、后四组调用main_mlc3_3.py；当前损失构造位置分别为469—475、484—490行，单分支训练也使用该criterion。lib/models/aslloss.py的gamma_neg/gamma_pos聚焦及clip>0条件与参数相符；九份DG正式配置均为ASL、gamma_pos=0/gamma_neg=2/clip=0。当前aux将_Ref213949927编号为[17]，沿用已有文献，不新增引用条目。依据范围为保存配置/日志及当前对应实现，未声称完成历史完整源码快照复原。
+
+原始英文
+The loss function is standard binary cross entropy (BCE).
+
+原始中文
+损失函数采用标准二元交叉熵（BCE）。
+
+修改后英文
+Classification supervision uses Asymmetric Loss (ASL) [17], with positive and negative focusing parameters of 0 and 2, respectively, and probability clipping disabled.
+
+修改后中文
+分类监督采用非对称损失（ASL）［17］，正、负样本聚焦参数分别为0和2，并关闭概率裁剪。
+
+【附项B：优化器名称Adam→AdamW——已通过，已落实】
+
+审核状态：用户于2026-11-13确认“附项B按这个版本保留”，并授权集中落实已通过修改。
+
+位置：第4.2节公共训练配置段，04_experiments_trans.tex第43行首个优化器句。
+修改原因：原文写Adam，但三方向Base/Ours六份保存配置的optim均为AdamW，当前对应训练入口按该参数构建AdamW；新增MixStyle/FACT/RSC九份配置及其训练入口也均采用AdamW。将名称与已有实验依据对齐，仅将原句的Adam替换为AdamW，保留初始学习率和后续设置说明。
+对应回复稿：（4）新增泛化方法沿用公共训练设置。附项B使第4.2节对公共优化器的描述与已有实验配置一致，为比较设置提供准确说明；属于实验设置名称校正。
+保留范围：初始/峰值学习率、OneCycleLR安排、50轮、批量32、448输入、阈值及训练硬件等后续内容不改。
+
+核对来源（2026-11-13）：六份Base/Ours配置路径与附项A相同，均optim=AdamW、lr=1e-5、weight_decay=0.002；当前lib/main_mlc.py第479—487行、lib/main_mlc3_3.py第494—502行在该配置下调用torch.optim.AdamW。九份DG正式配置的optimizer.name均为AdamW，lib/dg_baselines/runner.py第271行、rsc_runner.py第88行直接构建AdamW。本项只核准优化器名称，不将其表述为更换优化算法或重跑实验；其他调度文字不在本项展开。
+
+原始英文
+Adam is used as the optimizer, with an initial learning rate of 4 × 10⁻⁷.
+
+原始中文
+采用Adam优化器，初始学习率为4×10⁻⁷。
+
+修改后英文
+AdamW is used as the optimizer, with an initial learning rate of 4 × 10⁻⁷.
+
+修改后中文
+采用AdamW优化器，初始学习率为4×10⁻⁷。
+
+四、审核与落实说明
+
+第1—8及附A/B的修改后文本均已按用户授权写入当前论文，正文措辞沿用已通过版本；仅作LaTeX引用、黄色高亮和数学符号适配。各项“原始英文/中文”保留实施前内容，以便逐项对照；文中的历史位置以文首落实位置为准。
+原第4.3节、消融、基线比较、EDID分项指标、t-SNE及隐私内容保持；原有黄色高亮保留。第4章非本点编辑部分经反向替换核验与实施前逐字一致，其他50个受保护源文件/图片/已有回复/实验资料哈希不变。
+服务器高亮和清洁模式的无PDF输出编译检查均通过，正式PDF及内置预览状态另见文首说明。未进行新实验、Git提交推送或Mac同步；已通过中文回复正文尚未改写。
