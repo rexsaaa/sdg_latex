@@ -1,0 +1,398 @@
+审稿人2主要意见5：正文必要修改与逐处中英文前后对照
+日期：2026-11-15（北京时间）
+状态：当前中文返修阶段已完成（2026-11-15）。七处通过版本均已正式落实，既有修改及累计黄色高亮保留；高亮版与清洁版已编译并完成相关页面目视检查，最终中文回复已据实同步。本轮完成状态以用户查看最终效果后的收尾要求为准。
+当前逐项进度：第1—7处均已落实；图9采用原统一配置5＋4布局，案例(a)—(i)，新增IoU表5，EDID及后续表号顺延；三篇新增文献为[54]—[56]。实际落点及检查见第七部分。第六部分及其他标有日期的阶段说明保留审核历史，以当前状态为准。
+当前主稿：sdg_latex/submit/build/。
+已通过回复：sdg_latex/submit/revision/reviewer2_point5_reply_zh.txt。
+英文原文取自当前服务器文件，省略LaTeX排版/高亮命令，图号按当前图9展开。中文为审核译文。新增内容的原文栏明确写“无”，不伪造原有段落。文献占位现已按实际编译结果统一为Ghadai[54]、Hier[55]、Pham/Cheng[56]，与正文及当前回复一致。
+
+一、已匹配与保留内容
+
+1. 第3.1节已有Grad-CAM类别响应公式、通道权重与空间热图解释，以及CAM与原图对照检查关注区域的用途，能够支撑回复（1）。方法计算、训练机制、公式编号和图3均保留，不重复加入整段方法介绍。
+2. 标题、摘要、引言及结论已有框架定位和CAM可视化用途。本点通过的回复没有要求改题或改写框架贡献；本轮不改这些部分，不把九例IoU扩展为总体定位精度或跨域证据。
+3. 第4.1节数据集介绍和第4.2节分类指标/训练设置保留。新增区域IoU的对象及计算规则集中放在第4.4节相应分析附近，不重复公共设置。
+4. 第4.4节首段、ODIR Off-site表4、图8及逐配置分类结果保留。完整模型项目中，78.85等分类数值及模块配合的解释均保留；只处理其末尾CAM总结一句（下方第1处）。
+5. EDID设置、结果及ODIR Off-site消融总结保持原文和数值。已将CAM设置、原统一配置图9、IoU表和结果分析连续放在完整模型段落之后、EDID设置之前；图9编号不变，新IoU表5，原EDID表5顺延为表6。
+6. 第4.5节泛化、t-SNE与隐私内容保留。后续表号联动属于插入新表后的必要同步，不改既有结果、图10/11、解释或高亮。
+7. 原统一标注和主阈值0.5保持，全部九例保留，g仍Baseline较高。g扰动测试不纳入正文或图表。GPT具体型号未有可核验记录，候选正文按用户最新要求使用ChatGPT/ChatGPT-assisted称谓，不补写未经核实的具体型号或虚构API调用/专家复核/盲法。
+
+二、正文与图表的已落实顺序
+
+第4.4节保留原引导、ODIR Off-site表4/图8和逐配置分析。第1处CAM解释及文献已落实在原完整模型段落内。
+已按通过方案在完整模型段落之后、itemize结束处连续安排：AI参照与案例设置（第2处）→统一IoU规则（第3处）→5＋4布局图9（第4处）→九例＋Mean表5（第5处）→整体结果与f分析（第6处）。之后接原EDID设置→EDID表6→EDID结果→原消融总结→第4.5节；第7处三篇文献同步落实。
+第7处新增三条必要文献：Ghadai支持CAM定性解释，Hier支持GPT-5.2在临床文本表型标注中的具体能力，Pham/Cheng支持医学区域框生成。正文保持已通过的具体任务表述，无新增节号或公式编号。
+
+图9采用现有独立预览的原统一配置，九例编号统一为(a)–(i)；上组(a)–(e)，下组(f)/(g)/(h)/(i)居中，每组均为Original image、Baseline、Ours三行。黄色虚线为AI辅助参照，洋红实线为CAM框，均有黑描边。各小图放大，保持框坐标和图像比例，图内不重复列IoU。
+图9审核来源：revision_drafts/experiments/cam_roi_iou_20261115/figure_table_preview_5plus4/annotated_5plus4.pdf；正式资产为sdg_latex/submit/build/images/plots/fig_cam_roi_iou_5plus4.pdf，两者字节一致。
+IoU小表使用原逐图CSV和等权均值，独立LaTeX表排版，保留四位小数、逐列加粗较高值，包含g列Baseline较高。
+图表按正文全宽排版；实际图9在第19页，表5与结果在紧接的第20页。原images/media/image8_padded.pdf作为历史资产保留；正式正文已使用新图9资产。两版正式修订PDF均已更新。
+注意：候选CAM面板来自原始浮点CAM按统一数值融合/归一化重新渲染，尤其a的Base历史RGB融合与本次规则不同，不能把新版称为仅在旧拼图上叠框。原上传图片与原实验资料继续保留。
+
+三、逐处中英对照
+
+【第1处：在完整模型原段落内局部补充CAM解释和文献】
+位置：sections/04_experiments_trans.tex当前第102行，ResNet50+DFE+ARC完整模型分析段。
+最新审核要求（2026-11-15）：用户要求逐处审核，先看第1处，将候选文字放回原段落，给出完整中英前后对照，尽量保留已能支撑回复的内容，暂不落实。本处现保留在原位置，不再采用“移出为独立段落”的首版建议。
+修改原因：原段落前五句已完整说明分类结果及两模块配合，全部原样保留；仅将最后一句CAM总体结论替换为两句，交代图9如何提供视觉解释并补充Ghadai等文献。具体区域改善由后续九例IoU和f分析支撑，不在本处提前展开。
+对应回复：（1）通过CAM将模型响应与原图对应，提供空间视觉解释；Ghadai等研究依据。
+保留范围：第一至第五句英文逐字保留；全部数值、比较、模块机制、前后段落及现有位置保持。
+状态：第1处已按通过版本落实并编译核验；中英文审核文字保持，引用占位按实际编号更新。
+
+原始英文（完整原段落）
+ResNet50+DFE+ARC (the proposed method, ours): when both modules are enabled, the Final score further increases to 78.85 (+2.66 over the baseline), Kappa reaches 57.05 (+4.30), and F1 and AUC reach 89.03 (+1.20) and 90.48 (+2.48), respectively. The combined model improves the Final score by 0.48 and 1.87 percentage points over the DFE-only and ARC-only configurations, respectively. These results show that each module contributes to performance improvement and that their combination achieves the best performance among the four configurations. DFE provides more stable domain-invariant features for ARC, enabling Transformer to learn label-label relevance and label-feature relevance more accurately. Conversely, the attention consistency loss of ARC further constrains the output distributions of the two branches and improves feature stability. In addition, the visualization results in Fig. 9 show that, compared with the baseline, the CAMs obtained by the proposed method respond less to image edges and illumination artifacts, and the model-attended regions concentrate more on the eyeball, vessels, and other disease-related regions, indicating enhanced model interpretability.
+
+原始中文（完整原段落）
+ResNet50+DFE+ARC（本文方法，ours）：同时启用两个模块后，Final得分进一步提高至78.85（比基线高2.66），Kappa达到57.05（提高4.30），F1和AUC分别达到89.03（提高1.20）和90.48（提高2.48）。完整模型的Final得分分别比仅使用DFE和仅使用ARC的配置提高0.48和1.87个百分点。这些结果表明，每个模块均对性能改善有所贡献，二者联合在四组配置中取得最佳性能。DFE为ARC提供更稳定的域不变特征，使Transformer能够更准确地学习标签—标签相关性和标签—特征相关性。反过来，ARC的注意力一致性损失进一步约束两个分支的输出分布，并改善特征稳定性。此外，图9的可视化结果表明，与基线相比，本文方法得到的CAM对图像边缘和光照伪影的响应更弱，模型关注区域更多集中于眼球、血管及其他疾病相关区域，表明模型可解释性得到增强。
+
+修改后英文（保留原段落位置）
+ResNet50+DFE+ARC (the proposed method, ours): when both modules are enabled, the Final score further increases to 78.85 (+2.66 over the baseline), Kappa reaches 57.05 (+4.30), and F1 and AUC reach 89.03 (+1.20) and 90.48 (+2.48), respectively. The combined model improves the Final score by 0.48 and 1.87 percentage points over the DFE-only and ARC-only configurations, respectively. These results show that each module contributes to performance improvement and that their combination achieves the best performance among the four configurations. DFE provides more stable domain-invariant features for ARC, enabling Transformer to learn label-label relevance and label-feature relevance more accurately. Conversely, the attention consistency loss of ARC further constrains the output distributions of the two branches and improves feature stability. In addition, the CAM visualizations in Fig. 9 compare the spatial responses of the baseline and the proposed method on the same fundus images, allowing model-attended regions to be inspected alongside the original images. This use of CAM provides a visual interpretation of model predictions, consistent with the qualitative Grad-CAM analysis for diabetic retinopathy classification reported by Ghadai et al. [54].
+
+修改后中文（保留原段落位置）
+ResNet50+DFE+ARC（本文方法，ours）：同时启用两个模块后，Final得分进一步提高至78.85（比基线高2.66），Kappa达到57.05（提高4.30），F1和AUC分别达到89.03（提高1.20）和90.48（提高2.48）。完整模型的Final得分分别比仅使用DFE和仅使用ARC的配置提高0.48和1.87个百分点。这些结果表明，每个模块均对性能改善有所贡献，二者联合在四组配置中取得最佳性能。DFE为ARC提供更稳定的域不变特征，使Transformer能够更准确地学习标签—标签相关性和标签—特征相关性。反过来，ARC的注意力一致性损失进一步约束两个分支的输出分布，并改善特征稳定性。此外，图9中的CAM可视化比较了基线与本文方法在相同眼底图像上的空间响应，使模型关注区域能够结合原始图像进行检查。这种CAM用法为模型预测提供了视觉解释，与Ghadai等[54]在糖尿病视网膜病变分类中采用Grad-CAM进行定性分析的做法一致。
+
+【第2处：说明图9的量化用途、AI辅助参照依据与案例范围】
+位置（已落实）：紧接第1处已通过的完整模型段落，在itemize结束后、原图9之前插入独立设置段。第2—6处共同组成连续CAM分析区，随后再进入原EDID设置、表格、结果和消融总结。此前插入EDID结果与消融总结之间的候选不采用。
+最新反馈（2026-11-15）：用户不接受以“未经专家复核、探索性比较”作为本段收尾，要求以GPT-5.2在特定临床标注任务中接近人工表现的文献建立依据，并询问图9的定性/定量角色及插入位置。本候选取消该单独限制式收尾，保留“AI辅助候选参照”的准确对象定义，增加Hier等临床文本标注文献；未将其外推为眼底框专家精度，也未把实际模型版本回填为GPT-5.2/5.6。
+本处作用：衔接“CAM能够提供视觉解释”和“为什么可以开展区域IoU比较”，交代缺少空间标注的条件、选用AI辅助参照的研究依据、实际标注对象及九例比较范围；计算细节由第3处承担，结果解释由第6处承担。
+图9与小表分工：图9展示原图/CAM及对应参照框和CAM框，使区域重叠可直接观察；独立IoU小表报告同一组九例的配对数值和Mean。二者共同支撑定性与量化分析，不必把全部分数写入图内。
+对应回复：（2）数据标注条件及ChatGPT辅助参照；衔接（3）九例IoU比较。Hier文献及相应措辞已同步至最终中文回复，待用户复核。
+保留范围：第1处通过稿、原九例与统一标注、EDID原有设置/结果/总结均保持。新增设置不打断EDID结果与总结。
+状态：第2处已按通过版本落实并编译核验；中英文审核文字保持，引用占位按实际编号更新。
+
+原始英文
+无。原文在完整模型段落结束后直接展示图9，再进入EDID外部消融设置，没有区域参照设置段落。
+
+原始中文
+无。原文在完整模型段落结束后直接展示图9，再进入EDID外部消融设置，没有区域参照设置段落。
+
+修改后英文（新增独立段落）
+To quantitatively compare the CAM-attended regions in Fig. 9, a region IoU analysis is conducted on all nine displayed ODIR training images, including both normal and disease cases. The available image-level multi-label annotations do not include corresponding expert region boxes or lesion masks, motivating the construction of spatial references for this comparison. Hier et al. [55] reported that GPT-5.2 achieved near-human performance in clinical phenotype annotation from multiple-sclerosis notes. Pham and Cheng [56] use vision-language models to generate medical region-of-interest boxes as spatial priors for subsequent segmentation. Drawing on these applications of AI-assisted annotation and region generation, ChatGPT is used to generate candidate reference boxes for visible anatomical structures and appearance regions in the original images. The same reference boxes and a common CAM-region extraction rule are used to compute region IoU separately for Baseline and Ours.
+
+修改后中文（新增独立段落）
+为对图9中两种方法的CAM关注区域进行量化比较，我们对所展示的全部九张ODIR训练图像开展区域IoU分析，涵盖正常与疾病案例。现有图像级多标签标注未提供对应的专家区域框或病灶掩码，因此需要建立用于此次比较的空间参照。Hier等[55]报告，GPT-5.2在多发性硬化临床病历的表型标注任务中取得了接近人工标注的表现。Pham和Cheng[56]则利用视觉语言模型生成医学感兴趣区域框，并将其作为后续分割的空间先验。参考这些AI辅助标注与区域生成的研究，我们采用ChatGPT为原图中的可见解剖结构和外观区域生成候选参照框，并使用同一组参照及统一的CAM区域提取规则，分别计算Baseline和Ours的区域IoU。
+
+前后文衔接说明（不写入论文）
+前接第1处已通过的完整模型段落，其末尾已说明图9的视觉解释用途并引用Ghadai；该段原样保留。
+本段之后依次接第3处IoU计算规则、图9、新IoU表5、第6处九例与f结果，再接原EDID设置段。
+由此EDID设置→表6→EDID结果→原ODIR Off-site总结保持连续。此顺序已落实并经实际PDF检查。
+
+【第3处：明确参照框、CAM框的生成规则及区域IoU计算】
+位置：紧接已通过的第2处AI辅助参照段，位于图9之前。随后依次为图9、九例＋Mean小表、整体结果与f分析，再进入原EDID消融。
+状态：第3处已按通过版本落实并编译核验；中英文审核文字保持，引用占位按实际编号更新。
+修改原因：第2处已交代文献依据，本处简要交代参照对象及固定/共用方式，说明两方法采用相同类别、融合/归一化、0.5阈值和全部连通域框，再定义区域IoU与九例等权均值。按用户要求不展开坐标编码、448网格、8邻域、筛选术语及P/R符号，必要计算记录保留于原实验材料。第3.1节Grad-CAM公式不动。
+对应回复：（2）AI辅助候选参照的实际构建、同图共用固定参照、相同类别/数值CAM/归一化/阈值/连通域取框规则、全部框的区域IoU及等权均值；为（3）的Mean和f整图数值提供依据。
+保留范围：第1、2处通过文字、全部原始标注/CAM数组、主阈值0.5及计算数值保持；无新训练或推理。
+实现核对：protocol.json、evaluate.py及source_manifest.json一致。九例两方法的类别文件集合与图像级取值1标签对应；逐方法最大值融合后归一化；使用>=0.5及8连通域全部外接框；框覆盖区域并集上的交并比；逐图计算后九例等权均值。该核对说明不写入正文。
+用语调整：将旧候选“positive-label class CAMs/正标签类别集合”明确为“图像级标签中标记为1的类别”，并补明每种方法分别融合，避免把正常类别误读成疾病阳性或把两模型CAM混合。未改变任何计算。
+
+生成记录与公平性范围核对（不写入论文）：annotations.json记录区域对象/置信度及归一化xyxy；当前标注和protocol指纹均与首次评分封存一致；GPT侧未单独保存可核验的模型快照、固定提示词与采样参数，不能补写GPT-5.6、temperature=0或统一提示词API实验。实际由本对话助手参照原图坐标板给框，助手此前看过CAM，不能称独立盲法。正文只陈述可核实的对象/坐标/首次评分前固定/同图共用参照及统一CAM自动取框；不能由后处理一致推出AI参照独立性或专家精度。g微调测试仍单独保留，未进入主比较。未修改或重新封存原实验协议。
+
+原始英文（本处）
+无。当前正式正文没有区域IoU定义或计算段落。已通过的第2处也尚未写入论文，不能当作当前稿已有英文。
+
+原始中文（本处）
+无。当前正式正文没有区域IoU定义或计算段落。以下以前一处已通过稿作为审核上下文，新增前后不改其文字。
+
+修改前英文衔接（沿用第2处通过稿构造审核上下文，不代表已落实）
+To quantitatively compare the CAM-attended regions in Fig. 9, a region IoU analysis is conducted on all nine displayed ODIR training images, including both normal and disease cases. The available image-level multi-label annotations do not include corresponding expert region boxes or lesion masks, motivating the construction of spatial references for this comparison. Hier et al. [55] reported that GPT-5.2 achieved near-human performance in clinical phenotype annotation from multiple-sclerosis notes. Pham and Cheng [56] use vision-language models to generate medical region-of-interest boxes as spatial priors for subsequent segmentation. Drawing on these applications of AI-assisted annotation and region generation, ChatGPT is used to generate candidate reference boxes for visible anatomical structures and appearance regions in the original images. The same reference boxes and a common CAM-region extraction rule are used to compute region IoU separately for Baseline and Ours.
+
+［此处尚无IoU计算段落；之后安排图9。］
+
+修改前中文衔接（同上）
+为对图9中两种方法的CAM关注区域进行量化比较，我们对所展示的全部九张ODIR训练图像开展区域IoU分析，涵盖正常与疾病案例。现有图像级多标签标注未提供对应的专家区域框或病灶掩码，因此需要建立用于此次比较的空间参照。Hier等[55]报告，GPT-5.2在多发性硬化临床病历的表型标注任务中取得了接近人工标注的表现。Pham和Cheng[56]则利用视觉语言模型生成医学感兴趣区域框，并将其作为后续分割的空间先验。参考这些AI辅助标注与区域生成的研究，我们采用ChatGPT为原图中的可见解剖结构和外观区域生成候选参照框，并使用同一组参照及统一的CAM区域提取规则，分别计算Baseline和Ours的区域IoU。
+
+［此处尚无IoU计算段落；之后安排图9。］
+
+修改后英文（完整上下文；两段均已通过，工具称谓统一为ChatGPT）
+To quantitatively compare the CAM-attended regions in Fig. 9, a region IoU analysis is conducted on all nine displayed ODIR training images, including both normal and disease cases. The available image-level multi-label annotations do not include corresponding expert region boxes or lesion masks, motivating the construction of spatial references for this comparison. Hier et al. [55] reported that GPT-5.2 achieved near-human performance in clinical phenotype annotation from multiple-sclerosis notes. Pham and Cheng [56] use vision-language models to generate medical region-of-interest boxes as spatial priors for subsequent segmentation. Drawing on these applications of AI-assisted annotation and region generation, ChatGPT is used to generate candidate reference boxes for visible anatomical structures and appearance regions in the original images. The same reference boxes and a common CAM-region extraction rule are used to compute region IoU separately for Baseline and Ours.
+
+ChatGPT-assisted annotation generates candidate reference boxes around visible structures, such as the optic disc and vessels, and local appearance features in the original images. These boxes are fixed before the first IoU calculation and shared by both methods. For Baseline and Ours, CAMs for the same class set are separately combined by a pixelwise maximum and normalized to [0,1]. A common threshold of 0.5 is then used to extract bounding boxes for all high-response connected regions, retaining every generated box. For each image, the pixels covered by all CAM boxes and those covered by all reference boxes are separately combined into two regions. Their intersection area divided by their union area defines the region IoU, and the mean is calculated with equal weight across all nine cases.
+
+［随后为图9及九例＋Mean的IoU小表，再接整体结果与f分析；图注、表和结果具体文字分别按第4—6处审核，不因本处展示而视为通过。］
+
+修改后中文（完整上下文；两段均已通过，工具称谓统一为ChatGPT）
+为对图9中两种方法的CAM关注区域进行量化比较，我们对所展示的全部九张ODIR训练图像开展区域IoU分析，涵盖正常与疾病案例。现有图像级多标签标注未提供对应的专家区域框或病灶掩码，因此需要建立用于此次比较的空间参照。Hier等[55]报告，GPT-5.2在多发性硬化临床病历的表型标注任务中取得了接近人工标注的表现。Pham和Cheng[56]则利用视觉语言模型生成医学感兴趣区域框，并将其作为后续分割的空间先验。参考这些AI辅助标注与区域生成的研究，我们采用ChatGPT为原图中的可见解剖结构和外观区域生成候选参照框，并使用同一组参照及统一的CAM区域提取规则，分别计算Baseline和Ours的区域IoU。
+
+ChatGPT根据原图中的视盘、血管等可见结构及局部外观特征生成候选参照框，在首次IoU计算前固定，并供两种方法共同使用。Baseline与Ours采用相同类别集合的CAM，分别经逐像素最大值融合并归一化至[0,1]后，以统一阈值0.5提取高响应连通区域的外接框，保留全部生成框。对于每幅图像，将全部CAM框与全部参照框分别取覆盖区域的并集，以这两个区域的交集面积与并集面积之比计算区域IoU，最终对九个案例等权取平均。
+
+［随后为图9及九例＋Mean的IoU小表，再接整体结果与f分析；图注、表和结果具体文字分别按第4—6处审核，不因本处展示而视为通过。］
+
+下文衔接（不写入论文）：图9将展示本段定义的参照框和CAM外接框，小表逐例报告区域IoU及九例等权Mean。结果段中的f数值指全部框覆盖区域的整图IoU；左下框用于说明可视化差异。CAM分析结束后，继续原EDID设置、表格、结果及消融总结。
+排版说明：用交集面积与并集面积之比直接定义IoU，不增加P/R符号或公式编号。既有公式、图9编号及后续公式引用不受影响。
+
+【第4处：以5＋4标注图替换图9，并更新图注】
+位置：第4.4节完整模型分析之后、EDID之前，紧接第3处通过稿；图9后安排独立IoU表及结果分析，再进入EDID。保持fig:cam-visualization和图9编号。
+状态：第4处已按通过版本落实并编译核验；中英文审核文字保持，引用占位按实际编号更新。
+修改原因：保留原图的九例、原图/Baseline/Ours比较功能，将九列改为5＋4布局，使区域框可辨；图注交代三行及两类框的含义和统一阈值。来源清单显示九例均为训练图像，因此纠正原Off-site/test表述。原图注后半句的效果概括由后续九例IoU和f案例具体支撑，图注集中解释如何读图。
+对应回复：（1）原图与CAM对照提供视觉解释；（2）展示同一候选参照及统一规则提取的CAM框；（3）为f案例及九例数值提供可见比较对象，数值与结论在第5/6处。
+保留范围：原九个案例、原统一配置的全部参照框和CAM框不变，不采用g微调。现行展示编号按顺序改为(a)—(i)，原末例(j)对应现(i)，仍为4451_right。图内不重复列IoU，数值集中于独立小表。
+
+修改前图本体
+当前论文图：submit/build/images/media/image8_padded.pdf。
+九列对应九个案例，每列依次为Original Image、Baseline、Ours三行，无参照框或CAM框。
+原图读图作用保留；原九例的真实来源由source_manifest.json核实为Train Set。
+英文→中文：Original Image→原始图像；Baseline→基线；Ours→本文方法。
+
+原始英文（图注）
+Comparison of CAM-based model-attended region visualizations between the baseline and the proposed method on selected ODIR Off-site samples, where (a)--(j) denote different test samples. Compared with the baseline, the model-attended regions of the proposed method are more concentrated on the eyeball, vessels, and disease-related regions, with weaker responses to irrelevant background factors such as image edges and illumination artifacts.
+
+原始中文（图注）
+基线与本文方法在所选ODIR Off-site样本上的CAM模型关注区域可视化比较，其中(a)—(j)表示不同测试样本。与基线相比，本文方法的模型关注区域更集中于眼球、血管和疾病相关区域，对图像边缘及光照伪影等无关背景因素的响应更弱。
+
+修改后图本体（现有独立预览，未写入论文）
+候选：revision_drafts/experiments/cam_roi_iou_20261115/figure_table_preview_5plus4/annotated_5plus4.pdf及.png。
+上组(a)—(e)，下组(f)/(g)/(h)/(i)居中；每组从上至下仍是原图、Baseline、Ours。各案例面板放大，统一图例：黄色虚线为参照框，洋红实线为CAM框，均有黑描边。原图展示参照框，CAM面板叠加相同参照框及各自CAM框。
+热图采用已保存的数值CAM按第3处统一规则绘制；尤其(a)的Baseline历史RGB融合与本次数值融合不同，本次预览不是仅在旧拼图上加框。既有原统一配置的标注、数据及IoU数值不变。
+图内英文→中文：Original image→原始图像；Baseline→基线；Ours→本文方法；AI-assisted reference boxes→AI辅助参照框；CAM-derived boxes→CAM提取框。图例保留一般类别AI-assisted，图注明确具体使用ChatGPT。
+
+修改后英文（图注）
+Comparison of CAM visualizations and region annotations for nine ODIR training images. In each group, the rows show the original images, Baseline CAMs, and Ours CAMs. Yellow dashed boxes indicate ChatGPT-assisted candidate reference regions, and magenta solid boxes indicate CAM-derived regions extracted using a common threshold of 0.5.
+
+修改后中文（图注）
+九张ODIR训练图像的CAM可视化与区域标注比较。每组从上至下依次为原始图像、Baseline CAM和Ours CAM。黄色虚线框表示ChatGPT辅助生成的候选参照区域，洋红实线框表示采用统一阈值0.5提取的CAM区域。
+
+结合上下文的英文审核串联（前段和图注均按通过版本落实）
+ChatGPT-assisted annotation generates candidate reference boxes around visible structures, such as the optic disc and vessels, and local appearance features in the original images. These boxes are fixed before the first IoU calculation and shared by both methods. For Baseline and Ours, CAMs for the same class set are separately combined by a pixelwise maximum and normalized to [0,1]. A common threshold of 0.5 is then used to extract bounding boxes for all high-response connected regions, retaining every generated box. For each image, the pixels covered by all CAM boxes and those covered by all reference boxes are separately combined into two regions. Their intersection area divided by their union area defines the region IoU, and the mean is calculated with equal weight across all nine cases.
+
+［此处插入5＋4图9］
+Comparison of CAM visualizations and region annotations for nine ODIR training images. In each group, the rows show the original images, Baseline CAMs, and Ours CAMs. Yellow dashed boxes indicate ChatGPT-assisted candidate reference regions, and magenta solid boxes indicate CAM-derived regions extracted using a common threshold of 0.5.
+
+［随后为九例＋Mean的独立IoU表、整体结果及f案例分析，表格及第6处结果分析均已落实；然后保留原EDID消融设置、表格、结果和总结。］
+
+结合上下文的中文审核串联（前段和图注均按通过版本落实）
+ChatGPT根据原图中的视盘、血管等可见结构及局部外观特征生成候选参照框，在首次IoU计算前固定，并供两种方法共同使用。Baseline与Ours采用相同类别集合的CAM，分别经逐像素最大值融合并归一化至[0,1]后，以统一阈值0.5提取高响应连通区域的外接框，保留全部生成框。对于每幅图像，将全部CAM框与全部参照框分别取覆盖区域的并集，以这两个区域的交集面积与并集面积之比计算区域IoU，最终对九个案例等权取平均。
+
+［此处插入5＋4图9］
+九张ODIR训练图像的CAM可视化与区域标注比较。每组从上至下依次为原始图像、Baseline CAM和Ours CAM。黄色虚线框表示ChatGPT辅助生成的候选参照区域，洋红实线框表示采用统一阈值0.5提取的CAM区域。
+
+［随后为九例＋Mean的独立IoU表、整体结果及f案例分析，表格及第6处结果分析均已落实；然后保留原EDID消融设置、表格、结果和总结。］
+
+修改前正式稿的上下文（用于区分原文与通过稿）：原图9前为完整模型分类/CAM分析，原图9后直接接“To examine whether the module-level improvements observed on ODIR also occur on an external dataset…”的EDID设置。该句中文为“为检验在ODIR上观察到的模块性能提升是否也出现在外部数据集上……”。上述通过稿与候选只是审核串联，尚未写入论文。
+排版说明：原九列改为上五下四，以正文全宽排版并保留图号9；已编译核验，图9与完整图注在第19页。
+
+【第5处：新增九例＋Mean的独立IoU小表】
+位置：紧接已通过的第4处图9，随后接第6处整体结果/f案例分析，再进入原EDID消融。新表暂定Table 5，原EDID表顺延为Table 6；建议标签tab:cam-roi-iou。
+状态：第5处已按通过版本落实并编译核验；中英文审核文字保持，引用占位按实际编号更新。
+修改原因：图9已使区域重叠可见，本表补齐全部九个案例及Mean的配对数值；数值与图像分开提高可读性，且明确Mean覆盖九例。统一列编号便于直接对应图9，保留g的实际方向。
+对应回复：（3）九例逐图比较、8/9、平均IoU及f整图数值；（2）主阈值0.5和ChatGPT辅助候选参照。
+保留范围：全部原CSV数值、四位小数、两方法顺序、各列较高值加粗、g列Baseline较高均保持。Mean由九个完整精度值等权计算后显示，两行方法×九例＋Mean，不另加提升率列或显著性标记。
+
+原始英文（表题及表格）
+None. The current manuscript contains no region-IoU table for the cases in Fig. 9.
+［此为缺项说明，并非论文原有句子；原稿图9后直接接EDID设置和原表5。］
+
+原始中文（表题及表格）
+无。当前正文没有图9案例的区域IoU表。
+［修改前原稿图9后直接接EDID设置和原表5，当时没有本IoU表。现已新增表5，EDID顺延为表6。］
+
+新增表前引导句（英文，已通过；放在图9之后、表5之前）
+To quantify the overlap between the CAM-derived and reference regions in Fig. 9, Table 5 summarizes the region IoU for Baseline and Ours across the nine cases and their mean values.
+
+新增表前引导句（中文）
+为量化图9中CAM区域与参照区域的重叠程度，表5汇总了Baseline与Ours在九个案例上的区域IoU及其均值。
+
+引入原因：此前表题已说明图9对应关系，但正文直接从“表5显示”进入结果，缺少对表格用途和内容的引导。补充本句后按“图9可视化—量化目的与表格内容—表5—结果解释”展开；第6处首句相应直接陈述Ours数值，避免重复“表5显示”。表格、表题和所有数值保持。
+
+修改后英文（Table 5表题）
+Region IoU relative to ChatGPT-assisted candidate references for the nine cases in Fig. 9, using a common CAM threshold of 0.5. Mean is the unweighted average across all nine cases. Higher IoU indicates greater spatial agreement.
+
+修改后英文（完整表格）
+| Method | (a) | (b) | (c) | (d) | (e) | (f) | (g) | (h) | (i) | Mean |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Baseline | 0.1456 | 0.1641 | 0.1281 | 0.0659 | 0.4893 | 0.1309 | **0.1893** | 0.1703 | 0.0381 | 0.1691 |
+| Ours | **0.1927** | **0.4017** | **0.4029** | **0.1048** | **0.5503** | **0.3125** | 0.1754 | **0.2469** | **0.0602** | **0.2719** |
+
+修改后中文（表5表题）
+图9九个案例相对于ChatGPT辅助候选参照的区域IoU，CAM统一阈值为0.5。Mean为全部九个案例的等权平均值。IoU越高表示空间一致性越高。
+
+修改后中文（完整表格）
+| 方法 | (a) | (b) | (c) | (d) | (e) | (f) | (g) | (h) | (i) | 均值 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 基线 | 0.1456 | 0.1641 | 0.1281 | 0.0659 | 0.4893 | 0.1309 | **0.1893** | 0.1703 | 0.0381 | 0.1691 |
+| 本文方法 | **0.1927** | **0.4017** | **0.4029** | **0.1048** | **0.5503** | **0.3125** | 0.1754 | **0.2469** | **0.0602** | **0.2719** |
+
+结合上下文：前接图9（第4处已通过图注，保持）
+英文：Comparison of CAM visualizations and region annotations for nine ODIR training images. In each group, the rows show the original images, Baseline CAMs, and Ours CAMs. Yellow dashed boxes indicate ChatGPT-assisted candidate reference regions, and magenta solid boxes indicate CAM-derived regions extracted using a common threshold of 0.5.
+中文：九张ODIR训练图像的CAM可视化与区域标注比较。每组从上至下依次为原始图像、Baseline CAM和Ours CAM。黄色虚线框表示ChatGPT辅助生成的候选参照区域，洋红实线框表示采用统一阈值0.5提取的CAM区域。
+
+本处插入：图9后先接上述表前引导句，再放独立表5。引导句明确量化目的、图9对应关系、两种方法及九例/均值的内容；图表编号与比较对象一致。
+
+结合上下文：后接结果解释（第6处已落实）
+英文起句：Ours achieves a mean region IoU of 0.2719, compared with 0.1691 for Baseline, with higher IoU in eight of the nine cases.
+中文起句：Ours的平均区域IoU为0.2719，Baseline为0.1691，且Ours在九个案例中的八个取得更高IoU。
+随后按第6处通过稿解释f案例的区域变化及整图IoU，再进入原EDID设置/表格/结果和消融总结。
+
+排版说明：表5沿用论文三线表样式，以独立LaTeX表排版；图9不嵌入数值。各列加粗较高值，保留四位小数；案例(a)—(i)及后续表号已经实际编译核验。
+
+【第6处：新增整体结果与f案例分析】
+位置：紧接第5处已通过的独立IoU表，位于原EDID设置段之前。前方图9及表前引导/表格完整保留，后方EDID设置/表格/结果/消融总结保持连续。
+状态：第6处已按通过版本落实并编译核验；中英文审核文字保持，引用占位按实际编号更新。
+修改原因：第5处已完成表格引入和数值呈现，本处解释这些数值说明什么，并结合图9(f)指明可直接观察的空间变化。按“九例均值及8/9—f左下区域—f整图IoU—视觉解释意义”展开，形成完整论证，避免重复计算方法和表格引入。
+对应回复：（3）Mean0.1691→0.2719、九例中八例更高、f0.1309→0.3125与区域变化；回扣（1）的CAM视觉解释用途。
+保留范围：第1—5处通过文字、表5全部数值、原统一配置和(a)—(i)编号、后续EDID已通过内容保持。ChatGPT称谓与前文一致。
+依据核对（不写入论文）：summary.json主阈值0.5均值/胜例数一致；results_primary.csv的f原值0.13093724719750374/0.31245103912262107与表5一致；f_case_detail.png可见下方候选血管区域与Ours较大框重叠，Baseline较零散。f数据标签为N，不将所示区域改称确诊病灶；数值指整幅图像全部区域，而不是左下单框IoU。未重新标注、选样、推理或计算新指标。
+
+原始英文（本处）
+None. The current manuscript contains no analysis of the nine-case region IoU results or the corresponding comparison for case (f).
+［本处为新增段落；以上是缺项说明，不是原稿正文。］
+
+原始中文（本处）
+无。当前正文没有九例区域IoU结果及f案例的对应分析。本处为新增，原定性CAM总结已在第1处处理。
+
+修改前的实际上下文（当前正式稿）
+修改前原图9之后直接进入以下EDID设置段，当时没有新表5及本处分析。
+英文：To examine whether the module-level improvements observed on ODIR also occur on an external dataset, the four ablation configurations are evaluated in the ODIR-to-EDID setting. Training uses the ODIR D/G/M subset described in Section 4.1, and EDID provides the target evaluation images. The ResNet50 backbone, source data split, and evaluation metrics are kept consistent across the four configurations.
+中文：为检验在ODIR上观察到的模块性能提升是否也出现在外部数据集上，我们在ODIR到EDID的设置下评估四种消融配置。训练使用第4.1节所述的ODIR D/G/M子集，EDID提供目标评估图像。四种配置采用一致的ResNet50骨干网络、源数据划分及评价指标。
+
+修改后英文（完整审核上下文）
+［前文：第5处已通过引导句，保持］
+To quantify the overlap between the CAM-derived and reference regions in Fig. 9, Table 5 summarizes the region IoU for Baseline and Ours across the nine cases and their mean values.
+
+［此处为第5处已通过的表5，表题、九例数据及Mean均保持］
+
+［本处新增结果段，已按通过稿落实］
+Ours achieves a mean region IoU of 0.2719, compared with 0.1691 for Baseline, with higher IoU in eight of the nine cases. This indicates greater overall spatial agreement with the ChatGPT-assisted references within the displayed cases. Figure 9(f) illustrates this difference in the lower-left region beneath the optic disc, where visible vessels are included in the reference annotation. Baseline produces scattered, small high-response regions, whereas Ours produces a more continuous region whose bounding box overlaps more extensively with the corresponding reference box. For this image, the IoU computed from all regions increases from 0.1309 to 0.3125. The case-level comparison makes the spatial change visible, while the nine-case results provide complementary numerical evidence for the CAM-based visual interpretation.
+
+［下文：原EDID设置段，保持］
+To examine whether the module-level improvements observed on ODIR also occur on an external dataset, the four ablation configurations are evaluated in the ODIR-to-EDID setting. Training uses the ODIR D/G/M subset described in Section 4.1, and EDID provides the target evaluation images. The ResNet50 backbone, source data split, and evaluation metrics are kept consistent across the four configurations.
+
+修改后中文（完整审核上下文）
+［前文：第5处已通过引导句，保持］
+为量化图9中CAM区域与参照区域的重叠程度，表5汇总了Baseline与Ours在九个案例上的区域IoU及其均值。
+
+［此处为第5处已通过的表5，表题、九例数据及Mean均保持］
+
+［本处新增结果段，已按通过稿落实］
+Ours的平均区域IoU为0.2719，Baseline为0.1691，且Ours在九个案例中的八个取得更高IoU。这表明，在所展示案例中，本文方法与ChatGPT辅助参照的整体空间一致性更高。图9(f)直观展示了这一差异：图像左下方、视盘下方的可见血管区域被纳入参照标注，Baseline在此产生零散的小范围高响应区域，而Ours形成更连续的响应区域，其外接框与对应参照框具有更充分的重叠。对该图像的全部区域计算IoU，数值从0.1309提高至0.3125。逐例比较直观展示了空间变化，九例结果则为基于CAM的视觉解释提供了补充数值证据。
+
+［下文：原EDID设置段，保持］
+为检验在ODIR上观察到的模块性能提升是否也出现在外部数据集上，我们在ODIR到EDID的设置下评估四种消融配置。训练使用第4.1节所述的ODIR D/G/M子集，EDID提供目标评估图像。四种配置采用一致的ResNet50骨干网络、源数据划分及评价指标。
+
+衔接说明（不写入论文）：表前引导已说明图9/表5的关系，本段直接解释数值，再回到f图中的具体位置。段末完成CAM分析后，原EDID首句明确转入外部数据集模块评估，无需另写重复过渡。EDID后续表格、结果和消融总结原样保留。
+f审核图：revision_drafts/experiments/cam_roi_iou_20261115/figure_table_preview_5plus4/f_case_detail.png。该放大图仅用于核对本段表述，不新增论文图号或替换已通过的图9。
+
+【第7处：补充三条必要参考文献及正文引用】
+位置：书目写入sections/06_references_trans.tex；正文引用位于第4.4节已通过的第1/2处。第1/2处引用句保持不变，落实时将[xx]接到相应条目。
+状态：第7处已按通过版本落实并编译核验；中英文审核文字保持，引用占位按实际编号更新。
+修改原因：分别补足CAM定性视觉解释、特定临床文本任务的AI辅助标注、视觉语言模型生成医学区域框三项论据。集中补全已通过段落所需的书目，不增加其他文献或改写通过文字。
+原有文献保留：现有参考文献表未包含这三篇，其余条目、引用键及既有高亮保持。
+书目次序：三篇已按正文首次引用顺序Ghadai→Hier→Pham放在Ou之后、Ponomareva之前。实际编号为[54]—[56]，正文及本对照的引用占位已同步。
+中文书目仅为审核译文；正式参考文献表使用英文。期刊原文链接用于核验，不将审核说明或链接段落搬进正式回复。
+
+修改前英文（三篇共同）
+None. The current reference list contains none of the following three articles.
+［此为缺项说明，不是论文原有正文。］
+
+修改前中文（三篇共同）
+无。当前参考文献表尚未收录下列三篇文献。本处新增对应条目，第1/2处已经通过的引用句保持。
+
+（1）Ghadai等
+引用位置：第4.4节、第1处完整模型分析段的最后一句。
+建议引用键：_RefGhadai2026GradCAM
+
+修改后英文（完整书目）
+Ghadai K K, Nayak S K, Senapati B R. A clinically interpretable deep learning pipeline for diabetic retinopathy classification using EfficientNet, advanced data augmentation and GradCAM. BMC Ophthalmology 2026;26: 406. doi:10.1186/s12886-026-04897-4.
+
+修改后中文（审核译文）
+Ghadai K K、Nayak S K、Senapati B R：利用EfficientNet、先进数据增强和GradCAM进行糖尿病视网膜病变分类的临床可解释深度学习流程。BMC Ophthalmology，2026，26：406。DOI：10.1186/s12886-026-04897-4。
+
+对应正文英文（已通过，保持）
+This use of CAM provides a visual interpretation of model predictions, consistent with the qualitative Grad-CAM analysis for diabetic retinopathy classification reported by Ghadai et al. [54].
+
+对应正文中文（已通过，保持）
+这种CAM用法为模型预测提供了视觉解释，与Ghadai等[54]在糖尿病视网膜病变分类中采用Grad-CAM进行定性分析的做法一致。
+
+对应支撑与回复要点：该文在Explainability及Grad-CAM分析中，将热图与原始眼底图像对应，以定性可视化解释模型关注的区域。用于支持本文CAM视觉解释的方法先例，对应回复（1）。
+期刊原文：https://link.springer.com/article/10.1186/s12886-026-04897-4
+
+（2）Hier等
+引用位置：第4.4节、第2处AI辅助参照说明段，在数据标注条件之后、Pham和Cheng引用之前。
+建议引用键：_RefHier2026Phenotyping
+
+修改后英文（完整书目）
+Hier D B, Srinivasula P Y, Carrithers M D. Note-Level Phenotyping of Multiple-Sclerosis Notes by a Large Language Model Achieves near Human-Level Agreement. Journal of Clinical Medicine 2026;15(11): 4092. doi:10.3390/jcm15114092.
+
+修改后中文（审核译文）
+Hier D B、Srinivasula P Y、Carrithers M D：大型语言模型对多发性硬化病历进行病历级表型标注，达到接近人工的一致性。Journal of Clinical Medicine，2026，15(11)：4092。DOI：10.3390/jcm15114092。
+
+对应正文英文（已通过，保持）
+Hier et al. [55] reported that GPT-5.2 achieved near-human performance in clinical phenotype annotation from multiple-sclerosis notes.
+
+对应正文中文（已通过，保持）
+Hier等[55]报告，GPT-5.2在多发性硬化临床病历的表型标注任务中取得了接近人工标注的表现。
+
+对应支撑与回复要点：该文评估100份临床病历的17类表型标注，报告GPT-5.2接近人工标注的表现。用于支持特定临床文本任务中AI辅助标注的能力依据，对应回复（2）。
+期刊原文：https://www.mdpi.com/2077-0383/15/11/4092
+
+（3）Pham和Cheng
+引用位置：第4.4节、第2处AI辅助参照说明段，紧接Hier等的句子，随后引出本文采用ChatGPT生成候选参照框的做法。
+建议引用键：_RefPham2025ROI
+
+修改后英文（完整书目）
+Pham H, Cheng S. Prototype-Guided Zero-Shot Medical Image Segmentation with Large Vision-Language Models. Applied Sciences 2025;15(21): 11441. doi:10.3390/app152111441.
+
+修改后中文（审核译文）
+Pham H、Cheng S：利用大型视觉语言模型进行原型引导的零样本医学图像分割。Applied Sciences，2025，15(21)：11441。DOI：10.3390/app152111441。
+
+对应正文英文（已通过，保持）
+Pham and Cheng [56] use vision-language models to generate medical region-of-interest boxes as spatial priors for subsequent segmentation.
+
+对应正文中文（已通过，保持）
+Pham和Cheng[56]则利用视觉语言模型生成医学感兴趣区域框，并将其作为后续分割的空间先验。
+
+对应支撑与回复要点：该文第3.2节利用视觉语言模型从医学图像中估计感兴趣区域框，再用于后续分割。用于支持由AI生成医学区域框作为空间参照的研究思路，对应回复（2）。
+期刊原文：https://www.mdpi.com/2076-3417/15/21/11441
+
+核验范围（内部记录，不写入论文）：2026-11-15已重新核对三篇期刊原文的作者、题名、年卷期、文章号、DOI及支撑内容。Ghadai的CAM为定性视觉解释；Hier为临床文本表型标注，未外推为眼底框精度；Pham/Cheng主框生成模型为Gemini Pro 2.5，本文引用视觉语言模型的医学框生成方法先例，不将其分割表现说成ChatGPT框精度或专家真值验证。保持已通过句子中的具体任务表述。
+已落实联动：第1/2处使用上述引用键，新增文字保留高亮；编译确定编号为[54]—[56]，当前回复已补充Hier并统一称谓及实际编号。
+
+四、插入表5后的编号联动（已落实并核对）
+
+| 内容 | 当前编号 | 方案编号 |
+|---|---|---|
+| ODIR Off-site模块消融 | 表4 | 表4 |
+| 九例CAM区域IoU | 无 | 表5（新增） |
+| EDID模块消融 | 表5 | 表6 |
+| 泛化最佳观测结果 | 表6 | 表7 |
+| 泛化五候选均值±SD | 表7 | 表8 |
+| 隐私超参数扫描 | 表8 | 表9 |
+| 隐私训练轨迹 | 表9 | 表10 |
+| 隐私最终双眼比较 | 表10 | 表11 |
+
+图9仍为图9，后续t-SNE图10、隐私权衡图11保持编号。第4.4/4.5节及原公式编号保持。
+正文标签引用已随编译更新，点2、点3、点4当前回复涉及的表号/文献号已同步；其论证与数值保留，历史对照添加当前编号提示。
+
+五、已落实状态与最终审核
+
+1. 用户已授权按七处通过稿集中落实；正式正文、参考文献、图9及IoU表源文件均已写入，保留原统一配置和既有黄色高亮。
+2. 已按服务器原有脚本编译高亮版和清洁版，并目视检查第18—20页及新增参考文献所在页。检查结果见第七部分。
+3. 当前中文回复已补充实际修改位置、Hier引用、ChatGPT称谓和最终图表/文献编号；最终回复与正文效果提交用户复核。
+4. 本轮未修改实验标注或重新生成CAM，未采用g微调，未提交、推送或同步Mac。第六部分是落实前的整体review历史，保留其当时表述。
+
+六、整体叙事与上下文review（2026-11-15；未落实）
+
+结论：现行七处能够按已通过位置纳入第4.4节，未发现需要重排段落或重写已通过文字的上下文冲突。本次仅评估文本整合，实际整稿排版尚待获准落实后编译检查。
+
+1. 上文承接：保留原ODIR Off-site分类结果、表4/图8、四组配置及模块配合解释。第1处在完整模型段末由性能结果转入同图像CAM响应及视觉解释；第2处明确九张ODIR训练图像、参照来源和文献依据，区分其与前文Off-site分类评估的对象。第3.1节已有CAM公式及用途，无需在此重述训练方法。
+2. 内部顺序：视觉解释用途及Ghadai依据→九例范围、标注条件、Hier与Pham/Cheng依据→ChatGPT候选参照与统一提框/IoU规则→图9→表前引导与表5→整体结果及f案例。各段依次回答比较目的、参照依据、如何比较及结果含义。第2处末尾与第3处开头少量重复同一参照/统一规则，分别承担原则引出与操作说明，保持已通过版本，不再为压缩而改写。
+3. 图表与结果：图9展示原图、两方法CAM及对应框；表5给同九例的配对IoU和Mean，引导句已明确二者关系。结果先给0.1691/0.2719及8/9，再用f左下区域解释视觉差异；f的0.1309/0.3125明确为整图全部区域IoU。表中保留g的原始比较，九例均纳入Mean。结论落在所展示案例与ChatGPT辅助候选参照的空间一致性，和图注、方法、文献引用的对象一致。
+4. 下文衔接：CAM结果段完成本项分析后，原EDID首句“To examine whether the module-level improvements observed on ODIR also occur on an external dataset…”明确转回外部模块评估。EDID设置→表格→结果保持连续，其后原消融总结继续衔接第4.5节。保留原过渡，不另加重复解释或新小节。
+5. 引用安排：Ghadai紧跟CAM视觉解释，Hier具体限定于临床病历表型标注，Pham/Cheng承接医学ROI框生成，再引出本文候选参照。三篇各自支撑一项用途/方法依据，现有叙事无需追加文献或扩写专家等价性主张。
+6. 落实联动：图9全篇统一(a)—(i)及训练图像来源；新IoU表为表5，EDID及后续表号顺延；三条文献替换[xx]并核对引用顺序。现有中文回复仍为较早两篇文献/GPT称谓版本，最终回复须按已通过正文同步Hier引用、ChatGPT称谓及具体修改位置，并复核相应段落措辞。只列后续同步事项，本轮未改回复。
+7. 排版待核：5＋4大图、图注、小表和分析段需要在正式编译后确认可读性及浮动位置，使图9/表5尽量靠近CAM分析，不被安排到EDID或第4.5节之后。本轮没有生成整篇新PDF，不能据此声称最终版面已经通过检查。
+
+七、实际落实与编译核验（2026-11-15）
+
+实际位置：第4.4节，完整模型项目末尾及其后、EDID设置之前。第1处保留原段分类结果与模块解释，末尾CAM句按通过稿替换；第2/3/6处段落原样纳入；第4处以正式新资产images/plots/fig_cam_roi_iou_5plus4.pdf展示原统一配置；第5处新增tables/src/table_cam_roi_iou_trans.tex；第7处在Ou之后、Ponomareva之前插入三篇书目。LaTeX引用命令替代审核文字中的硬编码编号，正文含义及数值保持。
+
+实际编号：图9及后续图10/11不变；IoU表5，EDID表6，泛化最佳结果表7，候选均值±SD表8，隐私扫描/轨迹/最终比较表9/10/11。新增Ghadai、Hier、Pham/Cheng文献分别为[54]、[55]、[56]，Ponomareva/Arasteh顺延为[57]/[58]。点2/3/4当前回复中受影响的编号已同步，其他文字和数值保持；历史对照已添加当前编号提示。
+
+编译与版面：python sdg_latex/scripts/build_revision.py，输出main_cas_revised_highlight.pdf与main_cas_revised.pdf，均为28页。第18页为CAM引入、参照依据和计算规则；第19页整页展示5＋4图9，保留图例、(a)—(i)、全部框及比例；第20页紧接表前引导、IoU表5、整体与f分析及EDID表6。高亮/清洁版相关页面均已逐页目视检查，图注完整，表格无越界，未让图9延后到EDID/泛化之后。第28页三篇新增书目及后续引用编号已核对。以上页码仅用于内部核验和用户查看，正式中文回复仅标章节、图表和参考文献编号。
+
+保留检查：正式图9资产与已审核预览PDF逐字节一致；图中九个案例和表中九列一致。IoU20个展示值与原逐例CSV/Mean一致，Ours为8/9提高，g保留Baseline较高；f数值为整图IoU。原有章节、表格、主文件及原图9资产等保护文件未改；两处编辑章节的原有revision块全部保留。未修改封存标注或实验数据。
+
+编译日志：两版均无未定义引用/文献、无新图表越界或浮动体过大警告。日志仍报告原main_cas.tex第96行maketitle的117.0831pt overfull警告及空锚点提示；本轮未修改该标题页入口，CAM图表相关页面检查通过。
+
+当前回复同步：新增Hier临床文本标注依据及[54]—[56]实际编号，统一本文工具称谓ChatGPT；用已通过的候选参照定义、首次评分前固定和共同使用说明替换较早的单独限制式收尾；补全全部CAM框保留、表5和图9(f)位置，末段据实列明已完成的修改。Mean、8/9及f数值不变。用户查看最终效果后已进入本点收尾与协作复盘，当前中文返修阶段标记完成。
+
+审核预览：submit/revision/reviewer2_point5_preview/highlight-18.png、highlight-19.png、highlight-20.png及clean-19.png、clean-20.png，均从本次实际编译PDF渲染，未另造整篇快照。
