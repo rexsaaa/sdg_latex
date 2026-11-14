@@ -1,0 +1,50 @@
+审稿人2次要意见1：核查与返修记录
+日期：2026-11-15（北京时间）
+状态：2026-11-15用户确认最终中文回复通过，本点当前中文返修阶段完成；无需修改论文。
+
+一、授权与流程
+用户指定本对话处理审稿人2次要意见1，先读取项目索引、协作规则及已有材料，沿用导师思路，先交完整中文回复稿，暂不修改论文。
+已读取外层与sdg_latex的AGENTS.md、PROJECT_INDEX.md相关入口、revision_workflow_rules_zh.txt及anti-defensive-writing/SKILL.md。
+本点唯一回复：submit/revision/reviewer2_minor1_reply_zh.txt。本轮没有正文修改，不创建空的修改对照或全稿快照。
+
+二、意见与已确认思路
+原文：Eq. 3–4 are cut off in the manuscript text (page 7–8 transition). The residual weighting formula appears incomplete.
+历史材料：revision_drafts/reviewer2/discussion_progress_2026-11-06_zh.txt第四节。
+导师对齐材料：revision_drafts/meetings/meeting_01/docx_alignment/审稿意见中文译文及回复_导师意见对齐版.txt次要意见1；同会议目录回复思路调整与三类工作清单_zh.txt第二类第3项；自动转录_带时间戳.txt的00:51:54—00:52:02及00:05:40—00:06:06。
+已确认方向：先核对原投稿及当前修订PDF，显示有问题才修排版；若最终PDF已完整，指出完整公式及位置，不虚构修复。此类具体问题直接回应，不扩展为方法或实验争论。
+
+三、只读核查结果
+固定基准：准备审稿人意见返修（4f62d422ce992cb2f082e96f5286d0c3f77f432f）。
+基准与当前第3.1节的两条残差加权公式一致，处于同一align环境；前文已说明空间/通道权重，后文已解释α、β。两条公式及参数说明没有缺失。
+通过pdftotext定位，并用pdftoppm渲染实际页面后逐页目视核查：
+1. 本地保留的main_cas.pdf为22页；第7页底部公式（3）（4）、左右表达式及编号均完整，未见裁切；α、β解释位于第8页开头。
+2. 当前main_cas_revised.pdf为28页；第8页同时显示完整公式（3）（4）、编号及紧随其后的α、β说明，无截断、遮挡或公式跨页。
+3. 当前main_cas_revised_highlight.pdf同为28页；第8页该处显示与清洁版一致。已有高亮保留，该公式块本身无新增高亮。
+以上结论针对仓库实际保留的PDF；未取得期刊系统另行转换的审稿文件，不推断不同阅读端的问题来源，也不将“公式与说明跨页”断言为审稿人所见截断的原因。
+本轮预览只存于/tmp/odir_r2minor1_original-07.png、original-08.png、clean.png和highlight.png（均使用odir_r2minor1_前缀），不创建新整稿。
+
+四、最终回复与完成确认
+回复集中感谢显示完整性提醒、给出完整残差加权式及必要符号说明、指出修订稿第3.1节完整连续呈现的核查结果。正式回复不列页码、不插表格或超链接，不写“已修复”“已调整排版”。
+2026-11-15用户反馈：审稿人只知道修订稿，正式回复不应引入“我们同时检查了清洁版和高亮版PDF”的内部流程表述。已将末段合并为修订稿中的显示结果；两版PDF的实际核验事实仅保留在内部记录中。其余回复保持，未修改论文。
+2026-11-15用户明确确认：“可以，这版回复通过。本点既然不需要修改论文，就保存最终回复和核查记录，标记为当前中文返修阶段完成。”据此将本点标记完成，已通过回复正文原样保留，仅更新文件标题及状态；本记录和PROJECT_INDEX.md同步完成状态。
+本点无需额外论文修改，因此没有新增修改对照或编译任务。最终整稿排版变化时再复核该处显示；该项为整稿阶段检查，不影响本点当前中文返修阶段完成。后续英文翻译、其他意见、Git提交推送及Mac同步按用户后续指令处理，不自动开展。
+上述中文审核与完成标记阶段没有改正文、公式、图表、参考文献或正式PDF，没有编译、训练、推理、Git暂存/提交/推送或Mac同步。
+
+五、正式文件核验
+以下四个正式文件当前字节内容与本仓库HEAD完全一致：
+submit/build/sections/03_method_trans.tex
+SHA256: 94dacf2f64206037ce939a440806cc15565b09f6353b1e77492c9f0ecdbd10df
+
+submit/build/main_cas.pdf
+SHA256: 4ab600a020e628f3d000b2b748b22ad6b52380b4761db4bea752a02b89b96412
+
+submit/build/main_cas_revised.pdf
+SHA256: b0b987a3c2900af402a67e1ab2cca2aa4af5dbff8b0135c36cbdc50d7cfe999a
+
+submit/build/main_cas_revised_highlight.pdf
+SHA256: 9fa968a39395aff3447b5d0ed8256b4f52aef33d3062c6d11c214e901d054b4d
+
+六、本地提交归档授权（2026-11-15）
+用户明确要求将本点最终回复和核查记录提交到sdg_latex仓库，提交说明沿用之前格式，暂不推送。
+本次归档范围为submit/revision/reviewer2_minor1_reply_zh.txt和本记录两份文件；已通过回复正文原样保留。提交说明采用“审稿人2次要意见1暂存”，具体提交结果以Git历史及外层PROJECT_INDEX.md为准。
+论文、PDF和其他未提交改动不纳入本点提交；不推送或同步Mac。
