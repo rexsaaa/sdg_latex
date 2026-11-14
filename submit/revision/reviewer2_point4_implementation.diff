@@ -1,0 +1,45 @@
+--- a/submit/build/sections/04_experiments_trans.tex
++++ b/submit/build/sections/04_experiments_trans.tex
+@@ -75,7 +75,7 @@
+ 
+ \subsection{Ablation Study Results}
+ 
+-To assess the independent contributions and combined effects of the two core modules in the proposed method, namely Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) and Adaptive Label-Feature Relevance Construction (ARC), and to examine the improvement in model interpretability brought by CAM guidance, \revision{module-wise ablation experiments are conducted using ODIR Off-site metrics}. The results are shown in \hyperref[tab:ablation]{Table~\ref*{tab:ablation}}, and \hyperref[fig:ablation-radar]{Fig.~\ref*{fig:ablation-radar}} provides an intuitive radar-chart comparison of the metric distributions across models. \hyperref[tab:ablation]{Table~\ref*{tab:ablation}} reports both monocular and binocular metrics, which show a consistent improvement trend; to align with the official patient-level evaluation standard and keep the main text concise, the following analysis focuses on the binocular metrics.
++To assess the independent contributions and combined effects of the two core modules in the proposed method, namely Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) and Adaptive Label-Feature Relevance Construction (ARC), and to examine the improvement in model interpretability brought by CAM guidance, \revision{module-wise ablation experiments are conducted using ODIR Off-site metrics}. The results are shown in \hyperref[tab:ablation]{Table~\ref*{tab:ablation}}, and \hyperref[fig:ablation-radar]{Fig.~\ref*{fig:ablation-radar}} provides an intuitive radar-chart comparison of the metric distributions across models. \hyperref[tab:ablation]{Table~\ref*{tab:ablation}} reports both monocular and binocular metrics, which show a consistent improvement trend; to align with the official patient-level evaluation standard and keep the main text concise, the following \revision{Off-site} analysis focuses on the binocular metrics. \revision{The same four ablation configurations are further evaluated on EDID to examine whether the performance gains extend to an external dataset.}
+ 
+ \input{tables/src/table6_ablation_trans.tex}
+ 
+@@ -109,7 +109,13 @@
+ \label{fig:cam-visualization}
+ \end{figure}
+ 
+-The ablation results show that Adaptive Label-Feature Relevance Construction (ARC) improves label relevance modeling in multi-disease co-occurrence scenarios, while Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) supports learning domain-invariant features from a single source domain when multi-institutional joint training is restricted. The integration of the two modules further improves multi-label recognition performance under single-source-domain training and provides a basis for the subsequent cross-domain generalization results.
++\revision{To examine whether the module-level improvements observed on ODIR also occur on an external dataset, the four ablation configurations are evaluated in the ODIR-to-EDID setting. Training uses the ODIR D/G/M subset described in Section 4.1, and EDID provides the target evaluation images. The ResNet50 backbone, source data split, and evaluation metrics are kept consistent across the four configurations.}
++
++\input{tables/src/table_edid_ablation_trans.tex}
++
++\revision{\mbox{\tabref{tab:ablation-edid}} reports the results of these supplementary ablation evaluations. The best-observed image-level Final scores are 52.16 for ResNet50, 53.75 for ResNet50+DFE, 53.27 for ResNet50+ARC, and 55.42 for the joint model. The joint configuration improves Final by 3.26 points over the baseline and by 1.67 and 2.15 points over the DFE and ARC configurations, respectively. It achieves the highest Final in both the ODIR Off-site and external EDID ablations, supporting the value of the joint configuration for cross-dataset recognition.}
++
++The \revision{ODIR Off-site} ablation results show that Adaptive Label-Feature Relevance Construction (ARC) improves label relevance modeling in multi-disease co-occurrence scenarios, while Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) supports learning domain-invariant features from a single source domain when multi-institutional joint training is restricted. The integration of the two modules further improves multi-label recognition performance under single-source-domain training and provides a basis for the subsequent cross-domain generalization results.
+ 
+ \subsection{Generalization Performance Results}
+ 
+--- /dev/null
++++ b/submit/build/tables/src/table_edid_ablation_trans.tex
+@@ -0,0 +1,16 @@
++% Reviewer 2 major point 4: external module ablation on EDID.
++\begin{table}[pos=H]
++\centering
++\caption{\protect\revision{External ablation results on EDID. The four configurations follow the ODIR Off-site ablation setting and are trained on the ODIR D/G/M subset. Best-observed image-level results are reported from the supplementary ablation evaluations, using EDID Final to select among five checkpoints retained by source-domain validation for each configuration. All scores are reported on a percentage scale. Kappa $\uparrow$, F1 $\uparrow$, AUC $\uparrow$, and Final $\uparrow$ indicate that higher values are better.}}
++\label{tab:ablation-edid}
++\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc@{}}
++\toprule
++\revision{Model} & \revision{Kappa} & \revision{F1} & \revision{AUC} & \revision{Final} \\
++\midrule
++\revision{ResNet50} & \revision{23.83} & \revision{65.54} & \revision{67.09} & \revision{52.16} \\
++\revision{ResNet50+DFE} & \revision{26.80} & \revision{66.65} & \revision{67.80} & \revision{53.75} \\
++\revision{ResNet50+ARC} & \revision{23.35} & \revision{65.50} & \revision{70.96} & \revision{53.27} \\
++\textbf{\revision{ResNet50+DFE+ARC (Ours)}} & \textbf{\revision{27.31}} & \textbf{\revision{67.30}} & \textbf{\revision{71.67}} & \textbf{\revision{55.42}} \\
++\bottomrule
++\end{tabular*}
++\end{table}

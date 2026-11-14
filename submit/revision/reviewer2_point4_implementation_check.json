@@ -1,0 +1,656 @@
+{
+  "status": "temporarily_complete_in_authorized_chinese_revision_scope",
+  "baseline_commit": "02270bb63c5d96d76498260663c39bc7722b0f27",
+  "implemented_items": [
+    "1",
+    "2",
+    "4",
+    "summary_scope"
+  ],
+  "excluded_item": "3",
+  "reverse_reconstruction_unchanged_chapter": true,
+  "approved_intro_exact_match": true,
+  "approved_caption_exact_match": true,
+  "approved_external_paragraphs_exact_match": true,
+  "edid_rows": [
+    {
+      "stage": "base",
+      "model": "ResNet50",
+      "values": [
+        "23.83",
+        "65.54",
+        "67.09",
+        "52.16"
+      ]
+    },
+    {
+      "stage": "onlydual",
+      "model": "ResNet50+DFE",
+      "values": [
+        "26.80",
+        "66.65",
+        "67.80",
+        "53.75"
+      ]
+    },
+    {
+      "stage": "onlyatten",
+      "model": "ResNet50+ARC",
+      "values": [
+        "23.35",
+        "65.50",
+        "70.96",
+        "53.27"
+      ]
+    },
+    {
+      "stage": "total",
+      "model": "ResNet50+DFE+ARC (Ours)",
+      "values": [
+        "27.31",
+        "67.30",
+        "71.67",
+        "55.42"
+      ]
+    }
+  ],
+  "edits": [
+    {
+      "item": "1",
+      "old": "the following analysis focuses on the binocular metrics.",
+      "new": "the following \\revision{Off-site} analysis focuses on the binocular metrics. \\revision{The same four ablation configurations are further evaluated on EDID to examine whether the performance gains extend to an external dataset.}"
+    },
+    {
+      "item": "4",
+      "old": "The ablation results show that Adaptive Label-Feature Relevance Construction (ARC)",
+      "new": "\\revision{To examine whether the module-level improvements observed on ODIR also occur on an external dataset, the four ablation configurations are evaluated in the ODIR-to-EDID setting. Training uses the ODIR D/G/M subset described in Section 4.1, and EDID provides the target evaluation images. The ResNet50 backbone, source data split, and evaluation metrics are kept consistent across the four configurations.}\n\n\\input{tables/src/table_edid_ablation_trans.tex}\n\n\\revision{\\mbox{\\tabref{tab:ablation-edid}} reports the results of these supplementary ablation evaluations. The best-observed image-level Final scores are 52.16 for ResNet50, 53.75 for ResNet50+DFE, 53.27 for ResNet50+ARC, and 55.42 for the joint model. The joint configuration improves Final by 3.26 points over the baseline and by 1.67 and 2.15 points over the DFE and ARC configurations, respectively. It achieves the highest Final in both the ODIR Off-site and external EDID ablations, supporting the value of the joint configuration for cross-dataset recognition.}\n\nThe ablation results show that Adaptive Label-Feature Relevance Construction (ARC)"
+    },
+    {
+      "item": "summary_scope",
+      "old": "The ablation results show that Adaptive Label-Feature Relevance Construction (ARC)",
+      "new": "The \\revision{ODIR Off-site} ablation results show that Adaptive Label-Feature Relevance Construction (ARC)"
+    }
+  ],
+  "protected_hashes": {
+    "sdg_latex/submit/build/highlights.pdf": "eb8e8a13fcc4cdd23f0a5d4871e65c64809a3b0f00342ac8c91e94c9da51e8e5",
+    "sdg_latex/submit/build/cas-common.sty": "e95a01f4b33531d01ade231669fcc1e42f52193dddcb22ead5b63240eb952f8f",
+    "sdg_latex/submit/build/README_BUILD.md": "ab3fb28f8e5a2d73741c208e03aa4d87792888ac34cee200fd5b3da8fc35b9ca",
+    "sdg_latex/submit/build/main_cas_full.pdf": "e2f9acc8230bc1833c5dfb5946094629b4324d0091ee6d054214631a159162ac",
+    "sdg_latex/submit/build/cas-model2-names.bst": "6f6204eb7670d762042ab363c2d05cf87196052bfbdf6dbee51a1327a8ce479a",
+    "sdg_latex/submit/build/cas-sc.cls": "5030545ed09c770afa31004817bf8626ca7f311cf795e6c2825ecae113bb42e9",
+    "sdg_latex/submit/build/main_cas.abs": "967ea6078ff2f2f7162489007ba42bbacf530c8046eeb50875f04c57429e5508",
+    "sdg_latex/submit/build/main_cas.pdf": "4ab600a020e628f3d000b2b748b22ad6b52380b4761db4bea752a02b89b96412",
+    "sdg_latex/submit/build/main_cas.tex": "93c989d1b866e4cf27cf7424b8e9201feb23fc5d79f74e8b83d13a003e32399a",
+    "sdg_latex/submit/build/sections/03_method_trans.tex": "94dacf2f64206037ce939a440806cc15565b09f6353b1e77492c9f0ecdbd10df",
+    "sdg_latex/submit/build/sections/06_references_trans.tex": "26ca5c98cf5110bac0984093ff41750171cf25773ce2b082c2bfab6c01027dfa",
+    "sdg_latex/submit/build/sections/05_conclusion_trans.tex": "69e55eb9ed4dfdcaa55c982ff40bcf639fd88f2c73affe75b52ac10bd665b711",
+    "sdg_latex/submit/build/sections/01_introduction_trans.tex": "07f38204d8918223d049d1fc6f6bdacee72148a8016ce249a04bb963b40810d3",
+    "sdg_latex/submit/build/sections/02_related_work_trans.tex": "b08cfa6362fd9ef4c250623559d2b03b6326f8079a681b55124e6a51879bba60",
+    "sdg_latex/submit/build/tables/src/table5_privacy_final_trans.tex": "46180ff75dc7fd1d27fdbe3d26c9d4e26fb69e7e0cf1d4586927cee20bff233d",
+    "sdg_latex/submit/build/tables/src/table3_privacy_scan_trans.tex": "5df080338f7129ff2946e7e04848b6828ccf6fc7c8b6e837a0a43ab7bc9fa761",
+    "sdg_latex/submit/build/tables/src/table4_privacy_evolution_trans.tex": "b754658715656c983b07064def4871fc7de043625ccc224673e35befea4cea27",
+    "sdg_latex/submit/build/tables/src/table_tau_sensitivity_trans.tex": "c39ca2befbae6902722f387e8fcc89642d71f8e027fa67e4eb760b64dcf9d3a9",
+    "sdg_latex/submit/build/tables/src/table7_sota_trans.tex": "eeeef45f4eeb5e0c8cb026de78d2cd2b3b0168a56002b7e57d976b59240039c0",
+    "sdg_latex/submit/build/tables/src/table1_dataset_distribution_trans.tex": "6afbd2362b63543810a04c0ce3d4f337d8dfa985e00bd0140082aa4e670e03db",
+    "sdg_latex/submit/build/tables/src/table2_generalization_trans.tex": "3f959199acbe797022a10ebfe8f309ac819b1161db77ba4d5902fe3f30044af4",
+    "sdg_latex/submit/build/tables/src/table6_ablation_trans.tex": "e1bc1274459e5e0be0fafcce9a3b17db53d7c4f2bfc0162174c57fa362f72354",
+    "sdg_latex/submit/build/tables/src/table_generalization_top5_trans.tex": "bb9c58f66d2d6f3a53728e6a269afc9b59988ce860c4695c265de7aaed0d5017",
+    "sdg_latex/submit/build/images/gragh/image7.png": "d74a60fadf639319bcbac01ca348cc4ea7a9afd31988ec394cbef4f369581b75",
+    "sdg_latex/submit/build/images/gragh/image10.png": "c8b9badd937e00a66f8f7bb6d4661a1dcc4850cd97631fe5abb4559aecdd6276",
+    "sdg_latex/submit/build/images/gragh/image9.png": "dd32960beb19de0e5e83728ee76e5b3ea2598e24e8f90e1c0da3cba8f0301e4d",
+    "sdg_latex/submit/build/images/gragh/image13.png": "da315452ad9a9764b5e392050102c668e88422dfbdd2ac458a92d41af889147a",
+    "sdg_latex/submit/build/images/gragh/image12.png": "5e403367ed0d9a5f6d80987b8954b002deaadd2cf5ae05754dffb6fca867994d",
+    "sdg_latex/submit/build/images/gragh/image11.png": "7c21bc9f97a4941631bb96118d0e4ec32ad5c698727d836375a32f99c080f8e5",
+    "sdg_latex/submit/build/images/gragh/image4.png": "20e46b4151c5728c1fa140f3d67ce41a9fe20b1e53d39dd7668b7f591bfdcecb",
+    "sdg_latex/submit/build/images/media/image8_padded.pdf": "5f502f29d3bb0016b9a45a59b307e26d3db90071dd2beb0453844c2d8b1a3df5",
+    "sdg_latex/submit/build/images/media/edid示例图.pdf": "9b5c91e594e493f80a4533619fa29e491f62a5b1ef5434be742dd36a2264e982",
+    "sdg_latex/submit/build/images/media/image5_padded.pdf": "d7e5e003c0a8874766fbca6d33f9d48a0e508c9114bf8e24660fe8c05ed42278",
+    "sdg_latex/submit/build/images/media/edid_samples_padded.pdf": "b41bafebbb9cd391b01020b9f0f0f5651f3d40610e4ad8deb5e92cc093a39498",
+    "sdg_latex/submit/build/images/media/image2.pdf": "6f125b97a3e6cff7d4c3614e62e4a99726cf48595dcf488434e989f52a640494",
+    "sdg_latex/submit/build/images/media/image2_padded.pdf": "bcc0f745d5604fce80f3794afb84aaabf53ad2f9079a3d8a3df436aab14969bb",
+    "sdg_latex/submit/build/images/media/image3_v2.png": "c163f4b32a4200189d9d8d9dceb513a49755721574accbc422f15ba874002c21",
+    "sdg_latex/submit/build/images/media/image6_padded.pdf": "30baa291d4c46262ef272556cffb7f5583ec6c3560fb08d16aeced94134abd66",
+    "sdg_latex/submit/build/images/media/image1_padded.pdf": "a3b956846071fced79a1352a0d26eeef896259a9a94a2602e0988f11ec3a379d",
+    "sdg_latex/submit/build/images/plots/tsne_rfmid_panel1_tx.png": "229a94078465c09dcae1060ada072604676a31bcd912fd2d9412b2078a0b7a5c",
+    "sdg_latex/submit/build/images/plots/fig_privacy_tradeoff.png": "deef6fe1f663a4c12f4a046a49cb910671701c93f98a64e9058bf675d6bc19f2",
+    "sdg_latex/submit/build/images/plots/tsne_odir8_panel1_tx.png": "6f08e2a982be12e87a53553504b3904f8b0c8fe308aab7d93915ccb81d3db2df",
+    "sdg_latex/submit/build/images/plots/fig_privacy_evolution.png": "7c6771b1b9917c251098a86a64d16d26b8dd50fceef177427dff4dead62d1902",
+    "sdg_latex/submit/build/images/plots/fig_ablation_radar.png": "fea1033ca56dac3c47824dd47b8ec16ff7ba4bde73b76e6aae84a954eaf4bf56",
+    "sdg_latex/submit/build/images/plots/fig_privacy_tradeoff.pdf": "98a1babb05c81d25cc887bb1bafe4b6cf90ab9ee51917f7b34ceb42ca94e9f84",
+    "sdg_latex/submit/build/images/plots/fig_ablation_radar.pdf": "318a6c48a1377e92e44a1b29c9f9ce0c7ae1ad32185dd1baaa5d6aced7390134",
+    "sdg_latex/submit/build/images/plots/fig_sota_compare.png": "ad3fb965e973c433a1f762767a1e20d2856a27a5c2dee6da4ba527895dd1bba1",
+    "sdg_latex/submit/build/images/plots/fig_sota_compare.pdf": "73238c1cbeb295b01803f12cc85c447e691777897d9bf6a04b6795e147254aba",
+    "sdg_latex/submit/build/images/plots/tsne_edid_panel1_tx.png": "e5dbbcae0bca3c2c599fec3fd245c4e5a0f223420525ba5337ae2c2d2da0473b",
+    "sdg_latex/submit/build/images/plots/fig_privacy_evolution.pdf": "98f3dd5d948f3de627571e3a5813c733f039bec41fc3a1b8468efe6e9b7e09cd",
+    "sdg_latex/submit/revision/method_approved_20261111_comparison.txt": "b06940e2398ac25b88b72b62aa2a77fbdd5c659f07e11f3a9cd9ee1069d3bd35",
+    "sdg_latex/submit/revision/point4_revision.md": "8727e331c0e79e214bb256c26aa1edd0ff5fb52537ebfda31b2771a958708586",
+    "sdg_latex/submit/revision/reviewer2_point4_table5_top5.tex": "f09d91885ffe342d4951c0300f01454235754f701e22e3359568d4ee78bec3ee",
+    "sdg_latex/submit/revision/reviewer2_point1_settings_reorganization_20261110_zh.txt": "c00ceb09d1d49a0bc645b96efd3349ba25f07262ca3e1ba32d9d560f5e3e9a27",
+    "sdg_latex/submit/revision/reviewer2_point3_editor_compile_diagnostics.json": "5b15f021808b81301c76079c1703aff31e822a864cbab72889975a40bf8115f0",
+    "sdg_latex/submit/revision/reviewer2_point3_tables_review.html": "2cff0e4a77dd288525e586fd8dfbb9f003106626214d77c9d2a33c5435d2619d",
+    "sdg_latex/submit/revision/reviewer2_point4_statistics.json": "6a52513fd6df81e4b3d5b4824bed6d6de4df745d3099955a834eacb57f3ade54",
+    "sdg_latex/submit/revision/reviewer2_point1_update_20261110_zh.txt": "789f1b234a99f9eb36db2dbd7dc4f1ad63392b79dfc3a5168d032dca84c54e9f",
+    "sdg_latex/submit/revision/reviewer2_point5_reply_zh.txt": "5556862dc50c35d361b866a404bc34064c33df801b2ad27ae707b076bb873fc7",
+    "sdg_latex/submit/revision/reviewer2_point4_table5_top5.csv": "480b01b79bc94ec7f7928f7672297812d9e369edc786b69bd47b62dac6b35b8c",
+    "sdg_latex/submit/revision/reviewer2_point1_changes_comparison_zh.txt": "1a184e97eb2b1eb0b4a4b7146add06cc43e4488d61d39f23abf934cef2a0a02e",
+    "sdg_latex/submit/revision/introduction_restructure_20261111_full_zh.txt": "ef9713b9d624bbc062fa176f846da20d341547bd74fbd1091e1b63193bfaf5dd",
+    "sdg_latex/submit/revision/point6_revision.md": "e6785fed225bcdb464560c4257ea06b79aeed86f4ba203d4a3daece0d229d4ff",
+    "sdg_latex/submit/revision/point3_revision.md": "31f8390795dad46ccc72fcda0f3d0a91a3b75a426ae6951c7b05565e9b6caf3e",
+    "sdg_latex/submit/revision/reviewer2_point4_external_ablation.csv": "fd4b038ba8fe58c806a95057c88dfa5c88d4d73c904e50e861ae4b2160de4ebb",
+    "sdg_latex/submit/revision/reviewer2_point3_implementation_check.json": "1c218059a03661077cf286453a27911ccdd3c96187199375428b961dd70b6416",
+    "sdg_latex/submit/revision/reviewer2_point5_revision_record.txt": "8f65d1575e40ad992dba0f25e9e1fc06a27159ba6f7057f3d965b1e541adc589",
+    "sdg_latex/submit/revision/reviewer2_point3_dg_comparison_plan_zh.txt": "b846a2b839e0021bb791801657017bae7a8ac1520687bf9fa5487756b6104f49",
+    "sdg_latex/submit/revision/introduction_restructure_20261111_comparison.txt": "38de71a56fd121f214a5ad06c7d4059e964934fbcf8605be486a229664b19fdb",
+    "sdg_latex/submit/revision/reviewer2_point3_implementation.diff": "0ecc9c3ada8d641f273133a01a392b77fca0577ea1c66ffaaa7c2a36172dc4b7",
+    "sdg_latex/submit/revision/Response_Letter_中文审核框架.docx": "52a7b3f303c3e46b52ba46b331ad8ade19624b25cd8f62b682b73bd882ef08e3",
+    "sdg_latex/submit/revision/reviewer2_point1_revision_record.txt": "0bc2b1013b661d4519f8ed81ef32b4814f184793e809f64f5f5051a824c6b851",
+    "sdg_latex/submit/revision/introduction_approved_20261111_comparison.txt": "38de71a56fd121f214a5ad06c7d4059e964934fbcf8605be486a229664b19fdb",
+    "sdg_latex/submit/revision/reviewer2_point1_reply_zh.txt": "3fa204f308ec164a176dc8d3086008f98dedfc00d771f6b68f449b39085bcbf4",
+    "sdg_latex/submit/revision/reviewer2_point4_results_zh.txt": "49dfa969514398264575d5403951131e7cd465da22b2dad0d2e7c4e8018b373b",
+    "sdg_latex/submit/revision/introduction_approved_20261111_full_zh.txt": "ef9713b9d624bbc062fa176f846da20d341547bd74fbd1091e1b63193bfaf5dd",
+    "lib/output_cross_domain_ablation_20261111_inference/edid_ablation_summary.csv": "31d4504b8345851f4cb5e00d83666aea7d8c424bd98a27c3c9f346fbb28a43e4",
+    "revision_drafts/experiments/rsc_formal_20261113/comparison_top5.csv": "64198f5832e28d284175fe42a940fd7a5f1e30e1ab9bf072a0bab188623d12db"
+  },
+  "source_before_sha256": "963c4f6cc4815bead7a7513cc1e71dc363333360f204d1d841812380044c58c1",
+  "source_after_sha256": "e6b69c30f2cd90ca32e2408e0f20e5827efeb560496971092e01077d3e2d614d",
+  "new_table_sha256": "5bad0f9aff6f05698612bb132aaac8c4182056fbb485926fe076a79173cbf880",
+  "protected_files_checked": 78,
+  "protected_files_changed": [],
+  "excluded_item3_byte_identical_to_baseline": true,
+  "reply_scope_checks": {
+    "point2": "table references and page removal only",
+    "point3": "table references only",
+    "point4": "table references and two implementation location statements only"
+  },
+  "pdf_checks": {
+    "clean": {
+      "file": "sdg_latex/submit/build/main_cas_revised.pdf",
+      "sha256": "41ee107311a4c5119da4321a53f6218d8c78ba1c7bef2e0b45d0b2aeb49a8430",
+      "pages": 26,
+      "labels": {
+        "tab:dataset-distribution": {
+          "number": "1",
+          "page": 12,
+          "destination": "table.caption.4"
+        },
+        "tab:tau-sensitivity": {
+          "number": "2",
+          "page": 15,
+          "destination": "table.caption.8"
+        },
+        "tab:sota-compare": {
+          "number": "3",
+          "page": 16,
+          "destination": "table.caption.9"
+        },
+        "tab:ablation": {
+          "number": "4",
+          "page": 17,
+          "destination": "table.caption.11"
+        },
+        "fig:ablation-radar": {
+          "number": "8",
+          "page": 17,
+          "destination": "figure.caption.12"
+        },
+        "fig:cam-visualization": {
+          "number": "9",
+          "page": 18,
+          "destination": "figure.caption.13"
+        },
+        "tab:ablation-edid": {
+          "number": "5",
+          "page": 18,
+          "destination": "table.caption.14"
+        },
+        "tab:generalization": {
+          "number": "6",
+          "page": 20,
+          "destination": "table.caption.15"
+        },
+        "tab:generalization-top5": {
+          "number": "7",
+          "page": 20,
+          "destination": "table.caption.16"
+        },
+        "tab:privacy-scan": {
+          "number": "8",
+          "page": 22,
+          "destination": "table.caption.18"
+        },
+        "tab:privacy-evolution": {
+          "number": "9",
+          "page": 23,
+          "destination": "table.caption.19"
+        },
+        "fig:privacy-tradeoff": {
+          "number": "11",
+          "page": 23,
+          "destination": "figure.caption.20"
+        },
+        "tab:privacy-final": {
+          "number": "10",
+          "page": 24,
+          "destination": "table.caption.21"
+        }
+      },
+      "numeric_cells_checked": {
+        "edid": 16,
+        "best": 40,
+        "mean_sd": 40
+      },
+      "table_links": [
+        {
+          "from_page": 12,
+          "destination": "table.caption.4",
+          "to_page": 12
+        },
+        {
+          "from_page": 15,
+          "destination": "table.caption.8",
+          "to_page": 15
+        },
+        {
+          "from_page": 15,
+          "destination": "table.caption.9",
+          "to_page": 16
+        },
+        {
+          "from_page": 15,
+          "destination": "table.caption.9",
+          "to_page": 16
+        },
+        {
+          "from_page": 15,
+          "destination": "table.caption.9",
+          "to_page": 16
+        },
+        {
+          "from_page": 16,
+          "destination": "table.caption.9",
+          "to_page": 16
+        },
+        {
+          "from_page": 16,
+          "destination": "table.caption.11",
+          "to_page": 17
+        },
+        {
+          "from_page": 16,
+          "destination": "table.caption.11",
+          "to_page": 17
+        },
+        {
+          "from_page": 17,
+          "destination": "table.caption.11",
+          "to_page": 17
+        },
+        {
+          "from_page": 18,
+          "destination": "table.caption.14",
+          "to_page": 18
+        },
+        {
+          "from_page": 19,
+          "destination": "table.caption.15",
+          "to_page": 20
+        },
+        {
+          "from_page": 19,
+          "destination": "table.caption.15",
+          "to_page": 20
+        },
+        {
+          "from_page": 19,
+          "destination": "table.caption.16",
+          "to_page": 20
+        },
+        {
+          "from_page": 19,
+          "destination": "table.caption.15",
+          "to_page": 20
+        },
+        {
+          "from_page": 20,
+          "destination": "table.caption.15",
+          "to_page": 20
+        },
+        {
+          "from_page": 20,
+          "destination": "table.caption.15",
+          "to_page": 20
+        },
+        {
+          "from_page": 21,
+          "destination": "table.caption.16",
+          "to_page": 20
+        },
+        {
+          "from_page": 21,
+          "destination": "table.caption.18",
+          "to_page": 22
+        },
+        {
+          "from_page": 22,
+          "destination": "table.caption.19",
+          "to_page": 23
+        },
+        {
+          "from_page": 22,
+          "destination": "table.caption.21",
+          "to_page": 24
+        },
+        {
+          "from_page": 23,
+          "destination": "table.caption.18",
+          "to_page": 22
+        },
+        {
+          "from_page": 23,
+          "destination": "table.caption.21",
+          "to_page": 24
+        },
+        {
+          "from_page": 23,
+          "destination": "table.caption.19",
+          "to_page": 23
+        },
+        {
+          "from_page": 23,
+          "destination": "table.caption.21",
+          "to_page": 24
+        },
+        {
+          "from_page": 24,
+          "destination": "table.caption.19",
+          "to_page": 23
+        }
+      ],
+      "warnings": [
+        "Underfull \\hbox (badness 10000) in paragraph at lines 93--93",
+        "Overfull \\hbox (117.0831pt too wide) detected at line 96",
+        "Package hyperref Warning: Ignoring empty anchor on input line 96.",
+        "Package hyperref Warning: Ignoring empty anchor on input line 96.",
+        "Package hyperref Warning: Ignoring empty anchor on input line 96."
+      ]
+    },
+    "highlight": {
+      "file": "sdg_latex/submit/build/main_cas_revised_highlight.pdf",
+      "sha256": "933e12ee5b5c15fec7833ac7fbfdc1a239fce52aa94ca126d50518945c3e5c03",
+      "pages": 26,
+      "labels": {
+        "tab:dataset-distribution": {
+          "number": "1",
+          "page": 12,
+          "destination": "table.caption.4"
+        },
+        "tab:tau-sensitivity": {
+          "number": "2",
+          "page": 15,
+          "destination": "table.caption.8"
+        },
+        "tab:sota-compare": {
+          "number": "3",
+          "page": 16,
+          "destination": "table.caption.9"
+        },
+        "tab:ablation": {
+          "number": "4",
+          "page": 17,
+          "destination": "table.caption.11"
+        },
+        "fig:ablation-radar": {
+          "number": "8",
+          "page": 17,
+          "destination": "figure.caption.12"
+        },
+        "fig:cam-visualization": {
+          "number": "9",
+          "page": 18,
+          "destination": "figure.caption.13"
+        },
+        "tab:ablation-edid": {
+          "number": "5",
+          "page": 18,
+          "destination": "table.caption.14"
+        },
+        "tab:generalization": {
+          "number": "6",
+          "page": 20,
+          "destination": "table.caption.15"
+        },
+        "tab:generalization-top5": {
+          "number": "7",
+          "page": 20,
+          "destination": "table.caption.16"
+        },
+        "tab:privacy-scan": {
+          "number": "8",
+          "page": 22,
+          "destination": "table.caption.18"
+        },
+        "tab:privacy-evolution": {
+          "number": "9",
+          "page": 23,
+          "destination": "table.caption.19"
+        },
+        "fig:privacy-tradeoff": {
+          "number": "11",
+          "page": 23,
+          "destination": "figure.caption.20"
+        },
+        "tab:privacy-final": {
+          "number": "10",
+          "page": 24,
+          "destination": "table.caption.21"
+        }
+      },
+      "numeric_cells_checked": {
+        "edid": 16,
+        "best": 40,
+        "mean_sd": 40
+      },
+      "table_links": [
+        {
+          "from_page": 12,
+          "destination": "table.caption.4",
+          "to_page": 12
+        },
+        {
+          "from_page": 15,
+          "destination": "table.caption.8",
+          "to_page": 15
+        },
+        {
+          "from_page": 15,
+          "destination": "table.caption.9",
+          "to_page": 16
+        },
+        {
+          "from_page": 15,
+          "destination": "table.caption.9",
+          "to_page": 16
+        },
+        {
+          "from_page": 15,
+          "destination": "table.caption.9",
+          "to_page": 16
+        },
+        {
+          "from_page": 16,
+          "destination": "table.caption.9",
+          "to_page": 16
+        },
+        {
+          "from_page": 16,
+          "destination": "table.caption.11",
+          "to_page": 17
+        },
+        {
+          "from_page": 16,
+          "destination": "table.caption.11",
+          "to_page": 17
+        },
+        {
+          "from_page": 17,
+          "destination": "table.caption.11",
+          "to_page": 17
+        },
+        {
+          "from_page": 18,
+          "destination": "table.caption.14",
+          "to_page": 18
+        },
+        {
+          "from_page": 19,
+          "destination": "table.caption.15",
+          "to_page": 20
+        },
+        {
+          "from_page": 19,
+          "destination": "table.caption.15",
+          "to_page": 20
+        },
+        {
+          "from_page": 19,
+          "destination": "table.caption.16",
+          "to_page": 20
+        },
+        {
+          "from_page": 19,
+          "destination": "table.caption.15",
+          "to_page": 20
+        },
+        {
+          "from_page": 20,
+          "destination": "table.caption.15",
+          "to_page": 20
+        },
+        {
+          "from_page": 20,
+          "destination": "table.caption.15",
+          "to_page": 20
+        },
+        {
+          "from_page": 21,
+          "destination": "table.caption.16",
+          "to_page": 20
+        },
+        {
+          "from_page": 21,
+          "destination": "table.caption.18",
+          "to_page": 22
+        },
+        {
+          "from_page": 22,
+          "destination": "table.caption.19",
+          "to_page": 23
+        },
+        {
+          "from_page": 22,
+          "destination": "table.caption.21",
+          "to_page": 24
+        },
+        {
+          "from_page": 23,
+          "destination": "table.caption.18",
+          "to_page": 22
+        },
+        {
+          "from_page": 23,
+          "destination": "table.caption.21",
+          "to_page": 24
+        },
+        {
+          "from_page": 23,
+          "destination": "table.caption.19",
+          "to_page": 23
+        },
+        {
+          "from_page": 23,
+          "destination": "table.caption.21",
+          "to_page": 24
+        },
+        {
+          "from_page": 24,
+          "destination": "table.caption.19",
+          "to_page": 23
+        }
+      ],
+      "warnings": [
+        "Underfull \\hbox (badness 10000) in paragraph at lines 93--93",
+        "Overfull \\hbox (117.0831pt too wide) detected at line 96",
+        "Package hyperref Warning: Ignoring empty anchor on input line 96.",
+        "Package hyperref Warning: Ignoring empty anchor on input line 96.",
+        "Package hyperref Warning: Ignoring empty anchor on input line 96."
+      ]
+    }
+  },
+  "visual_review": {
+    "clean": [
+      18,
+      19,
+      20
+    ],
+    "highlight": [
+      16,
+      18,
+      19
+    ],
+    "observations": "EDID table is intact with all four rows and bold joint row; headers have no arrows. Settings immediately precede table; results continue from page 18 to 19, then scoped original summary and section 4.5. No new overlap or clipping. New highlights visible; clean copy unhighlighted. Original best/mean tables remain together and readable on page 20."
+  },
+  "restored_build_dependency": {
+    "path": "sdg_latex/submit/build/thumbnails/cas-email.jpeg",
+    "sha256": "51cadbff5919f51f76f6f9238b18c9b5d512ea9234cb6d7fef7b53d9767fa845",
+    "origin": "Original JPEG bytes extracted from pre-existing clean PDF; matches earlier point3 recorded hash."
+  },
+  "date": "2026-11-14 Asia/Shanghai",
+  "review_artifact_hashes": {
+    "reviewer2_point2_changes_comparison_zh.txt": "88653d757bad00c867224ad7762faa92e0dd334b3c58428ece7c562f319f5d8c",
+    "reviewer2_point3_changes_comparison_zh.txt": "f7ed08afcd44d4b11af1b7d09b68ffb014d9836c10d485f643ef8b8eadc1b64a",
+    "reviewer2_point2_reply_zh.txt": "e7006fecaa3337100432f33f7111bc1199a05db5386e1942edff36caf1d52353",
+    "reviewer2_point2_revision_record.txt": "085db472eba19cbdaf03242a9aea416e556870d57d74b7c14414937ebda518a7",
+    "reviewer2_point3_revision_record.txt": "5ee57a61d1c46f310c7d327ab2d0526d125042b2943deb62067ff213e65bc650",
+    "reviewer2_point4_reply_zh.txt": "814edaba8ed6a4c5e455afa651023468d6b6d22285c7c4a8e4334e04c8666ed1",
+    "reviewer2_point4_changes_comparison_zh.txt": "e7ae0df9c27c0c57712cd5ab39eeacef17ebd809ca6e566ffbfe8933a707b744",
+    "reviewer2_point3_reply_zh.txt": "9f0082a58dc0b76cd963ac9f2e91810d319179ba63690ca37eba052aa33bfd3b",
+    "reviewer2_point4_revision_record.txt": "adaaafd772cd8c9885779d56ab60e9c84bc8b9b4c477b0318b7922b3fdfa47e7"
+  },
+  "completion_review": {
+    "date": "2026-11-15 Asia/Shanghai",
+    "user_authorization": "审核点4是否可暂时完成；如可，在sdg_latex提交点4相关文件改动。",
+    "reply_manuscript_mapping": {
+      "1": "Section 4.5 / Table 6 and complementary Table 7",
+      "2": "Section 4.5 / Table 7",
+      "3": "Section 4.4 / Table 5"
+    },
+    "pdf_and_manuscript_hashes_unchanged_since_build": true,
+    "rebuild_required": false,
+    "scope": "Current approved Chinese response and manuscript revision; does not certify removal of target-selection bias, independent-run statistical significance, or resolution of the retained CAM attribution discrepancy.",
+    "commit_title": "审稿人2点4暂存",
+    "commit_files": [
+      "submit/build/sections/04_experiments_trans.tex",
+      "submit/build/tables/src/table_edid_ablation_trans.tex",
+      "submit/build/main_cas_revised_highlight.pdf",
+      "submit/build/main_cas_revised.pdf",
+      "submit/build/thumbnails/cas-email.jpeg",
+      "submit/revision/reviewer2_point2_reply_zh.txt",
+      "submit/revision/reviewer2_point2_changes_comparison_zh.txt",
+      "submit/revision/reviewer2_point2_revision_record.txt",
+      "submit/revision/reviewer2_point3_reply_zh.txt",
+      "submit/revision/reviewer2_point3_changes_comparison_zh.txt",
+      "submit/revision/reviewer2_point3_revision_record.txt",
+      "submit/revision/reviewer2_point4_reply_zh.txt",
+      "submit/revision/reviewer2_point4_changes_comparison_zh.txt",
+      "submit/revision/reviewer2_point4_revision_record.txt",
+      "submit/revision/reviewer2_point4_implementation.diff",
+      "submit/revision/reviewer2_point4_implementation_check.json",
+      "submit/revision/reviewer2_point4_statistics.json",
+      "submit/revision/reviewer2_point4_results_zh.txt",
+      "submit/revision/reviewer2_point4_external_ablation.csv",
+      "submit/revision/reviewer2_point4_table5_top5.csv",
+      "submit/revision/reviewer2_point4_table5_top5.tex"
+    ],
+    "push_authorized": false
+  }
+}

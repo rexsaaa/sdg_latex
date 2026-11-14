@@ -1,0 +1,190 @@
+审稿人2主要意见4：已落实修改与逐处中英文前后对照
+日期：2026-11-14（北京时间）
+状态：暂时完成（2026-11-15，当前中文回复及已批准正文返修阶段）。第1、2、4处及原总结首句ODIR Off-site限定均落实，第3处不改；高亮版和清洁版均26页。用户已授权审核通过后提交本点相关改动，提交前核验通过。
+落实基线：02270bb63c5d96d76498260663c39bc7722b0f27（审稿人2点3顺序调整）。
+融入顺序：原Off-site表4/图8及逐组分析、图9 → EDID设置 → 独立表5 → EDID结果 → 限定为ODIR Off-site的原总结 → 第4.5节。
+当前位置：第1处在第16页；第2处表5与第4处设置在第18页，结果跨第18—19页；总结限定在第19页。原泛化最佳表5→现表6、原top5统计表6→现表7，均在第20页；隐私表顺延为表8/9/10（第22/23/24页）。正文标签引用及点2/3/4正式回复相应引用已同步。
+以下第1、2、4处中英文通过稿原样保留；只更新落实状态和位置。原表4、图8及第3处原文保持。附项A记录本轮新通过的总结首句范围限定。第五节保留落实前审核历史，以本页状态及第六节核验为准。
+
+当前主稿：sdg_latex/submit/build/。英文原文来自当前服务器稿；LaTeX高亮命令省略、引用按已核对的表4/图8编号展开。中文为英文原文的审核译文。
+
+一、已匹配与保留内容
+
+1. 回复（1）：第4.1节第6行明确Off-site用于模型选择、On-site用于泛化评价；第4.5节第128/130行明确同次训练按源域Off-site验证Final保留五候选，表6展示最佳目标结果，表7汇总候选均值和样本SD。表6表题明确目标排序指标及源/目标同一权重。这些内容已能支撑回复，均保留。
+2. 回复（2）：表7表题已有single training run、n=5、recorded source-validation/target-evaluation scores，第4.5节第130行说明SD反映候选间变化；第144行及表7包含On-site/EDID均值优势和RFMiD的FACT最高。均保留，不另加独立随机种子、置信区间或显著性结论，也不增加重复解释段。
+3. 回复（3）的公共设置：第4.1节第36—37行已有EDID与ODIR的D/G/M对应、3358张目标图像及1871张源域训练图像，第4.2节第41行已有Final定义。保留，不重写数据集动机、单正标签说明或已有优化设置。
+4. 原表4的ODIR四行32个数值、顺序及粗体，图8雷达图及其明确标为ODIR Off-site的图注，图9及其图注，以及原Off-site基线/ARC/完整模型分析、末尾总结除本轮通过的首句范围限定外、后续第4.5节均保留。下列第3处DFE文字核准候选已被用户排除，不在本轮落实；已有配置与归因差异仍作未解决事实记录，不改变图表或结果。
+5. 表6与表7的五方法顺序ResNet50→MixStyle→RSC→FACT→Ours、全部数值和已批准高亮保持。EDID补充消融完整模型55.42与表6既有55.35分别来自不同评价批次，不混用、不覆盖。
+
+二、必要修改范围与审核顺序
+
+当前修改范围为原编号第1、2、4处：第1处引导句、第2处独立EDID表及第4处EDID设置与结果分析均已落实；另落实已通过的总结首句限定。第3处原DFE配置/机制说明候选按用户要求不纳入本轮落实，保留编号供追溯。第1、2、4处对应回复（3），新表报告方式同时衔接回复（1）。
+独立EDID表置于原Off-site分析/CAM可视化之后、原总结之前，与相应设置和结果分析相邻。已按逐项通过的文字与表题落实；原表4及图8关系保持，表号顺延、版面位置和引用已在两版PDF核对。
+重要核准：原DFE说明写“complete”和CAM残差加权归因，但旧Off-site onlydual与新增EDID onlydual配置均为disable_cam=true、use_cam_guidance=false、disable_attention=true。按用户已确认的原四组设置使用onlydual的53.75，不能替换为dualcam的53.40，也不能继续写该行已启用CAM。第3处原拟更正这一配置条件及归因，现按用户要求不落实。此范围决定不等于确认CAM已启用；保留原始证据，不把这些关闭CAM的运行写成启用CAM的结果，也不据此证明CAM贡献。
+
+三、逐处对照
+
+【第1处：第4.4节首段保留Off-site介绍并引出EDID——已落实】
+位置：sections/04_experiments_trans.tex第78行。
+修改原因：采用独立EDID表后，表4与图8仍专门对应Off-site，原引入无需重写。仅将“下文分析”限定为“下文对Off-site的分析”，并在段末增加外部评价引导句，建立先Off-site、后EDID的阅读顺序。
+对应回复：（3）沿用相同四组消融配置，将模块比较延伸至EDID。
+保留范围：原研究目的、模块全称、CAM可视化目的、表4与图8说明、双眼分析理由均原样保留；不提前添加外部数据设置、结果数值或新表号。
+审核状态：用户明确“第一处可以，按这个版本保留”。以下四段中英前后对照原样保存，已写入论文；对应PDF第16页。
+
+原始英文
+To assess the independent contributions and combined effects of the two core modules in the proposed method, namely Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) and Adaptive Label-Feature Relevance Construction (ARC), and to examine the improvement in model interpretability brought by CAM guidance, module-wise ablation experiments are conducted using ODIR Off-site metrics. The results are shown in Table 4, and Fig. 8 provides an intuitive radar-chart comparison of the metric distributions across models. Table 4 reports both monocular and binocular metrics, which show a consistent improvement trend; to align with the official patient-level evaluation standard and keep the main text concise, the following analysis focuses on the binocular metrics.
+
+原始中文
+为评估本文两个核心模块，即双分支引导的域不变特征提取（DFE）和自适应标签—特征关联构建（ARC）的独立贡献及联合效果，并考察CAM引导带来的模型可解释性改善，本文采用ODIR Off-site指标开展模块消融实验。结果见表4，图8通过雷达图直观比较不同模型的指标分布。表4同时报告单眼和双眼指标，二者呈现一致的改善趋势；为与官方患者级评价标准保持一致并使正文简洁，下文分析重点讨论双眼指标。
+
+修改后英文
+To assess the independent contributions and combined effects of the two core modules in the proposed method, namely Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) and Adaptive Label-Feature Relevance Construction (ARC), and to examine the improvement in model interpretability brought by CAM guidance, module-wise ablation experiments are conducted using ODIR Off-site metrics. The results are shown in Table 4, and Fig. 8 provides an intuitive radar-chart comparison of the metric distributions across models. Table 4 reports both monocular and binocular metrics, which show a consistent improvement trend; to align with the official patient-level evaluation standard and keep the main text concise, the following Off-site analysis focuses on the binocular metrics. The same four ablation configurations are further evaluated on EDID to examine whether the performance gains extend to an external dataset.
+
+修改后中文
+为评估本文两个核心模块，即双分支引导的域不变特征提取（DFE）和自适应标签—特征关联构建（ARC）的独立贡献及联合效果，并考察CAM引导带来的模型可解释性改善，本文采用ODIR Off-site指标开展模块消融实验。结果见表4，图8通过雷达图直观比较不同模型的指标分布。表4同时报告单眼和双眼指标，二者呈现一致的改善趋势；为与官方患者级评价标准保持一致并使正文简洁，下文对Off-site的分析重点讨论双眼指标。进一步在EDID上评价相同四组消融配置，以考察性能改善能否延伸至外部数据集。
+
+【第2处：新增独立EDID消融表——已落实】
+位置：第4.4节原Off-site分析和CAM可视化之后、原总结段之前，位于新增EDID设置说明与结果分析之间。现为表5（PDF第18页）；泛化最佳/统计表已顺延为表6/7（第20页）。源文件为tables/src/table_edid_ablation_trans.tex，由章节第114行引入。
+修改原因：为已完成的外部四组模块消融提供独立、完整的指标证据，保留原表4—图8对应关系。
+对应回复：（3）EDID四组配置与联合模型结果；表题中的候选来源/最佳结果说明同时衔接回复（1）。
+保留范围：原表4及其表题、全部32个Off-site数值、图8及图注不动。新表只列ResNet50、ResNet50+DFE、ResNet50+ARC、ResNet50+DFE+ARC，不增加CAM行。
+审核状态：用户明确第二处按当前格式保留，并要求删除英文“Bold values indicate the highest score in each column.”。已同步删除对应中文句；其余已通过表题、表头、四组数据和表内粗体保持，已落实到新表源文件并编译核对。
+格式复核（2026-11-14）：用户认为表述无问题，指出表头箭头与表4不一致。已按当前表4源码移除中英文表头箭头，仅在表题列出四项指标的向上箭头说明。模型顺序、16格数值、粗体及其他表题信息保持；其后已按上述审核状态通过。
+
+原始英文
+No corresponding EDID ablation table is present. The existing Table 4 reports only ODIR Off-site results.
+
+原始中文
+原无EDID消融表。现有表4仅报告ODIR Off-site结果。
+
+修改后英文（新增独立表，Table 5）
+表题：
+External ablation results on EDID. The four configurations follow the ODIR Off-site ablation setting and are trained on the ODIR D/G/M subset. Best-observed image-level results are reported from the supplementary ablation evaluations, using EDID Final to select among five checkpoints retained by source-domain validation for each configuration. All scores are reported on a percentage scale. Kappa ↑, F1 ↑, AUC ↑, and Final ↑ indicate that higher values are better.
+
+表格内容：
+| Model | Kappa | F1 | AUC | Final |
+|---|---:|---:|---:|---:|
+| ResNet50 | 23.83 | 65.54 | 67.09 | 52.16 |
+| ResNet50+DFE | 26.80 | 66.65 | 67.80 | 53.75 |
+| ResNet50+ARC | 23.35 | 65.50 | 70.96 | 53.27 |
+| **ResNet50+DFE+ARC (Ours)** | **27.31** | **67.30** | **71.67** | **55.42** |
+
+修改后中文（新增独立表，表5）
+表题：
+EDID上的外部消融结果。四组配置沿用ODIR Off-site消融设置，并在ODIR D/G/M子集上训练。表中报告此次补充消融评价的最佳观测图像级结果：每组配置根据源域验证表现保留五个候选检查点，再按EDID Final选取报告结果。所有分数均以百分数尺度表示。Kappa ↑、F1 ↑、AUC ↑、Final ↑表示数值越高越好。
+
+表格内容：
+| 模型 | Kappa | F1 | AUC | Final |
+|---|---:|---:|---:|---:|
+| ResNet50 | 23.83 | 65.54 | 67.09 | 52.16 |
+| ResNet50+DFE | 26.80 | 66.65 | 67.80 | 53.75 |
+| ResNet50+ARC | 23.35 | 65.50 | 70.96 | 53.27 |
+| **ResNet50+DFE+ARC（本文方法）** | **27.31** | **67.30** | **71.67** | **55.42** |
+
+内部核对说明（不纳入表题）：16格数值直接读取edid_ablation_summary.csv的base/onlydual/onlyatten/total四行，F1对应micro_f1；Kappa/F1/AUC/Final均取同一条记录，不分别挑各指标最大值。完整模型四列均为最高，按列加粗。新消融55.42与原泛化表历史55.35来源不同，均按各自记录保留；不将本表称为top5均值、独立多种子结果或已修正全部择优偏差。
+
+【第3处：原DFE消融配置与机制归因核准——用户不采纳，本轮不落实】
+位置：sections/04_experiments_trans.tex第95行，ResNet50+DFE项目。
+最新决定（2026-11-14）：用户要求不改此处，并要求忽略配置、默认启用CAM。本轮仅执行“不改此处”的范围决定；不采纳与既有证据不符的事实重标。以下对照保留为未采纳候选，不得据其实施修改，也不得将该事项记作CAM启用已核验。
+修改原因：旧Off-site与新EDID的对应onlydual配置均关闭CAM；原句“完整DFE”和“CAM引导残差加权”的表述与其不一致。新增外部四组时应准确界定该行，不能把dualcam的结果换入同一名称。
+对应回复：（3）外部消融沿用Off-site四组配置；本项是这一对应关系的必要说明，不新增消融配置或实验。
+保留范围：四组名称不改；78.37、+2.18、Kappa+3.45、AUC+2.10原样保留；保留掩码过滤及域不变特征学习的解释。该候选涉及既有正文，必须审核后才能改动。
+审核状态（2026-11-14）：用户要求在第1、2处通过后查看本处完整中英前后对照。本轮再次核对当前第95行原文及旧Off-site/新增EDID的onlydual配置：两者均disable_cam=true、use_cam_guidance=false，保留双分支、关闭attention。下方候选此前已交付，随后用户决定不采纳，未写回正文。
+
+原始英文
+ResNet50+DFE: only the complete Dual-Branch Guided Domain-Invariant Feature Extraction module is introduced. The Final score increases to 78.37 (+2.18), Kappa increases by 3.45, and AUC increases by 2.10. The improvement mainly comes from CAM-guided residual weighting and the mask mechanism, which effectively suppress domain-specific noise and encourage the model to focus on domain-invariant features.
+
+原始中文
+ResNet50+DFE：仅引入完整的双分支引导域不变特征提取模块。Final提升至78.37（+2.18），Kappa提高3.45，AUC提高2.10。改善主要来自CAM引导的残差加权和掩码机制，二者有效抑制域特异噪声，并促使模型关注域不变特征。
+
+修改后英文
+ResNet50+DFE: the dual-branch feature extraction configuration is introduced, with CAM guidance disabled in this ablation. The Final score increases to 78.37 (+2.18), Kappa increases by 3.45, and AUC increases by 2.10. The cross-view mask mechanism filters inconsistent feature responses between the two views, supporting the learning of domain-invariant features.
+
+修改后中文
+ResNet50+DFE：该消融配置引入双分支特征提取，并关闭CAM引导。Final提升至78.37（+2.18），Kappa提高3.45，AUC提高2.10。跨视图掩码机制过滤两个视图之间不一致的特征响应，支持域不变特征学习。
+
+【第4处：补充EDID消融设置与结果分析——已落实；独立表为表5】
+位置：sections/04_experiments_trans.tex第112行设置段、第114行引入独立表5、第116行结果段，均在图9及原Off-site分析之后；第118行原总结仅增加已通过的ODIR Off-site限定。PDF设置/表格在第18页，结果跨第18—19页。
+修改原因：表格之外需要交代外部消融的目的、源域训练/目标评价关系以及联合配置的结果含义，形成“目的—设置—结果”的完整分析。
+对应回复：（3）共有D/G/M三类、相同四组设置、EDID四组Final与联合优势。
+保留范围：引用第4.1节已有类别与数据划分，不重复EDID背景和样本分布；按用户决定不修改第3处，也不改其他Off-site逐组分析、图9；原结尾总结仅加已通过的首句范围限定，第4.5节的55.35保持。
+审核状态（2026-11-14）：用户再次确认第3处不用改，要求继续第4处。已核对当前插入点、第4.1节D/G/M设置与EDID四组Final，下面完整中英对照沿用原候选。用户随后确认“第四处可以，按这个版本保留”并授权集中落实；用户随后通过整体审核提出的总结范围限定，并再次授权集中落实；本处已按下列文字写入。
+论证说明：第一段交代由Off-site延伸到外部数据的目的和共同设置，第二段依据最佳观测Final说明四组配置与联合表现；不将该比较写成独立多种子显著性结果，也不新增CAM作用的实证归因。
+
+原始英文
+No corresponding EDID ablation paragraph is present. The CAM visualization is followed by the existing concluding paragraph beginning “The ablation results show that...”.
+
+原始中文
+原无EDID消融分析段。CAM可视化之后直接接以“The ablation results show that...”开头的原消融总结段。
+
+修改后英文（在原总结前新增）
+To examine whether the module-level improvements observed on ODIR also occur on an external dataset, the four ablation configurations are evaluated in the ODIR-to-EDID setting. Training uses the ODIR D/G/M subset described in Section 4.1, and EDID provides the target evaluation images. The ResNet50 backbone, source data split, and evaluation metrics are kept consistent across the four configurations.
+
+Table 5 reports the results of these supplementary ablation evaluations. The best-observed image-level Final scores are 52.16 for ResNet50, 53.75 for ResNet50+DFE, 53.27 for ResNet50+ARC, and 55.42 for the joint model. The joint configuration improves Final by 3.26 points over the baseline and by 1.67 and 2.15 points over the DFE and ARC configurations, respectively. It achieves the highest Final in both the ODIR Off-site and external EDID ablations, supporting the value of the joint configuration for cross-dataset recognition.
+
+修改后中文（在原总结前新增）
+为考察在ODIR上观察到的模块层面改善能否同样体现在外部数据集上，本文在ODIR→EDID设置下评价这四组消融配置。训练采用第4.1节介绍的ODIR D/G/M子集，EDID图像用于目标域评价。四组配置保持相同的ResNet50骨干、源域数据划分和评价指标。
+
+表5报告此次补充消融评价的结果。ResNet50、ResNet50+DFE、ResNet50+ARC和联合模型的最佳观测图像级Final分别为52.16、53.75、53.27和55.42。联合配置相对于基线提高3.26分，相对于DFE和ARC配置分别提高1.67和2.15分。联合配置在ODIR Off-site和外部EDID消融中均取得最高Final，支持其在跨数据集识别中的应用价值。
+
+【附项A：原总结首句限定ODIR Off-site——已通过并落实】
+位置：sections/04_experiments_trans.tex第118行；两版PDF第19页。
+修改原因：新增EDID分析后，明确原总结中多病共现相关结论的证据来自ODIR Off-site，保留EDID外部识别分析及原总结其余论述。
+对应回复：（3）外部消融的适用范围及其与原Off-site消融的衔接。
+原始英文
+The ablation results show that Adaptive Label-Feature Relevance Construction (ARC) improves label relevance modeling in multi-disease co-occurrence scenarios, while Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) supports learning domain-invariant features from a single source domain when multi-institutional joint training is restricted. The integration of the two modules further improves multi-label recognition performance under single-source-domain training and provides a basis for the subsequent cross-domain generalization results.
+
+原始中文
+消融结果表明，自适应标签—特征关联构建（ARC）改善了多病共现场景下的标签关联建模，而双分支引导的域不变特征提取（DFE）支持在多机构联合训练受限时从单一源域学习域不变特征。两模块的结合进一步提高了单源域训练条件下的多标签识别性能，并为后续跨域泛化结果提供了基础。
+
+修改后英文
+The ODIR Off-site ablation results show that Adaptive Label-Feature Relevance Construction (ARC) improves label relevance modeling in multi-disease co-occurrence scenarios, while Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) supports learning domain-invariant features from a single source domain when multi-institutional joint training is restricted. The integration of the two modules further improves multi-label recognition performance under single-source-domain training and provides a basis for the subsequent cross-domain generalization results.
+
+修改后中文
+ODIR Off-site上的消融结果表明，自适应标签—特征关联构建（ARC）改善了多病共现场景下的标签关联建模，而双分支引导的域不变特征提取（DFE）支持在多机构联合训练受限时从单一源域学习域不变特征。两模块的结合进一步提高了单源域训练条件下的多标签识别性能，并为后续跨域泛化结果提供了基础。
+
+四、证据及落实核对
+
+1. 四组配置依次对应base、onlydual、onlyatten、total；额外dualcam保持原始记录但不进入本次模块对照。
+2. 数据源：lib/output_cross_domain_ablation_20261111_inference/edid_ablation_summary.csv；SHA256=31d4504b8345851f4cb5e00d83666aea7d8c424bd98a27c3c9f346fbb28a43e4。
+3. onlydual对应配置：lib/output_check_train_aug/offset_onlydual_best/config.json、lib/output_cross_domain_ablation_20261111/odir2edid_onlydual_seed42/config.json；已重新核对关闭CAM、保留双分支、关闭attention。
+4. 原表4的ODIR数据32格及独立EDID表16格均按原有两位小数展示；正文3.26/1.67/2.15分按展示值相减，与已通过回复一致。
+5. 已写入获批正文与独立表，使用python scripts/build_revision.py生成两版26页PDF；保留累计高亮，未运行新实验、改动原始实验输出或Git提交/推送/Mac同步。
+6. 点4回复开头及（3）已补入第4.4节/表5位置，泛化比较引用改为表6/7；点3正式回复仅同步表号，点2隐私回复按表格内容同步为表9/10并移除页码。其他实质论证保持。
+
+五、落实前整体叙事审核历史（2026-11-14；下列状态为当时状态，后续落实见第六节）
+
+状态核对：用户先确认第4处并授权将第1、2、4处落实、编译双版本PDF及同步位置，随后主动中断并要求整体审核。当前正文/表格/两版PDF相对论文HEAD无本点差异，独立EDID表文件尚未创建，第1/4处仍未写入。原落实授权保留；本轮按最新要求完成叙事审核，不将审核建议自动并入已通过文字。
+
+审核方法：通读当前第4.3节末尾、第4.4节全节及第4.5节开头/统计比较，将已通过引导句与EDID两段仅在/tmp组成阅读副本，核对旧表4、图8、四组Off-site分析、图9及原总结的顺序。未改正文或试编新稿。
+
+结论：第1、2、4处属于现有模块消融论证的外部延伸，整体无需重排。顺序为Off-site模块定量比较→图8与逐组解释→图9可视化→EDID目的/设置、独立表、结果→消融总结→第4.5节完整方法的泛化比较。新增内容在原Off-site论证结束后接入，保留其完整性。
+
+逐项影响：
+1. 第1处仅限定Off-site分析范围并预告EDID，未删除原研究目的和患者级评价理由；可保持通过版本。
+2. 第2处独立表使图8继续直接对应原表4，EDID图像级指标另列；保持单眼/双眼与外部图像级的条件区分。新表不需要配套新雷达图。
+3. 第4处第一段交代外部检验目的/共同设置，第二段说明Final与联合配置的表现，能够接续原消融。第4.1节已经交代D/G/M和EDID单正标签，不需另扩数据背景。指标叙述只限Final优势，不把ARC所有分项都说成改善。
+4. 第4.4节EDID消融比较同一框架的不同配置，第4.5节比较完整框架与ResNet50/MixStyle/RSC/FACT，并报告候选均值/SD；即使都使用EDID，论证职责不同，不构成重复章节。原“为后续跨域泛化结果提供基础”的总结末句仍能保留。
+
+建议的一处额外范围限定（尚未通过，不得自动写回）：
+原总结紧接新增EDID结果，会使“The ablation results show that ... ARC improves label relevance modeling in multi-disease co-occurrence scenarios”可能被理解为也由单正标签EDID实验支持。建议仅把总结首句开头“The ablation results show that”改为“The ODIR Off-site ablation results show that”，中文从“消融结果表明”改为“ODIR Off-site上的消融结果表明”。其后原句和总结末句保持。该限定与已通过第1处限定Off-site双眼分析相呼应；属于本次整体审核新发现的范围问题，不重开第3处。
+
+另两项衔接核对：
+- 新消融55.42与原方法比较55.35来自不同评价批次；已通过表题和结果段的“supplementary ablation evaluations”已有来源区分，不统一或覆盖数值，也不写成同一结果。两处研究问题不同，正文应保持该区别。
+- 新表预计为表5，现泛化最佳/均值表顺延为6/7，后续表同样顺延；当前LaTeX正文引用采用标签，未发现需手改的正文数字式Table引用（发现的数字仅为旧表源文件注释）。正式编译后仍须核对编号、回复/对照中的中文手写表号、浮动表与设置/分析的距离，以及表4—图8关系。未试排，不预判页数或声称版式已通过。
+
+本轮只更新审核对照、记录和索引；已通过段落/表格内容、正文、图表、PDF和回复不变。配置事实差异按此前记录保留，此次结构审核不将其记作已解决。
+
+六、获批落实与最终核验（2026-11-14）
+
+1. 第1、2、4处及附项A均已写入；第3处原文逐字保留。撤回本次三组源码替换即可精确还原实施前章节，其他章节、既有表格与图像保持原指纹。
+2. python scripts/build_revision.py构建成功，高亮版和清洁版均26页。两版表5在第18页、表6/7在第20页，后续隐私表8/9/10在第22/23/24页；图8/表4继续同在第17页。
+3. 新表16格、四组顺序、表头无箭头、表题方向说明、完整模型粗体与通过稿一致；原泛化两表数值/方法顺序和已有高亮保留。设置紧邻新表，结果段从第18页自然续至第19页，再接范围已限定的原总结及第4.5节。
+4. 已核对新表和相关段落的两版版面、引用及高亮；最终编译日志无未定义引用、重复标签或新错误，仅有既有封面警告。具体指纹及核验记录见reviewer2_point4_implementation_check.json，源码差异见同名implementation.diff。
+5. 构建时发现模板邮件图标缺失，已从实施前清洁版PDF恢复原JPEG，SHA256与此前点3记录相同（51cadbff5919f51f76f6f9238b18c9b5d512ea9234cb6d7fef7b53d9767fa845）；未改模板、作者信息或图像内容。
+6. 本对照、点4回复及记录、PROJECT_INDEX已同步；点2/3正式回复仅作受影响的引用同步，历史前后对照加注当前编号。该项为11月14日交付时状态；11月15日用户授权审核后提交，现已完成获批范围的提交前审核。第3处事实差异仍按原记录保留。
+
+七、暂时完成审核（2026-11-15）
+
+已逐项核对回复（1）与第4.5节/表6、回复（2）与第4.5节/表7、回复（3）与第4.4节/表5，修改位置、四组消融数值、均值/SD及比较范围一致。第3处保持原文，第1/2/4处和附项A无新增改写。PDF、源码指纹与上次已核验版本相同，26页/96格及引用复查通过，故沿用既有编译产物与目视检查，无重复构建。
+可按当前已确认方案暂时完成中文返修阶段。候选SD、最佳观测选择口径及第3处未解决事实差异仍遵循原记录，不把阶段完成扩展为独立训练显著性或全部偏差已解决的认定。用户授权本地提交本点相关21个文件，清单见implementation_check.json；提交实际哈希见项目索引。

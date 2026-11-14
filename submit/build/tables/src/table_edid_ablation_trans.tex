@@ -1,0 +1,16 @@
+% Reviewer 2 major point 4: external module ablation on EDID.
+\begin{table}[pos=H]
+\centering
+\caption{\protect\revision{External ablation results on EDID. The four configurations follow the ODIR Off-site ablation setting and are trained on the ODIR D/G/M subset. Best-observed image-level results are reported from the supplementary ablation evaluations, using EDID Final to select among five checkpoints retained by source-domain validation for each configuration. All scores are reported on a percentage scale. Kappa $\uparrow$, F1 $\uparrow$, AUC $\uparrow$, and Final $\uparrow$ indicate that higher values are better.}}
+\label{tab:ablation-edid}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc@{}}
+\toprule
+\revision{Model} & \revision{Kappa} & \revision{F1} & \revision{AUC} & \revision{Final} \\
+\midrule
+\revision{ResNet50} & \revision{23.83} & \revision{65.54} & \revision{67.09} & \revision{52.16} \\
+\revision{ResNet50+DFE} & \revision{26.80} & \revision{66.65} & \revision{67.80} & \revision{53.75} \\
+\revision{ResNet50+ARC} & \revision{23.35} & \revision{65.50} & \revision{70.96} & \revision{53.27} \\
+\textbf{\revision{ResNet50+DFE+ARC (Ours)}} & \textbf{\revision{27.31}} & \textbf{\revision{67.30}} & \textbf{\revision{71.67}} & \textbf{\revision{55.42}} \\
+\bottomrule
+\end{tabular*}
+\end{table}
