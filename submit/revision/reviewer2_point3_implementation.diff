@@ -1,6 +1,8 @@
---- before/submit/build/sections/04_experiments_trans.tex
-+++ after/submit/build/sections/04_experiments_trans.tex
-@@ -14,7 +14,9 @@
+diff --git a/submit/build/sections/04_experiments_trans.tex b/submit/build/sections/04_experiments_trans.tex
+index 3e72c66..bb18d58 100644
+--- a/submit/build/sections/04_experiments_trans.tex
++++ b/submit/build/sections/04_experiments_trans.tex
+@@ -14,7 +14,9 @@ This study uses the ODIR-5K (Ocular Disease Intelligent Recognition) \cite{_Ref2
  \label{fig:odir-samples}
  \end{figure}
  
@@ -11,7 +13,7 @@
  
  \begin{figure}
  \centering
-@@ -23,7 +25,7 @@
+@@ -23,7 +25,7 @@ To comprehensively evaluate domain generalization capability, in addition to ODI
  \label{fig:rfmid-samples}
  \end{figure}
  
@@ -20,7 +22,7 @@
  
  \begin{figure}
  \centering
-@@ -32,15 +34,15 @@
+@@ -32,15 +34,15 @@ In addition, this study introduces the EDID \cite{_RefEDID2024} dataset collecte
  \label{fig:edid-samples}
  \end{figure}
  
@@ -40,12 +42,12 @@
  
  \revision{To examine the effect of the dual-branch mask threshold $\tau$ on recognition performance, the joint DFE and ARC model is trained under the non-private setting with $\tau=0.05$, $0.10$, $0.20$, $0.25$, $0.30$, and $0.50$. All runs use the same data split, model architecture, augmentation strategy, and other training parameters. Each run is trained for 50 epochs with a batch size of 32 and a fixed random seed of 42. The checkpoint with the best monocular Final score is selected using the same source-domain validation rule for all runs.}
  
-@@ -113,15 +115,29 @@
+@@ -113,15 +115,29 @@ The ablation results show that Adaptive Label-Feature Relevance Construction (AR
  
  To comprehensively validate the generalization capability of the proposed method under single-source-domain training and the effectiveness of the privacy-preserving mechanism, \revision{the evaluation is organized into three stages}: in-domain generalization, cross-domain generalization, and privacy preservation. \revision{The evaluation first assesses multi-label recognition performance within the ODIR domain (Off-site and On-site), then examines cross-domain generalization capability on the two unseen domains RFMiD and EDID, and finally evaluates performance retention after introducing the privacy-preserving mechanism.} The first two stages are completed under the non-private setting, while the third stage is completed under the privacy-preserving setting.
  
 -1. Generalization performance under the non-private setting. The results are shown in \hyperref[tab:generalization]{Table~\ref*{tab:generalization}}, which reports the Final scores of the baseline and the proposed method on different test sets. The generalization experiments are organized along three evaluation directions: ODIR in-domain Off-site \(\rightarrow\) On-site, cross-domain generalization from ODIR to RFMiD, and cross-domain generalization from ODIR to EDID. For each direction, model selection and evaluation are based on the top five candidate checkpoints saved during training. Specifically, the checkpoint group with the best test-set performance is selected from the candidate checkpoints of the baseline and the proposed method, respectively, and the results of this checkpoint group on the source-domain Off-site set and the target domain are reported simultaneously.
-+1. Generalization performance under the non-private setting. \revision{To assess the recognition performance of the proposed framework relative to different domain generalization methods under single-source training, \mbox{\tabref{tab:generalization}} compares the ResNet50 baseline, MixStyle \mbox{\cite{_Ref213949562}}, FACT \mbox{\cite{_Ref213949788}}, RSC \mbox{\cite{_Ref213949796}}, and the proposed method. ResNet50 provides a reference for measuring the recognition gains of the proposed framework over the base model, while the three domain generalization methods provide comparisons based on different mechanisms. MixStyle mixes feature-style statistics to simulate appearance variation; FACT combines Fourier augmentation with teacher--student consistency learning; and RSC uses self-challenging feature masking to encourage the use of different discriminative cues.}
++1. Generalization performance under the non-private setting. \revision{To assess the recognition performance of the proposed framework relative to different domain generalization methods under single-source training, \mbox{\tabref{tab:generalization}} compares the ResNet50 baseline, MixStyle \mbox{\cite{_Ref213949562}}, RSC \mbox{\cite{_Ref213949796}}, FACT \mbox{\cite{_Ref213949788}}, and the proposed method. ResNet50 provides a reference for measuring the recognition gains of the proposed framework over the base model, while the three domain generalization methods provide comparisons based on different mechanisms. MixStyle mixes feature-style statistics to simulate appearance variation; RSC uses self-challenging feature masking to encourage the use of different discriminative cues; and FACT combines Fourier augmentation with teacher--student consistency learning.}
 +
 +\revision{The classification outputs and supervision are adapted to the multi-label task while retaining the core mechanisms of the three methods. For RSC, feature-importance and confidence scores are computed by aggregating scores over the positive labels of each sample.}
 +
@@ -54,9 +56,9 @@
 +\revision{To characterize the best performance observed within this candidate set, \mbox{\tabref{tab:generalization}} reports the best target-test results among the five candidates, using binocular Final for On-site and monocular Final for RFMiD and EDID as the comparison metric. The Off-site and target-domain results in each direction correspond to the same checkpoint attaining this result. To complement these best-observed results, \mbox{\tabref{tab:generalization-top5}} reports the mean and sample standard deviation of the five candidates' recorded evaluation scores, describing their average performance and variation across checkpoints.}
  
  \input{tables/src/table2_generalization_trans.tex}
-+
-+\input{tables/src/table_generalization_top5_trans.tex}
  
++\input{tables/src/table_generalization_top5_trans.tex}
++
  For ODIR in-domain generalization, the test set is On-site, and \hyperref[tab:generalization]{Table~\ref*{tab:generalization}} reports both monocular and binocular evaluation protocols. The baseline checkpoint achieves binocular scores of 76.19 and 75.23 on Off-site and On-site, respectively, whereas the corresponding checkpoint of the proposed method improves these scores to 78.79 and 77.49, with gains of 2.60 and 2.26 percentage points. The monocular metrics also increase from 79.37 and 77.30 to 81.71 and 78.98. This indicates that dual-branch guided feature learning and CAM-guided attention can enhance the model's focus on disease-related regions. Binocular metrics are lower than monocular metrics because the model is trained with monocular data. During inference, when the left-eye and right-eye predictions of the same patient are merged, an incorrect prediction from either eye may affect patient-level judgment, amplifying the effect of small monocular errors on the final metric.
  
  For cross-domain generalization, the complete label spaces of RFMiD, EDID, and ODIR are inconsistent. Therefore, this study first reconstructs shared three-class label spaces before generalization evaluation. RFMiD is aligned using D/A/M classes, while EDID is aligned using D/G/M classes. Although EDID is a single-label dataset, it can still be used as a cross-domain generalization dataset under the three-class shared label space. Considering that the cross-domain generalization datasets differ more significantly from ODIR in imaging devices, acquisition procedures, illumination conditions, disease composition, and label definitions, model selection and evaluation are also based on the top five candidate checkpoints. The monocular Final scores of the selected checkpoint group on the three-class ODIR Off-site set and the cross-domain generalization dataset are reported simultaneously.
@@ -72,8 +74,10 @@
  
  \begin{figure}
  \centering
---- before/submit/build/tables/src/table2_generalization_trans.tex
-+++ after/submit/build/tables/src/table2_generalization_trans.tex
+diff --git a/submit/build/tables/src/table2_generalization_trans.tex b/submit/build/tables/src/table2_generalization_trans.tex
+index 898db2f..ebcc2ff 100644
+--- a/submit/build/tables/src/table2_generalization_trans.tex
++++ b/submit/build/tables/src/table2_generalization_trans.tex
 @@ -1,8 +1,7 @@
 -% Chapter 4 Experiments - Table 4
 -% Generalization performance on ODIR, RFMiD/RIADD, and EDID.
@@ -91,14 +95,17 @@
  ResNet50 & 79.37 & 76.19 & 77.30 & 75.23 & 94.39 & 83.86 & 94.30 & 52.16 \\
 -\textbf{Ours} & \textbf{81.71} & \textbf{78.79} & \textbf{78.98} & \textbf{77.49} & \textbf{95.94} & \textbf{85.06} & \textbf{96.03} & \textbf{55.35} \\
 +\revision{MixStyle} & \revision{79.10} & \revision{75.82} & \revision{76.59} & \revision{74.76} & \revision{95.08} & \revision{84.29} & \revision{94.70} & \revision{51.05} \\
-+\revision{FACT} & \revision{79.50} & \revision{76.81} & \revision{78.13} & \revision{76.55} & \textbf{\revision{95.99}} & \textbf{\revision{86.72}} & \revision{94.96} & \revision{53.88} \\
 +\revision{RSC} & \revision{80.29} & \revision{76.82} & \revision{78.05} & \revision{75.86} & \revision{95.98} & \revision{84.25} & \revision{94.88} & \revision{52.16} \\
++\revision{FACT} & \revision{79.50} & \revision{76.81} & \revision{78.13} & \revision{76.55} & \textbf{\revision{95.99}} & \textbf{\revision{86.72}} & \revision{94.96} & \revision{53.88} \\
 +\textbf{Ours} & \textbf{81.71} & \textbf{78.79} & \textbf{78.98} & \textbf{77.49} & 95.94 & 85.06 & \textbf{96.03} & \textbf{55.35} \\
  \bottomrule
  \end{tabular}
  }
---- before/submit/build/tables/src/table_generalization_top5_trans.tex
-+++ after/submit/build/tables/src/table_generalization_top5_trans.tex
+diff --git a/submit/build/tables/src/table_generalization_top5_trans.tex b/submit/build/tables/src/table_generalization_top5_trans.tex
+new file mode 100644
+index 0000000..aa32bfb
+--- /dev/null
++++ b/submit/build/tables/src/table_generalization_top5_trans.tex
 @@ -0,0 +1,23 @@
 +% Reviewer 2 major point 3: candidate mean and sample SD.
 +\begin{table}
@@ -116,8 +123,8 @@
 +\midrule
 +\revision{ResNet50} & \revision{79.42$\pm$0.08} & \revision{75.84$\pm$0.56} & \revision{76.80$\pm$0.49} & \revision{74.13$\pm$0.69} & \revision{94.47$\pm$0.08} & \revision{83.09$\pm$0.60} & \revision{94.31$\pm$0.11} & \revision{51.50$\pm$0.66} \\
 +\revision{MixStyle} & \revision{79.07$\pm$0.13} & \revision{75.31$\pm$0.39} & \revision{76.23$\pm$0.26} & \revision{73.73$\pm$0.62} & \revision{95.09$\pm$0.06} & \revision{82.76$\pm$1.74} & \revision{94.60$\pm$0.06} & \revision{49.71$\pm$1.25} \\
-+\revision{FACT} & \revision{79.70$\pm$0.14} & \revision{76.60$\pm$0.19} & \revision{77.30$\pm$0.63} & \revision{75.10$\pm$0.92} & \revision{96.03$\pm$0.05} & \textbf{\revision{84.63$\pm$1.30}} & \revision{95.03$\pm$0.10} & \revision{53.15$\pm$0.97} \\
 +\revision{RSC} & \revision{80.36$\pm$0.21} & \revision{76.67$\pm$0.20} & \revision{77.48$\pm$0.38} & \revision{75.21$\pm$0.51} & \revision{95.98$\pm$0.05} & \revision{83.42$\pm$0.54} & \revision{94.63$\pm$0.17} & \revision{51.80$\pm$0.26} \\
++\revision{FACT} & \revision{79.70$\pm$0.14} & \revision{76.60$\pm$0.19} & \revision{77.30$\pm$0.63} & \revision{75.10$\pm$0.92} & \revision{96.03$\pm$0.05} & \textbf{\revision{84.63$\pm$1.30}} & \revision{95.03$\pm$0.10} & \revision{53.15$\pm$0.97} \\
 +\textbf{\revision{Ours}} & \textbf{\revision{81.32$\pm$0.69}} & \textbf{\revision{78.20$\pm$0.75}} & \textbf{\revision{78.11$\pm$0.84}} & \textbf{\revision{76.27$\pm$1.25}} & \textbf{\revision{96.14$\pm$0.37}} & \revision{84.22$\pm$0.71} & \textbf{\revision{95.37$\pm$0.41}} & \textbf{\revision{54.41$\pm$1.06}} \\
 +\bottomrule
 +\end{tabular}

@@ -1,5 +1,5 @@
 {
-  "status": "Completed: user approved the final Chinese response and corresponding manuscript revisions, tables and both review PDFs.",
+  "status": "Completed; user-requested table and introduction order refinement applied, both review PDFs rebuilt and verified.",
   "implemented_items": [
     "1a",
     "1b",
@@ -25,8 +25,8 @@
   "method_order": [
     "ResNet50",
     "MixStyle",
-    "FACT",
     "RSC",
+    "FACT",
     "Ours"
   ],
   "reverse_reconstruction_of_unchanged_chapter_text": true,
@@ -136,13 +136,13 @@
     {
       "item": "5",
       "old": "1. Generalization performance under the non-private setting. The results are shown in \\hyperref[tab:generalization]{Table~\\ref*{tab:generalization}}, which reports the Final scores of the baseline and the proposed method on different test sets. ",
-      "new": "1. Generalization performance under the non-private setting. \\revision{To assess the recognition performance of the proposed framework relative to different domain generalization methods under single-source training, \\mbox{\\tabref{tab:generalization}} compares the ResNet50 baseline, MixStyle \\mbox{\\cite{_Ref213949562}}, FACT \\mbox{\\cite{_Ref213949788}}, RSC \\mbox{\\cite{_Ref213949796}}, and the proposed method. ResNet50 provides a reference for measuring the recognition gains of the proposed framework over the base model, while the three domain generalization methods provide comparisons based on different mechanisms. MixStyle mixes feature-style statistics to simulate appearance variation; FACT combines Fourier augmentation with teacher--student consistency learning; and RSC uses self-challenging feature masking to encourage the use of different discriminative cues.}\n\n\\revision{The classification outputs and supervision are adapted to the multi-label task while retaining the core mechanisms of the three methods. For RSC, feature-importance and confidence scores are computed by aggregating scores over the positive labels of each sample.}\n\n"
+      "new": "1. Generalization performance under the non-private setting. \\revision{To assess the recognition performance of the proposed framework relative to different domain generalization methods under single-source training, \\mbox{\\tabref{tab:generalization}} compares the ResNet50 baseline, MixStyle \\mbox{\\cite{_Ref213949562}}, RSC \\mbox{\\cite{_Ref213949796}}, FACT \\mbox{\\cite{_Ref213949788}}, and the proposed method. ResNet50 provides a reference for measuring the recognition gains of the proposed framework over the base model, while the three domain generalization methods provide comparisons based on different mechanisms. MixStyle mixes feature-style statistics to simulate appearance variation; RSC uses self-challenging feature masking to encourage the use of different discriminative cues; and FACT combines Fourier augmentation with teacher--student consistency learning.}\n\n\\revision{The classification outputs and supervision are adapted to the multi-label task while retaining the core mechanisms of the three methods. For RSC, feature-importance and confidence scores are computed by aggregating scores over the positive labels of each sample.}\n\n"
     }
   ],
   "after_sha256": {
-    "sdg_latex/submit/build/sections/04_experiments_trans.tex": "7e006348d114b02c9a394b62a042c5d65d733a5ad151cc5664970ab22745b9f7",
-    "sdg_latex/submit/build/tables/src/table2_generalization_trans.tex": "7f71addc427e1a17d7a307326dc168da6a2ab802216a6a6ac57dffcecabc5b89",
-    "sdg_latex/submit/build/tables/src/table_generalization_top5_trans.tex": "1ee1fd3d6c5b8dbbb503ef1b570cc89ba77211c867d57ff858ffa4400a6f85b9"
+    "sdg_latex/submit/build/sections/04_experiments_trans.tex": "963c4f6cc4815bead7a7513cc1e71dc363333360f204d1d841812380044c58c1",
+    "sdg_latex/submit/build/tables/src/table2_generalization_trans.tex": "3f959199acbe797022a10ebfe8f309ac819b1161db77ba4d5902fe3f30044af4",
+    "sdg_latex/submit/build/tables/src/table_generalization_top5_trans.tex": "bb9c58f66d2d6f3a53728e6a269afc9b59988ce860c4695c265de7aaed0d5017"
   },
   "compile_repairs": [
     "Item 6 arrow: use $...$ math delimiters supported by the existing soul highlighting macro; wording unchanged."
@@ -272,90 +272,88 @@
     "command": "python scripts/build_revision.py",
     "cwd": "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex",
     "exit_code": 0,
-    "source_files_changed": [],
-    "protected_files_count": 51,
+    "source_files_changed": [
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/sections/04_experiments_trans.tex",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/tables/src/table2_generalization_trans.tex",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/tables/src/table_generalization_top5_trans.tex"
+    ],
+    "protected_files_count": 57,
     "all_protected_hashes_unchanged": true,
     "protected_sha256": {
-      "sdg_latex/submit/build/highlights.pdf": "eb8e8a13fcc4cdd23f0a5d4871e65c64809a3b0f00342ac8c91e94c9da51e8e5",
-      "sdg_latex/submit/build/cas-common.sty": "e95a01f4b33531d01ade231669fcc1e42f52193dddcb22ead5b63240eb952f8f",
-      "sdg_latex/submit/build/main_cas_full.pdf": "e2f9acc8230bc1833c5dfb5946094629b4324d0091ee6d054214631a159162ac",
-      "sdg_latex/submit/build/cas-sc.cls": "5030545ed09c770afa31004817bf8626ca7f311cf795e6c2825ecae113bb42e9",
-      "sdg_latex/submit/build/main_cas.pdf": "4ab600a020e628f3d000b2b748b22ad6b52380b4761db4bea752a02b89b96412",
-      "sdg_latex/submit/build/main_cas.tex": "93c989d1b866e4cf27cf7424b8e9201feb23fc5d79f74e8b83d13a003e32399a",
-      "sdg_latex/submit/build/thumbnails/cas-email.jpeg": "51cadbff5919f51f76f6f9238b18c9b5d512ea9234cb6d7fef7b53d9767fa845",
-      "sdg_latex/submit/build/sections/04_experiments_trans.tex": "7e006348d114b02c9a394b62a042c5d65d733a5ad151cc5664970ab22745b9f7",
-      "sdg_latex/submit/build/sections/03_method_trans.tex": "94dacf2f64206037ce939a440806cc15565b09f6353b1e77492c9f0ecdbd10df",
-      "sdg_latex/submit/build/sections/06_references_trans.tex": "26ca5c98cf5110bac0984093ff41750171cf25773ce2b082c2bfab6c01027dfa",
-      "sdg_latex/submit/build/sections/05_conclusion_trans.tex": "69e55eb9ed4dfdcaa55c982ff40bcf639fd88f2c73affe75b52ac10bd665b711",
-      "sdg_latex/submit/build/sections/01_introduction_trans.tex": "07f38204d8918223d049d1fc6f6bdacee72148a8016ce249a04bb963b40810d3",
-      "sdg_latex/submit/build/sections/02_related_work_trans.tex": "b08cfa6362fd9ef4c250623559d2b03b6326f8079a681b55124e6a51879bba60",
-      "sdg_latex/submit/build/tables/src/table5_privacy_final_trans.tex": "46180ff75dc7fd1d27fdbe3d26c9d4e26fb69e7e0cf1d4586927cee20bff233d",
-      "sdg_latex/submit/build/tables/src/table3_privacy_scan_trans.tex": "5df080338f7129ff2946e7e04848b6828ccf6fc7c8b6e837a0a43ab7bc9fa761",
-      "sdg_latex/submit/build/tables/src/table4_privacy_evolution_trans.tex": "b754658715656c983b07064def4871fc7de043625ccc224673e35befea4cea27",
-      "sdg_latex/submit/build/tables/src/table_tau_sensitivity_trans.tex": "c39ca2befbae6902722f387e8fcc89642d71f8e027fa67e4eb760b64dcf9d3a9",
-      "sdg_latex/submit/build/tables/src/table7_sota_trans.tex": "eeeef45f4eeb5e0c8cb026de78d2cd2b3b0168a56002b7e57d976b59240039c0",
-      "sdg_latex/submit/build/tables/src/table1_dataset_distribution_trans.tex": "6afbd2362b63543810a04c0ce3d4f337d8dfa985e00bd0140082aa4e670e03db",
-      "sdg_latex/submit/build/tables/src/table2_generalization_trans.tex": "7f71addc427e1a17d7a307326dc168da6a2ab802216a6a6ac57dffcecabc5b89",
-      "sdg_latex/submit/build/tables/src/table6_ablation_trans.tex": "e1bc1274459e5e0be0fafcce9a3b17db53d7c4f2bfc0162174c57fa362f72354",
-      "sdg_latex/submit/build/tables/src/table_generalization_top5_trans.tex": "1ee1fd3d6c5b8dbbb503ef1b570cc89ba77211c867d57ff858ffa4400a6f85b9",
-      "sdg_latex/submit/build/images/gragh/image7.png": "d74a60fadf639319bcbac01ca348cc4ea7a9afd31988ec394cbef4f369581b75",
-      "sdg_latex/submit/build/images/gragh/image10.png": "c8b9badd937e00a66f8f7bb6d4661a1dcc4850cd97631fe5abb4559aecdd6276",
-      "sdg_latex/submit/build/images/gragh/image9.png": "dd32960beb19de0e5e83728ee76e5b3ea2598e24e8f90e1c0da3cba8f0301e4d",
-      "sdg_latex/submit/build/images/gragh/image13.png": "da315452ad9a9764b5e392050102c668e88422dfbdd2ac458a92d41af889147a",
-      "sdg_latex/submit/build/images/gragh/image12.png": "5e403367ed0d9a5f6d80987b8954b002deaadd2cf5ae05754dffb6fca867994d",
-      "sdg_latex/submit/build/images/gragh/image11.png": "7c21bc9f97a4941631bb96118d0e4ec32ad5c698727d836375a32f99c080f8e5",
-      "sdg_latex/submit/build/images/gragh/image4.png": "20e46b4151c5728c1fa140f3d67ce41a9fe20b1e53d39dd7668b7f591bfdcecb",
-      "sdg_latex/submit/build/images/media/image8_padded.pdf": "5f502f29d3bb0016b9a45a59b307e26d3db90071dd2beb0453844c2d8b1a3df5",
-      "sdg_latex/submit/build/images/media/edid示例图.pdf": "9b5c91e594e493f80a4533619fa29e491f62a5b1ef5434be742dd36a2264e982",
-      "sdg_latex/submit/build/images/media/image5_padded.pdf": "d7e5e003c0a8874766fbca6d33f9d48a0e508c9114bf8e24660fe8c05ed42278",
-      "sdg_latex/submit/build/images/media/edid_samples_padded.pdf": "b41bafebbb9cd391b01020b9f0f0f5651f3d40610e4ad8deb5e92cc093a39498",
-      "sdg_latex/submit/build/images/media/image2.pdf": "6f125b97a3e6cff7d4c3614e62e4a99726cf48595dcf488434e989f52a640494",
-      "sdg_latex/submit/build/images/media/image2_padded.pdf": "bcc0f745d5604fce80f3794afb84aaabf53ad2f9079a3d8a3df436aab14969bb",
-      "sdg_latex/submit/build/images/media/image3_v2.png": "c163f4b32a4200189d9d8d9dceb513a49755721574accbc422f15ba874002c21",
-      "sdg_latex/submit/build/images/media/image6_padded.pdf": "30baa291d4c46262ef272556cffb7f5583ec6c3560fb08d16aeced94134abd66",
-      "sdg_latex/submit/build/images/media/image1_padded.pdf": "a3b956846071fced79a1352a0d26eeef896259a9a94a2602e0988f11ec3a379d",
-      "sdg_latex/submit/build/images/plots/tsne_rfmid_panel1_tx.png": "229a94078465c09dcae1060ada072604676a31bcd912fd2d9412b2078a0b7a5c",
-      "sdg_latex/submit/build/images/plots/fig_privacy_tradeoff.png": "deef6fe1f663a4c12f4a046a49cb910671701c93f98a64e9058bf675d6bc19f2",
-      "sdg_latex/submit/build/images/plots/tsne_odir8_panel1_tx.png": "6f08e2a982be12e87a53553504b3904f8b0c8fe308aab7d93915ccb81d3db2df",
-      "sdg_latex/submit/build/images/plots/fig_privacy_evolution.png": "7c6771b1b9917c251098a86a64d16d26b8dd50fceef177427dff4dead62d1902",
-      "sdg_latex/submit/build/images/plots/fig_ablation_radar.png": "fea1033ca56dac3c47824dd47b8ec16ff7ba4bde73b76e6aae84a954eaf4bf56",
-      "sdg_latex/submit/build/images/plots/fig_privacy_tradeoff.pdf": "98a1babb05c81d25cc887bb1bafe4b6cf90ab9ee51917f7b34ceb42ca94e9f84",
-      "sdg_latex/submit/build/images/plots/fig_ablation_radar.pdf": "318a6c48a1377e92e44a1b29c9f9ce0c7ae1ad32185dd1baaa5d6aced7390134",
-      "sdg_latex/submit/build/images/plots/fig_sota_compare.png": "ad3fb965e973c433a1f762767a1e20d2856a27a5c2dee6da4ba527895dd1bba1",
-      "sdg_latex/submit/build/images/plots/fig_sota_compare.pdf": "73238c1cbeb295b01803f12cc85c447e691777897d9bf6a04b6795e147254aba",
-      "sdg_latex/submit/build/images/plots/tsne_edid_panel1_tx.png": "e5dbbcae0bca3c2c599fec3fd245c4e5a0f223420525ba5337ae2c2d2da0473b",
-      "sdg_latex/submit/build/images/plots/fig_privacy_evolution.pdf": "98f3dd5d948f3de627571e3a5813c733f039bec41fc3a1b8468efe6e9b7e09cd",
-      "sdg_latex/submit/revision/reviewer2_point3_reply_zh.txt": "c88db0e50ea088739f5caea9767eb46ed5cbb29732b6a649c1fbe54efc158c8b",
-      "revision_drafts/experiments/rsc_formal_20261113/comparison_top5.csv": "64198f5832e28d284175fe42a940fd7a5f1e30e1ab9bf072a0bab188623d12db"
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/highlights.pdf": "eb8e8a13fcc4cdd23f0a5d4871e65c64809a3b0f00342ac8c91e94c9da51e8e5",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/cas-common.sty": "e95a01f4b33531d01ade231669fcc1e42f52193dddcb22ead5b63240eb952f8f",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/main_cas_full.pdf": "e2f9acc8230bc1833c5dfb5946094629b4324d0091ee6d054214631a159162ac",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/cas-sc.cls": "5030545ed09c770afa31004817bf8626ca7f311cf795e6c2825ecae113bb42e9",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/main_cas.pdf": "4ab600a020e628f3d000b2b748b22ad6b52380b4761db4bea752a02b89b96412",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/main_cas.tex": "93c989d1b866e4cf27cf7424b8e9201feb23fc5d79f74e8b83d13a003e32399a",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/thumbnails/cas-email.jpeg": "51cadbff5919f51f76f6f9238b18c9b5d512ea9234cb6d7fef7b53d9767fa845",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/sections/03_method_trans.tex": "94dacf2f64206037ce939a440806cc15565b09f6353b1e77492c9f0ecdbd10df",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/sections/06_references_trans.tex": "26ca5c98cf5110bac0984093ff41750171cf25773ce2b082c2bfab6c01027dfa",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/sections/05_conclusion_trans.tex": "69e55eb9ed4dfdcaa55c982ff40bcf639fd88f2c73affe75b52ac10bd665b711",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/sections/01_introduction_trans.tex": "07f38204d8918223d049d1fc6f6bdacee72148a8016ce249a04bb963b40810d3",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/sections/02_related_work_trans.tex": "b08cfa6362fd9ef4c250623559d2b03b6326f8079a681b55124e6a51879bba60",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/tables/src/table5_privacy_final_trans.tex": "46180ff75dc7fd1d27fdbe3d26c9d4e26fb69e7e0cf1d4586927cee20bff233d",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/tables/src/table3_privacy_scan_trans.tex": "5df080338f7129ff2946e7e04848b6828ccf6fc7c8b6e837a0a43ab7bc9fa761",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/tables/src/table4_privacy_evolution_trans.tex": "b754658715656c983b07064def4871fc7de043625ccc224673e35befea4cea27",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/tables/src/table_tau_sensitivity_trans.tex": "c39ca2befbae6902722f387e8fcc89642d71f8e027fa67e4eb760b64dcf9d3a9",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/tables/src/table7_sota_trans.tex": "eeeef45f4eeb5e0c8cb026de78d2cd2b3b0168a56002b7e57d976b59240039c0",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/tables/src/table1_dataset_distribution_trans.tex": "6afbd2362b63543810a04c0ce3d4f337d8dfa985e00bd0140082aa4e670e03db",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/tables/src/table6_ablation_trans.tex": "e1bc1274459e5e0be0fafcce9a3b17db53d7c4f2bfc0162174c57fa362f72354",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/gragh/image7.png": "d74a60fadf639319bcbac01ca348cc4ea7a9afd31988ec394cbef4f369581b75",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/gragh/image10.png": "c8b9badd937e00a66f8f7bb6d4661a1dcc4850cd97631fe5abb4559aecdd6276",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/gragh/image9.png": "dd32960beb19de0e5e83728ee76e5b3ea2598e24e8f90e1c0da3cba8f0301e4d",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/gragh/image13.png": "da315452ad9a9764b5e392050102c668e88422dfbdd2ac458a92d41af889147a",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/gragh/image12.png": "5e403367ed0d9a5f6d80987b8954b002deaadd2cf5ae05754dffb6fca867994d",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/gragh/image11.png": "7c21bc9f97a4941631bb96118d0e4ec32ad5c698727d836375a32f99c080f8e5",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/gragh/image4.png": "20e46b4151c5728c1fa140f3d67ce41a9fe20b1e53d39dd7668b7f591bfdcecb",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/media/image8_padded.pdf": "5f502f29d3bb0016b9a45a59b307e26d3db90071dd2beb0453844c2d8b1a3df5",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/media/edid示例图.pdf": "9b5c91e594e493f80a4533619fa29e491f62a5b1ef5434be742dd36a2264e982",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/media/image5_padded.pdf": "d7e5e003c0a8874766fbca6d33f9d48a0e508c9114bf8e24660fe8c05ed42278",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/media/edid_samples_padded.pdf": "b41bafebbb9cd391b01020b9f0f0f5651f3d40610e4ad8deb5e92cc093a39498",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/media/image2.pdf": "6f125b97a3e6cff7d4c3614e62e4a99726cf48595dcf488434e989f52a640494",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/media/image2_padded.pdf": "bcc0f745d5604fce80f3794afb84aaabf53ad2f9079a3d8a3df436aab14969bb",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/media/image3_v2.png": "c163f4b32a4200189d9d8d9dceb513a49755721574accbc422f15ba874002c21",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/media/image6_padded.pdf": "30baa291d4c46262ef272556cffb7f5583ec6c3560fb08d16aeced94134abd66",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/media/image1_padded.pdf": "a3b956846071fced79a1352a0d26eeef896259a9a94a2602e0988f11ec3a379d",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/plots/tsne_rfmid_panel1_tx.png": "229a94078465c09dcae1060ada072604676a31bcd912fd2d9412b2078a0b7a5c",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/plots/fig_privacy_tradeoff.png": "deef6fe1f663a4c12f4a046a49cb910671701c93f98a64e9058bf675d6bc19f2",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/plots/tsne_odir8_panel1_tx.png": "6f08e2a982be12e87a53553504b3904f8b0c8fe308aab7d93915ccb81d3db2df",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/plots/fig_privacy_evolution.png": "7c6771b1b9917c251098a86a64d16d26b8dd50fceef177427dff4dead62d1902",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/plots/fig_ablation_radar.png": "fea1033ca56dac3c47824dd47b8ec16ff7ba4bde73b76e6aae84a954eaf4bf56",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/plots/fig_privacy_tradeoff.pdf": "98a1babb05c81d25cc887bb1bafe4b6cf90ab9ee51917f7b34ceb42ca94e9f84",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/plots/fig_ablation_radar.pdf": "318a6c48a1377e92e44a1b29c9f9ce0c7ae1ad32185dd1baaa5d6aced7390134",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/plots/fig_sota_compare.png": "ad3fb965e973c433a1f762767a1e20d2856a27a5c2dee6da4ba527895dd1bba1",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/plots/fig_sota_compare.pdf": "73238c1cbeb295b01803f12cc85c447e691777897d9bf6a04b6795e147254aba",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/plots/tsne_edid_panel1_tx.png": "e5dbbcae0bca3c2c599fec3fd245c4e5a0f223420525ba5337ae2c2d2da0473b",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/images/plots/fig_privacy_evolution.pdf": "98f3dd5d948f3de627571e3a5813c733f039bec41fc3a1b8468efe6e9b7e09cd",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/revision/reviewer2_point4_table5_top5.tex": "f09d91885ffe342d4951c0300f01454235754f701e22e3359568d4ee78bec3ee",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/revision/reviewer2_point4_statistics.json": "6a52513fd6df81e4b3d5b4824bed6d6de4df745d3099955a834eacb57f3ade54",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/revision/reviewer2_point5_reply_zh.txt": "5556862dc50c35d361b866a404bc34064c33df801b2ad27ae707b076bb873fc7",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/revision/reviewer2_point4_table5_top5.csv": "480b01b79bc94ec7f7928f7672297812d9e369edc786b69bd47b62dac6b35b8c",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/revision/reviewer2_point4_external_ablation.csv": "fd4b038ba8fe58c806a95057c88dfa5c88d4d73c904e50e861ae4b2160de4ebb",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/revision/reviewer2_point4_reply_zh.txt": "4982fba667e7291b71d7887254a2e16bd130040f32e65b73f928e49b75304e7f",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/revision/reviewer2_point5_revision_record.txt": "8f65d1575e40ad992dba0f25e9e1fc06a27159ba6f7057f3d965b1e541adc589",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/revision/reviewer2_point4_results_zh.txt": "49dfa969514398264575d5403951131e7cd465da22b2dad0d2e7c4e8018b373b",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/revision/reviewer2_point4_revision_record.txt": "79b84927e9c9906df4ca5b4ff591f755a73ae57ce3800680aa4ab8af5e112ba7",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/revision_drafts/revision_workflow_rules_zh.txt": "3d52475b1d02e1b9fc110ed89dcbaf43a8db071051a5fcccedf8483f893bd0bb",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/revision_drafts/experiments/rsc_formal_20261113/comparison_top5.csv": "64198f5832e28d284175fe42a940fd7a5f1e30e1ab9bf072a0bab188623d12db"
     },
     "previous_output_sha256": {
-      "sdg_latex/submit/build/main_cas_revised_highlight.pdf": "c7c049dd5282c429f644e4fd2f40001229d7d3cd37327891d26ed47bf875e051",
-      "sdg_latex/submit/build/main_cas_revised.pdf": "1ca126d8e2acc64854baa963008f8f857e5e146ce4f3695687401a9d242afc75"
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/main_cas_revised_highlight.pdf": "620dc5cee032b7a3cf523ff29073a63a7071e5a75c359b7604c202094762fa23",
+      "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/main_cas_revised.pdf": "025d6cbc76e19e3a2c25072673f68e6320af29d81fe57ab1c4510b31c11ddcc2"
     },
-    "visual_review": {
-      "pages": [
-        19
-      ],
-      "variants": [
-        "highlight",
-        "clean"
-      ],
-      "captions_headers_rows_and_values_not_clipped": true,
-      "no_table_overlap": true,
-      "same_three_level_eight_column_structure": true,
-      "ours_last_in_both_tables": true,
-      "column_best_boldface_checked": true,
-      "highlight_and_clean_modes_render_as_expected": true,
-      "images": [
-        "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/build/revision/r2p3-pdf-review/highlight-p19.png",
-        "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/build/revision/r2p3-pdf-review/clean-p19.png"
-      ]
-    },
+    "method_order": [
+      "ResNet50",
+      "MixStyle",
+      "RSC",
+      "FACT",
+      "Ours"
+    ],
     "highlight": {
       "path": "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/main_cas_revised_highlight.pdf",
       "pages": 26,
-      "bytes": 11000057,
-      "sha256": "620dc5cee032b7a3cf523ff29073a63a7071e5a75c359b7604c202094762fa23",
+      "bytes": 11000059,
+      "sha256": "2fc67c72508b0c59ebdb2485b6e5885c07d6924f4666548d9ffe9449988d3bf0",
       "table_pages": [
         19
       ],
@@ -406,8 +404,8 @@
       "method_order": [
         "ResNet50",
         "MixStyle",
-        "FACT",
         "RSC",
+        "FACT",
         "Ours"
       ],
       "unresolved_references_or_errors": [],
@@ -424,8 +422,8 @@
     "clean": {
       "path": "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/main_cas_revised.pdf",
       "pages": 26,
-      "bytes": 10845836,
-      "sha256": "025d6cbc76e19e3a2c25072673f68e6320af29d81fe57ab1c4510b31c11ddcc2",
+      "bytes": 10845812,
+      "sha256": "bb428fe8812f23f7f5d0db878d2b0f63c4f7119afd26dcdefdf6345fd93fecd9",
       "table_pages": [
         19
       ],
@@ -476,8 +474,8 @@
       "method_order": [
         "ResNet50",
         "MixStyle",
-        "FACT",
         "RSC",
+        "FACT",
         "Ours"
       ],
       "unresolved_references_or_errors": [],
@@ -491,17 +489,94 @@
       "all_warnings_present_in_prior_build": true,
       "log": "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/build/revision/clean/build.log"
     },
-    "text_extraction_note": "PDF font ligatures and soul highlighting yield different extraction spacing/characters. Full extracted-text equality is not used as a content test; identical pre-build source hashes, both table cell sets, rendered pages, labels and PDF link destinations were verified."
+    "visual_review": {
+      "pages": [
+        19
+      ],
+      "variants": [
+        "highlight",
+        "clean"
+      ],
+      "captions_headers_rows_and_values_not_clipped": true,
+      "no_table_overlap": true,
+      "same_three_level_eight_column_structure": true,
+      "method_order": [
+        "ResNet50",
+        "MixStyle",
+        "RSC",
+        "FACT",
+        "Ours"
+      ],
+      "ours_last_in_both_tables": true,
+      "column_best_boldface_checked": true,
+      "highlight_and_clean_modes_render_as_expected": true,
+      "images": [
+        "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/build/revision/r2p3-pdf-review/highlight-p19.png",
+        "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/build/revision/r2p3-pdf-review/clean-p19.png"
+      ]
+    }
   },
   "completion": {
     "status": "complete",
     "recorded_on": "2026-11-14",
     "scope": "Reviewer 2 major point 3 Chinese revision stage",
     "final_chinese_reply_approved": true,
-    "reply_sha256": "9033b601e732ec441b3000c47fcc1c373ffd8a509e966402f6c3ac51361b6c97",
+    "reply_sha256": "5982fa68765be8fe9b0c89da81fc20911d36617f9468ca73e4a4c8f7923e1f2c",
     "manuscript_and_pdf_hashes_still_match_verified_build": true,
     "git_commit_authorized": true,
     "git_commit_subject": "审稿人2点3暂存",
-    "push_or_mac_sync_performed": false
+    "push_or_mac_sync_performed": false,
+    "order_refined_on": "2026-11-14"
+  },
+  "order_refinement": {
+    "date": "2026-11-14",
+    "previous_commit": "236b09c06ce3c44ff48ed4867183793d042e6d62",
+    "new_order": [
+      "ResNet50",
+      "MixStyle",
+      "RSC",
+      "FACT",
+      "Ours"
+    ],
+    "source_changes": [
+      {
+        "path": "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/sections/04_experiments_trans.tex",
+        "old": "MixStyle \\mbox{\\cite{_Ref213949562}}, FACT \\mbox{\\cite{_Ref213949788}}, RSC \\mbox{\\cite{_Ref213949796}}",
+        "new": "MixStyle \\mbox{\\cite{_Ref213949562}}, RSC \\mbox{\\cite{_Ref213949796}}, FACT \\mbox{\\cite{_Ref213949788}}"
+      },
+      {
+        "path": "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/sections/04_experiments_trans.tex",
+        "old": "MixStyle mixes feature-style statistics to simulate appearance variation; FACT combines Fourier augmentation with teacher--student consistency learning; and RSC uses self-challenging feature masking to encourage the use of different discriminative cues.",
+        "new": "MixStyle mixes feature-style statistics to simulate appearance variation; RSC uses self-challenging feature masking to encourage the use of different discriminative cues; and FACT combines Fourier augmentation with teacher--student consistency learning."
+      },
+      {
+        "path": "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/tables/src/table2_generalization_trans.tex",
+        "old": "\\revision{FACT} & \\revision{79.50} & \\revision{76.81} & \\revision{78.13} & \\revision{76.55} & \\textbf{\\revision{95.99}} & \\textbf{\\revision{86.72}} & \\revision{94.96} & \\revision{53.88} \\\\\n\\revision{RSC} & \\revision{80.29} & \\revision{76.82} & \\revision{78.05} & \\revision{75.86} & \\revision{95.98} & \\revision{84.25} & \\revision{94.88} & \\revision{52.16} \\\\\n",
+        "new": "\\revision{RSC} & \\revision{80.29} & \\revision{76.82} & \\revision{78.05} & \\revision{75.86} & \\revision{95.98} & \\revision{84.25} & \\revision{94.88} & \\revision{52.16} \\\\\n\\revision{FACT} & \\revision{79.50} & \\revision{76.81} & \\revision{78.13} & \\revision{76.55} & \\textbf{\\revision{95.99}} & \\textbf{\\revision{86.72}} & \\revision{94.96} & \\revision{53.88} \\\\\n"
+      },
+      {
+        "path": "/shared_data/users/jinqiang/share_folder/py_project/ODIR/sdg_latex/submit/build/tables/src/table_generalization_top5_trans.tex",
+        "old": "\\revision{FACT} & \\revision{79.70$\\pm$0.14} & \\revision{76.60$\\pm$0.19} & \\revision{77.30$\\pm$0.63} & \\revision{75.10$\\pm$0.92} & \\revision{96.03$\\pm$0.05} & \\textbf{\\revision{84.63$\\pm$1.30}} & \\revision{95.03$\\pm$0.10} & \\revision{53.15$\\pm$0.97} \\\\\n\\revision{RSC} & \\revision{80.36$\\pm$0.21} & \\revision{76.67$\\pm$0.20} & \\revision{77.48$\\pm$0.38} & \\revision{75.21$\\pm$0.51} & \\revision{95.98$\\pm$0.05} & \\revision{83.42$\\pm$0.54} & \\revision{94.63$\\pm$0.17} & \\revision{51.80$\\pm$0.26} \\\\\n",
+        "new": "\\revision{RSC} & \\revision{80.36$\\pm$0.21} & \\revision{76.67$\\pm$0.20} & \\revision{77.48$\\pm$0.38} & \\revision{75.21$\\pm$0.51} & \\revision{95.98$\\pm$0.05} & \\revision{83.42$\\pm$0.54} & \\revision{94.63$\\pm$0.17} & \\revision{51.80$\\pm$0.26} \\\\\n\\revision{FACT} & \\revision{79.70$\\pm$0.14} & \\revision{76.60$\\pm$0.19} & \\revision{77.30$\\pm$0.63} & \\revision{75.10$\\pm$0.92} & \\revision{96.03$\\pm$0.05} & \\textbf{\\revision{84.63$\\pm$1.30}} & \\revision{95.03$\\pm$0.10} & \\revision{53.15$\\pm$0.97} \\\\\n"
+      }
+    ],
+    "only_order_changed": true,
+    "all_table_rows_preserved_verbatim": true,
+    "reply_method_value_mapping_preserved": true,
+    "other_manuscript_files_unchanged": true,
+    "protected_files_count": 57,
+    "git_commit": {
+      "authorized": true,
+      "subject": "审稿人2点3顺序调整",
+      "baseline_commit": "236b09c06ce3c44ff48ed4867183793d042e6d62",
+      "hash_record": "PROJECT_INDEX.md",
+      "file_count": 11,
+      "excluded": [
+        "Reviewer 2 point 4 files",
+        "Reviewer 2 point 5 files",
+        "pre-existing build/environment files"
+      ],
+      "push_performed": false
+    }
   }
 }

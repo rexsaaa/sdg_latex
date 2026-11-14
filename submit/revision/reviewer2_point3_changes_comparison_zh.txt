@@ -2,6 +2,7 @@
 
 日期：2026-11-13。
 状态：用户已确认本点第1—8项（含1a/1b、7a/7b）及附项A/B，并授权落实。第5项现已按确认版本写入第4.5节，本点全部已确认正文修改均已完成；其余内容、表5/6数值和黄色高亮保持。已按用户最新授权使用服务器原有流程更新高亮版和清洁版PDF，两版均26页；表5/6均位于第19页，排版、全部80格数据和引用跳转均已核对。此次仅构建PDF，正文源文件及其他已确认内容保持不变。
+最新顺序复查（2026-11-14）：FACT已移至RSC之后、Ours之前，方法介绍与回复同步排序；两版PDF重新编译通过，均26页，表5/6仍第19页。两表80格、表题、粗体与引用均核验，57个其他受保护文件不变。本轮顺序微调已获准单独提交，标题为“审稿人2点3顺序调整”，实际提交哈希见PROJECT_INDEX.md。
 完成确认（2026-11-14）：用户已确认最终中文回复及其与正文修改的对应关系，本点中文返修阶段已完成；本对照中的已通过内容及论文/PDF均保持。此前审核中间状态按历史记录理解。
 依据：服务器当前submit/build/，不以旧投稿稿覆盖已批准修改。英文引文中的LaTeX引用命令按当前可读编号显示；中文为当前英文的审核译文，不代表另有一份待覆盖的中文正文。
 
@@ -27,7 +28,7 @@ PDF与引用核验：两版均26页；表5/6均第19页，表7/8/9分别第21/22
 1. ODIR八类任务、原数据划分、样本量、疾病分布及图像示例。
 2. 第4.1节EDID“每张图像只有一个正标签，是多标签任务特殊情况”的原句，以及ODIR D/G/M训练子集说明。第3项只改其前面的类别选择句。
 3. 第4.2节ResNet50骨干、单眼输入与患者级合并逻辑、448输入、50轮及批量32等已匹配设置；已批准的阈值实验及其解释。
-4. 第4.3节已有眼病识别比较及其与泛化实验的衔接；第2节已有MixStyle、FACT、RSC文献介绍。
+4. 第4.3节已有眼病识别比较及其与泛化实验的衔接；第2节已有MixStyle、RSC、FACT文献介绍。
 5. 第4.5节“域内—跨数据集—隐私”三阶段顺序、已有On-site与RFMiD/EDID对ResNet50的结果、EDID三个组成指标及3.19分提升、已有跨域设置概述、t-SNE图文和隐私部分。
 6. 摘要、方法章节、其他图表、结论不因本点回复整体改写；共有类别说明放在数据集节，新增比较放在现有泛化结果节。
 
@@ -141,7 +142,7 @@ The evaluation metrics follow the official ODIR standard: Kappa, micro-F1, AUC, 
 范围决定（2026-11-13）：用户已明确取消原5a在4.2节新增段落的安排，方法介绍与必要多标签适配集中放在4.5节。公共参数不再重复；使用“泛化方法”，不恢复已删除的训练数据/第4.2节指引句。以下具体中英文已获确认并落实。
 位置：第4.5节“1. Generalization performance under the non-private setting.”开头的前两句，现为04_experiments_trans.tex第118、120行；其后接第6项三个评估方向及选模统计。第4.5节三阶段总述不变。
 修改原因：表5从基线与Ours扩展为五方法比较，需要先说明基线及三种DG方法各自提供什么参照，再简述它们如何适用于当前多标签任务。将这两类说明集中放在泛化部分，可以使比较目的、方法介绍和必要适配自然衔接，并避免在4.2重复公共设置。
-对应回复稿：（4）ResNet50提供基线参照，MixStyle、FACT和RSC提供不同机制的直接比较；保留各方法核心机制，对分类输出和多标签监督作任务适配，RSC的特征重要性与置信度评分聚合阳性标签。
+对应回复稿：（4）ResNet50提供基线参照，MixStyle、RSC和FACT提供不同机制的直接比较；保留各方法核心机制，对分类输出和多标签监督作任务适配，RSC的特征重要性与置信度评分聚合阳性标签。
 保留范围：4.2不增加原5a段落，不重复ResNet50骨干、448输入、50轮、批量及共同评价参数；非隐私部分标题、三阶段顺序和表后已有分析均保留。BCE/ASL及Adam/AdamW名称已由附A/B分别核准并落实，原5a的独立配置段保持取消。
 
 原始英文
@@ -151,12 +152,12 @@ The evaluation metrics follow the official ODIR standard: Kappa, micro-F1, AUC, 
 1. 非隐私条件下的泛化性能。结果见表5，该表报告基线与本文方法在不同测试集上的Final得分。
 
 修改后英文
-1. Generalization performance under the non-private setting. To assess the recognition performance of the proposed framework relative to different domain generalization methods under single-source training, Table 5 compares the ResNet50 baseline, MixStyle [30], FACT [32], RSC [33], and the proposed method. ResNet50 provides a reference for measuring the recognition gains of the proposed framework over the base model, while the three domain generalization methods provide comparisons based on different mechanisms. MixStyle mixes feature-style statistics to simulate appearance variation; FACT combines Fourier augmentation with teacher–student consistency learning; and RSC uses self-challenging feature masking to encourage the use of different discriminative cues.
+1. Generalization performance under the non-private setting. To assess the recognition performance of the proposed framework relative to different domain generalization methods under single-source training, Table 5 compares the ResNet50 baseline, MixStyle [30], RSC [33], FACT [32], and the proposed method. ResNet50 provides a reference for measuring the recognition gains of the proposed framework over the base model, while the three domain generalization methods provide comparisons based on different mechanisms. MixStyle mixes feature-style statistics to simulate appearance variation; RSC uses self-challenging feature masking to encourage the use of different discriminative cues; and FACT combines Fourier augmentation with teacher–student consistency learning.
 
 The classification outputs and supervision are adapted to the multi-label task while retaining the core mechanisms of the three methods. For RSC, feature-importance and confidence scores are computed by aggregating scores over the positive labels of each sample.
 
 修改后中文
-1. 非隐私条件下的泛化性能。为考察本文框架在单源训练条件下相对于不同泛化方法的识别表现，表5比较ResNet50基线、MixStyle［30］、FACT［32］、RSC［33］与本文方法。ResNet50用于衡量本文框架相对于基础识别模型的性能改善，三种域泛化方法则提供不同机制的比较参照：MixStyle通过混合特征风格统计模拟外观变化；FACT结合傅里叶增强与教师—学生一致性学习；RSC通过自挑战式特征屏蔽促进模型利用不同的判别线索。
+1. 非隐私条件下的泛化性能。为考察本文框架在单源训练条件下相对于不同泛化方法的识别表现，表5比较ResNet50基线、MixStyle［30］、RSC［33］、FACT［32］与本文方法。ResNet50用于衡量本文框架相对于基础识别模型的性能改善，三种域泛化方法则提供不同机制的比较参照：MixStyle通过混合特征风格统计模拟外观变化；RSC通过自挑战式特征屏蔽促进模型利用不同的判别线索；FACT结合傅里叶增强与教师—学生一致性学习。
 
 三种方法在保留各自核心机制的基础上，对分类输出与监督形式作多标签任务适配。其中，RSC的特征重要性和置信度评分通过聚合每个样本阳性标签对应的评分计算。
 
@@ -188,14 +189,15 @@ To characterize the best performance observed within this candidate set, Table 5
 
 【第7项：表5报告最佳结果，新增表6报告top5均值±SD——已通过，已落实】
 
-审核状态：用户于2026-11-13明确“第7项按这个版本保留”，并要求Ours放在最后一行。已保留表题、数值及标优，拟修改表5和拟新增表6统一按ResNet50、MixStyle、FACT、RSC、Ours排序；原始表5作为对照原样保留；修改后表5与新增表6现已写入论文。
-共同样式：沿用原表5的三层分组表头、三个方向、八个数据列及三线表形式。两表方法顺序一致，依次为ResNet50、MixStyle、FACT、RSC、Ours；保留两位小数。表5按各列得分标优，表6按各列均值标优；不单独按SD大小标优。英文表头沿用Model、Monocular、Binocular；中文审核表对应模型、单眼、双眼，双眼指原有患者级合并结果。
+审核状态：用户于2026-11-13通过第7项并要求Ours置末；2026-11-14指定将FACT移至RSC与Ours之间。当前表5/表6统一按ResNet50、MixStyle、RSC、FACT、Ours排序，表题、数值及标优保留；原始表5作为对照原样保留，修改后两表已写入论文。
+顺序微调（2026-11-14，用户指定）：两表将FACT移至RSC之后、Ours之前；第4.5节及回复中的方法列举/机制介绍同步为MixStyle→RSC→FACT。表内数值、粗体、高亮和结论保持。以下修改后中英文与表体已同步。
+共同样式：沿用原表5的三层分组表头、三个方向、八个数据列及三线表形式。两表方法顺序一致，依次为ResNet50、MixStyle、RSC、FACT、Ours；保留两位小数。表5按各列得分标优，表6按各列均值标优；不单独按SD大小标优。英文表头沿用Model、Monocular、Binocular；中文审核表对应模型、单眼、双眼，双眼指原有患者级合并结果。
 排版预览：同目录reviewer2_point3_tables_review.html，包含原表5、拟修改表5及拟新增表6，可切换中英文查看相同分组样式。此文件仅供审核，不替代论文或编译PDF。
 
 【7a：表5保留最佳结果并加入三种域泛化对照】
 
 位置：tables/src/table2_generalization_trans.tex，当前表5。保留tab:generalization标签。
-修改原因：原表仅含ResNet50和Ours，需增加MixStyle、FACT、RSC以承载回复中的直接泛化方法比较；表题明确“同次训练源域top5候选中的最佳目标测试表现”，与已通过第6项衔接。每个方向源域与目标域列属于同一候选，不将各列分别取最大值。
+修改原因：原表仅含ResNet50和Ours，需增加MixStyle、RSC、FACT以承载回复中的直接泛化方法比较；表题明确“同次训练源域top5候选中的最佳目标测试表现”，与已通过第6项衔接。每个方向源域与目标域列属于同一候选，不将各列分别取最大值。
 对应回复稿：（3）EDID相对于ResNet50提高3.19分的所报结果；（4）三个方向的五方法直接比较，On-site和EDID中的识别优势及RFMiD中的分方向结果。
 保留范围：原三方向、八个数据列、ResNet50/Ours全部16个数值及原评价规则不变。仅新增三行、明确表题并根据五方法比较更新粗体；RFMiD方向两列的最高得分均为FACT。
 
@@ -222,8 +224,8 @@ Best observed generalization results among five candidate checkpoints, measured 
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | ResNet50 | 79.37 | 76.19 | 77.30 | 75.23 | 94.39 | 83.86 | 94.30 | 52.16 |
 | MixStyle | 79.10 | 75.82 | 76.59 | 74.76 | 95.08 | 84.29 | 94.70 | 51.05 |
-| FACT | 79.50 | 76.81 | 78.13 | 76.55 | **95.99** | **86.72** | 94.96 | 53.88 |
 | RSC | 80.29 | 76.82 | 78.05 | 75.86 | 95.98 | 84.25 | 94.88 | 52.16 |
+| FACT | 79.50 | 76.81 | 78.13 | 76.55 | **95.99** | **86.72** | 94.96 | 53.88 |
 | Ours | **81.71** | **78.79** | **78.98** | **77.49** | 95.94 | 85.06 | **96.03** | **55.35** |
 
 【7b：在表5之后新增同样式的表6，报告五个候选的均值±SD】
@@ -250,12 +252,12 @@ Mean ± sample standard deviation (SD) of generalization Final scores (%, ↑) a
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | ResNet50 | 79.42±0.08 | 75.84±0.56 | 76.80±0.49 | 74.13±0.69 | 94.47±0.08 | 83.09±0.60 | 94.31±0.11 | 51.50±0.66 |
 | MixStyle | 79.07±0.13 | 75.31±0.39 | 76.23±0.26 | 73.73±0.62 | 95.09±0.06 | 82.76±1.74 | 94.60±0.06 | 49.71±1.25 |
-| FACT | 79.70±0.14 | 76.60±0.19 | 77.30±0.63 | 75.10±0.92 | 96.03±0.05 | **84.63±1.30** | 95.03±0.10 | 53.15±0.97 |
 | RSC | 80.36±0.21 | 76.67±0.20 | 77.48±0.38 | 75.21±0.51 | 95.98±0.05 | 83.42±0.54 | 94.63±0.17 | 51.80±0.26 |
+| FACT | 79.70±0.14 | 76.60±0.19 | 77.30±0.63 | 75.10±0.92 | 96.03±0.05 | **84.63±1.30** | 95.03±0.10 | 53.15±0.97 |
 | Ours | **81.32±0.69** | **78.20±0.75** | **78.11±0.84** | **76.27±1.25** | **96.14±0.37** | 84.22±0.71 | **95.37±0.41** | **54.41±1.06** |
 
 审核显示说明：上述文本表头为便于聊天/纯文本审核使用缩写，M = Monocular / 单眼，B = Binocular / 双眼；正式排版及HTML预览保留原三层表头，不用缩写替换正式列名。
-表号联动：本统计表现为表6，隐私参数扫描、预算演化、隐私最终结果分别顺延为表7、表8、表9；两种模式的编译辅助文件均已确认编号一致。正式PDF未更新，已通过回复文字保留。
+表号联动：本统计表现为表6，隐私参数扫描、预算演化、隐私最终结果分别顺延为表7、表8、表9；两种模式的编译辅助文件均已确认编号一致。正式高亮/清洁PDF已更新；回复中的方法列举及机制介绍顺序同步，实质论证保持。
 数值依据：revision_drafts/experiments/rsc_formal_20261113/comparison_top5.csv；原表5与当前论文表格逐格核对一致。
 
 【第8项：补充对应表5最佳结果和表6候选统计的泛化方法结果分析——已通过，已落实】
