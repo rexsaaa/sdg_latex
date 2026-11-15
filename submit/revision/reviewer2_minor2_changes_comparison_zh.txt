@@ -1,0 +1,84 @@
+审稿人2次要意见2：必要修改分析与完整中英文前后对照
+日期：2026-11-15（北京时间）
+状态：2026-11-15用户确认本点当前中文返修阶段完成。两处审核英文、中英文对照、累计高亮、两版PDF及最终回复均已完成并核验；按用户授权本地Git归档，暂不推送。
+依据：服务器submit/build/累计修订稿；本点修改前提交为5f1609bf679a14911f27c2b032e8a76471cea0ff。
+展示说明：原始英文仅去除LaTeX高亮/引用命令并展开核准编号，不改写正文。原始中文与修改后中文分别忠实对应各自英文；旧正文中的公式与数值保留，不将用户对回复去除重复数字/公式的要求扩大为删去论文已有设置。
+现有引用编号按本轮实际编译稿核准；本点不新增网页参考文献，不引入［xx］占位。两版PDF均为28页，相关表号、图号及文献号保持。
+
+一、已有支撑与必要修改范围
+已能支撑回复：
+1. 第4.2节完整给出Final定义、百分制、展平方式、分类阈值0.5、Kappa/micro-F1使用离散预测及AUC使用连续分数，并说明三个指标的含义。它属于此前已批准内容，不重新压缩或整段重写。
+2. 第4.3节已说明比较方法来源及文献成绩直接取自发表结果；现有结果段报告两组Final和差值。表3列有全部分项数值，图7图注已明确本文在两组测试集上Kappa和Final最高。
+3. Li等ODIR基准［49］及Ou等BFENet［53］已有完整参考文献，不重复添加。
+本轮实际落实两处正文：
+1. 第4.2节原指标段补入既有ODIR基准文献［49］，用于指标体系；补Kappa的阈值/标签分布影响，并以统一评价设置说明固定0.5，原有计算口径完整保留。
+2. 第4.3节保留原图表引入及两组Final数值，用分项差异→Kappa含义及Final提升来源→两个测试集上所比较方法中Final最高及综合性能优势，替换原段尾对DFE/ARC有效性的概括。方法比较应明确其综合性能优势，具体模块贡献由第4.4节消融论证承接。
+原第3项撤回：按用户反馈不新增ODIR任务说明网页条目。Li论文支持指标体系，不将其写成明确给出0.5分类阈值的原文依据；该数值的官方任务页及配套evaluation.py证据保留于内部核查记录。
+本点不需要调整模型、实验、表格数值、图注、摘要或结论。图7图内文献号存在既有旧号，仍留待后续引用联动核查，不把其误记为本点已修复。
+
+二、逐处对照
+
+【第1处：第4.2节指标段，补清评价依据和阈值设置理由——已通过并落实】
+位置：sections/04_experiments_trans.tex第41行，当前PDF正文第14页。紧接Experimental Settings小节标题，后接ResNet50基线与患者级合并说明。本次修改原段，不新增独立的指标讨论小节。
+原因：现段已清楚交代“如何计算”，补足指标体系引用及固定评价条件的理由，并简明回应Kappa受阈值和标签分布影响的关切。0.5作为本文评价设置直接报告，官方程序依据保留在回复与核查记录，不另列网页书目。
+保留范围：骨干/PyTorch、Final及百分制、展平、两类输入、各指标含义全部保留；原有已批准黄色高亮已累计保留。
+对应通过回复：ODIR既定评价规则、固定0.5依据及离散预测/连续分数的计算方式。回复中的发布方程序依据已核实，保留在回复中。
+
+原始英文
+All experiments use ResNet50 as the backbone and are implemented in PyTorch. The evaluation metrics follow the official ODIR standard: Kappa, micro-F1, AUC, and their arithmetic mean, Final = (Kappa + micro-F1 + AUC)/3, with all scores reported on a percentage scale. Ground-truth labels and predicted scores are flattened across image–class pairs. Kappa and micro-F1 are computed using predictions binarized at a threshold of 0.5, whereas AUC uses the continuous prediction scores. Kappa accounts for chance agreement, micro-F1 summarizes label predictions, and AUC measures score discrimination; Final combines these three aspects of recognition performance.
+
+原始中文
+所有实验均采用ResNet50作为骨干网络，并在PyTorch中实现。评价指标遵循ODIR官方标准：Kappa、micro-F1、AUC及其算术平均值Final＝（Kappa＋micro-F1＋AUC）／3，所有得分均以百分制报告。真实标签和预测分数按图像—类别对展平。Kappa和micro-F1基于以0.5为阈值二值化后的预测计算，而AUC使用连续预测分数。Kappa考虑机会一致性，micro-F1汇总标签预测结果，AUC衡量分数判别能力；Final综合这三个方面的识别表现。
+
+修改后英文（已落实）
+All experiments use ResNet50 as the backbone and are implemented in PyTorch. The evaluation metrics follow the official ODIR standard [49]: Kappa, micro-F1, AUC, and their arithmetic mean, Final = (Kappa + micro-F1 + AUC)/3, with all scores reported on a percentage scale. Ground-truth labels and predicted scores are flattened across image–class pairs. Kappa depends on the decision threshold and the distributions of true and predicted labels. To maintain a consistent evaluation setting, Kappa and micro-F1 are computed using predictions binarized at a fixed threshold of 0.5, whereas AUC uses the continuous prediction scores. Kappa accounts for chance agreement, micro-F1 summarizes label predictions, and AUC measures score discrimination; Final combines these three aspects of recognition performance.
+
+修改后中文（已落实英文对应译文）
+所有实验均采用ResNet50作为骨干网络，并在PyTorch中实现。评价指标遵循ODIR官方标准［49］：Kappa、micro-F1、AUC及其算术平均值Final＝（Kappa＋micro-F1＋AUC）／3，所有得分均以百分制报告。真实标签和预测分数按图像—类别对展平。Kappa取决于判定阈值以及真实标签和预测标签的分布。为保持一致的评价设置，Kappa和micro-F1基于以固定阈值0.5二值化后的预测计算，而AUC使用连续预测分数。Kappa考虑机会一致性，micro-F1汇总标签预测结果，AUC衡量分数判别能力；Final综合这三个方面的识别表现。
+
+改动说明：在指标体系后添加既有Li文献［49］；新增Kappa影响因素一句；原阈值句明确固定评价条件。按用户反馈撤去［xx］和“prescribed”措辞，不把［49］挂在0.5后暗示该论文明确给出该数值；不声称固定阈值已消除类别不平衡影响或验证阈值稳健性。
+
+【第2处：第4.3节原比较结果段，补清提升来源与结果含义——已通过并落实】
+位置：sections/04_experiments_trans.tex第63行，当前PDF正文第15页。前一段介绍Ou方法；本段先引入表3/图7，再报告结果；后接表3与图7，随后转入框架泛化和隐私评估的作用说明。
+原因：用户指出上一版止于Kappa/Final来源解释，缺少方法比较应有的优势结论。Kappa带动Final提高不削弱既定综合指标下的领先事实；本段应明确本文在两个测试集上均取得所比较方法中最高的Final，体现ODIR评价体系下更优的综合识别性能。相对Base的提升支持整体方法有效，具体DFE/ARC贡献由第4.4节消融结果解释。
+保留范围：原前两句逐字保持，包括图表引入及Off-site/On-site全部数值；原末句改为分项解释及综合性能结论三句。不改第4.4节已批准消融论证。
+对应通过回复：两个测试集上所比较方法中Kappa/Final最高，Off-site增益来源、经机会一致性校正后的预测一致性以及Ou的F1/AUC略高。
+
+原始英文
+Table 3 and Fig. 7 compare binocular metrics on the Off-site test and On-site test sets. The proposed method achieves a Final score of 78.85 on Off-site, outperforming Ou et al. [53] by 0.85, and achieves 77.49 on On-site, outperforming Ou et al. [53] by 0.79. These results demonstrate the effectiveness of dual-branch guided feature learning and adaptive label-feature relevance construction on the ODIR multi-label recognition task.
+
+原始中文
+表3和图7比较了Off-site与On-site测试集上的双眼评价指标。本文方法在Off-site上的Final得分为78.85，比Ou等人的方法［53］高0.85分；在On-site上的得分为77.49，比Ou等人的方法［53］高0.79分。这些结果表明，双分支引导特征学习与自适应标签—特征关联构建在ODIR多标签识别任务中具有有效性。
+
+修改后英文（已落实）
+Table 3 and Fig. 7 compare binocular metrics on the Off-site test and On-site test sets. The proposed method achieves a Final score of 78.85 on Off-site, outperforming Ou et al. [53] by 0.85, and achieves 77.49 on On-site, outperforming Ou et al. [53] by 0.79. On Off-site, the proposed method achieves higher Kappa, whereas Ou et al. [53] obtain slightly higher F1 and AUC. The Kappa gain reflects greater chance-corrected agreement between predictions and ground-truth labels and drives the improvement in Final under the ODIR evaluation protocol. Overall, the proposed method achieves the highest Final scores among the compared methods on both test sets, demonstrating superior overall recognition performance under the ODIR evaluation protocol.
+
+修改后中文（已落实英文对应译文）
+表3和图7比较了Off-site与On-site测试集上的双眼评价指标。本文方法在Off-site上的Final得分为78.85，比Ou等人的方法［53］高0.85分；在On-site上的得分为77.49，比Ou等人的方法［53］高0.79分。在Off-site上，本文方法的Kappa更高，而Ou等人的方法［53］在F1和AUC上略高。Kappa的提升体现了预测结果与真实标签之间更高的机会校正一致性，并带动了ODIR评价规则下Final得分的提高。总体而言，本文方法在两个测试集上均取得了所比较方法中最高的Final得分，表明其在ODIR评价体系下具有更优的综合识别性能。
+
+改动说明：前两句报告比较对象与总体结果，随后解释分项差异及Final提升来源，最后明确两个测试集上所比较方法中的综合性能优势。保留方法比较的结论功能，将具体模块归因交由消融分析，而非因分项存在差异取消总体优势。最高结论限定为所比较方法、两个测试集及ODIR综合评价；不外推少数类改善或阈值鲁棒性。
+
+【原第3处：新增ODIR任务说明网页文献——按用户反馈撤回】
+不新增此网页参考文献，原条目候选及［xx］已从本轮有效方案中移除。
+第1处仅用既有Li等［49］支持指标体系，0.5作为本文固定评价设置报告；网页和官方评估程序证据继续保留在核查记录中，已通过回复中的相应说明不改。
+已核对的Li公开全文第4.2节说明Kappa/F1采用单一阈值、AUC综合多个阈值，但未明确分类阈值数值0.5；其中出现的0.5是杯盘比。正式出版页只有预览，不把未读取部分写成已完整核验。
+
+三、审核及落实状态
+突出综合优势的完整中文回复已获用户通过；两处正文方案已获正式落实授权，并已逐字写入英文稿。原第3处撤回状态保持。
+本轮修改04_experiments_trans.tex第41、63行，更新两版修订PDF；表格、图片、参考文献条目及其他章节源文件保持。用户已授权将本点论文修改、最终回复及核查材料提交到sdg_latex本地仓库，暂不推送；未进行实验或Mac同步。
+整体连读及落实后核查均完成。最终回复按用户通过的精简方案保留前四段论证，以一段修改说明收尾，删除重复总结；用户已确认本点当前中文返修阶段完成。
+
+四、整体叙事与上下文核查（2026-11-15）
+核查范围：第4.2节指标段及后续设置、第4.3节比较对象/方法介绍/结果段/表3/图7/末段、第4.4节消融引入，以及本点已通过中文回复。
+1. 第4.2节负责说明评价体系、固定分类阈值和指标计算；第4.3节负责解释比较结果及综合性能优势，功能衔接成立。分类阈值0.5与后文双分支掩码阈值τ保持区分。
+2. 第2处保留图表引入和数值，增加Off-site分项差异与提升来源，最终落到两个测试集上所比较方法中的最高Final。与表3及图7图注一致；未将优势扩大为所有分项最优，也未以Kappa增益宣称具体模块贡献。
+3. 图表后的原有段落再次提及Final领先，用于从ODIR分类比较转入跨数据集泛化和隐私评估；与新结果段有简短信息重述，但承担承接功能且无冲突。本轮保留，不扩展改动范围。第4.4节原有模块消融分析保留。
+4. 既有Li［49］引用仅支持指标体系，官方0.5依据保留于回复及核查记录；不新增网页书目，参考文献条目、表格数值和图形均无本点必要变更。
+5. 结论：未发现需要再次改写通过稿的实质问题。用户随后已授权正式写入，执行时保持两处审核文字，并完成下列编译与页面核验。
+
+五、正式落实与编译核验（2026-11-15）
+1. 两处英文经去除LaTeX高亮/引用命令、展开实际编号后，与审核对照逐字一致。章节源码仅第41、63行变化；原45个revision标记保持，新增1个标记，累计为46个。第4.2节原有指标高亮保留，第4.3节新增三句整体高亮，未恢复R1页边标注。
+2. 已执行python sdg_latex/scripts/build_revision.py，两版修订PDF均编译成功且为28页。正式PDF与对应缓存产物指纹相同；原投稿main_cas.pdf保持。
+3. 已核对PDF正文与aux：第4.2节修改在第14页，第4.3节修改在第15页；表3、图7均在第16页，Li［49］和Ou［53］保持。实际渲染并目视检查两版第14/15页及清洁版第16页：文字完整、高亮正常、图表及段落无新增遮挡或越界。页面预览保存于reviewer2_minor2_preview/。
+4. 两版均无新增编译警告、未定义引用或本点相关越界；原maketitle的Underfull/Overfull及空锚点警告与修改前完全相同。图7图内旧文献号是此前记录的待统一事项，本轮按两处正文授权范围保持图形原样，不记为已修复。
+5. 表3源码、参考文献源码、图7资产及原投稿PDF指纹保持；本点正式文件新指纹见revision_record。最终回复的第4.2/4.3节修改说明随后按用户要求精简为一段，删去重复总结，前四段论证保持；不在对外回复中写内部PDF核查操作或页码。
