@@ -1,13 +1,24 @@
-% Reviewer 2 major point 1: mask-threshold sensitivity.
+% Reviewer 2 major point 1 and minor point 4: mask-threshold and consistency-weight sensitivity.
 \begin{table}[pos=H]
 \centering
-\caption{\protect\revision{Mask threshold sensitivity. Best monocular Final scores on the ODIR Off-site source-domain validation set are reported under the same training budget and checkpoint-selection rule. The default threshold is $\tau=0.25$.}}
+\caption{\protect\revision{Sensitivity to the mask threshold $\tau$ and consistency loss weight $\lambda$. Best monocular Final scores on the ODIR Off-site source-domain validation set are reported.}}
 \label{tab:tau-sensitivity}
 \begin{tabular}{lcccccc}
 \toprule
-\revision{$\tau$} & \revision{0.05} & \revision{0.10} & \revision{0.20} & \revision{0.25} & \revision{0.30} & \revision{0.50} \\
+\multicolumn{7}{l}{\revision{(a) Mask threshold $\tau$ (fixed $\lambda=5$)}} \\
 \midrule
+\revision{$\tau$} & \revision{0.05} & \revision{0.10} & \revision{0.20} & \revision{0.25} & \revision{0.30} & \revision{0.50} \\
 \revision{Final} & \revision{81.65} & \revision{81.81} & \revision{81.59} & \revision{81.77} & \revision{81.52} & \revision{81.72} \\
+\midrule
+\multicolumn{7}{l}{\revision{(b) Consistency loss weight $\lambda$ (fixed $\tau=0.25$)}} \\
+\midrule
+\revision{$\lambda$} & \revision{0} & \revision{1} & \revision{2.5} & \revision{5} & \revision{7.5} & \revision{10} \\
+\revision{Final} & \revision{81.77} & \revision{81.68} & \revision{81.44} & \revision{81.44} & \revision{81.51} & \revision{81.95} \\
 \bottomrule
 \end{tabular}
+\par\vspace{4pt}
+\begin{minipage}{\linewidth}
+\footnotesize
+\textit{\revision{Note:}} \revision{Both sweeps use the same training budget and checkpoint-selection rule, with $\alpha=\beta=0.01$ fixed. The sweeps are trained independently, including separate runs of the default configuration ($\tau=0.25$, $\lambda=5$).}
+\end{minipage}
 \end{table}

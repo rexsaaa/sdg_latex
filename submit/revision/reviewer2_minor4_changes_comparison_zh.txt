@@ -1,0 +1,183 @@
+审稿人2次要意见4：逐处完整中英文修改前后对照
+日期：2026-11-16（北京时间）
+状态：四处正文修改、两版编译PDF及最终六段中文回复均已获用户认可，本点当前中文返修阶段已完成。第4.2节保留Experimental Settings原题，τ/λ分析与合并表2位于本节；后续复杂度比较安排在第4.3节。以下批准文本及正式论文保持，本次按用户授权归档至sdg_latex本地Git，暂不推送；提交号见外层PROJECT_INDEX.md。
+依据：服务器submit/build/当前累计修订稿，保留此前已批准内容及黄色高亮。
+展示规则：原始英文仅移除LaTeX高亮命令、展开百分号排版，正文逐字保留；两份中文分别忠实对应各自英文。修改后内容均为已通过版本，已落实到正式论文；下列原始对照及审核理由保留。
+
+【第1处：第4.2节训练配置段——已通过，已落实】
+位置：sections/04_experiments_trans.tex第45行。编译后两版PDF中本段跨第14—15页；新增α/β/λ默认值句位于第15页，已核对文字与实际排版。
+上下文：前一段介绍ResNet50基线、ASL分类监督及双眼患者级合并；本段交代训练与默认参数；后一段引出非隐私DFE+ARC的敏感性实验。当前前后段均保持，后段另属第2处审核。
+理由与回复对应：对应认可回复首段的α=β=0.01、τ=0.25、λ=5。现段已有τ默认值及含义，补齐CAM空间/通道系数和一致性损失权重，使四参数的实际设置可直接查阅。
+保留范围：现有整段逐字保留，在τ句之后新增一句；优化器、学习率安排及其理由、50轮/batch32/输入448、τ原句、两张GPU和基线结果均保持。原有高亮持续保留，新增句已加黄色高亮。
+
+原始英文
+The training configuration is as follows. AdamW is used as the optimizer, with an initial learning rate of \(4 \times 10^{-7}\). OneCycleLR is adopted as the scheduling strategy: the learning rate linearly warms up from the initial learning rate to the peak value of \(1 \times 10^{-5}\) during the first 10% of epochs to help the model quickly escape local optima, and then anneals during the remaining 90% of epochs to facilitate convergence and reach a better solution. The number of training epochs is 50, the batch size is 32, and the input resolution is \(448 \times 448\). The default mask threshold for dual-branch feature filtering is $\tau=0.25$, specifying the feature retention criterion between the two views after instance normalization. The proposed method is trained on two RTX 4080 Super GPUs. Experimental results show that our improved baseline model, with an Off-site binocular Final score of 76.19, outperforms the ResNet50 implementation in the original ODIR paper, which reports an Off-site binocular Final score of 68.00.
+
+原始中文
+训练配置如下。采用 AdamW 优化器，初始学习率为 4×10⁻⁷。采用 OneCycleLR 作为学习率调度策略：在前 10% 的训练轮次中，学习率从初始值线性预热至峰值 1×10⁻⁵，以帮助模型快速跳出局部最优；随后在剩余 90% 的训练轮次中进行退火，以促进收敛并获得更优的解。训练轮数为 50，批量大小为 32，输入分辨率为 448×448。双分支特征筛选的默认掩码阈值为 τ=0.25，用于规定实例归一化后两个视图之间的特征保留准则。本文方法使用两张 RTX 4080 Super GPU 进行训练。实验结果表明，改进后的基线模型在 Off-site 上的双眼 Final 得分为 76.19，优于原始 ODIR 论文中 Off-site 双眼 Final 得分为 68.00 的 ResNet50 实现。
+
+修改后英文（已通过，已落实）
+The training configuration is as follows. AdamW is used as the optimizer, with an initial learning rate of \(4 \times 10^{-7}\). OneCycleLR is adopted as the scheduling strategy: the learning rate linearly warms up from the initial learning rate to the peak value of \(1 \times 10^{-5}\) during the first 10% of epochs to help the model quickly escape local optima, and then anneals during the remaining 90% of epochs to facilitate convergence and reach a better solution. The number of training epochs is 50, the batch size is 32, and the input resolution is \(448 \times 448\). The default mask threshold for dual-branch feature filtering is $\tau=0.25$, specifying the feature retention criterion between the two views after instance normalization. The default coefficients for spatial and channel CAM guidance are \(\alpha=\beta=0.01\), and the default consistency loss weight is \(\lambda=5\). The proposed method is trained on two RTX 4080 Super GPUs. Experimental results show that our improved baseline model, with an Off-site binocular Final score of 76.19, outperforms the ResNet50 implementation in the original ODIR paper, which reports an Off-site binocular Final score of 68.00.
+
+修改后中文（已通过英文对应译文，已落实）
+训练配置如下。采用 AdamW 优化器，初始学习率为 4×10⁻⁷。采用 OneCycleLR 作为学习率调度策略：在前 10% 的训练轮次中，学习率从初始值线性预热至峰值 1×10⁻⁵，以帮助模型快速跳出局部最优；随后在剩余 90% 的训练轮次中进行退火，以促进收敛并获得更优的解。训练轮数为 50，批量大小为 32，输入分辨率为 448×448。双分支特征筛选的默认掩码阈值为 τ=0.25，用于规定实例归一化后两个视图之间的特征保留准则。CAM 空间与通道引导的默认系数为 α=β=0.01，一致性损失的默认权重为 λ=5。本文方法使用两张 RTX 4080 Super GPU 进行训练。实验结果表明，改进后的基线模型在 Off-site 上的双眼 Final 得分为 76.19，优于原始 ODIR 论文中 Off-site 双眼 Final 得分为 68.00 的 ResNet50 实现。
+
+改动说明：仅新增“The default coefficients for spatial and channel CAM guidance are \(\alpha=\beta=0.01\), and the default consistency loss weight is \(\lambda=5\).”，对应中文为“CAM 空间与通道引导的默认系数为 α=β=0.01，一致性损失的默认权重为 λ=5。”。使用default表明这是主实验的默认参数，后续敏感性扫描在此基础上改变单个参数。参数机制已有方法章节说明，本处不重复扩写机制或增加未经验证的选择依据。
+
+【第2处：第4.2节敏感性实验说明段——已通过，已落实】
+位置：sections/04_experiments_trans.tex第47行，当前两版PDF第15页。紧接第1处训练/默认参数段，后接表2及现有τ结果分析。
+上下文与衔接：第1处已通过的新增句交代α=β=0.01及λ=5；本段说明为何考察τ/λ、如何分别改变参数及如何比较；末句先引出表2。表2的λ区块和表后结果解释分别见已通过的第3处与第4处。本轮只给本段完整前后对照，不复写或微调第1处通过稿。
+理由与回复对应：对应已认可回复第二段的特征筛选/一致性约束两类作用、固定其余参数、独立扫描和统一源域验证口径。补充λ六个取值，保留τ取值及共同训练、选模说明。λ=0的机制含义留在结果说明处简短交代，不在此额外展开。
+保留范围：共同数据/模型/增强/训练参数及50轮、batch32、seed42两句逐字保留，τ全部取值及非隐私DFE+ARC保持。原首句扩展为两参数的研究目的和设计，新增独立训练说明。按用户认可的合并方式，将候选末尾选模规则和表2引入合为一句，串联验证数据集、选模依据及结果位置。所有参数值来自本点已核验配置，不新增实验。
+
+原始英文
+To examine the effect of the dual-branch mask threshold $\tau$ on recognition performance, the joint DFE and ARC model is trained under the non-private setting with $\tau=0.05$, $0.10$, $0.20$, $0.25$, $0.30$, and $0.50$. All runs use the same data split, model architecture, augmentation strategy, and other training parameters. Each run is trained for 50 epochs with a batch size of 32 and a fixed random seed of 42. The checkpoint with the best monocular Final score is selected using the same source-domain validation rule for all runs.
+
+原始中文
+为考察双分支掩码阈值 τ 对识别性能的影响，在非隐私设置下训练 DFE 与 ARC 联合模型，τ 分别取 0.05、0.10、0.20、0.25、0.30 和 0.50。所有实验均使用相同的数据划分、模型结构、增强策略及其他训练参数。每组训练 50 轮，批量大小为 32，随机种子固定为 42。所有实验均按照相同的源域验证规则，选择单眼 Final 得分最高的 checkpoint。
+
+修改后英文（已通过，已落实）
+To examine how feature filtering and consistency regularization affect recognition performance, the mask threshold \(\tau\) and consistency loss weight \(\lambda\) are varied separately in the joint DFE and ARC model under the non-private setting. With \(\alpha=\beta=0.01\) fixed, \(\tau\) is varied over 0.05, 0.10, 0.20, 0.25, 0.30, and 0.50 while keeping \(\lambda=5\). The weight \(\lambda\) is varied over 0, 1, 2.5, 5, 7.5, and 10 while keeping \(\tau=0.25\). The two sweeps are conducted independently, with each parameter value trained in a separate run. All runs use the same data split, model architecture, augmentation strategy, and other training parameters. Each run is trained for 50 epochs with a batch size of 32 and a fixed random seed of 42. For all runs, the checkpoint with the highest monocular Final score on the ODIR Off-site source-domain validation set is selected under the same model-selection rule, and the corresponding results are summarized in Table 2.
+
+修改后中文（已通过英文对应译文，已落实）
+为考察特征筛选与一致性约束对识别性能的影响，在非隐私设置下，分别改变 DFE 与 ARC 联合模型中的掩码阈值 τ 和一致性损失权重 λ。在固定 α=β=0.01 的条件下，保持 λ=5，将 τ 分别设为 0.05、0.10、0.20、0.25、0.30 和 0.50；保持 τ=0.25，将 λ 分别设为 0、1、2.5、5、7.5 和 10。两组参数扫描独立开展，每个参数取值均单独训练。所有实验均使用相同的数据划分、模型结构、增强策略及其他训练参数。每组训练 50 轮，批量大小为 32，随机种子固定为 42。所有实验均按照相同的选模规则，根据 ODIR Off-site 源域验证集上的单眼 Final 得分选择最佳 checkpoint，相应结果汇总于表 2。
+
+改动说明：以特征筛选与一致性约束的作用引出两个参数，保持各自扫描时其他参数固定；明确两组独立训练，以对应表2中同一名义默认配置的两次观测值。原段共同训练条件保持，选模口径不变；末句合并验证数据集、选模依据与表2引入，使“实验设计→统一验证与选模→结果表格”的衔接更紧凑。前后文原有功能与顺序保持。
+第2处源段落SHA-256（不含行尾换行）：960d41310ed27619003c2a3d46ac7386aa092ce61943369c04c60ca79d989996
+
+【第3处：第4.2节表2扩展τ/λ区块——已通过，已落实】
+位置：tables/src/table_tau_sensitivity_trans.tex，原表2位于当前两版PDF第15页；由04_experiments_trans.tex第49行引入。扩展后实际分页待获准写入时核对。
+上下文：前接已通过第2处的两参数实验设计及表2引入，后接已通过的τ与λ结果分析（第4处）。沿用同一表2编号及引用标签，其他表号不变。
+用户决定：采用已经预览并认可的上下两区布局，τ和λ放在同一张表2。用户本轮已通过第3处完整表题、区块标题、数据及表注，全部中英文原样保留、待集中落实。英文与reviewer2_minor4_preview/table2_expanded.tex一致。
+修改原因与对应回复：让六组λ结果在论文中可查，与已认可回复的τ/λ敏感性结果及第2处实验设计对应。原τ数据逐项保持，新增λ区块并注明固定参数；共同评价条件保留于表注，说明两批默认配置分别独立训练。敏感性结论及参数选择意义放在表后分析中。
+展示说明：下列(a)/(b)为同一张表2内部的两个区块；聊天/TXT用分块显示以便逐项核对，正式布局保持已认可的预览。原表没有单列Note，共同条件及默认τ写在原表题中；修改后移入共同表注并扩展，信息没有删除。
+
+原始英文
+Table 2
+Mask threshold sensitivity. Best monocular Final scores on the ODIR Off-site source-domain validation set are reported under the same training budget and checkpoint-selection rule. The default threshold is τ=0.25.
+
+| τ | 0.05 | 0.10 | 0.20 | 0.25 | 0.30 | 0.50 |
+|---|---:|---:|---:|---:|---:|---:|
+| Final | 81.65 | 81.81 | 81.59 | 81.77 | 81.52 | 81.72 |
+
+原始中文
+表2
+掩码阈值敏感性。在相同的训练预算和 checkpoint 选择规则下，报告 ODIR Off-site 源域验证集上的最佳单眼 Final 得分。默认阈值为 τ=0.25。
+
+| τ | 0.05 | 0.10 | 0.20 | 0.25 | 0.30 | 0.50 |
+|---|---:|---:|---:|---:|---:|---:|
+| Final | 81.65 | 81.81 | 81.59 | 81.77 | 81.52 | 81.72 |
+
+修改后英文（已通过，已落实）
+Table 2
+Sensitivity to the mask threshold τ and consistency loss weight λ. Best monocular Final scores on the ODIR Off-site source-domain validation set are reported.
+
+(a) Mask threshold τ (fixed λ=5)
+
+| τ | 0.05 | 0.10 | 0.20 | 0.25 | 0.30 | 0.50 |
+|---|---:|---:|---:|---:|---:|---:|
+| Final | 81.65 | 81.81 | 81.59 | 81.77 | 81.52 | 81.72 |
+
+(b) Consistency loss weight λ (fixed τ=0.25)
+
+| λ | 0 | 1 | 2.5 | 5 | 7.5 | 10 |
+|---|---:|---:|---:|---:|---:|---:|
+| Final | 81.77 | 81.68 | 81.44 | 81.44 | 81.51 | 81.95 |
+
+Note: Both sweeps use the same training budget and checkpoint-selection rule, with α=β=0.01 fixed. The sweeps are trained independently, including separate runs of the default configuration (τ=0.25, λ=5).
+
+修改后中文（已通过英文对应译文，已落实）
+表2
+掩码阈值 τ 与一致性损失权重 λ 的敏感性。报告 ODIR Off-site 源域验证集上的最佳单眼 Final 得分。
+
+(a) 掩码阈值 τ（固定 λ=5）
+
+| τ | 0.05 | 0.10 | 0.20 | 0.25 | 0.30 | 0.50 |
+|---|---:|---:|---:|---:|---:|---:|
+| Final | 81.65 | 81.81 | 81.59 | 81.77 | 81.52 | 81.72 |
+
+(b) 一致性损失权重 λ（固定 τ=0.25）
+
+| λ | 0 | 1 | 2.5 | 5 | 7.5 | 10 |
+|---|---:|---:|---:|---:|---:|---:|
+| Final | 81.77 | 81.68 | 81.44 | 81.44 | 81.51 | 81.95 |
+
+注：两组扫描均采用相同的训练预算和 checkpoint 选择规则，并固定 α=β=0.01。两组扫描独立训练，默认配置（τ=0.25、λ=5）也在两组中分别训练。
+
+保留与调整说明：保留τ六个取值及Final数值、源域单眼评价口径、共同训练预算与选模规则和默认τ=0.25；表题扩展分析对象，新增λ数据/分区/默认λ及独立训练说明。默认τ/λ同一名义配置的81.77与81.44分别保留，各自属于独立扫描。表格不使用跨参数列的配对解释，不新增统计显著性或最优配置断言；布局及预览文件本轮保持。落实时保留了既有黄色高亮，并为新增表题/行/表注添加高亮。
+
+【第4处：第4.2节表后敏感性结果分析——已通过，已落实】
+位置：sections/04_experiments_trans.tex第51行及其后、第4.3节之前。编译后现有τ分析和新增λ/综合分析均位于两版PDF第15页，已进行实际页面核对。
+上下文：前接已通过的表2，含(a)τ与(b)λ两个区块。现有τ完整分析保持，紧接两段新增文字，分别承担λ结果解释和两参数敏感性/配置选择结论。随后进入原第4.3节Comparison with Existing Methods，开始比较ODIR基准上的分类性能；该后续章节及其段落保持。
+理由与回复对应：对应已认可回复中λ取值结果、所测范围内较低敏感性、参数设置灵活性及进一步优化空间；在论文中使表格数值形成实质结论。λ=0含义在此简述，前面的设计/表注不重复扩写。
+保留范围：原τ分析英文逐字保留（展示时仅去除高亮/引用命令并将表号展开为2），对应中文亦完整重复于修改后版本首段；新增λ及综合分析两段。不改第1—3处通过文字、不重复列出表内全部参数得分、不将感谢审稿人的语句写进论文。第4.3节原文保持。
+
+原始英文
+Table 2 reports the ODIR Off-site source-domain validation results. The best monocular Final scores range from 81.52 to 81.81 across the six thresholds, with a maximum difference of 0.29 percentage points. The default threshold $\tau=0.25$ achieves 81.77, which is 0.04 percentage points below the highest score. Under the six tested thresholds and the common model-selection rule, the best source-domain validation performances are close, and the default setting remains close to the highest value. The threshold $\tau=0.25$ is therefore retained as the default.
+
+原始中文
+表 2 报告了 ODIR Off-site 源域验证结果。六个阈值对应的最佳单眼 Final 得分介于 81.52—81.81，最大差异为 0.29 个百分点。默认阈值 τ=0.25 的得分为 81.77，比最高得分低 0.04 个百分点。在所测试的六个阈值及共同选模规则下，各组的最佳源域验证表现接近，默认设置也保持接近最高值的表现。因此，继续采用 τ=0.25 作为默认阈值。
+
+修改后英文（已通过，已落实）
+Table 2 reports the ODIR Off-site source-domain validation results. The best monocular Final scores range from 81.52 to 81.81 across the six thresholds, with a maximum difference of 0.29 percentage points. The default threshold $\tau=0.25$ achieves 81.77, which is 0.04 percentage points below the highest score. Under the six tested thresholds and the common model-selection rule, the best source-domain validation performances are close, and the default setting remains close to the highest value. The threshold $\tau=0.25$ is therefore retained as the default.
+
+For the consistency loss weight \(\lambda\), setting \(\lambda=0\) assigns zero weight to the consistency term while retaining both branches and their classification losses. Across the six tested values, the best monocular Final scores range from 81.44 to 81.95, with a maximum difference of 0.51 percentage points. The highest observed score is 81.95 at \(\lambda=10\), which is 0.51 percentage points above the score of 81.44 obtained with the default \(\lambda=5\) in this sweep.
+
+These results indicate low sensitivity of the best source-domain validation performance to \(\tau\) and \(\lambda\) within the tested ranges and under the common model-selection rule, suggesting some flexibility in parameter settings. The higher score observed at \(\lambda=10\) also suggests scope for further improvement in validation performance through parameter adjustment. The original setting of \(\tau=0.25\) and \(\lambda=5\) is retained to maintain consistency across the existing method comparisons and ablation experiments.
+
+修改后中文（已通过英文对应译文，已落实）
+表 2 报告了 ODIR Off-site 源域验证结果。六个阈值对应的最佳单眼 Final 得分介于 81.52—81.81，最大差异为 0.29 个百分点。默认阈值 τ=0.25 的得分为 81.77，比最高得分低 0.04 个百分点。在所测试的六个阈值及共同选模规则下，各组的最佳源域验证表现接近，默认设置也保持接近最高值的表现。因此，继续采用 τ=0.25 作为默认阈值。
+
+对于一致性损失权重 λ，λ=0 表示将一致性项的权重设为零，同时保留双分支结构及其分类损失。在所测试的六个取值下，最佳单眼 Final 得分介于 81.44—81.95，最大差异为 0.51 个百分点。λ=10 取得最高观测得分 81.95，比本组扫描中默认 λ=5 所取得的 81.44 高 0.51 个百分点。
+
+上述结果表明，在所测试的参数范围及共同选模规则下，最佳源域验证性能对 τ 和 λ 的变化表现出较低的敏感性，说明参数设置具有一定灵活性。λ=10 的较高观测得分也提示，通过参数调整仍有进一步提升验证性能的空间。为保持已有方法比较与消融实验的配置一致，继续沿用 τ=0.25、λ=5 的原设置。
+
+改动说明：第一段为现有τ结果及默认选择理由，逐字保持；第二段解释λ=0含义、六组得分范围和λ10相对本批λ5的观测差异；第三段明确敏感性结论、参数灵活性与进一步优化空间，并交代保留原设置，以承接后续按原配置进行的方法比较。结论限于所测参数范围、源域最佳验证分数及共同选模规则，未写成跨域稳健性、统计显著或所有参数不敏感。
+第4处源段落SHA-256（不含行尾换行）：144c8237b602b8d7c5188ded40c1db980f79c8099912dc4520adc096271f4068
+
+当前落实状态
+第1处：通过稿已落实，α/β/λ默认值句加黄色高亮。
+第2处：合并末句版本已落实，保留自动表号引用。
+第3处：同表2上下两个区块已落实，表题、数据及表注与通过稿一致。
+第4处：原τ段逐字保留，新增λ及综合结论两段已落实并加黄色高亮。
+
+第1处源段落SHA-256（不含行尾换行）：eba6f843c654ba34f852a20406c70c148723de121257b06a4a3be2a1fc59f18b
+初次认可回复SHA-256（历史版本）：82af42961df094ed26188a588a30c8d88ef9d1b83282b8dcc83fe0f83ed2537e
+
+整体叙事与上下文review（2026-11-15，四处已通过，尚未落实）
+
+核对范围：第4.2节现有指标/基线与患者级合并段，四处通过稿的完整英文及对应中文，表2标题/两个区块/表注，以及第4.3节方法比较引入。按论文顺序连读，不重新润色已通过文字。
+
+1. 论证递进成立。
+当前顺序为“评价和基线设置→训练及默认参数→围绕特征筛选/一致性约束设计τ/λ扫描→表2完整数据→τ分析→λ分析→敏感性及保留原配置的理由→第4.3节方法比较”。研究目的先于做法，数据先于判断，λ更高观测分数与后续沿用原配置的关系已交代；无需重排。
+
+2. 段落和表格衔接清楚。
+第1处给默认值，第2处在此基础上交代变动和固定的参数，默认配置与扫描配置含义不冲突。第2处末句已把源域验证选模和表2引入合并，表格在出现前获得引导。表2(a)/(b)分别说明固定λ或固定τ，表注完整交代独立训练，能独立阅读；第4处按τ→λ顺序解释，和表格分区一致。保留原设置的结尾自然承接第4.3节按原配置进行的方法比较，原第4.3节无需额外过渡句。
+
+3. 重复内容审查：有少量功能性重述，无需追加删改。
+（1）训练50轮/batch32在公共设置与敏感性设计中再次出现，敏感性段另给seed42及选模规则，承担明确本组可比条件的作用。该重复为既有论文内容，用户此前精简的是回复中的细节，当前通过稿不再额外压缩。
+（2）共同条件、固定参数和独立训练在正文与表注各有概括，正文交代实验设计，表注保证表格可独立理解且区分默认配置的两次训练。表注简短，无需删除。
+（3）表前“相应结果汇总表2”与原表后开头“表2报告源域验证结果”存在轻度重述，分别引入表格和开启读表分析；可保持，避免为一句过渡改动原已批准τ分析。
+（4）τ段保留默认阈值与末段保留τ/λ整套配置，前者由τ接近最高值给出理由，后者联系既有比较一致性，功能不同。λ段报告λ10的数值，末段解释优化空间，也属于数据→含义的递进。
+（5）表格给12个完整结果，正文只选范围、默认点及最高观测值，不重复逐项枚举；未发现新增段落机械照搬回复的情况，感谢语留在回复中。
+
+4. 数值、评价对象与结论范围一致。
+四处均明确源域验证的最佳单眼Final，和此前公共设置中的患者级结果区分。τ跨度0.29/默认点距最高0.04，λ跨度0.51/λ10对本批λ5差0.51，与原结果一致；两个0.51是不同比较关系的舍入值，正文指代清楚。两组同一名义默认配置81.77和81.44有独立训练说明，不相互替代。α/β只作为固定设置，未声称其性能敏感性已验证；综合结论限定所测范围与共同源域选模规则，λ10称观测值及优化空间，不称已验证跨域增益或统计显著。
+
+5. 审核决定与待执行事项。
+建议四处通过稿全部原样保留；未发现需要重写、合并或重新审核的实质冲突。本轮只记录review和第4处通过状态，没有更改任何通过文字或正式稿，也未编译。后续获准落实时使用这四处最终版本，保留既有及新增黄色高亮、表2编号；再核验整稿实际分页、图表位置、引用和最终回复中的实际修改说明。本次整体review不等于正式落实，也不将本点提前标记完成。
+
+
+正式落实与编译检查（2026-11-15，待用户检查PDF）
+
+用户最终确认章节安排：4.2保留Experimental Settings原题，τ与λ在此分析并共用表2；复杂度比较后续纳入4.3 Comparison with Existing Methods。本轮不新增或改名章节，未加入复杂度数据。
+
+四处通过稿已经写入sections/04_experiments_trans.tex及tables/src/table_tau_sensitivity_trans.tex。逐字核验正文与通过英文一致，仅作LaTeX数学定界、高亮及自动引用转换；表格去除高亮与引用标签后，与已通过的独立预览布局源码一致。原τ分析、所有章节标题及4.3之后的正文完整保持。
+
+已执行python sdg_latex/scripts/build_revision.py，两版正式修订PDF均为29页。四处修改及合并表2全部位于正文第15页，第4.2节从第14页开始，第4.3节在第15页末衔接。目视检查高亮版第14—16页及清洁版第15—16页：新增文字与表题/数据/表注高亮正常，表2及表注完整同页，无重叠或越界。源文件差异检查通过，原表号/公式号及其他交叉引用编号保持，无未定义引用。编译日志的排版/空锚点提示位于未改动的main_cas.tex关键词和标题区域（第93/96行），本点正文和表格未出现对应警告。
+
+正式输出：submit/build/main_cas_revised_highlight.pdf、submit/build/main_cas_revised.pdf。认可的六段中文回复原样保留；本点待用户检查已编译论文后继续完善最终修改说明，未提前标记完成。未运行新实验，未Git暂存/提交/推送，未同步Mac。
+
+用户审核更新（2026-11-15）：用户认可落实后的论文，四处修改及两版PDF通过；随后要求按实际内容和位置完善完整中文回复。最终中文回复已在原认可论证基础上补齐第4.2节及表2(a)/(b)位置和实际修改说明，等待用户审核。本文全部中英对照和正式文件保持，未再次编译。
+
+最终审核完成（2026-11-15）：用户已认可最终六段中文回复及此前落实的论文修改和编译PDF，本点当前中文返修阶段已完成。最终回复保留未压缩论证，仅去除末段重复修改说明并将感谢接回结尾；SHA-256：c2139589c2920cd88225570e65972b7ba239e08ce0d64eb53892597fd45ed12e。四处中英批准文本、正文、表格和PDF原样保持。相关去重规则已归档协作文件，未再次编译或进行Git提交推送。
