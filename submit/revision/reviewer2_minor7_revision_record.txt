@@ -1,0 +1,86 @@
+审稿人2次要意见7：中文回复、文献核查与完成记录
+日期：2026-11-16（北京时间）
+状态：当前中文返修阶段已完成。用户已确认最终中文回复，决定保留 Query2Label 的现有预印本引用，并授权保存回复、核查记录及更新项目索引。本点无待落实论文修改。
+
+一、最终决定与交付
+
+最终回复：submit/revision/reviewer2_minor7_reply_zh.txt。
+回复SHA-256：cdfaf1908091b2ab959f1119528b2635bb4df85a6afbfa334db933669f06e019。
+唯一核查与完成记录：本文件。无需论文修改，故不生成修改对照文件。
+用户先确认保留现有引用，并明确删除“当前参考文献条目已明确标注其 arXiv 预印本性质、编号及年份，与作者公开提供的引用信息一致。”这段冗余说明。
+用户随后确认：“可以，就用这个版本。保存回复和核查记录，更新项目索引，将审稿人2次要意见7标记为完成，注意不要覆盖其他对话的改动。”
+最终回复按用户通过的一段原文保存，不额外添加上述已删除句、超链接、文献编号、核查细节或重复修改说明；文件末尾保留一个换行。
+
+二、审稿意见与已有材料
+
+英文原意见：
+Reference [17] (Query2Label) is an arXiv preprint from 2021. If it has been published at a venue since then, the published version should be cited.
+
+中文：参考文献［17］（Query2Label）是2021年的 arXiv 预印本。如果此后已有正式发表版本，应引用正式发表版本。
+
+历史讨论：revision_drafts/reviewer2/discussion_progress_2026-11-06_zh.txt，第十节。
+导师意见对齐稿：revision_drafts/meetings/meeting_01/docx_alignment/审稿意见中文译文及回复_导师意见对齐版.txt，R2次要意见7。
+导师原始转录：revision_drafts/meetings/meeting_01/自动转录_带时间戳.txt，01:00:10—01:00:18附近有“参考文件改一下就行了”的概括性提醒，未提供正式发表渠道或书目信息；不将其作为已经正式发表的证据。对齐稿明确按公开核查结果决定是否替换版本。
+既有方向为核查作者公开信息；未找到可核实正式版本时，保留预印本引用并在回复中说明。
+
+三、2026-11-16公开检索与核查
+
+用户要求再次扩大搜索后，按完整题名、Query2Label、作者组合及 arXiv:2107.10834 交叉检索，并通过搜索引擎检索 CVF、IEEE Xplore、Springer、ACM、ScienceDirect、OpenReview 等站点。结论限定为“目前尚未检索到可核实的正式期刊或会议发表版本”，不表述为绝对不存在、全网没有或从未发表。公开预印本与正式期刊/会议版本分别核查。
+
+1. arXiv 原始记录
+https://arxiv.org/abs/2107.10834
+题名：Query2Label: A Simple Transformer Way to Multi-Label Classification。
+作者：Shilong Liu, Lei Zhang, Xiao Yang, Hang Su, Jun Zhu。
+提交历史仅显示2021-07-22的v1，页面未列正式期刊或会议发表信息。
+页面 DOI 10.48550/arXiv.2107.10834 明确为 arXiv 经 DataCite 提供的 DOI，不能据此认定已有正式期刊/会议版本。
+
+2. 第一作者论文列表
+https://lsl.zone/publications/
+该条目列为“arXiv:2107.10834, 2021”；其 BibTeX 的 journal 为 arXiv:2107.10834，year 为2021，未提供正式发表渠道。
+
+3. 官方代码仓库
+https://github.com/SlongLiu/query2labels#bibtex
+通过 GitHub 工具读取官方 README.md，BibTeX 为 @misc，year=2021，eprint=2107.10834，archivePrefix=arXiv。
+本轮读取的 README.md blob SHA：e2f5d69f0b0f1aae6081593c927d3dc6dd24cfaa。
+官方提供的引用仍指向2021年预印本。
+
+4. DBLP 记录
+https://dblp.org/rec/journals/corr/abs-2107-10834.html
+收录为 CoRR abs/2107.10834 (2021)，类型为 Informal or Other Publication；页面显示记录更新日期2025-10-28，外部全文链接指向 arXiv。该记录不提供可替换的正式期刊/会议版本。
+初次直接打开该页曾失败，之后通过不带 .html 的记录地址成功打开并核查；不是只依据搜索结果标题判断。
+
+5. 相互矛盾的二次引用及核查
+https://www.zjujournals.com/eng/EN/10.3785/j.issn.1008-973X.2023.10.002
+该2023年文章的参考文献第20条，将 Query2Label 写作“IEEE Conference on Computer Vision and Pattern Recognition. Piscataway: IEEE, 2021: 391-407”。
+该标注与作者官方资料及 DBLP 记录不一致。本轮在 DBLP 的 CVPR 2021论文目录中搜索 Query2Label，无匹配：
+https://dblp.org/db/conf/cvpr/cvpr2021.html
+CVF 的 CVPR 2021总目录直接访问返回403；不能声称已成功阅读全文目录。CVF站点检索亦未找到 Query2Label 自身的正式论文页面。
+因此，该二次引用尚无可核实的原始出版记录支持，不能据此将当前引用改为CVPR论文；记录为存在矛盾的线索，不将“疑似引文错误”写成已经证实的事实。
+
+其他检索结果中出现的会议/期刊名称，多对应引用 Query2Label 的其他论文或其应用研究。没有将它们的出版信息当作 Query2Label 自身的正式发表渠道。
+
+四、返修基准与当前稿核对
+
+固定返修基准：准备审稿人意见返修，提交4f62d422ce992cb2f082e96f5286d0c3f77f432f。
+参考文献源码：submit/build/sections/06_references_trans.tex。
+LaTeX 引用键：_Ref213950246。
+返修基准中为参考文献［17］；本次保存时按当前源码的书目顺序核对为［18］。编号变化来自累计修订，不作为本点新增改动；后续整稿编号调整按最终稿核对。
+基准与当前稿的该文献条目内容一致：
+Liu S, Zhang L, Yang X, et al. Query2label: A simple transformer way to multi-label classification. arXiv preprint arXiv:2107.10834. 2021.
+用户已决定保留现有条目。本点不修改参考文献、正文、图表或公式，不编译或替换两版PDF；没有待实施的正文对照。
+
+五、完成范围与并行协作
+
+本次仅保存本点最终中文回复、本记录，并局部更新 PROJECT_INDEX.md 的本点状态和材料入口。
+写入前读取最新索引及工作区状态，索引已经包含次要意见6完成信息，其回复与含补充分析的记录均保留。次要意见5由另一对话并行处理，其阶段和材料由该对话维护；本点不替其他意见确认状态。
+索引更新保留其他点内容及既有工程/资料改动，不恢复旧索引或覆盖其他对话的累计修改。
+未执行实验、英文翻译、Git暂存/提交/推送或Mac同步。本点完成指当前中文返修阶段完成。
+下一可单独处理的点为R2次要意见8；只提供接续提示词，不自动启动或创建对话。
+
+六、本地提交授权与范围（2026-11-16）
+
+用户确认：“好的，就保留这版，本点完成。按之前模板对该点的相关文件进行sdg_latex提交。”
+沿用既有逐点提交标题：审稿人2次要意见7暂存。
+提交范围仅为submit/revision/reviewer2_minor7_reply_zh.txt和本记录，共两个文件；最终回复原文及SHA-256保持。本点保留现有引用、不修改论文，因此不纳入参考文献源码、正文、图表、PDF或修改对照。
+第五节所述未提交状态为此前保存阶段的记录；本次用户已单独授权本地Git提交。提交号及执行结果由外层PROJECT_INDEX.md记录，不将该索引纳入sdg_latex仓库。
+其他意见材料及既存工程/资料改动均不纳入本次提交，不改变其他文件的暂存状态。本次不推送、不编译、不运行实验或同步Mac。
