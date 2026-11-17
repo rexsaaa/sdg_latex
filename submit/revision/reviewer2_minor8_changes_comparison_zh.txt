@@ -1,0 +1,383 @@
+审稿人2次要意见8：修改范围与逐处对照（当前中文返修阶段已完成）
+日期：2026-11-17
+状态：2026-11-17用户明确通过最终中文回复，要求保存、标记完成并提交。八组共十三处文字均已通过并落实，两版修订PDF均29页且已检查；本点当前中文返修阶段已完成。摘要/结论、次要5总述及ARC结构/CAM配置等共享事项继续按已有安排处理。下方逐轮记录保留当时审核状态，当前状态以本段及末尾完成记录为准。
+修改前英文以本点落实前的累计稿为准；仅将LaTeX引用转换为实际参考文献编号。以下顺序为原始英文→原始中文→修改后英文→修改后中文。
+
+已落实范围（八组共十三处）
+1. 第2.2节两个自然段：区分DG/SDG任务定义与域不变表示学习路线，并将现有FACT引用与增强/预测一致性联系起来。
+2. 图2图注(c)：将筛选输出描述为双视图中相对稳定的分量，保留完整模块名称与其他图注内容。
+3. 第3.1节开头：明确DFE的跨域稳定表示学习目标与单源增强的作用，保留原有设计动机。
+4. 第3.1节公式(4)后、公式(6)前：调整直接宣称已经提取域不变特征的衔接文字；保留主要意见1已通过的双视图机制解释及次要意见4已通过的阈值解释。
+5. 第3.2节开头与交叉注意力引入：用DFE筛选后的特征描述ARC输入。
+6. 第4.4节DFE单模块、联合模块与总结三个段落：保持数值和比较口径，将机制解释与识别结果分工表述。
+7. Highlights第2条：以可迁移特征概括贡献；其他条目保留。
+8. 图1(c)图注：按已通过目标式措辞表述学习可迁移的疾病相关特征与适用于未见域的决策边界。
+本点保留DFE名称和公式运算/符号，不新增实验、表格或参考文献条目。全文原有关于领域方法的domain-invariant表述不机械替换。
+共享段落处理：
+- 次要5已通过、尚未落实的引言与第3节总述可直接支持本点，不另写竞争版本。
+- 次要5现已按用户要求暂时搁置，其已通过引言/方法总述保留但未落实，旧结论候选不作为落实版本；本点不接续或实施次要5，后续按最新稿与各点通过文字核对共享位置。
+- 摘要沿用既定安排，留到全部意见完成后整体重写时同步本点术语。摘要现有措辞尚未处理，不将全稿术语一致性记作完成。
+- 图1图件及图10保持；图1(c)图注后经本点补充审核通过并落实，次要6已通过回复的概念图定位保持。
+
+第1组—第1段：第2.2节DG定义与代表方法
+状态：用户已通过并落实；2026-11-17最终回复及本点完成已确认。
+实际落实位置：两版修订PDF第5页。
+位置：submit/build/sections/02_related_work_trans.tex，第18行完整自然段。当前高亮PDF第5页（由PDF文本定位，未做本轮视觉检查）。
+修改原因：目前将学习域不变特征直接写入DG任务定义；FACT简介未清楚呈现其增强/一致性学习机制。
+对应回复：DG描述任务，域不变表示学习是实现路线之一；现有FACT文献支持增强下稳定语义信息学习与泛化的联系。
+保留范围：其他方法介绍、多源DG的条件及医疗数据协作约束均保持；不增删参考文献。
+前文：第2.2节第1段介绍域偏移、DA及其目标数据访问条件。
+本段功能：转入DG并介绍代表路线，随后说明多源使用条件。
+后文：第3段引入单源DG；该段在下方单独审核，不因本段通过自动通过。
+
+原始英文
+Unlike DA, Domain Generalization (DG) aims to learn domain-invariant features without accessing target-domain data and to generalize to unseen domains [29]. Typical DG methods include MixStyle [30], which simulates potential domain shift by mixing instance style statistics; DomainBed [31], which provides a unified benchmark for evaluating DG algorithms; FACT [32], which decomposes domain-specific and domain-invariant information from a frequency-domain perspective; RSC [33], which suppresses dominant features to force the model to attend to more class-relevant cues; and meta-learning-based DG methods [34], which improve generalization by simulating differences between source and target domains. Most DG studies use multiple labeled source domains to learn cross-domain stable representations. This helps models capture richer inter-domain variations, but also requires consistent label spaces, coordinated data processing, and cross-institutional collaboration. In real-world medical scenarios, however, these conditions are not always available, making it difficult to centralize or synchronously use multi-institutional data. Even when centralized storage is avoided through federated learning, additional complexity arises from communication, privacy mechanisms, non-independent and identically distributed data, and collaborative optimization.
+
+原始中文
+与DA不同，域泛化（DG）旨在不访问目标域数据的情况下学习域不变特征，并泛化到未见域[29]。典型的DG方法包括：MixStyle[30]，通过混合实例风格统计量模拟潜在域偏移；DomainBed[31]，为评估DG算法提供统一基准；FACT[32]，从频域视角分解域特定信息与域不变信息；RSC[33]，通过抑制主导特征迫使模型关注更多类别相关线索；以及基于元学习的DG方法[34]，通过模拟源域与目标域之间的差异改善泛化。大多数DG研究使用多个有标签源域学习跨域稳定表示。这有助于模型捕捉更丰富的域间变化，但也要求一致的标签空间、协调的数据处理和跨机构协作。然而，在真实医疗场景中，这些条件并不总能满足，使多机构数据难以集中或同步使用。即使通过联邦学习避免集中存储，通信、隐私机制、非独立同分布数据和协同优化仍会带来额外复杂性。
+
+修改后英文（用户已通过，已落实）
+Unlike DA, Domain Generalization (DG) aims to learn predictive models using only source-domain data for application to unseen target domains [29]. Domain-invariant representation learning is one approach to this task, aiming to reduce the influence of domain-related variations on the learned features. Typical DG methods include MixStyle [30], which simulates potential domain shift by mixing instance style statistics; DomainBed [31], which provides a unified benchmark for evaluating DG algorithms; FACT [32], which combines Fourier-based augmentation with prediction consistency between original and augmented images to encourage stable semantic representations; RSC [33], which suppresses dominant features to force the model to attend to more class-relevant cues; and meta-learning-based DG methods [34], which improve generalization by simulating differences between source and target domains. Most DG studies use multiple labeled source domains to learn cross-domain stable representations. This helps models capture richer inter-domain variations, but also requires consistent label spaces, coordinated data processing, and cross-institutional collaboration. In real-world medical scenarios, however, these conditions are not always available, making it difficult to centralize or synchronously use multi-institutional data. Even when centralized storage is avoided through federated learning, additional complexity arises from communication, privacy mechanisms, non-independent and identically distributed data, and collaborative optimization.
+
+修改后中文（用户已通过，已落实）
+与DA不同，域泛化（DG）旨在仅利用源域数据学习可应用于未见目标域的预测模型[29]。域不变表示学习是服务于这一任务的一种途径，旨在减小域相关变化对所学特征的影响。典型的DG方法包括：MixStyle[30]，通过混合实例风格统计量模拟潜在域偏移；DomainBed[31]，为评估DG算法提供统一基准；FACT[32]，将傅里叶增强与原始图像和增强图像之间的预测一致性相结合，以促进稳定语义表示的学习；RSC[33]，通过抑制主导特征迫使模型关注更多类别相关线索；以及基于元学习的DG方法[34]，通过模拟源域与目标域之间的差异改善泛化。大多数DG研究使用多个有标签源域学习跨域稳定表示。这有助于模型捕捉更丰富的域间变化，但也要求一致的标签空间、协调的数据处理和跨机构协作。然而，在真实医疗场景中，这些条件并不总能满足，使多机构数据难以集中或同步使用。即使通过联邦学习避免集中存储，通信、隐私机制、非独立同分布数据和协同优化仍会带来额外复杂性。
+
+第1组—第2段：第2.2节SDG设定与研究动机
+状态：用户已通过并落实；2026-11-17最终回复及本点完成已确认。
+实际落实位置：两版修订PDF第5页。
+位置：submit/build/sections/02_related_work_trans.tex，第20行完整自然段，当前高亮PDF第5页。
+修改原因：首句将“学习域不变特征”写入SDG设定，末句再次以该表述概括本文研究方向；拟与已通过的DG段保持任务与学习思路的区分。
+对应回复：单源域泛化规定数据来源及跨域识别目标，稳定表示学习服务于该任务。
+保留范围：医学单源DG文献[35]及其支持的研究动机、目标数据访问与多源协作约束均保持；不新增机制说明或边界声明。
+前文：已通过的DG段区分任务与域不变表示学习路线，并说明多源数据使用约束。
+本段功能：引入单源设定，将这一设定与跨机构多标签眼病识别的部署需求连接起来。
+后文：第2.3节转入隐私保护，保持原有章节衔接。
+具体变化：仅调整首句任务定义及末句研究方向；中间两句逐字保留。
+
+原始英文
+Against this background, Single-Domain Generalization (SDG) is a more constrained generalization setting that uses only one source domain to learn domain-invariant features for unseen domains. Studies on single-source DG in medical images [35] also indicate that mining more stable disease-related features from a single source domain has practical value when multi-institutional data cannot be centrally used. In summary, the assumptions of target-domain accessibility or multi-source collaboration presumed by common cross-domain methods are difficult to satisfy simultaneously in real-world medical scenarios. Therefore, learning domain-invariant features from a single source domain is well aligned with the deployment constraints of cross-institutional multi-label ocular disease recognition.
+
+原始中文
+在此背景下，单域泛化（SDG）是一种约束更强的泛化设定，即仅使用一个源域为未见域学习域不变特征。医学图像单源DG研究[35]也表明，当多机构数据无法集中使用时，从单一源域中挖掘更加稳定的疾病相关特征具有实际价值。综上，常见跨域方法所依赖的目标域数据可访问或多源协作等假设，在真实医疗场景中难以同时满足。因此，从单一源域学习域不变特征，与跨机构多标签眼病识别的部署约束相契合。
+
+修改后英文（用户已通过，已落实）
+Against this background, Single-Domain Generalization (SDG) is a more constrained generalization setting in which a model is trained using data from a single source domain for application to unseen target domains. Studies on single-source DG in medical images [35] also indicate that mining more stable disease-related features from a single source domain has practical value when multi-institutional data cannot be centrally used. In summary, the assumptions of target-domain accessibility or multi-source collaboration presumed by common cross-domain methods are difficult to satisfy simultaneously in real-world medical scenarios. Therefore, learning transferable disease-related representations from a single source domain is well aligned with the deployment constraints of cross-institutional multi-label ocular disease recognition.
+
+修改后中文（用户已通过，已落实）
+在此背景下，单域泛化（SDG）是一种约束更强的泛化设定，即使用单一源域的数据训练模型，以应用于未见目标域。医学图像单源DG研究[35]也表明，当多机构数据无法集中使用时，从单一源域中挖掘更加稳定的疾病相关特征具有实际价值。综上，常见跨域方法所依赖的目标域数据可访问或多源协作等假设，在真实医疗场景中难以同时满足。因此，从单一源域学习具有可迁移性的疾病相关表示，与跨机构多标签眼病识别的部署约束相契合。
+
+第2组：图2完整图注中的(c)部分
+状态：用户已通过并落实；2026-11-17最终回复及本点完成已确认。
+实际落实位置：两版修订PDF第7页。
+位置：submit/build/sections/03_method_trans.tex，第11行完整图注。现有编译辅助文件将图2定位于第7页，本轮未编译或作图像视觉检查。
+修改原因：(c)原句由双分支高度相似直接写到提取域不变特征；拟用归一化差异筛选及所采用扰动下的相对稳定性描述实际操作。
+对应回复：保留DFE名称表达学习目标，具体输出按双视图筛选机制描述。
+保留范围：完整DFE/ARC名称、(a)(b)(d)(e)及图像均保持；仅修改(c)中机制名称之后的文字。
+上下文：本图概括双分支特征提取、CAM引导、特征筛选及后续标签关联学习。(c)衔接前两步得到的特征与Part 2的标签表示学习。
+展示：完整图注按原始英文→原始中文→修改后英文→修改后中文连续排列；英文仅去掉LaTeX高亮包装，保留全部原句。
+
+原始英文
+Overview of the proposed interpretable single-domain generalization framework. Part 1 is Dual-Branch Guided Domain-Invariant Feature Extraction (DFE), consisting of (a)--(c): (a) original source-domain images and augmented source-domain images are first fed into the backbone to extract dual-branch features; (b) CAM is used to generate model-attended region guidance, which enhances disease-related regions and suppresses background noise; and (c) a dual-branch feature filtering mechanism retains highly similar components between the two feature branches to extract domain-invariant features. Part 2 is Adaptive Label-Feature Relevance Construction (ARC), consisting of (d)--(e): (d) Transformer self-attention is used to model label-label relevance, and cross-attention is then used to establish label-feature relevance; (e) attention consistency constraints improve the stability of attention features, thereby reducing false positives and false negatives in multi-label recognition.
+
+原始中文
+所提出的可解释单域泛化框架概览。第1部分为双分支引导的域不变特征提取（DFE），包括(a)—(c)：(a)首先将原始源域图像和增强源域图像输入骨干网络，提取双分支特征；(b)利用CAM生成模型关注区域的引导信息，增强疾病相关区域并抑制背景噪声；(c)双分支特征筛选机制保留两个特征分支之间高度相似的分量，以提取域不变特征。第2部分为自适应标签—特征关联构建（ARC），包括(d)—(e)：(d)利用Transformer自注意力建模标签—标签关联，随后通过交叉注意力建立标签—特征关联；(e)注意力一致性约束提高注意力特征的稳定性，从而减少多标签识别中的假阳性和假阴性。
+
+修改后英文（用户已通过，已落实）
+Overview of the proposed interpretable single-domain generalization framework. Part 1 is Dual-Branch Guided Domain-Invariant Feature Extraction (DFE), consisting of (a)--(c): (a) original source-domain images and augmented source-domain images are first fed into the backbone to extract dual-branch features; (b) CAM is used to generate model-attended region guidance, which enhances disease-related regions and suppresses background noise; and (c) a dual-branch feature filtering mechanism compares normalized feature differences between the two views to retain components that are relatively stable under the selected appearance perturbations. Part 2 is Adaptive Label-Feature Relevance Construction (ARC), consisting of (d)--(e): (d) Transformer self-attention is used to model label-label relevance, and cross-attention is then used to establish label-feature relevance; (e) attention consistency constraints improve the stability of attention features, thereby reducing false positives and false negatives in multi-label recognition.
+
+修改后中文（用户已通过，已落实）
+所提出的可解释单域泛化框架概览。第1部分为双分支引导的域不变特征提取（DFE），包括(a)—(c)：(a)首先将原始源域图像和增强源域图像输入骨干网络，提取双分支特征；(b)利用CAM生成模型关注区域的引导信息，增强疾病相关区域并抑制背景噪声；(c)双分支特征筛选机制通过比较两个视图之间的归一化特征差异，保留对所采用外观扰动相对稳定的分量。第2部分为自适应标签—特征关联构建（ARC），包括(d)—(e)：(d)利用Transformer自注意力建模标签—标签关联，随后通过交叉注意力建立标签—特征关联；(e)注意力一致性约束提高注意力特征的稳定性，从而减少多标签识别中的假阳性和假阴性。
+
+第3组：第3.1节开头完整自然段
+状态：用户已通过并落实；2026-11-17最终回复及本点完成已确认。
+实际落实位置：两版修订PDF第7页。
+位置：submit/build/sections/03_method_trans.tex，第17行完整自然段。
+修改原因：开头直接写已学习域不变特征；末句将增强对成像/人群差异的模拟及语义保留写成已实现性质。拟明确DFE学习目标，并将增强作用具体落到成像外观变化的设计目的。
+对应回复：DFE以跨域稳定性为学习目标，单源增强为稳定特征学习提供条件。
+保留范围：多机构数据使用约束、单源设定、对比学习启发、图像符号及增强示例保持。不扩写CAM/ARC机制，不增加数学边界声明。
+前文：图2及其完整图注概括方法流程；图注(c)的具体中英文修改已通过，但尚未落实。
+本段功能：从单源使用条件进入DFE的学习目标与原始/增强图像构造。
+后文：下一自然段从图2(a)引入骨干网络及双分支特征，随后说明CAM引导的作用；保持现有衔接。
+具体变化：首句拆为单源设定与DFE目标两句；末句改为增强设计目的，聚焦成像设备/光照相关外观变化，去掉将患者人群差异直接归入风格增强模拟对象的表述。中间两个原句逐字保留。
+
+原始英文
+Considering that multi-institutional data in medical scenarios are often difficult to centralize or use synchronously, this study adopts a single-domain generalization setting and learns domain-invariant features for unseen-domain data using only one source domain. Inspired by contrastive learning, original source-domain images are transformed into augmented source-domain images through augmentation techniques such as style disturbance to simulate possible distribution shifts in unseen domains. Specifically, \(I^{ori}\) denotes original source-domain images, and \(I^{aug}\) denotes augmented source-domain images generated by style disturbance, such as MixStyle or random adjustment of brightness, contrast, and saturation. This augmentation simulates differences in imaging devices, illumination environments, or patient populations in cross-domain scenarios while preserving the semantic content of the images, namely disease regions.
+
+原始中文
+考虑到医疗场景中的多机构数据通常难以集中或同步使用，本文采用单域泛化设定，仅利用一个源域为未见域数据学习域不变特征。受对比学习启发，通过风格扰动等增强技术，将原始源域图像转换为增强源域图像，以模拟未见域中可能出现的分布偏移。具体而言，\(I^{ori}\)表示原始源域图像，\(I^{aug}\)表示通过风格扰动生成的增强源域图像，例如采用MixStyle或随机调整亮度、对比度和饱和度。这种增强在保留图像语义内容（即疾病区域）的同时，模拟跨域场景中的成像设备、光照环境或患者人群差异。
+
+修改后英文（用户已通过，已落实）
+Considering that multi-institutional data in medical scenarios are often difficult to centralize or use synchronously, this study adopts a single-domain generalization setting. DFE aims to learn disease-discriminative representations from a single source domain, with cross-domain stability as its learning objective. Inspired by contrastive learning, original source-domain images are transformed into augmented source-domain images through augmentation techniques such as style disturbance to simulate possible distribution shifts in unseen domains. Specifically, \(I^{ori}\) denotes original source-domain images, and \(I^{aug}\) denotes augmented source-domain images generated by style disturbance, such as MixStyle or random adjustment of brightness, contrast, and saturation. This augmentation is designed to simulate appearance variations associated with imaging devices and illumination conditions while preserving disease-related semantic content.
+
+修改后中文（用户已通过，已落实）
+考虑到医疗场景中的多机构数据通常难以集中或同步使用，本文采用单域泛化设定。DFE旨在从单一源域学习疾病判别表示，并以跨域稳定性作为学习目标。受对比学习启发，通过风格扰动等增强技术，将原始源域图像转换为增强源域图像，以模拟未见域中可能出现的分布偏移。具体而言，\(I^{ori}\)表示原始源域图像，\(I^{aug}\)表示通过风格扰动生成的增强源域图像，例如采用MixStyle或随机调整亮度、对比度和饱和度。这种增强旨在保留疾病相关语义内容的同时，模拟与成像设备和光照条件相关的外观变化。
+
+第4组—第1处：第3.1节公式（4）后的残差引导说明
+状态：用户已通过并落实；2026-11-17最终回复及本点完成已确认。
+实际落实位置：两版修订PDF第8页。
+位置：submit/build/sections/03_method_trans.tex，第40行完整自然段。
+修改原因：第三句直接称提取域不变特征，并把疾病相关性的提升归到这一步；前句已说明CAM的疾病相关引导作用，本句宜衔接引导表示与后续筛选。
+对应回复：具体机制按实际操作描述，区分CAM引导与双视图特征筛选的作用，不将筛选输出直接宣称为已取得域不变性质。
+保留范围：α/β及空间/通道权重含义、残差引导的原有解释、CAM可视化用途全部保持；仅替换第三句。
+前文：公式（3）、（4）给出两个分支的CAM残差加权。
+本段功能：解释加权参数及引导作用，再衔接下一步特征筛选。
+后文：主要意见1已通过的双视图/实例归一化/逐元素差异说明及公式（5）保持，本轮不改。
+下一待审位置：公式（6）前的掩码应用说明，保留次要意见4已通过的阈值分析。
+
+原始英文
+Here, \(\alpha\) and \(\beta\) are hyperparameters that control the enhancement strengths of \(s_{w}\) and \(c_{w}\), respectively. Residual weighting allows CAM guidance to highlight disease-related regions while retaining the original feature representation, reducing the model's reliance on domain-specific noise such as illumination and background textures. Extracting domain-invariant features from these guided representations helps improve the disease relevance of the learned features. Meanwhile, visualizing model-attended regions through CAM enhances model interpretability and helps clinicians understand the basis of prediction, for example by overlaying CAM to inspect whether the model focuses on lesion regions.
+
+原始中文
+其中，\(\alpha\)和\(\beta\)分别是控制\(s_w\)和\(c_w\)增强强度的超参数。残差加权使CAM引导能够在保留原始特征表示的同时突出疾病相关区域，减小模型对光照和背景纹理等域特定噪声的依赖。从这些引导后的表示中提取域不变特征，有助于提高所学特征与疾病的相关性。同时，利用CAM将模型关注区域可视化能够增强模型的可解释性，帮助临床医生理解预测依据，例如通过叠加CAM观察模型是否关注病灶区域。
+
+修改后英文（用户已通过，已落实）
+Here, \(\alpha\) and \(\beta\) are hyperparameters that control the enhancement strengths of \(s_{w}\) and \(c_{w}\), respectively. Residual weighting allows CAM guidance to highlight disease-related regions while retaining the original feature representation, reducing the model's reliance on domain-specific noise such as illumination and background textures. The resulting guided representations serve as inputs to the subsequent dual-branch feature filtering. Meanwhile, visualizing model-attended regions through CAM enhances model interpretability and helps clinicians understand the basis of prediction, for example by overlaying CAM to inspect whether the model focuses on lesion regions.
+
+修改后中文（用户已通过，已落实）
+其中，\(\alpha\)和\(\beta\)分别是控制\(s_w\)和\(c_w\)增强强度的超参数。残差加权使CAM引导能够在保留原始特征表示的同时突出疾病相关区域，减小模型对光照和背景纹理等域特定噪声的依赖。由此得到的引导特征表示作为后续双分支特征筛选的输入。同时，利用CAM将模型关注区域可视化能够增强模型的可解释性，帮助临床医生理解预测依据，例如通过叠加CAM观察模型是否关注病灶区域。
+
+第4组—第2处：第3.1节公式（6）前的掩码应用说明
+状态：用户已通过并落实；2026-11-17最终回复及本点完成已确认。
+实际落实位置：两版修订PDF第9页。
+位置：submit/build/sections/03_method_trans.tex，第54行完整自然段。
+修改原因：末句将掩码应用直接表述为提取域不变特征；拟明确其实际保留依据为双视图归一化差异。
+对应回复：按实际筛选机制描述输出，衔接已通过的图2(c)及公式（5）前双视图解释。
+保留范围：符号说明、阈值赋值规则，以及次要意见4已通过的四句阈值分析全部保留；仅修改末句。公式（6）的运算及符号保持。
+前文：公式（5）给出基于归一化差异与阈值τ的二值掩码。
+本段功能：解释掩码参数与阈值作用，随后引出掩码对两个分支引导特征的应用。
+后文：公式（6）给出逐元素相乘；其后的双视图一致成分、增强前提及CAM质量说明保持，属于主要意见1已通过内容。
+展示：原始英文仅去除黄色高亮包装，数学符号及原句保持；完整自然段四项对照连续展示。
+
+原始英文
+Here, \(\mu_{1},\sigma_{1}\) and \(\mu_{2},\sigma_{2}\) are the means and variances of the two guided features, respectively, \(\epsilon = 10^{-5}\) is a stability constant, and \(i,j\) denote feature map positions. Components satisfying the threshold \(\tau\) are assigned 1, while the remaining components are assigned 0. The threshold $\tau$ controls the feature differences allowed between the two views. For a fixed pair of feature maps, a smaller threshold imposes stricter filtering, whereas a larger threshold retains more features. It therefore controls the trade-off between information retention and perturbation suppression. Overly strict filtering may remove useful information that is sensitive to augmentation, whereas a more permissive threshold may retain more components affected by appearance variations. The mask matrix is then applied to \(F_{guide}^{ori}\) and \(F_{guide}^{aug}\) to extract domain-invariant features:
+
+原始中文
+其中，\(\mu_1,\sigma_1\)和\(\mu_2,\sigma_2\)分别为两组引导特征的均值和方差，\(\epsilon=10^{-5}\)是数值稳定常数，\(i,j\)表示特征图位置。满足阈值\(\tau\)条件的分量赋值为1，其余分量赋值为0。阈值\(\tau\)控制两个视图之间允许的特征差异。对于给定的一对特征图，较小的阈值意味着更严格的筛选，较大的阈值则保留更多特征。因此，它控制着信息保留与扰动抑制之间的权衡。过于严格的筛选可能移除对增强敏感的有效信息，而更宽松的阈值可能保留更多受外观变化影响的分量。随后，将掩码矩阵应用于\(F_{guide}^{ori}\)和\(F_{guide}^{aug}\)，以提取域不变特征：
+
+修改后英文（用户已通过，已落实）
+Here, \(\mu_{1},\sigma_{1}\) and \(\mu_{2},\sigma_{2}\) are the means and variances of the two guided features, respectively, \(\epsilon = 10^{-5}\) is a stability constant, and \(i,j\) denote feature map positions. Components satisfying the threshold \(\tau\) are assigned 1, while the remaining components are assigned 0. The threshold $\tau$ controls the feature differences allowed between the two views. For a fixed pair of feature maps, a smaller threshold imposes stricter filtering, whereas a larger threshold retains more features. It therefore controls the trade-off between information retention and perturbation suppression. Overly strict filtering may remove useful information that is sensitive to augmentation, whereas a more permissive threshold may retain more components affected by appearance variations. The mask matrix is then applied to \(F_{guide}^{ori}\) and \(F_{guide}^{aug}\) to retain components with small normalized differences between the two views:
+
+修改后中文（用户已通过，已落实）
+其中，\(\mu_1,\sigma_1\)和\(\mu_2,\sigma_2\)分别为两组引导特征的均值和方差，\(\epsilon=10^{-5}\)是数值稳定常数，\(i,j\)表示特征图位置。满足阈值\(\tau\)条件的分量赋值为1，其余分量赋值为0。阈值\(\tau\)控制两个视图之间允许的特征差异。对于给定的一对特征图，较小的阈值意味着更严格的筛选，较大的阈值则保留更多特征。因此，它控制着信息保留与扰动抑制之间的权衡。过于严格的筛选可能移除对增强敏感的有效信息，而更宽松的阈值可能保留更多受外观变化影响的分量。随后，将掩码矩阵应用于\(F_{guide}^{ori}\)和\(F_{guide}^{aug}\)，保留两个视图之间归一化差异较小的特征分量：
+
+第5组—第1处：第3.2节开头关于ARC输入的说明
+状态：用户已通过并落实；2026-11-17最终回复及本点完成已确认。
+实际落实位置：两版修订PDF第9页。
+位置：submit/build/sections/03_method_trans.tex，第64行完整自然段。
+修改原因：首句直接将DFE输出称为域不变疾病特征；拟改用实际处理过程描述ARC输入，承接前文的掩码筛选。
+对应回复：区分稳定表示的学习目标与特征筛选操作，在ARC入口沿用DFE筛选后的特征这一表述。
+保留范围：本次仅替换首句的起始短语，其余两句及图2(d)/(e)引用原样保留以呈现完整上下文；不重复展开DFE机制。
+前文：公式（6）及其后已通过的说明交代掩码输出传入标签—特征关联模块。
+本段功能：从DFE输出转入ARC，说明后续多标签预测及本节组织。
+后文：标签向量、自注意力及交叉注意力机制说明。复杂度核查已发现该部分维度/头数及标签自注意力描述与实际保存模型存在差异，待与图2(d)及共享方法总述单独对齐；本次输入术语审核不代表该结构问题已解决。
+展示：仅将LaTeX图引用转换为图号，保留完整自然段；以下四项连续展示。
+
+原始英文
+After obtaining domain-invariant disease features, the model further handles the multi-label relevance problem caused by ocular disease co-occurrence. To this end, Transformer attention mechanisms are embedded to construct adaptive relevance at the label and feature levels for multi-label prediction. As shown in Fig. 2.d and Fig. 2.e, this module includes multi-label relevance construction and attention feature alignment.
+
+原始中文
+在获得域不变疾病特征后，模型进一步处理眼部疾病共存引起的多标签关联问题。为此，引入Transformer注意力机制，在标签和特征层面构建自适应关联，用于多标签预测。如图2.d和图2.e所示，该模块包括多标签关联构建和注意力特征对齐。
+
+修改后英文（用户已通过，已落实）
+Using the features filtered by DFE, the model further handles the multi-label relevance problem caused by ocular disease co-occurrence. To this end, Transformer attention mechanisms are embedded to construct adaptive relevance at the label and feature levels for multi-label prediction. As shown in Fig. 2.d and Fig. 2.e, this module includes multi-label relevance construction and attention feature alignment.
+
+修改后中文（用户已通过，已落实）
+利用DFE筛选后的特征，模型进一步处理眼部疾病共存引起的多标签关联问题。为此，引入Transformer注意力机制，在标签和特征层面构建自适应关联，用于多标签预测。如图2.d和图2.e所示，该模块包括多标签关联构建和注意力特征对齐。
+
+第5组—第2处：第3.2节交叉注意力引入段
+状态：2026-11-17已按通过版本落实首句术语调整；第二句及公式结构保持当前稿，仍待单独对齐，不将其保留视为结构核验通过。
+实际落实位置：两版修订PDF第9页。
+位置：submit/build/sections/03_method_trans.tex，第74行、公式（8）前完整自然段。
+修改原因：首句再次将交叉注意力接收的图像特征称为域不变特征；拟与已通过的ARC开头段统一为DFE筛选后的特征。
+对应回复：按照特征来源和实际筛选过程指称DFE输出，避免将学习目标直接写成已获得的特征属性。
+保留范围：本次仅将首句“domain-invariant features”改为“the features filtered by DFE”；第二句按当前原文保留以显示上下文，公式符号未调整。
+前文：标签向量及自注意力公式（7）的说明。
+本段功能：引入标签与图像特征的交叉注意力，随后衔接公式（8）。
+后文：公式（8）及交叉注意力输出说明，之后为已通过的一致性约束说明。
+明确重叠：第二句把展平的DFE输出直接用作Key/Value，并将标签自注意力输出V_self用作Query；复杂度核查记录表明实际图像特征经过encoder，两层decoder均无标签self-attention。该句须与公式（7）—（8）、相邻说明和图2(d)一起完成结构对齐。当前保留仅用于完整上下文展示，术语候选通过不能视为第二句结构重新获准或整段已可实施。
+展示：四项完整自然段连续排列，后两项仅呈现本点术语改动。
+
+原始英文
+Next, a cross-attention mechanism is used to combine labels with domain-invariant features. Since Transformer requires sequential input, \(F_{invariant}^{ori}\) and \(F_{invariant}^{aug}\) output by Part 1 are first flattened and used as Key and Value, while the label vector \(V_{self}\) is used as Query for cross-attention calculation:
+
+原始中文
+接下来，利用交叉注意力机制将标签与域不变特征相结合。由于Transformer需要序列形式的输入，首先将第1部分输出的\(F_{invariant}^{ori}\)和\(F_{invariant}^{aug}\)展平，并用作键（Key）和值（Value），同时将标签向量\(V_{self}\)用作查询（Query），进行交叉注意力计算：
+
+修改后英文（用户已通过，已落实）
+Next, a cross-attention mechanism is used to combine labels with the features filtered by DFE. Since Transformer requires sequential input, \(F_{invariant}^{ori}\) and \(F_{invariant}^{aug}\) output by Part 1 are first flattened and used as Key and Value, while the label vector \(V_{self}\) is used as Query for cross-attention calculation:
+
+修改后中文（用户已通过，已落实）
+接下来，利用交叉注意力机制将标签与DFE筛选后的特征相结合。由于Transformer需要序列形式的输入，首先将第1部分输出的\(F_{invariant}^{ori}\)和\(F_{invariant}^{aug}\)展平，并用作键（Key）和值（Value），同时将标签向量\(V_{self}\)用作查询（Query），进行交叉注意力计算：
+
+第6组—第1处：第4.4节DFE单模块消融分析
+状态：用户已通过并落实；2026-11-17最终回复及本点完成已确认。
+实际落实位置：两版修订PDF第17页。
+日期：2026-11-17
+位置：submit/build/sections/04_experiments_trans.tex，第99行完整条目段落。
+修改原因：原末句直接称模型关注域不变特征；上一版仅描述设计机制，未充分分析消融结果。按用户要求改为解释特征筛选如何支持多标签识别提升，并将首句的模块全名改为DFE。
+对应回复：以实际机制描述特征筛选，以消融指标支持识别贡献，不将源域消融提升直接写成取得域不变性或证明域泛化。
+保留范围：首句采用用户给出的“仅引入完整的DFE模块”，原第二句全部数值逐字保持；对照对象及ODIR Off-site双眼评价口径不变，不改表格、雷达图和其他条目。
+共享内容核对：主要意见4已记录旧Off-site及新增EDID onlydual配置关闭CAM，原“complete”及CAM归因尚未获事实支持。用户本轮指定首句采用“仅引入完整的DFE模块”，此措辞按用户要求保留，不能视为完整DFE或CAM启用已核实。新末句把识别提升与扰动下稳定信息的特征筛选联系起来，不将该组结果新增归因为CAM贡献。配置差异继续留存，不改写配置、数值或主要意见4材料。
+前文：第4.4节引导说明双眼指标口径，随后基线条目给出Final 76.19、Kappa 52.75和AUC 88.00。
+本段功能：报告DFE配置相对基线的识别增益，并简述筛选机制。
+后文：ARC单模块与DFE+ARC联合配置分析。
+数值核验：当前table6_ablation_trans.tex双眼DFE行为Final 78.37、Kappa 56.20、AUC 90.10；相对基线差值分别为2.18、3.45、2.10，与本段一致。未用日志覆盖稿件值。
+具体变化：首句只将模块全名缩写为DFE；末句从纯机制说明改为“特征筛选有助于利用扰动下相对稳定的信息，从而改善多标签识别”的结果分析，不添加数学边界声明，不新增实验或文献。
+
+原始英文
+ResNet50+DFE: only the complete Dual-Branch Guided Domain-Invariant Feature Extraction module is introduced. The Final score increases to 78.37 (+2.18), Kappa increases by 3.45, and AUC increases by 2.10. The improvement mainly comes from CAM-guided residual weighting and the mask mechanism, which effectively suppress domain-specific noise and encourage the model to focus on domain-invariant features.
+
+原始中文
+ResNet50+DFE：仅引入完整的双分支引导域不变特征提取模块。Final分数提高至78.37（+2.18），Kappa提高3.45，AUC提高2.10。性能提升主要来自CAM引导的残差加权和掩码机制，它们有效抑制了域特定噪声，并促使模型关注域不变特征。
+
+修改后英文（用户已通过，已落实）
+ResNet50+DFE: only the complete DFE module is introduced. The Final score increases to 78.37 (+2.18), Kappa increases by 3.45, and AUC increases by 2.10. These gains indicate that DFE's feature filtering helps the model exploit information that is relatively stable under the selected appearance perturbations, thereby improving multi-label ocular disease recognition.
+
+修改后中文（用户已通过，已落实）
+ResNet50+DFE：仅引入完整的DFE模块。Final分数提高至78.37（+2.18），Kappa提高3.45，AUC提高2.10。这些提升表明，DFE的特征筛选有助于模型利用对所采用外观扰动相对稳定的信息，从而改善多标签眼病识别表现。
+
+第6组—第2处：第4.4节DFE与ARC联合消融分析
+状态：用户已通过并落实；2026-11-17最终回复及本点完成已确认。
+实际落实位置：两版修订PDF第18页。
+日期：2026-11-17
+位置：submit/build/sections/04_experiments_trans.tex，第106行完整条目段落。
+修改原因：第四句直接将DFE输出称为更稳定的域不变特征，并以此解释关联学习；拟与前文已通过的DFE学习目标及ARC输入表述一致。
+对应回复：将模块输出描述为对所采用外观扰动相对稳定的分量，保留联合识别增益与模块联系的分析。
+保留范围：全部结果和差值、四种配置的比较结论、ARC一致性损失解释及主要意见5已通过的两句CAM解释原文保持。仅替换第四句，不改图表、参考文献或前一处已通过稿。
+前文：基线、DFE单模块、ARC单模块的结果条目。
+本段功能：说明两模块联合使用的识别增益及其联系，再引出CAM可视化解释。
+后文：主要意见5已通过的CAM区域IoU比较说明、图9和表5相关内容保持。
+结构重叠：原第四句的标签间关联表述与已记录的标签自注意力结构差异相连；本候选将作用具体写为支持标签—特征关联学习，不继续将该句作为标签自注意力已核实的依据。第3.2节/图2(d)等结构对应仍单独待审。
+数值核验：表4双眼结果78.85/57.05/89.03/90.48及相对基线2.66/4.30/1.20/2.48均一致；相对DFE与ARC的Final增益0.48和1.87保持。图9、Ghadai文献[54]已从当前编译辅助文件核对。
+展示：去除LaTeX高亮包装，将图引用及文献引用按当前编号展开，其他原始英文保持；四项完整段落连续展示。
+
+原始英文
+ResNet50+DFE+ARC (the proposed method, ours): when both modules are enabled, the Final score further increases to 78.85 (+2.66 over the baseline), Kappa reaches 57.05 (+4.30), and F1 and AUC reach 89.03 (+1.20) and 90.48 (+2.48), respectively. The combined model improves the Final score by 0.48 and 1.87 percentage points over the DFE-only and ARC-only configurations, respectively. These results show that each module contributes to performance improvement and that their combination achieves the best performance among the four configurations. DFE provides more stable domain-invariant features for ARC, enabling Transformer to learn label-label relevance and label-feature relevance more accurately. Conversely, the attention consistency loss of ARC further constrains the output distributions of the two branches and improves feature stability. In addition, the CAM visualizations in Fig. 9 compare the spatial responses of the baseline and the proposed method on the same fundus images, allowing model-attended regions to be inspected alongside the original images. This use of CAM provides a visual interpretation of model predictions, consistent with the qualitative Grad-CAM analysis for diabetic retinopathy classification reported by Ghadai et al. [54].
+
+原始中文
+ResNet50+DFE+ARC（本文提出的方法，Ours）：同时启用两个模块时，Final分数进一步提高至78.85（比基线提高2.66），Kappa达到57.05（+4.30），F1和AUC分别达到89.03（+1.20）和90.48（+2.48）。联合模型的Final分数分别比仅使用DFE和仅使用ARC的配置提高0.48和1.87个百分点。这些结果表明，两个模块均对性能提升有所贡献，且二者结合在四种配置中取得了最佳表现。DFE为ARC提供更稳定的域不变特征，使Transformer能够更准确地学习标签间关联及标签与特征之间的关联。反过来，ARC的注意力一致性损失进一步约束两个分支的输出分布，并提高特征稳定性。此外，图9中的CAM可视化比较了基线与本文方法在相同眼底图像上的空间响应，使模型关注的区域能够与原始图像一同查看。CAM的这种用法为模型预测提供了视觉解释，与Ghadai等人[54]在糖尿病视网膜病变分类中报告的定性Grad-CAM分析一致。
+
+修改后英文（用户已通过，已落实）
+ResNet50+DFE+ARC (the proposed method, ours): when both modules are enabled, the Final score further increases to 78.85 (+2.66 over the baseline), Kappa reaches 57.05 (+4.30), and F1 and AUC reach 89.03 (+1.20) and 90.48 (+2.48), respectively. The combined model improves the Final score by 0.48 and 1.87 percentage points over the DFE-only and ARC-only configurations, respectively. These results show that each module contributes to performance improvement and that their combination achieves the best performance among the four configurations. DFE provides ARC with feature components that are relatively stable under the selected appearance perturbations, supporting the learning of label-feature relevance. Conversely, the attention consistency loss of ARC further constrains the output distributions of the two branches and improves feature stability. In addition, the CAM visualizations in Fig. 9 compare the spatial responses of the baseline and the proposed method on the same fundus images, allowing model-attended regions to be inspected alongside the original images. This use of CAM provides a visual interpretation of model predictions, consistent with the qualitative Grad-CAM analysis for diabetic retinopathy classification reported by Ghadai et al. [54].
+
+修改后中文（用户已通过，已落实）
+ResNet50+DFE+ARC（本文提出的方法，Ours）：同时启用两个模块时，Final分数进一步提高至78.85（比基线提高2.66），Kappa达到57.05（+4.30），F1和AUC分别达到89.03（+1.20）和90.48（+2.48）。联合模型的Final分数分别比仅使用DFE和仅使用ARC的配置提高0.48和1.87个百分点。这些结果表明，两个模块均对性能提升有所贡献，且二者结合在四种配置中取得了最佳表现。DFE为ARC提供在所采用外观扰动下相对稳定的特征分量，支持标签与特征之间关联的学习。反过来，ARC的注意力一致性损失进一步约束两个分支的输出分布，并提高特征稳定性。此外，图9中的CAM可视化比较了基线与本文方法在相同眼底图像上的空间响应，使模型关注的区域能够与原始图像一同查看。CAM的这种用法为模型预测提供了视觉解释，与Ghadai等人[54]在糖尿病视网膜病变分类中报告的定性Grad-CAM分析一致。
+
+第6组—第3处：第4.4节总结段落
+状态：用户已通过并落实；2026-11-17最终回复及本点完成已确认。
+实际落实位置：两版修订PDF第21页。
+日期：2026-11-17
+位置：submit/build/sections/04_experiments_trans.tex，第134行完整自然段。
+修改原因：原文总结DFE作用时仍称其学习域不变特征；拟改为通过特征筛选学习疾病判别表示，使本节结论与识别结果及前文通过的机制解释一致。
+对应回复：DFE的特征筛选服务于疾病判别表示学习，域泛化仍作为后续跨域评价所讨论的任务；此处不把源域识别增益直接表述为获得严格域不变特征。
+保留范围：主要意见4已通过的ODIR Off-site范围限定、多机构联合训练受限的背景、单源训练条件、ARC原有总结和末句向第4.5节的衔接均保留。沿用用户简写模块名的偏好，已定义的ARC/DFE在本段使用简称。
+前文：EDID补充消融结果说明联合模型在ODIR Off-site及EDID中均获得四组最高Final。
+本段功能：在明确ODIR Off-site范围下总结两模块作用与联合识别收益，再引向后续泛化评价。
+后文：第4.5节说明域内、跨域和隐私保护三阶段评价。
+共享内容核对：只改DFE表述及模块名称简写，不改变主要意见4的范围限定与末句；ARC原有总结保留作上下文，既有自注意力结构差异仍单独待审。
+展示：原始英文只去除ODIR Off-site的LaTeX高亮包装，四项完整段落连续展示。
+
+原始英文
+The ODIR Off-site ablation results show that Adaptive Label-Feature Relevance Construction (ARC) improves label relevance modeling in multi-disease co-occurrence scenarios, while Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) supports learning domain-invariant features from a single source domain when multi-institutional joint training is restricted. The integration of the two modules further improves multi-label recognition performance under single-source-domain training and provides a basis for the subsequent cross-domain generalization results.
+
+原始中文
+ODIR Off-site消融结果表明，自适应标签—特征关联构建（ARC）改善了多病共存场景中的标签关联建模，而双分支引导域不变特征提取（DFE）在多机构联合训练受限时，支持从单一源域学习域不变特征。两个模块的结合进一步提高了单源域训练条件下的多标签识别性能，并为后续跨域泛化结果提供了基础。
+
+修改后英文（用户已通过，已落实）
+The ODIR Off-site ablation results show that ARC improves label relevance modeling in multi-disease co-occurrence scenarios, while DFE supports learning disease-discriminative representations from a single source domain through feature filtering when multi-institutional joint training is restricted. The integration of the two modules further improves multi-label recognition performance under single-source-domain training and provides a basis for the subsequent cross-domain generalization results.
+
+修改后中文（用户已通过，已落实）
+ODIR Off-site消融结果表明，ARC改善了多病共存场景中的标签关联建模，而在多机构联合训练受限时，DFE通过特征筛选支持从单一源域学习疾病判别表示。两个模块的结合进一步提高了单源域训练条件下的多标签识别性能，并为后续跨域泛化结果提供了基础。
+
+第7组：Highlights第2条
+状态：用户已通过并落实；2026-11-17最终回复及本点完成已确认。
+实际落实位置：单独Highlights预览第1页；两版正文PDF按原流程不含Highlights页。
+日期：2026-11-17
+位置：submit/build/main_cas.tex，第86—90行完整Highlights，第2条位于第88行。
+修改原因：两版均可直接表达所学特征，但可迁移特征版同时保留CAM、单源条件与跨域应用价值，更适合Highlights概括贡献；扰动稳定性版更精确贴合筛选机制，但省去单源条件且侧重既定扰动下的性质。
+对应回复：DG任务与域不变学习目标的区分继续沿用已通过回复。Highlights以可迁移性概括跨域应用价值，正文继续准确说明所采用扰动下相对稳定的表示；不将两种性质视为同义或由筛选机制直接推出可迁移性。现有跨数据集识别及EDID消融为应用价值提供结果依据，已通过第2.2节亦采用transferable disease-related representations。
+保留范围：完整展示三条Highlights，第1、3条逐字保持；通过的第2条保留原有CAM与单源特点，仅将domain-invariant改为transferable。主要意见2对Highlights第3条的保留决定不变。此次比较不改已通过的引言/方法措辞。
+前后文：三条依次概括标签—特征关联、DFE特征学习和隐私机制；摘要仍按既定安排留待全文阶段重写，本轮不改。
+具体变化：通过版“Learns CAM-guided transferable features from a single source domain.”为68字符，保留原句结构。比较版“Learns CAM-guided features relatively stable under selected appearance perturbations.”为85字符，更贴近机制说明；该比较版及此前过程式、目标式候选均不作为落实版本。
+审核进度：七组共十二处均已逐项通过并在2026-11-17落实。整体检查记录保留，后附实施与PDF核验；最终回复待用户复核。
+展示：以下每一项均保留完整三条Highlights。
+
+原始英文
+- Models label-feature disease relevance with Transformer-based attention.
+- Learns CAM-guided domain-invariant features from a single source domain.
+- Balances privacy and generalization via adaptive Gaussian gradient noise.
+
+原始中文
+- 利用基于Transformer的注意力机制建模疾病标签与特征之间的关联。
+- 从单一源域学习CAM引导的域不变特征。
+- 通过自适应高斯梯度噪声平衡隐私保护与泛化能力。
+
+修改后英文（用户已通过，已落实）
+- Models label-feature disease relevance with Transformer-based attention.
+- Learns CAM-guided transferable features from a single source domain.
+- Balances privacy and generalization via adaptive Gaussian gradient noise.
+
+修改后中文（用户已通过，已落实）
+- 利用基于Transformer的注意力机制建模疾病标签与特征之间的关联。
+- 从单一源域学习CAM引导的可迁移特征。
+- 通过自适应高斯梯度噪声平衡隐私保护与泛化能力。
+
+整体叙事与上下文检查（2026-11-17，实施前审核记录）
+1. 已按相关工作、方法、消融、Highlights顺序连读十二处通过稿，并对照已通过回复、当前引言贡献、前后段落及次要5的保留通过稿。DG/SDG作为任务设定，跨域稳定性作为学习目标，双视图归一化差异作为实际筛选依据，识别/跨数据集结果作为应用价值证据，四者分工一致。
+2. 图2(c)、第3.1节、ARC输入和联合消融均采用扰动下相对稳定或DFE筛选后的特征表述；第4.4节仍保留识别增益的结论与分析。Highlights的transferable与第2.2节通过稿的transferable disease-related representations衔接，未将稳定性与可迁移性直接等同。未发现需重写本轮通过稿的新增叙事冲突，不再进行额外润色。
+3. 其他已确认内容保持：主要意见1的双视图及一致性解释、次要4的阈值分析、主要意见4的ODIR Off-site限定、主要意见5的CAM解释和文献、Highlights第1/3条。回复仍为拟修改论证，尚不能改写为已实施。
+4. 既有事实问题继续单列：图2(d)及第3.2节的标签自注意力/Query与Key-Value来源、维度和头数尚待结构对齐；DFE消融首句的complete与旧运行关闭CAM的配置差异仍未解决。十二处术语文字通过不代表这些事实已获核验或批准为正确。
+5. 当前全稿残留按既定范围处理：摘要待全部意见完成后统一重写；第3节总述的旧术语由次要5已通过但尚未实施的版本衔接，该点仍暂停，本点不接续；结论待次要5后续整体重组；图1及图注按次要6决定保留，图10及图注同样保持。不把本轮检查记为全稿术语统一已完成。
+6. 本轮仅保存审核状态和整体检查记录，未修改论文、图表或PDF，未编译、运行实验、提交推送或同步。正式实施、实施后回复补齐及最终复核仍未完成。
+
+
+
+
+
+
+
+实施与PDF核验（2026-11-17）
+用户要求“下一步”，本轮据此继续既定流程，将十二处通过文字集中写入四个源文件；仅改获批片段，其余段落、公式、图表及其他意见的累计高亮保持。逐段去除LaTeX包装后与十二处通过英文完全一致，中英文对照正文未改写。
+编译命令：python sdg_latex/scripts/build_revision.py，退出码0；高亮版和清洁版均29页。两版的十一处正文锚点及独立Highlights条目均已定位。目视检查高亮版5/7/8/9/17/18/21页、清洁版5/9/18/21页及Highlights预览，高亮、公式完整性、图注和段落排版正常。仅保留模板maketitle已有的overfull/空锚点及关键词underfull提示，无新增正文错误或未解析引用。
+原投稿main_cas.pdf、原highlights.pdf、全部图像和表格源码保持；本轮只更新四个源文件和两版修订PDF。独立Highlights预览位于build/revision/reviewer2_minor8_review/highlights_highlight.pdf（另有清洁预览），用于查看已修改的第2条，不覆盖原投稿文件。
+回复前三段论证原文保持，第四段按实际修改补齐后，依用户要求进一步精简：保留第2.2/3.1节主要修改，合并图注、消融及Highlights说明，省去ARC输入等细项。当前为最终中文回复待审核版，SHA-256：a5ca6c7a15e4231af6b7d51644832d7d04aa8907d96b10b043ea6a400b76b0bc。
+未运行实验、暂存、提交、推送或同步Mac；次要5及共享结构/配置问题的既定处理范围保持。本点尚待用户确认最终回复及对应论文。
+
+
+补充审核：四处残留表述与图1(c)图注（2026-11-17，重新确认通过，已落实）
+最新状态：用户指出未审核到后已重新展示(c)完整中英前后对照；本轮对“是否保留旨在学习可迁移的疾病相关特征这一版”的明确询问回复“可以”，确认保留。当前图注已通过并在源码/PDF中；本轮只更新审核状态，不再改动或编译。第3节总述仍留待次要5实施。
+范围处理：摘要与结论沿用全文收尾时统一处理的安排；第3节总述沿用次要5已有通过稿，仍须后续落实；图1(c)已通过并落实。次要5未恢复实施，图1图件及图10保持。
+位置：submit/build/sections/01_introduction_trans.tex:15，图1完整图注中的(c)。
+修改原因：概念图用于解释设计目标，现有extracts domain-invariant features却是直接结果性陈述。建议以aims to learn说明目标，用transferable disease-related features保留疾病判别及跨域应用价值，衔接第2.2节与Highlights。
+对应回复：DG为任务、跨域稳定性为学习目标，具体机制另由方法正文说明；亦与次要6已通过回复中“图1(c)表达设计目标”的解释一致。
+保留范围：图注首句、(a)/(b)、(c)的原始/增强源域双分支及CAM引导对比学习说明、图件和引用全部保持；只替换(c)末句的主句。未改写次要6的最终回复或完成状态。
+
+原始英文
+Schematic illustration of the decision boundaries of a conventional model and a dual-branch model under domain shift. (a) shows the distribution relationship among original source-domain images (training set), augmented source-domain images, and the target domain (test set), where augmented source-domain images are used to simulate possible distribution shifts in the target domain. (b) When the model is trained only with original source-domain images, the learned decision boundary may not fit the target domain and can therefore cause classification errors on target-domain samples. (c) By constructing a dual-branch structure with original and augmented source-domain images and incorporating contrastive learning with CAM guidance, the model extracts domain-invariant features and learns a decision boundary that is more applicable to unseen domains.
+
+原始中文
+域偏移下常规模型与双分支模型的决策边界示意图。(a) 展示原始源域图像（训练集）、增强源域图像与目标域（测试集）之间的分布关系，其中增强源域图像用于模拟目标域中可能出现的分布偏移。(b) 当模型仅使用原始源域图像训练时，学到的决策边界可能不适用于目标域，因此可能导致目标域样本的分类错误。(c) 通过使用原始源域图像和增强源域图像构建双分支结构，并结合CAM引导的对比学习，模型提取域不变特征，并学习更适用于未见域的决策边界。
+
+修改后英文（用户已重新确认通过，已落实）
+Schematic illustration of the decision boundaries of a conventional model and a dual-branch model under domain shift. (a) shows the distribution relationship among original source-domain images (training set), augmented source-domain images, and the target domain (test set), where augmented source-domain images are used to simulate possible distribution shifts in the target domain. (b) When the model is trained only with original source-domain images, the learned decision boundary may not fit the target domain and can therefore cause classification errors on target-domain samples. (c) By constructing a dual-branch structure with original and augmented source-domain images and incorporating contrastive learning with CAM guidance, the model aims to learn transferable disease-related features and a decision boundary that is more applicable to unseen domains.
+
+修改后中文（用户已重新确认通过，已落实）
+域偏移下常规模型与双分支模型的决策边界示意图。(a) 展示原始源域图像（训练集）、增强源域图像与目标域（测试集）之间的分布关系，其中增强源域图像用于模拟目标域中可能出现的分布偏移。(b) 当模型仅使用原始源域图像训练时，学到的决策边界可能不适用于目标域，因此可能导致目标域样本的分类错误。(c) 通过使用原始源域图像和增强源域图像构建双分支结构，并结合CAM引导的对比学习，模型旨在学习可迁移的疾病相关特征，以及更适用于未见域的决策边界。
+
+
+第3节方法总述的衔接核对（2026-11-17）
+原始位置：submit/build/sections/03_method_trans.tex第3节标题之后、图2之前。
+唯一通过版本：reviewer2_minor5_changes_comparison_zh.txt第五部分“修改后英文/中文（用户已通过）”，完整两段。该稿尚未落实，本点不另建替代版本、不恢复次要5实施。
+术语核对：现稿extract more stable domain-invariant features及Based on the domain-invariant features produced by Part 1在通过稿中均已删除。通过稿按CAM引导和双分支特征筛选、归一化差异筛选结果输入ARC、对应疾病标签表示一致性的顺序说明，所保留domain-invariant仅出现于DFE正式名称，与本点已通过目标/机制表述衔接。
+本轮将已有通过稿原样展示作衔接核对，不要求再次重写或重复批准；ARC结构对应问题沿用既有记录。本点补充图1(c)仅记为文字通过，论文/PDF仍保持原状。
+
+
+图1(c)补充落实与核验（2026-11-17）
+用户通过图1(c)及方法总述衔接安排后要求继续，本轮继续既定返修流程，只将已通过图1(c)子句写入sections/01_introduction_trans.tex:15并加黄色高亮。完整图注渲染文本与通过英文一致。
+python sdg_latex/scripts/build_revision.py退出码0；两版均29页，图1均位于第3页。已目视检查两版第3页，图件、图注、行距及高亮正常；最终编译日志无未解析引用或待重跑提示，仅有既有模板警告。
+本次增量只涉及01_introduction_trans.tex及两版修订PDF；其他build文件指纹全部保持。图1图件、摘要、方法总述、结论及其他意见修改未动。本点累计五个源文件共十三处修改。
+最终回复仅将末段“图2、第4.4节”更新为“图1、图2、第4.4节”，其余原文保持。当前回复SHA-256：7c59e8f4f29c1dca12d686bf43756f6b424777bb84eb6f9cc9a5b0bd5a410d89。回复及论文效果仍待最终复核，本点未标记完成。
+核验与预览：build/revision/reviewer2_minor8_review/fig1_verification.json、fig1_highlight.png、fig1_clean.png。未运行实验、Git暂存提交推送或同步Mac。
+
+最终完成记录（2026-11-17）
+用户明确确认最终回复并要求标记完成、提交Git。本对照所列十三处当前均已落实且通过；回复四段原文保持，SHA-256：7c59e8f4f29c1dca12d686bf43756f6b424777bb84eb6f9cc9a5b0bd5a410d89。本次只维护完成状态，不再修改论文、图件、数值、公式、引用或PDF，不重复编译。第3节总述仍使用次要5已通过未实施版本作为后续唯一衔接稿，摘要/结论最终统一及共享事实差异均保留。Git提交范围为五个源文件、两版修订PDF及本点三份返修材料，共10个文件；提交号见项目索引与论文仓库日志。
