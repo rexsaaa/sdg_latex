@@ -1,0 +1,53 @@
+审稿人3意见3：审核与实施记录
+日期：2026-11-17
+当前阶段：2026-11-17用户最终通过完整中文回复及对应论文、两版PDF，并授权Git提交；本点当前中文返修阶段已完成。按授权进行本地Git归档，实际提交结果见PROJECT_INDEX.md；代码发布仍按后续安排执行。
+
+一、原意见及导师方向
+原意见：To facilitate reproducible research, if possible, I suggest that the author release the related source codes on github.com or similar repositories. This could have a positive impact on the academic community.
+原材料：revision_drafts/reviewer3/point3_meeting_outline_zh.txt、discussion_progress_2026-11-06_zh.txt；导师意见对齐稿第261—269行；原始转录01:03:06—01:03:40。
+导师方向：先建仓库、公开部分代码并完善README；与最终稿对应的完整代码和复现材料在论文发表后完善公开。不能自行改成接收后立即发布完整版本。
+仓库：https://github.com/rexsaaa/ppisdg-ocular。
+
+二、用户决定与实际状态
+1. 用户确认仓库已建立，README及部分实现代码准备后续上传；要求先审核回复。
+2. 用户明确要求回复按完成上传后的提交版语态撰写，采用“已上传”“已完善”，并确认两段中文回复的论证。
+3. 用户否定单独新增文末代码可用性小节，选择摘要末尾。
+4. 用户要求参照APNet摘要的“Code is available at ….”，去掉摘要候选中的完整代码及发表后公开时间说明；通过最终英文“Code is available at https://github.com/rexsaaa/ppisdg-ocular.”及中文“代码可从 https://github.com/rexsaaa/ppisdg-ocular 获取。”
+5. 2026-11-17用户授权落实该句、保留黄色高亮、编译两版PDF，并把回复的修改位置改为摘要末尾，再交完整中文回复复核。
+6. 本轮没有上传README或代码，没有操作GitHub、切换可见性、进行代码清理或实际核查当前仓库文件。论文及回复采用用户明确选择的提交版表述；不能将本轮写稿和编译记录当作代码发布完成的证明。仓库内容上传仍为后续待办。
+7. 本点新增摘要代码链接是用户本轮明确授权的局部改动；R2次要5暂停及摘要主体待全文收尾统一重写的安排保持。
+
+三、格式核查依据
+项目采用Elsevier CAS单栏模板。已读取CTAN发布的cas-sc-template.tex及cas-sc-sample.tex，未见强制将代码链接放在摘要或文末独立小节的规定。
+模板：https://ctan.org/tex-archive/macros/latex/contrib/els-cas-templates。
+期刊官方作者指南曾返回403，不将无法读取的指南解释为已核实的期刊要求。
+APNet：Feature selection and cascade dimensionality reduction for self-supervised visual representation learning，Computers and Electrical Engineering 106 (2023) 108570；摘要末尾为“Code is available at https://github.com/AI-TYQ/APNet.”
+来源：https://www.sciencedirect.com/science/article/abs/pii/S0045790622007856。
+该文仅用于核查声明格式，不作为新增论文参考文献。
+
+四、回复调整
+用户已通过的两段回复前文逐字保留，仅将原末句
+“修订稿中已补充代码可用性说明，提供仓库地址并明确上述公开安排。”
+替换为
+“修订稿摘要末尾已补充代码获取说明，并提供项目仓库地址。”
+原因：落实后的摘要只提供代码获取声明和链接，未在摘要中列出发布时间；避免回复误称摘要已说明发表后公开安排。
+最终中文回复：reviewer3_point3_reply_zh.txt；中英对照：reviewer3_point3_changes_comparison_zh.txt。
+按用户要求保留提交版语态，不表示代码上传已由本轮执行。
+
+五、实施与核验
+已使用python sdg_latex/scripts/build_revision.py编译。
+main_cas_revised_highlight.pdf：30页，SHA-256 c6c357e9b49306e49c269417e851a157a5d8bf6653a2df2f3c0362a6e08f6f82。
+main_cas_revised.pdf：30页，SHA-256 7c40f85b6ce272c0c4bf957e635d574a9b4152a738f072bf22e90e933f8e9036。
+两版新增句均在第1页，文字完整且链接目标正确。目视检查首页：新增句及地址黄色高亮完整，清洁版无修订高亮；摘要与下方引言衔接正常，无新增遮挡或可见溢出。
+本轮前后逐页提取文本仅第1页不同；原有源码内容、章节、表格与原投稿PDF指纹保持。未新增小节、图表或文献，不改变引用编号。
+编译未失败、未发现未定义引用；日志包含关键词/首页maketitle处的Underfull/Overfull及empty-anchor警告，相关首页已目视检查。未因本点改写模板或其他内容。
+详细核验及预览：build/revision/reviewer3_point3_review/；verification.json记录逐项检查、PDF指纹和日志警告。
+上一轮实施结束时未暂存、提交、推送或同步Mac；未开展实验、英文回复或其他审稿意见。保留其他对话的R3意见2等已有材料与工作区变化。
+
+六、最终确认与授权归档（2026-11-17）
+用户回复“通过 git提交一下”，最终确认上一轮完整中文回复、已落实论文和两版PDF，并授权本地Git提交。本点当前中文返修阶段已完成。
+最终回复按通过原文保持，SHA-256：c7811e212d28b66a9e975d94851a57d27deae3a621c954ff4b5d1b54bd464c12。
+提交前再次核对：新增摘要句是main_cas.tex的唯一差异；两版PDF指纹与已检查版本一致；原有章节、表格、原投稿PDF及返修基准标签保持。不再修改论文、不重复编译。
+本点归档范围为main_cas.tex、两版修订PDF、本点回复/对照/记录，共6个文件。提交说明为“审稿人3意见3中文返修完成”。提交哈希与提交后核验结果维护于外层PROJECT_INDEX.md及build/revision/reviewer3_point3_review/commit_verification.json，避免为记录自身哈希再产生额外提交。
+外层ODIR索引只更新本点状态，保留既有暂存内容；其他意见和工程改动不纳入本点提交。不执行推送、Mac同步、代码发布或下一点工作。
+代码/README上传和论文发表后公开完整复现材料的待办继续保留；本点中文返修完成不表示GitHub发布已完成。

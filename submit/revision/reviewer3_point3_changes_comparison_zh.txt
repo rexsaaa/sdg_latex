@@ -1,0 +1,29 @@
+审稿人3意见3：代码链接中英文修改对照
+日期：2026-11-17
+状态：2026-11-17用户最终通过中文回复及对应论文、两版PDF，并授权Git提交；本点当前中文返修阶段已完成。摘要末尾保留已通过的APNet式简短声明。
+
+一、位置、原因与范围
+位置：submit/build/main_cas.tex 的abstract环境末尾；当前两版修订PDF均为第1页。
+目的：回应公开代码以支持复现的建议，在摘要中提供读者可直接访问的项目仓库地址。
+范围：仅在现有摘要最后一句之后新增“Code is available at https://github.com/rexsaaa/ppisdg-ocular.”；摘要原有文字、数值及累计高亮保持。不单独新增Code availability小节。
+此前“结论后、参考文献前”小节方案及含“after publication”的摘要候选均已撤回，以本文件通过版本为准。完整代码发表后公开的安排保留在回复和后续仓库说明中。
+以下展示用户审核的摘要末尾衔接；全摘要主体保持不变，不因此启动待全文收尾的摘要整体重写。
+
+二、原始英文
+Overall, this study presents an interpretable and privacy-preserving single-domain generalization framework for multi-label ocular disease recognition, improving cross-domain performance and providing insights into ocular diagnosis under privacy constraints.
+
+三、原始中文
+总体而言，本研究提出了一种用于多标签眼部疾病识别的可解释、隐私保护单域泛化框架，改善了跨域性能，并为隐私约束下的眼部疾病诊断提供了启示。
+
+四、修改后英文
+Overall, this study presents an interpretable and privacy-preserving single-domain generalization framework for multi-label ocular disease recognition, improving cross-domain performance and providing insights into ocular diagnosis under privacy constraints. Code is available at https://github.com/rexsaaa/ppisdg-ocular.
+
+五、修改后中文
+总体而言，本研究提出了一种用于多标签眼部疾病识别的可解释、隐私保护单域泛化框架，改善了跨域性能，并为隐私约束下的眼部疾病诊断提供了启示。代码可从 https://github.com/rexsaaa/ppisdg-ocular 获取。
+
+六、实施及检查
+2026-11-17已按用户授权写入。新增句和地址均使用revision标记；超链接指向https://github.com/rexsaaa/ppisdg-ocular，采用外层href包裹地址的高亮文字，避免将超链接命令直接嵌入soul处理。
+编译入口：python sdg_latex/scripts/build_revision.py。
+两版PDF均30页，新增句位于第1页；链接目标与文字检查通过。两版首页已目视检查，新增句完整、未遮挡，黄色高亮与清洁显示符合预期。
+本轮前后逐页文本比较只有第1页变化；移除新增源码后main_cas.tex的SHA-256与修改前完全一致，原有章节、表格及原投稿PDF的已记录指纹保持。
+核验记录：build/revision/reviewer3_point3_review/verification.json；预览为同目录highlight_page01.png、clean_page01.png。
