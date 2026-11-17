@@ -44,6 +44,8 @@ All experiments use ResNet50 as the backbone and are implemented in PyTorch. \re
 
 The training configuration is as follows. \revision{AdamW} is used as the optimizer, with an initial learning rate of \(4 \times 10^{-7}\). OneCycleLR is adopted as the scheduling strategy: the learning rate linearly warms up from the initial learning rate to the peak value of \(1 \times 10^{-5}\) during the first 10\% of epochs to help the model quickly escape local optima, and then anneals during the remaining 90\% of epochs to facilitate convergence and reach a better solution. The number of training epochs is 50, the batch size is 32, and the input resolution is \(448 \times 448\). \revision{The default mask threshold for dual-branch feature filtering is $\tau=0.25$, specifying the feature retention criterion between the two views after instance normalization.} \revision{The default coefficients for spatial and channel CAM guidance are $\alpha=\beta=0.01$, and the default consistency loss weight is $\lambda=5$.} The proposed method is trained on two RTX 4080 Super GPUs. Experimental results show that our improved baseline model, with an Off-site binocular Final score of 76.19, outperforms the ResNet50 implementation in the original ODIR paper, which reports an Off-site binocular Final score of 68.00.
 
+\revision{Computational costs are compared under consistent evaluation settings, using $448 \times 448$ inputs and the non-private eight-class ODIR configuration. Training FLOPs are reported per source sample for one complete network update, whereas inference FLOPs cover one complete monocular prediction. Inference latency and peak allocated GPU memory are measured on the same RTX 4080 SUPER.}
+
 \revision{To examine how feature filtering and consistency regularization affect recognition performance, the mask threshold $\tau$ and consistency loss weight $\lambda$ are varied separately in the joint DFE and ARC model under the non-private setting. With $\alpha=\beta=0.01$ fixed, $\tau$ is varied over 0.05, 0.10, 0.20, 0.25, 0.30, and 0.50 while keeping $\lambda=5$. The weight $\lambda$ is varied over 0, 1, 2.5, 5, 7.5, and 10 while keeping $\tau=0.25$. The two sweeps are conducted independently, with each parameter value trained in a separate run. All runs use the same data split, model architecture, augmentation strategy, and other training parameters. Each run is trained for 50 epochs with a batch size of 32 and a fixed random seed of 42. For all runs, the checkpoint with the highest monocular Final score on the ODIR Off-site source-domain validation set is selected under the same model-selection rule, and the corresponding results are summarized in \mbox{\tabref{tab:tau-sensitivity}}.}
 
 \input{tables/src/table_tau_sensitivity_trans.tex}
@@ -181,6 +183,18 @@ In RFMiD D/A/M cross-domain generalization, the baseline checkpoint obtains a Fi
 \caption{t-SNE visualization of target-domain sample features under selected evaluation directions, where (a)--(b) correspond to ODIR in-domain (Off-site \(\rightarrow\) On-site) and ODIR \(\rightarrow\) RFMiD, respectively. In each subfigure, the left side is the baseline and the right side is the proposed method (Ours); different colors denote different classes, dots denote source-domain samples, and triangles denote target-domain samples.}
 \label{fig:tsne}
 \end{figure}
+
+\FloatBarrier
+
+\revision{To quantify the resource requirements associated with generalization performance, \mbox{\tabref{tab:computational-cost}} compares the model size, training computation, and inference costs of the five methods.}
+
+\input{tables/src/table_computational_cost_trans.tex}
+
+\revision{The three DG comparators retain the baseline inference network, resulting in identical parameter counts and inference FLOPs. In the proposed model, DFE processes two views with shared weights to select features that are relatively stable under appearance perturbations, while ARC constructs label-related representations and enforces their consistency across views during training. The Transformer accounts for 151.079M of the model's 175.006M trainable parameters. Complete monocular inference requires 121.634 GFLOPs, including 55.978 GFLOPs for the matrix operations in the two Transformer forward passes.}
+
+\revision{In the eight-class ODIR setting, the proposed method uses 10.01\% fewer FLOPs per source sample for a network training update than FACT (420.598 vs. 467.372), while its best-observed On-site monocular and binocular Final scores in \mbox{\tabref{tab:generalization}} are higher by 0.85 and 0.94 points, respectively. Full-network inference has a median latency of 29.149 ms and peak allocated memory of 969.94 MiB. The 1.47-point improvement over FACT in the shared-class EDID evaluation in \mbox{\tabref{tab:generalization}} provides further evidence of the joint design's cross-dataset generalization.}
+
+\FloatBarrier
 
 \begin{sloppypar}
 \revision{2. Noise configuration and privacy-budget selection. \mbox{\tabref{tab:privacy-scan}} summarizes the $\epsilon$ values recorded after 80 epochs for eight combinations of initial noise multiplier and noise decay rate, ranging from 5.01 to 20.01. The initial noise multiplier controls the starting perturbation strength, while the decay rate determines how the noise multiplier changes over training.}

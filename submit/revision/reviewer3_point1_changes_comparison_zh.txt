@@ -1,0 +1,328 @@
+审稿人3意见1：论文修改范围与对照审核入口
+日期：2026-11-16
+状态：用户于2026-11-17确认最终中文回复及对应论文，本点当前中文返修阶段已完成；最终回复原文保持，两版30页PDF已核验。结构一致性问题继续保留未解决记录，相关机制原文暂不改。
+
+一、当前稿核对
+正式稿：submit/build/main_cas.tex，sections/03_method_trans.tex，sections/04_experiments_trans.tex。
+当前第4.5节已包含：非隐私泛化实验设置→表7最佳观测结果→表8五候选均值与SD→ODIR/RFMiD/EDID结果分析→图10的t-SNE解释→隐私部分第2—4项。
+当前编译记录确认表7=tab:generalization，表8=tab:generalization-top5；隐私三表当前为9、10、11。
+表7的78.98/77.49、FACT的78.13/76.55、EDID的55.35/53.88，与通过回复一致。第4.5节已有0.85、0.94、1.47个百分点的解释，无需重新大段复述。
+第4.2节已写448×448、训练batch=32、两张RTX 4080 Super以及τ/λ敏感性实验；尚未有复杂度计数或GPU测量口径。
+第4.3节表3来自文献的方法比较保持；不将未实测的文献方法补进本次统一复杂度表。
+
+二、直接回应两条意见的两处核心修改（待审核）
+1. 第4.2节Experimental Settings，在现有训练配置段后、τ/λ敏感性实验引入前，补一小段计算开销测量说明。
+作用：明确统计对象与可复算口径，不在第4.5节结果分析中铺开测量过程。
+必要信息：表7对应的非隐私ODIR八类配置；448×448；训练按单卡每步16个源样本索引归一化为GFLOPs/source anchor/step，配对/增强视图与教师计算计入；推理为每眼一次完整网络调用，batch=1；同一RTX 4080 SUPER、AMP FP16；MAC=2，附加浮点算术按已存协议计数；参数共享计一次；延迟中位数/P95与峰值allocated的定义。
+每轮预热50次、测量200次、3轮共600次等复现细节压缩为一句或放表注；全部原始记录保留，不进入结果叙事。训练不含离线预处理/CAM生成和设备通信，推理输入已在GPU。原训练batch=32和双卡配置保持，不用统计用batch=16或推理batch=1替换。
+保留：现有评价指标、基线说明、训练配置及已通过的τ/λ实验段落。
+
+2. 第4.5节非隐私泛化部分末尾，在图10的t-SNE正文和图像之后、“2. Noise configuration and privacy-budget selection”之前，加入一个复杂度分析块。
+结构：一句引入→一张五方法复杂度表→两段结果分析。不新增编号小节，不拆表7、不迁移至4.3、不重写已经成立的泛化段落。
+按当前表序，新表预期为表9；现有隐私表9—11将顺延为10—12，最终以编译后编号为准。表7、表8保持编号，图10不因新增表格改变编号。
+引入句说明：在已有识别结果基础上，对同一组方法的ODIR八类模型评估资源需求，指向第4.2节的统一口径；不能把八类复杂度称为RFMiD/EDID三类模型的实测开销。
+
+三、复杂度表安排（待审核）
+一张表、五个独立行：ResNet50、MixStyle、RSC、FACT、Ours。
+建议六列：Method；Trainable parameters (M)；Training GFLOPs/source anchor/step；Inference GFLOPs/eye；Inference peak allocated memory (MiB)；Inference latency median/P95 (ms)。
+训练/推理可用分组表头，延迟median/P95放同一格，保留全部波动信息并控制宽度。若实际排版更清楚可拆成七列，不因此新增第二张表。
+四个对照的推理参数/FLOPs虽相同，训练与实测值不同，因此不合并行。无需重复表7的Final列；Transformer分项在正文解释，不另设模块分解表。
+来源：ODIR项目根下revision_drafts/experiments/complexity_20261116/complete_results.csv及该目录gpu_measurements/final_summary.json。
+以完整训练模型可训练参数175.006M为列口径；训练专用CAM模块等拆分已在实验记录中核对，按2026-11-17用户意见不在表注展开。实际推理模型总参数174.571M不混写成同一Trainable parameters指标。
+当前表注按2026-11-17最新意见进一步压缩为英文约32词的短注：每源样本/步的全部视图及教师计算；FP16 AMP和batch=1；600次预热后调用的延迟中位数/P95及峰值allocated显存。删除CAM参数拆分、MAC计数及附加浮点算术说明，不再引用含糊的“4.2评价设置”。
+表格数据仍使用已完成测量，不重跑实验或修改检查点。
+
+四、两段结果分析的职责（待审核）
+第一段：计算用于什么机制。
+解释四个对照方法推理结构相同、训练机制不同；DFE共享权重的双视图处理增加前向次数；本文可训练参数175.006M，其中Transformer151.079M。完整单眼121.634 GFLOPs，Transformer两次前向矩阵运算约55.978 GFLOPs。明确这55.978是矩阵运算分项，不能当作含全部归一化等附加算术的Transformer总值。以疾病相关表示、跨视图稳定性解释计算用途，不宣称参数越多必然泛化越好。
+第二段：资源与泛化收益。
+连接同一ODIR八类比较：训练步骤420.598 vs FACT 467.372，低约10.01%；On-site单眼/双眼Final提高0.85/0.94个百分点。用29.149 ms和969.94 MiB简要交代完整推理资源需求，引用表7已有EDID优势支持外部泛化价值。避免重抄所有表7数值或加入测量流水账。10.01%仅为ODIR网络优化步骤，不能声称总训练时间/整个流程成本更低，也不据单眼开销评价患者双眼一次推理。
+P95原始波动完整保留，不据四种同结构方法的小幅延迟/显存排序解释算法效率差异。
+
+五、结构一致性问题记录（2026-11-17用户决定暂保留记录，相关原文暂不改）
+该组属于已发现的现稿/实际实验不一致，不是新增实验要求，也尚未获准修改。
+1. 第3.2节两处d=512（标签嵌入与一致性公式后说明）及heads=8，与保存配置hidden_dim=2048、nheads=4不符；实际encoder=1层、decoder=2层、FFN=8192、输入投影Identity。复杂度必须对应实际模型，不能按现稿512/8另造模型替代。
+2. 当前公式（7）将标签向量作为self-attention输入；公式（8）及其说明以该标签self-attention输出作为query。实际两层decoder均未启用self-attention，自注意力位于图像特征encoder。需审核公式（7）—（8）及相邻说明的实际对应，而非只替换维度数字。
+3. 该表述还出现在第3节总述及图2(d)图注。图2原图已只读查看，确有Learnable Label Embeddings→Transformer Self-Attention→Cross-Attention路径；并有Flatten & Linear Proj.标注，需与实际Identity输入投影及encoder路径一并核对。图2这部分的同步调整范围须另行审核，当前不改图、不改公式。
+4. 与R2主要1已通过的模块联系/一致性解释及R2次要8尚在审核的第3.2节、图2说明存在共享位置。保留已通过实质解释；任何有影响的修改先提供完整上下文对照。R2次要8已通过的是图注(c)术语调整，不构成对图注(d)结构说明的重新核验。当前不编辑这些意见的回复或审核材料。
+最新处理决定（2026-11-17）：用户明确“结构一致性问题先保留记录，相关原文暂不改”。因此本轮保留上述事实记录和相关机制原文，不将该问题视为已解决，也不因该记录扩大本轮审核或实施范围。已通过的数值与复杂度文字保持，当前仅作整体审核，尚未实施。
+
+六、联动与保留
+落实时核对自动交叉引用、后续表号及受编号影响的已存回复/位置记录；只调整必要引用，不重写已通过论证。
+当前无需因本点扩写摘要、引言、结论、表3、表7/8或隐私结果。既定图1/图10保留决定不受影响。
+下一阶段为逐处中英文对照审核；当前用户仅要求保存回复、核对范围及排布，未授权写入论文、编译PDF、提交推送或同步Mac。
+
+七、第4.2节统计口径：首处中英文对照（2026-11-16；2026-11-17三句版已落实）
+用户本轮同意从4.2开始逐处审核，要求完整上下文、统计口径简洁、暂不直接修改论文。本处仅新增一个三句段落，不改前后的已通过文字。
+位置：sections/04_experiments_trans.tex，现有“The training configuration is as follows.”完整段落之后、“To examine how feature filtering...”敏感性实验完整引入段之前。
+修改原因：为第4.5节复杂度表提供共同的统计对象和单位，区分网络训练步骤与单眼推理。
+对应两份回复：一致评价配置、448×448、非隐私ODIR八类、每源样本完整网络更新、单眼完整推理及同一GPU。参数计数、MAC=2、全部视图/教师、AMP精度和batch等具体口径移至后续表注审核，本段不展开。
+保留范围：现有训练配置、指标及基线描述；τ/λ敏感性实验及其结果。当前表2仍指敏感性表，不受拟新增复杂度表影响。
+展示范围：插入位置前后两个完整自然段；中英文均逐段对应。仅去除原LaTeX排版/高亮命令，表号按当前编译记录显示。
+前后衔接：训练设置→新增计算统计口径→原有敏感性实验设置。计时轮次、预热次数、分母及具体排除项的进一步细节留待复杂度表注审核，不堆入本段。
+当前源文件SHA-256：c1c8e7ad26813e2133bd9927e6dc2d434b6d5cd9a13008654f0495b5152bec59
+
+原始英文
+The training configuration is as follows. AdamW is used as the optimizer, with an initial learning rate of $4 \times 10^{-7}$. OneCycleLR is adopted as the scheduling strategy: the learning rate linearly warms up from the initial learning rate to the peak value of $1 \times 10^{-5}$ during the first 10% of epochs to help the model quickly escape local optima, and then anneals during the remaining 90% of epochs to facilitate convergence and reach a better solution. The number of training epochs is 50, the batch size is 32, and the input resolution is $448 \times 448$. The default mask threshold for dual-branch feature filtering is $\tau=0.25$, specifying the feature retention criterion between the two views after instance normalization. The default coefficients for spatial and channel CAM guidance are $\alpha=\beta=0.01$, and the default consistency loss weight is $\lambda=5$. The proposed method is trained on two RTX 4080 Super GPUs. Experimental results show that our improved baseline model, with an Off-site binocular Final score of 76.19, outperforms the ResNet50 implementation in the original ODIR paper, which reports an Off-site binocular Final score of 68.00.
+
+To examine how feature filtering and consistency regularization affect recognition performance, the mask threshold $\tau$ and consistency loss weight $\lambda$ are varied separately in the joint DFE and ARC model under the non-private setting. With $\alpha=\beta=0.01$ fixed, $\tau$ is varied over 0.05, 0.10, 0.20, 0.25, 0.30, and 0.50 while keeping $\lambda=5$. The weight $\lambda$ is varied over 0, 1, 2.5, 5, 7.5, and 10 while keeping $\tau=0.25$. The two sweeps are conducted independently, with each parameter value trained in a separate run. All runs use the same data split, model architecture, augmentation strategy, and other training parameters. Each run is trained for 50 epochs with a batch size of 32 and a fixed random seed of 42. For all runs, the checkpoint with the highest monocular Final score on the ODIR Off-site source-domain validation set is selected under the same model-selection rule, and the corresponding results are summarized in Table 2.
+
+原始中文
+训练配置如下。采用AdamW优化器，初始学习率为4×10⁻⁷。采用OneCycleLR作为调度策略：学习率在前10%的训练轮次中从初始值线性预热至峰值1×10⁻⁵，以帮助模型快速跳出局部最优，随后在剩余90%的训练轮次中退火，以促进收敛并获得更好的解。训练轮数为50，批大小为32，输入分辨率为448×448。双分支特征筛选的默认掩码阈值为τ＝0.25，用于规定两视图经过实例归一化后的特征保留标准。空间和通道CAM引导的默认系数为α＝β＝0.01，默认一致性损失权重为λ＝5。本文方法使用两张RTX 4080 Super GPU进行训练。实验结果表明，改进后的基线模型在Off-site上的双眼Final得分为76.19，高于原始ODIR论文中ResNet50实现所报告的68.00。
+
+为考察特征筛选和一致性正则化对识别性能的影响，在非隐私设置下，分别改变DFE与ARC联合模型的掩码阈值τ和一致性损失权重λ。固定α＝β＝0.01，在保持λ＝5时，将τ分别设为0.05、0.10、0.20、0.25、0.30和0.50；在保持τ＝0.25时，将λ分别设为0、1、2.5、5、7.5和10。两组扫描独立进行，每个参数值分别进行一次独立训练。所有运行使用相同的数据划分、模型结构、增强策略及其他训练参数。每次运行均训练50轮，批大小为32，固定随机种子为42。所有运行均遵循相同的模型选择规则，选择在ODIR Off-site源域验证集上获得最高单眼Final的检查点，对应结果汇总于表2。
+
+修改后英文（候选；中间一段为新增）
+The training configuration is as follows. AdamW is used as the optimizer, with an initial learning rate of $4 \times 10^{-7}$. OneCycleLR is adopted as the scheduling strategy: the learning rate linearly warms up from the initial learning rate to the peak value of $1 \times 10^{-5}$ during the first 10% of epochs to help the model quickly escape local optima, and then anneals during the remaining 90% of epochs to facilitate convergence and reach a better solution. The number of training epochs is 50, the batch size is 32, and the input resolution is $448 \times 448$. The default mask threshold for dual-branch feature filtering is $\tau=0.25$, specifying the feature retention criterion between the two views after instance normalization. The default coefficients for spatial and channel CAM guidance are $\alpha=\beta=0.01$, and the default consistency loss weight is $\lambda=5$. The proposed method is trained on two RTX 4080 Super GPUs. Experimental results show that our improved baseline model, with an Off-site binocular Final score of 76.19, outperforms the ResNet50 implementation in the original ODIR paper, which reports an Off-site binocular Final score of 68.00.
+
+Computational costs are compared under consistent evaluation settings, using $448 \times 448$ inputs and the non-private eight-class ODIR configuration. Training FLOPs are reported per source sample for one complete network update, whereas inference FLOPs cover one complete monocular prediction. Inference latency and peak allocated GPU memory are measured on the same RTX 4080 SUPER.
+
+To examine how feature filtering and consistency regularization affect recognition performance, the mask threshold $\tau$ and consistency loss weight $\lambda$ are varied separately in the joint DFE and ARC model under the non-private setting. With $\alpha=\beta=0.01$ fixed, $\tau$ is varied over 0.05, 0.10, 0.20, 0.25, 0.30, and 0.50 while keeping $\lambda=5$. The weight $\lambda$ is varied over 0, 1, 2.5, 5, 7.5, and 10 while keeping $\tau=0.25$. The two sweeps are conducted independently, with each parameter value trained in a separate run. All runs use the same data split, model architecture, augmentation strategy, and other training parameters. Each run is trained for 50 epochs with a batch size of 32 and a fixed random seed of 42. For all runs, the checkpoint with the highest monocular Final score on the ODIR Off-site source-domain validation set is selected under the same model-selection rule, and the corresponding results are summarized in Table 2.
+
+修改后中文（候选；中间一段为新增）
+训练配置如下。采用AdamW优化器，初始学习率为4×10⁻⁷。采用OneCycleLR作为调度策略：学习率在前10%的训练轮次中从初始值线性预热至峰值1×10⁻⁵，以帮助模型快速跳出局部最优，随后在剩余90%的训练轮次中退火，以促进收敛并获得更好的解。训练轮数为50，批大小为32，输入分辨率为448×448。双分支特征筛选的默认掩码阈值为τ＝0.25，用于规定两视图经过实例归一化后的特征保留标准。空间和通道CAM引导的默认系数为α＝β＝0.01，默认一致性损失权重为λ＝5。本文方法使用两张RTX 4080 Super GPU进行训练。实验结果表明，改进后的基线模型在Off-site上的双眼Final得分为76.19，高于原始ODIR论文中ResNet50实现所报告的68.00。
+
+各方法的计算开销均在一致的评价配置下统计，采用448×448输入和非隐私ODIR八类设置。训练FLOPs按每个源样本对应的一次完整网络更新统计，推理FLOPs按一次完整的单眼预测统计。推理延迟和峰值已分配显存均在同一张RTX 4080 SUPER上测量。
+
+为考察特征筛选和一致性正则化对识别性能的影响，在非隐私设置下，分别改变DFE与ARC联合模型的掩码阈值τ和一致性损失权重λ。固定α＝β＝0.01，在保持λ＝5时，将τ分别设为0.05、0.10、0.20、0.25、0.30和0.50；在保持τ＝0.25时，将λ分别设为0、1、2.5、5、7.5和10。两组扫描独立进行，每个参数值分别进行一次独立训练。所有运行使用相同的数据划分、模型结构、增强策略及其他训练参数。每次运行均训练50轮，批大小为32，固定随机种子为42。所有运行均遵循相同的模型选择规则，选择在ODIR Off-site源域验证集上获得最高单眼Final的检查点，对应结果汇总于表2。
+
+审核状态：用户在三句版后要求“下一步”，本轮据此保留该版通过并进入下一处审核；尚未写入论文。下接原有表2及敏感性结果分析，均保持。
+
+本轮压缩说明：按用户最新意见，开头统一交代各方法采用一致评价配置；移除共享参数/MAC计数及FP16、batch=1、输入在GPU等句内细节，保留训练/推理统计单位和硬件。三句中英文均为待审候选，论文未改。
+
+八、第4.5节复杂度表与分析：中英文对照（2026-11-17，待审核）
+前一处状态：用户在三句版第4.2节候选后要求“下一步”，本轮保留该版并继续后续审核；尚未写入论文。
+本处位置：现有图10（t-SNE）及图注之后、隐私部分第2项之前。保留前方泛化结果、图10与隐私段落。
+作用：为同一组五方法的泛化结果补充资源成本；新增一句引入、一张表、两段分析。
+当前表序：新复杂度表暂为9，后方隐私表9自动顺延为10；下列修改后上下文仅同步该引用，原段其余文字保持。实际编号在获准落实后编译核对。
+审核标识“原图10及图注保持”只标记上下文位置，不是拟写入论文的句子。
+统计依据：complete_results.csv；本轮未运行新实验。当前仅保留英文约32词的短表注，具体计数约定继续保存在实验记录，表注不展开。
+源文件SHA-256：c1c8e7ad26813e2133bd9927e6dc2d434b6d5cd9a13008654f0495b5152bec59
+仍待单独审核的第3.2节/图2结构对应问题保持原记录；本轮不越过该项直接写论文。
+
+原始英文
+Fig. 10 further visualizes the target-domain feature distributions under selected evaluation directions using t-SNE. In the ODIR in-domain direction (Fig. 10a), Off-site and On-site share the same source and the domain gap itself is small, so same-class samples of both methods overlap reasonably, while Ours shows clearer local cluster structures on the small-sample disease classes (G, A, M). In the RFMiD cross-domain direction (Fig. 10b), Ours organizes the D/A/M classes into more independent clusters, with source- and target-domain samples of the same class closely mixed within each cluster, whereas the baseline has multiple separated sub-clusters within class D and looser local aggregation of the three classes.
+
+[Existing Fig. 10 and its caption.]
+
+2. Noise configuration and privacy-budget selection. Table 9 summarizes the $\epsilon$ values recorded after 80 epochs for eight combinations of initial noise multiplier and noise decay rate, ranging from 5.01 to 20.01. The initial noise multiplier controls the starting perturbation strength, while the decay rate determines how the noise multiplier changes over training.
+
+原始中文
+图10进一步利用t-SNE可视化选定评价方向下的目标域样本特征分布。在ODIR域内方向（图10a）中，Off-site与On-site来自相同来源，域间差距本身较小，因此两种方法的同类样本均有较好的重叠，而本文方法在小样本疾病类别（G、A、M）上呈现更清晰的局部簇结构。在RFMiD跨域方向（图10b）中，本文方法将D/A/M类别组织为更为独立的簇，源域和目标域的同类样本紧密混合，而基线在D类内部出现多个分离的子簇，三个类别的局部聚集也较为松散。
+
+［现有图10及图注。］
+
+2. 噪声配置与隐私预算选择。表9汇总了八种初始噪声乘数与噪声衰减率组合在80轮训练后记录的ε值，范围为5.01至20.01。初始噪声乘数控制初始扰动强度，而衰减率决定噪声乘数随训练过程变化的方式。
+
+修改后英文（候选）
+Fig. 10 further visualizes the target-domain feature distributions under selected evaluation directions using t-SNE. In the ODIR in-domain direction (Fig. 10a), Off-site and On-site share the same source and the domain gap itself is small, so same-class samples of both methods overlap reasonably, while Ours shows clearer local cluster structures on the small-sample disease classes (G, A, M). In the RFMiD cross-domain direction (Fig. 10b), Ours organizes the D/A/M classes into more independent clusters, with source- and target-domain samples of the same class closely mixed within each cluster, whereas the baseline has multiple separated sub-clusters within class D and looser local aggregation of the three classes.
+
+[Existing Fig. 10 and its caption retained.]
+
+To quantify the resource requirements associated with generalization performance, Table 9 compares the model size, training computation, and inference costs of the five methods.
+
+Table 9. Computational costs of the five methods under the eight-class ODIR setting.
+| Method | Trainable params (M) | Training (GFLOPs/sample/step) | Inference (GFLOPs/eye) | Peak memory (MiB) | Latency median/P95 (ms) |
+|---|---:|---:|---:|---:|---:|
+| ResNet50 | 24.287 | 84.048 | 32.811 | 164.26 | 10.222 / 10.557 |
+| MixStyle | 24.287 | 84.072 | 32.811 | 160.35 | 10.281 / 16.526 |
+| RSC | 24.287 | 168.095 | 32.811 | 168.44 | 10.521 / 17.598 |
+| FACT | 24.287 | 467.372 | 32.811 | 160.91 | 10.355 / 12.168 |
+| Ours | 175.006 | 420.598 | 121.634 | 969.94 | 29.149 / 30.211 |
+
+Notes: Training FLOPs cover all views and teacher computations per sample/update. Inference uses FP16 AMP (batch size 1); latency reports median/P95 over 600 runs after warm-up, and memory denotes peak allocated GPU memory.
+
+The three DG comparators retain the baseline inference network, resulting in identical parameter counts and inference FLOPs. In the proposed model, DFE processes two views with shared weights to select features that are relatively stable under appearance perturbations, while ARC constructs label-related representations and enforces their consistency across views during training. The Transformer accounts for 151.079M of the model's 175.006M trainable parameters. Complete monocular inference requires 121.634 GFLOPs, including 55.978 GFLOPs for the matrix operations in the two Transformer forward passes.
+
+In the eight-class ODIR setting, the proposed method uses 10.01% fewer FLOPs per source sample for a network training update than FACT (420.598 vs. 467.372), while its best-observed On-site monocular and binocular Final scores in Table 7 are higher by 0.85 and 0.94 points, respectively. Full-network inference has a median latency of 29.149 ms and peak allocated memory of 969.94 MiB. The 1.47-point improvement over FACT in the shared-class EDID evaluation in Table 7 provides further evidence of the joint design's cross-dataset generalization.
+
+2. Noise configuration and privacy-budget selection. Table 10 summarizes the $\epsilon$ values recorded after 80 epochs for eight combinations of initial noise multiplier and noise decay rate, ranging from 5.01 to 20.01. The initial noise multiplier controls the starting perturbation strength, while the decay rate determines how the noise multiplier changes over training.
+
+修改后中文（候选）
+图10进一步利用t-SNE可视化选定评价方向下的目标域样本特征分布。在ODIR域内方向（图10a）中，Off-site与On-site来自相同来源，域间差距本身较小，因此两种方法的同类样本均有较好的重叠，而本文方法在小样本疾病类别（G、A、M）上呈现更清晰的局部簇结构。在RFMiD跨域方向（图10b）中，本文方法将D/A/M类别组织为更为独立的簇，源域和目标域的同类样本紧密混合，而基线在D类内部出现多个分离的子簇，三个类别的局部聚集也较为松散。
+
+［现有图10及图注保持。］
+
+为量化泛化性能对应的资源需求，表9比较五种方法的模型规模、训练计算量和推理开销。
+
+表9：五种方法在ODIR八类设置下的计算开销。
+| 方法 | 可训练参数（M） | 训练（GFLOPs/源样本/步） | 推理（GFLOPs/眼） | 峰值显存（MiB） | 延迟中位数/P95（ms） |
+|---|---:|---:|---:|---:|---:|
+| ResNet50 | 24.287 | 84.048 | 32.811 | 164.26 | 10.222 / 10.557 |
+| MixStyle | 24.287 | 84.072 | 32.811 | 160.35 | 10.281 / 16.526 |
+| RSC | 24.287 | 168.095 | 32.811 | 168.44 | 10.521 / 17.598 |
+| FACT | 24.287 | 467.372 | 32.811 | 160.91 | 10.355 / 12.168 |
+| Ours | 175.006 | 420.598 | 121.634 | 969.94 | 29.149 / 30.211 |
+
+表注：训练FLOPs按每个源样本的一次更新统计，包含全部视图及教师计算。推理采用FP16 AMP（批大小1）；延迟为预热后600次调用的中位数/P95，显存为GPU峰值已分配量。
+
+三种域泛化对照方法沿用基线的推理网络，因此具有相同的参数量和推理FLOPs。在本文模型中，DFE通过共享权重处理两种视图，筛选对外观扰动相对稳定的特征；ARC构建疾病标签相关表示，并在训练中约束这些表示的跨视图一致性。模型的175.006M可训练参数中，Transformer占151.079M。完整单眼推理需要121.634 GFLOPs，其中两次Transformer前向的矩阵运算占55.978 GFLOPs。
+
+在ODIR八类设置下，本文方法每个源样本对应的一次网络训练更新所需FLOPs比FACT低10.01%（420.598对467.372），同时表7中的On-site单眼和双眼最佳观测Final分别提高0.85和0.94个百分点。完整网络推理的延迟中位数为29.149 ms，峰值已分配显存为969.94 MiB。表7中EDID共享类别评价相较FACT提高1.47个百分点的结果，进一步支持了该联合设计的跨数据集泛化能力。
+
+2. 噪声配置与隐私预算选择。表10汇总了八种初始噪声乘数与噪声衰减率组合在80轮训练后记录的ε值，范围为5.01至20.01。初始噪声乘数控制初始扰动强度，而衰减率决定噪声乘数随训练过程变化的方式。
+
+审核状态：用户于2026-11-17确认当前短表注，原文保留；用户在两段分析后要求“下一步”，据此保留两段通过；当前转入第3.2节结构对应审核。第4.5节整块尚未获准落实，没有写入论文或生成正式表格源码，没有编译PDF。
+
+2026-11-17局部精简：用户指出“第4.2节所述的评价设置”指代不明，现改为直接说明表9比较模型规模、训练计算量和推理开销。表注按要求压缩为三句，移除0.658M CAM参数、MAC=2和附加浮点算术说明；表格数值、两段分析及前后正文保持。新的引入与表注均待审核，论文未改。
+
+2026-11-17再次压缩：用户要求英文表注约两行半，现候选缩为约32词，两句；同步保存忠实中文，具体行数留待实际排版。表格、分析、引入及论文源码均未改，当前短注待审核。
+
+2026-11-17表注通过：用户明确“表注就用这版”，当前两句短表注中英文保留通过。下一审核对象为表后两段分析，沿用第八部分当前候选逐段展示，不重写已通过表注、不改论文。
+英文表注SHA-256（含Notes:前缀，不含行末换行）：61f108bb77aa55be8f03097dfe0a4ffe83f767578aab9fd66928b70ef40d5755
+中文表注SHA-256（含表注前缀，不含行末换行）：83ab42d8ef03748c7d6fc326461873fcd8bff2ad4443794344a5f6d609c2b8c6
+
+九、第3.2节标签向量定义：仅修改嵌入维度（2026-11-17，已落实）
+最新决定：用户明确要求本段只将嵌入维度由512改为2048，其余文字不变。按此保存中英文版本；此前将其改写为图像自注意力的候选不采用。未获直接修改论文的授权，本轮只维护审核稿。
+位置：sections/03_method_trans.tex第66行完整段落，自“First, the eight labels...”至公式（7）前。
+修改范围：该段d=512→d=2048；保持其余措辞，不增加头数、层数、前馈维度或新的图像自注意力引入段。
+依据：实际保存配置hidden_dim=2048，检查点query_embed.weight形状为[8,2048]。
+事实核验状态：用户对本段文字范围的决定不等于标签自注意力机制已经核验通过。当前结果对应模型未启用decoder标签自注意力，配置、代码、权重的核查及早期8份开启配置的线索继续保存在R3审核记录。当前保留的原稿机制描述与实际实验模型仍有差异，本轮未解决该差异。
+共享上下文：前一段采用R2次要8已通过、当前已在源码出现的ARC输入介绍，保持不变。后文公式（7）及Q/K/V解释、公式（8）、公式（9）后另一处维度、图2(d)均未在本轮修改或获新批准。
+
+原始英文（当前上下文）
+Using the features filtered by DFE, the model further handles the multi-label relevance problem caused by ocular disease co-occurrence. To this end, Transformer attention mechanisms are embedded to construct adaptive relevance at the label and feature levels for multi-label prediction. As shown in Fig. 2.d and Fig. 2.e, this module includes multi-label relevance construction and attention feature alignment.
+
+First, the eight labels in the ODIR dataset, such as normal, DR, and AMD, are modeled as learnable vectors $L = [L_1,\ldots,L_8] \in \mathbb{R}^{8 \times d}$, where $d = 512$ is the embedding dimension. These vectors are initialized from a random Gaussian distribution and optimized during training to characterize potential relevance among different disease labels. The label vectors are fed into the Transformer self-attention mechanism to model label relevance:
+
+原始中文
+利用DFE筛选后的特征，模型进一步处理眼部疾病共存引起的多标签关联问题。为此，引入Transformer注意力机制，在标签和特征层面构建自适应关联，用于多标签预测。如图2.d和图2.e所示，该模块包括多标签关联构建和注意力特征对齐。
+
+首先，将ODIR数据集中的八个标签（如正常、DR和AMD）建模为可学习向量$L=[L_1,\ldots,L_8]\in\mathbb{R}^{8\times d}$，其中$d=512$为嵌入维度。这些向量从随机高斯分布初始化，并在训练过程中优化，以表征不同疾病标签之间的潜在关联。标签向量被输入Transformer自注意力机制，以建模标签关联：
+
+修改后英文（本段只改维度）
+Using the features filtered by DFE, the model further handles the multi-label relevance problem caused by ocular disease co-occurrence. To this end, Transformer attention mechanisms are embedded to construct adaptive relevance at the label and feature levels for multi-label prediction. As shown in Fig. 2.d and Fig. 2.e, this module includes multi-label relevance construction and attention feature alignment.
+
+First, the eight labels in the ODIR dataset, such as normal, DR, and AMD, are modeled as learnable vectors $L = [L_1,\ldots,L_8] \in \mathbb{R}^{8 \times d}$, where $d = 2048$ is the embedding dimension. These vectors are initialized from a random Gaussian distribution and optimized during training to characterize potential relevance among different disease labels. The label vectors are fed into the Transformer self-attention mechanism to model label relevance:
+
+修改后中文（本段只改维度）
+利用DFE筛选后的特征，模型进一步处理眼部疾病共存引起的多标签关联问题。为此，引入Transformer注意力机制，在标签和特征层面构建自适应关联，用于多标签预测。如图2.d和图2.e所示，该模块包括多标签关联构建和注意力特征对齐。
+
+首先，将ODIR数据集中的八个标签（如正常、DR和AMD）建模为可学习向量$L=[L_1,\ldots,L_8]\in\mathbb{R}^{8\times d}$，其中$d=2048$为嵌入维度。这些向量从随机高斯分布初始化，并在训练过程中优化，以表征不同疾病标签之间的潜在关联。标签向量被输入Transformer自注意力机制，以建模标签关联：
+
+后文保持：公式（7）及其说明。本段的维度调整不自动授权后续公式、图或其他段落变更。
+审核状态：用户指定的局部文字已保存；结构对应问题保留未解决。论文源码、图表和PDF均未由本轮修改，未编译、训练或提交。
+
+十、第3.2节公式（7）后的说明段：注意力头数数值对照（2026-11-17，已落实）
+前一处状态：标签向量定义段仅将d=512改为2048，其余文字按用户指定保留；该通过稿仍未落实。
+位置：sections/03_method_trans.tex公式（7）后的完整“Here, Q=...”段落。
+原因与回复对应：实际保存配置nheads=4，当前段写heads=8；拟作数值对齐，使配置说明与复杂度统计依据一致。d=2048、heads=4时每头维度d_k=512，此推导仅作审核说明，不另外加入正文。
+保留范围：公式（7）、Q/K/V定义、后一句标签关联解释及下一段交叉注意力引入均暂保留原文；本轮只提出heads=8→heads=4的局部候选，不新增配置说明段。
+核验边界：原稿标签自注意力与当前实验结构的差异仍未解决。本候选保留的机制文字属于原稿，数值对齐不代表该标签自注意力层已经启用或已获验证；此前核查不撤回，不据此宣布方法与实现完全一致。
+
+前文（共同上下文）：标签向量定义段之后紧接公式（7）：
+V_{self}=\operatorname{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V.
+
+原始英文
+Here, $Q = LW_{Q},K = LW_{K},V = LW_{V}$, where $W_{Q},W_{K},W_{V}$ are learnable projection matrices and $d_{k} = d/heads$ for multi-head attention with $heads=8$. The self-attention output $V_{self}$ captures label relevance, enabling different disease labels to interact dynamically according to co-occurrence patterns and visual evidence in the training data.
+
+原始中文
+其中，$Q=LW_Q$、$K=LW_K$、$V=LW_V$，$W_Q$、$W_K$、$W_V$为可学习投影矩阵；对于$heads=8$的多头注意力，$d_k=d/heads$。自注意力输出$V_{self}$捕捉标签关联，使不同疾病标签能够根据训练数据中的共现模式和视觉证据进行动态交互。
+
+修改后英文（已通过，仅头数数值变化）
+Here, $Q = LW_{Q},K = LW_{K},V = LW_{V}$, where $W_{Q},W_{K},W_{V}$ are learnable projection matrices and $d_{k} = d/heads$ for multi-head attention with $heads=4$. The self-attention output $V_{self}$ captures label relevance, enabling different disease labels to interact dynamically according to co-occurrence patterns and visual evidence in the training data.
+
+修改后中文（已通过，仅头数数值变化）
+其中，$Q=LW_Q$、$K=LW_K$、$V=LW_V$，$W_Q$、$W_K$、$W_V$为可学习投影矩阵；对于$heads=4$的多头注意力，$d_k=d/heads$。自注意力输出$V_{self}$捕捉标签关联，使不同疾病标签能够根据训练数据中的共现模式和视觉证据进行动态交互。
+
+后文（当前已通过的术语句，保持）
+Next, a cross-attention mechanism is used to combine labels with the features filtered by DFE.
+接下来，采用交叉注意力机制，将标签与DFE筛选后的特征相结合。
+
+审核状态：用户于2026-11-17明确“可以，下一步”，本段仅heads=8→heads=4的中英文文字通过；其余措辞原样保存。通过不代表此前结构差异已解决，未写入论文；当前转入公式（9）后另一处嵌入维度审核。
+
+十一、第3.2节公式（9）后的说明段：统一第二处嵌入维度（2026-11-17，已落实）
+前一处状态：公式（7）后的heads=8→heads=4文字已获用户明确通过，尚未写入论文。
+位置：sections/03_method_trans.tex公式（9）后完整“Here, N=8...”段落。
+修改原因与回复对应：该处d表示每个标签输出表示的完整嵌入维度，应与已确认的d=2048及复杂度统计所用模型配置保持一致；这里不是单个注意力头的d_k=512。
+修改范围：仅将d=512改为d=2048；N=8、Softmax及一致性作用的原段说明保持。公式（9）形式不变，不新增实验或配置细节。
+审核顺序：公式（8）及交叉注意力段本轮暂保留原文，相关结构差异继续单独记录；本轮转入下一处有直接配置依据的维度修正，不代表中间机制段已核验通过。
+
+前文（共同上下文）：已通过的一致性解释段说明，原图与增强视图的对应标签表示经Softmax归一化后通过MSE约束；紧接公式（9）：
+L_{consist}=\frac{1}{N\cdot d}\sum_{k=1}^{N}\sum_{j=1}^{d}\left(\operatorname{softmax}(V_k^{ori})_j-\operatorname{softmax}(V_k^{aug})_j\right)^2.
+
+原始英文
+Here, $N = 8$ is the number of labels and $d = 512$ is the embedding dimension. Softmax normalizes attention vectors into comparable distribution forms. The attention consistency loss improves model stability under domain shift by minimizing differences between normalized attention features of the two branches.
+
+原始中文
+其中，$N=8$为标签数量，$d=512$为嵌入维度。Softmax将注意力向量归一化为可比较的分布形式。注意力一致性损失通过最小化两个分支归一化注意力特征之间的差异，提高模型在域偏移下的稳定性。
+
+修改后英文（已通过，仅嵌入维度变化）
+Here, $N = 8$ is the number of labels and $d = 2048$ is the embedding dimension. Softmax normalizes attention vectors into comparable distribution forms. The attention consistency loss improves model stability under domain shift by minimizing differences between normalized attention features of the two branches.
+
+修改后中文（已通过，仅嵌入维度变化）
+其中，$N=8$为标签数量，$d=2048$为嵌入维度。Softmax将注意力向量归一化为可比较的分布形式。注意力一致性损失通过最小化两个分支归一化注意力特征之间的差异，提高模型在域偏移下的稳定性。
+
+后文（共同上下文，保持）
+Finally, the attention vectors are fed into the multi-label classifier.
+最后，将注意力向量输入多标签分类器。
+
+审核状态：用户于2026-11-17明确“可以，下一处”，本段d=512→d=2048的中英文文字通过并原样保存，其余文字保持；尚未写入论文。
+
+十二、通过稿整体复核与剩余事项（2026-11-17）
+触发：用户通过公式（9）后的维度修正并要求“下一处”。本轮核对原定范围与当前论文，没有新增独立的常规文字修改；转入已通过稿的整体复核，剩余机制事项仍列明。
+
+按论文章节顺序的复核：
+1. 第3.2节两处完整嵌入维度均拟改为2048，公式（7）后头数拟改为4；由此单头维度512与完整维度2048可以区分。以上仅为通过稿中的数值一致性，不代表标签自注意力结构已核验通过。三处已通过文字均原样保留。
+2. 第4.2节三句说明明确448×448、非隐私ODIR八类、按源样本/网络更新统计训练量、完整单眼推理和同一GPU。它为第4.5节提供统计对象和单位，现有训练与敏感性设置保持。
+3. 第4.5节按图10之后、隐私第2项之前的一句引入、一表、两段分析安排。原有泛化分析与表7/8保留；新增块依次说明资源需求、机制用途与同任务的收益，未发现需要重写通过稿的新衔接冲突。表注保留用户通过的短版。
+4. 从complete_results.csv逐行核验中英文五方法表，共10行均与精确结果按指定小数位一致。训练步骤相较FACT的减少量为10.007871284...%，对应10.01%；当前表7的ODIR单眼/双眼和EDID差值分别为0.85、0.94、1.47个百分点。两份中文回复与候选表、分析中的对应数字一致。未将八类模型开销当成外部三类开销，未宣称总训练耗时更低或所有外部方向最优。
+5. 第4.2/4.5节采用已通过版本；第3.2节共享段落中已存在的R2次要8修改保持。复杂度表按目前表序预计为新表9，原隐私表9—11顺延10—12；正式编号与排版仍需获准实施后编译核对，本轮未生成或替换表格源码/PDF。
+
+原清单下一项及其状态：
+- 第3节总述、公式（7）—（8）及相邻解释、图2(d)原图/图注均涉及“标签先经过自注意力，再对图像特征交叉注意力”的结构说明。
+- 这些属于同一项尚未解决的机制—实现对应问题，不能通过已批准的维度/头数修正认定已解决。用户此前要求保留标签定义段机制措辞；本轮未据此扩大为其他结构位置已核验或已批准，也不重新提出用户已不采纳的图像自注意力替换段。
+- 当前没有新的独立数值或常规文字段落需要继续改写。上述结构问题及后续正文实施仍待处理，不能将已通过局部文字标为本点全部完成。
+
+本轮操作：只维护本点对照、审核记录和项目索引；未修改论文、公式、图表、代码或权重，未编译、运行新实验、提交推送或同步。两份已通过中文回复保持原文。
+
+2026-11-17用户明确暂缓结构处理后的整体审核
+授权范围：用户要求结构一致性问题先保留记录、相关原文暂不改，并对已经通过的要点整体审核是否冲突。本轮不修改任何通过稿具体文字，也不写入论文。
+复核基准：论文独立仓库HEAD=4e1b009，包含R2次要8已落实修改；此前暂停的R2次要5只作共享段落兼容性参考，不恢复其工作。
+结论：在本次已通过的数值修正和复杂度补充范围内，未发现新增实质冲突，无需重写通过稿。该结论不覆盖已按用户要求暂存的机制—实现差异，也不代表全稿事实问题已解决。
+
+具体审核结果：
+1. 方法参数：两处d=2048与heads=4前后一致，单头d_k=512不与完整嵌入维度混淆。对当前第3.2节作内存替换检查，恰为三处数值改变，公式块及R2次要8已经写入的两个术语句原样保留；未写文件。
+2. 统计口径：第4.2节提供任务、输入尺寸、训练/推理计量单位和GPU；表注补充所有视图/教师计算、推理精度与batch=1、600次统计及peak allocated。原有训练全局batch=32/双卡与推理batch=1/同一测量GPU分别对应不同阶段，没有数值冲突。训练量按每源样本每更新归一化，延迟与显存指网络推理，未把每步计算量写成完整训练总成本。
+3. 结果：五方法表中英文10行均与complete_results.csv逐项匹配。Transformer参数151.079M与完整可训练参数175.006M口径区分；55.978 GFLOPs明确为两次Transformer前向矩阵运算，121.634 GFLOPs为完整单眼网络。Ours相对FACT的训练步骤降低10.007871284...%，保留10.01%；表7的0.85、0.94、1.47个百分点准确。未与表3文献结果或其他消融检查点的78.85混用。
+4. 叙事与重复：第4.2节说明如何统计；第4.5节先呈现已有泛化结果，再补资源表，第一段说明资源用途，第二段关联同任务表现与资源。现有泛化分析与新增复杂度段都出现0.85/0.94/1.47，前者报告识别优势，后者解释成本对应的收益，属于有目的的简短回引，不构成论证冲突；不另删改已通过文字。
+5. 比较范围：表7保持五候选最佳观测口径，表8的均值/SD仍是候选间统计；ODIR八类复杂度与EDID共享三类泛化作为不同评价内容清楚区分，没有把外部三类开销写成已测值。当前及拟增文字均未宣称RFMiD最优，未归因于参数越多必然泛化更好。
+6. 共享修改：内存模拟在当前第4.2节训练配置后、第4.5节图10后加入通过稿，移除所插内容后与当前原文逐字一致。R2主要1的模块联系与一致性解释、R2主要3/4的表7/8及报告口径、R2次要4的敏感性段和R2次要8的术语修改均无需覆盖或回退；黄色高亮保持。
+7. 表号与交付：当前clean编译辅助文件确认表7/8为泛化两表、表9—11为隐私三表。新增复杂度表预计为表9，原隐私表顺延10—12；现有正文/图注主要使用标签自动引用。正式落实时须同步核对其他回复中涉及顺延表号的位置记录，不重写这些回复的实质论证。本轮没有编译，不能据此称新表排版或最终页数已验证。
+8. 两份回复：与通过的统计/分析文字和现有表7数值一致，保持“已完成统计、拟在论文补充”的当前时态，未擅自改为已落实；落实后再按实际章节和表号完善修改说明。
+
+本轮操作：仅维护既有对照、审核记录与索引。已通过的英文块保存指纹并核对不变；相关当前源文件、两份中文回复、两版PDF指纹均未变。结构差异仍未解决、按用户决定暂存，不重新展开结构改写，不新跑实验，不编译、不提交、不推送或同步。
+
+十三、已通过稿落实、编号联动及PDF核验（2026-11-17）
+用户授权：按已审核通过版本落实论文；结构一致性问题继续保留记录、相关机制原文暂不改；同步表号和引用，编译高亮版/清洁版供检查。
+实施基准：论文独立仓库4e1b009，当前其他意见与既有工程改动保留；没有Git暂存、提交、推送或Mac同步。
+
+已落实范围（文字沿用通过版本）：
+1. sections/03_method_trans.tex：第3.2节标签定义及公式（9）后完整嵌入维度均由512改为2048；公式（7）后heads由8改为4。三处用revision高亮；机制文字、所有公式、图2和原有R2高亮保持。
+2. sections/04_experiments_trans.tex：第4.2节训练配置后插入已通过三句统计口径；第4.5节图10后、隐私第2项前插入已通过引入句、复杂度表和两段分析。采用标签引用，不硬编码新表号。
+3. tables/src/table_computational_cost_trans.tex：新增五方法六列表9，数值、表题、短表注与通过稿一致；表头分行适配宽度。表注实际为两行，保留FP16 AMP/batch=1、600次统计及全部视图/教师口径。
+4. 排版调整：复杂度块前后各置FloatBarrier。初次编译发现后方隐私表浮到复杂度两段分析之前，第二次编译后已消除；表9位于24页，两段分析连续位于25页，随后衔接隐私分析，未改任何通过稿文字。
+
+编号与引用：
+两版aux均确认泛化最佳结果表7、候选均值表8保持；复杂度表9；隐私扫描表10、轨迹表11、最终结果表12。图10/11编号保持。正文、表题与图11图注通过现有标签自动同步。
+reviewer2_point2_reply_zh.txt中5处轨迹/最终结果表号由10/11改为11/12，其他文字和数值逐字保持；该点对照和记录仅补当前编号联动提示，历史审核编号不批量改写。R3/R5两份已通过中文回复在本轮保持原文，最终时态及落实位置待PDF审核后的最终回复阶段完善，不将尚保留的“拟”写法称为当前最终回复已完成。
+
+编译及页面检查：
+命令：python sdg_latex/scripts/build_revision.py；最终退出码0，两版正文PDF均30页（完整构建含Highlights为31页）。原投稿main_cas.pdf保持。
+实际位置：第3.2节数值修正9—10页；第4.2节统计口径15页；第4.5节表9及短表注24页，两段分析25页；后续隐私表10/11在26页、表12和图11在27页。这里只记录内部PDF检查位置，正式回复仍不列页码。
+目视检查：高亮版9、10、15、24、25、26页；清洁版9、10、15、24、25、26、27页。新增表不越界，表注和数据可读；高亮版三处数值及新增段落/表格均有黄色高亮，清洁版无黄色修订高亮。未发现相关新增排版问题。
+最终日志无未解析引用、需重跑引用提示或编译错误；仍有main_cas.tex既有标题/关键词模板的Underfull（line93）及Overfull（line96）提示，不来自本次新增段落或表格。
+
+内容与保留核验：
+- 新增统计说明、引入、表题、表注、两段分析及五行数据与通过稿匹配，且在两版PDF中均可检索；两版提取文本经过PDF字体连字映射后字符一致。原有表7附近段落在高亮/清洁版21—22页的自然分页略有差异，不涉及内容变化。
+- 将两章的本轮三处数值与新增块逆向移除后，与实施前源文件SHA-256完全一致；所有原有公式、结构文字及R2已落实修改保持。
+- 其他原有tex、原投稿PDF、两份已通过中文回复指纹保持。没有改变训练代码、配置、权重或实验结果。
+- 核验清单和指纹：build/revision/reviewer3_point1_reviewer5_point4_review/verification.json；页面文本、定位及截图在同目录。没有创建整稿快照。
+
+当前状态：本轮授权的正文落实、表号引用同步和两版PDF编译已完成，交用户检查；本点不提前标为最终完成。结构一致性问题继续作为未解决记录保留，相关机制原文未改，不因编译或数值修正视为已解决。
+
+十四、按实际修改完善回复（2026-11-17，待用户审核）
+现有reply_zh.txt已更新为按实际完成时态书写的完整中文回复；主要位置为第4.2节统一统计口径、第4.5节表9及分析，并结合表7解释泛化收益。未逐项列出第3.2节数值等小改动。数值、报告条件与当前正文/表格已反向核对；本轮不新增论文修改，结构一致性问题和相关原文保持。完整文字只保存在本点reply_zh.txt，当前指纹见revision_record.txt；待用户最终审核。
+
+十五、最终确认与中文返修完成（2026-11-17）
+用户已确认最终完整中文回复及对应正文，按当前原文保存；本点中文返修阶段标记完成。第3.2/4.2/4.5节落实内容、表9和两版PDF保持已核验版本，实际修改位置及排版记录见上文。两点合并一次本地归档提交，包含R2主要2的表号联动；结构一致性问题继续保留未解决，相关机制原文暂不改。最终回复指纹与提交范围见本点revision_record.txt，具体提交号见项目索引。

@@ -1,0 +1,27 @@
+% Reviewers 3 point 1 and 5 point 4: approved five-method computational costs.
+\begin{table}[pos=H]
+\centering
+\caption{\protect\revision{Computational costs of the five methods under the eight-class ODIR setting.}}
+\label{tab:computational-cost}
+\begingroup
+\small
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}
+\toprule
+\revision{Method} & \multicolumn{1}{c}{\shortstack{\revision{Trainable}\\\revision{params (M)}}} & \multicolumn{1}{c}{\shortstack{\revision{Training}\\\revision{(GFLOPs/}\\\revision{sample/step)}}} & \multicolumn{1}{c}{\shortstack{\revision{Inference}\\\revision{(GFLOPs/eye)}}} & \multicolumn{1}{c}{\shortstack{\revision{Peak memory}\\\revision{(MiB)}}} & \multicolumn{1}{c}{\shortstack{\revision{Latency}\\\revision{median/P95 (ms)}}} \\
+\midrule
+\revision{ResNet50} & \revision{24.287} & \revision{84.048} & \revision{32.811} & \revision{164.26} & \revision{10.222 / 10.557} \\
+\revision{MixStyle} & \revision{24.287} & \revision{84.072} & \revision{32.811} & \revision{160.35} & \revision{10.281 / 16.526} \\
+\revision{RSC} & \revision{24.287} & \revision{168.095} & \revision{32.811} & \revision{168.44} & \revision{10.521 / 17.598} \\
+\revision{FACT} & \revision{24.287} & \revision{467.372} & \revision{32.811} & \revision{160.91} & \revision{10.355 / 12.168} \\
+\revision{Ours} & \revision{175.006} & \revision{420.598} & \revision{121.634} & \revision{969.94} & \revision{29.149 / 30.211} \\
+\bottomrule
+\end{tabular*}
+\endgroup
+\par\vspace{4pt}
+\begin{minipage}{\linewidth}
+\footnotesize
+\revision{Notes: Training FLOPs cover all views and teacher computations per sample/update. Inference uses FP16 AMP (batch size 1); latency reports median/P95 over 600 runs after warm-up, and memory denotes peak allocated GPU memory.}
+\end{minipage}
+\end{table}
