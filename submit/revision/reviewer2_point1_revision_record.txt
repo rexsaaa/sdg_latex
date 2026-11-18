@@ -50,3 +50,5 @@ revision_drafts/reviewer2/point1_final_reply_20261111/保存本条最终中文�
 
 2026-11-18：R3意见2新增文献后的引用编号联动
 当前最终中文回复的参考文献编号已按新增smartMRI与Alzubaidi综述后的文献表更新（旧9—23加1，24—58加2），回复论证、数值与章节表号不变。原逐处对照中的历史编号保留；本次编号映射及核验见reviewer3_point2_revision_record.txt。
+
+2026-11-18：R4意见1将既有DCNet文献前移至［12］。本点最终回复中的ConDiSR编号由［15］同步为［16］，与引言及两版文献表一致。该处只更新数字，核验详情见reviewer4_point1_revision_record.txt。

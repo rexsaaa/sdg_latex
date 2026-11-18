@@ -1,0 +1,35 @@
+审稿人4意见1｜引言首段与第1项挑战修改对照
+
+一、第1节首段，CNN应用举例的句末及文献［8］
+
+承接上文关于视觉语言模型训练条件的讨论，下文接 smartMRI［9］的分割实例和选择CNN骨干的理由。用户选择以应用任务为并列单位，将句末改为“眼病诊断与病情进展预测”。文献［8］由 Hasan 等的孤独症谱系障碍早期检测研究替换为 Ganjdanesh 等的 LONGL-Net 研究。后者以彩色眼底照片判断当前是否为晚期年龄相关性黄斑变性，并预测以后是否会进展至晚期。原文 DOI 为 10.1093/pnasnexus/pgab003。
+
+原始英文
+In contrast, CNN-based deep visual models can directly learn local textures, lesion regions, and spatial structural features from fundus images, and have been widely applied to disease recognition [5], lesion segmentation [6], medical image reconstruction [7], and diagnosis and prediction of ocular diseases [8].
+
+原始中文
+相比之下，基于 CNN 的深度视觉模型可以直接从眼底图像中学习局部纹理、病灶区域及空间结构特征，并已广泛应用于疾病识别［5］、病灶分割［6］、医学图像重建［7］以及眼部疾病的诊断与预测［8］。
+
+修改后英文（已通过、已落实）
+In contrast, CNN-based deep visual models can directly learn local textures, lesion regions, and spatial structural features from fundus images, and have been widely applied to disease recognition [5], lesion segmentation [6], medical image reconstruction [7], and ocular disease diagnosis and prediction of disease progression [8].
+
+修改后中文（已通过）
+相比之下，基于 CNN 的深度视觉模型可以直接从眼底图像中学习局部纹理、病灶区域及空间结构特征，并已广泛应用于疾病识别［5］、病灶分割［6］、医学图像重建［7］以及眼病诊断与病情进展预测［8］。
+
+二、第1节第1项挑战
+
+位置：第1节三个编号挑战之首，位于眼底筛查方法与 CNN 骨干选择之后、第2项跨机构训练与部署挑战之前。首段末尾引出多病共存、跨机构泛化和隐私三项需求，第2项开头转入医学图像获取与专家标注的成本。
+
+原因：从多病共存出发，简述已有研究如何利用标签共现和双眼信息，再说明疾病征象的空间分布如何引出针对各疾病标签的局部特征学习。前两句保留，后三句按用户通过稿落实并高亮。修改后段落的引文按首次引用顺序列出。DCNet 在最初文字审核时为［22］，移至 ML-GCN 后为［12］；正文措辞按通过稿。
+
+原始英文
+1. In clinical ocular disease diagnosis, a single eye may present multiple diseases simultaneously. Using a standard single-label classifier, or modeling different diseases as fully independent, can therefore lead to false positives and false negatives [10]. Multi-label recognition has also been widely studied for natural images. For example, ML-GCN [11] constructs graph relevance from label co-occurrence frequencies, making relevant labels more likely to be recognized once a given label is identified and thereby reducing false negatives. However, in multi-label ocular disease recognition, disease relevance is more complex, and methods that infer disease relevance solely from label co-occurrence frequencies may be insufficiently reliable. For multi-disease co-occurrence in fundus images, a more reliable method for label-feature relevance construction is therefore needed.
+
+原始中文
+1. 在眼病的临床诊断中，同一只眼可能同时患有多种疾病。因此，采用标准的单标签分类器，或将不同疾病视为完全独立的任务进行建模，可能导致假阳性和假阴性［10］。多标签识别在自然图像中也得到了广泛研究。例如，ML-GCN［11］根据标签共现频率构建标签间的图关联，使模型在识别出某个标签后更有可能识别出与其相关的标签，从而减少假阴性。然而，在多标签眼病识别中，疾病之间的关联更为复杂，仅根据标签共现频率推断疾病关联的方法可能不够可靠。因此，针对眼底图像中的多病共存现象，需要一种更可靠的方法来建立标签与特征之间的关联。
+
+修改后英文（已通过、已落实）
+1. In clinical ocular disease diagnosis, a single eye may present multiple diseases simultaneously. Using a standard single-label classifier, or modeling different diseases as fully independent, can therefore lead to false positives and false negatives [10]. Existing methods draw on different sources of information to support multi-label prediction: ML-GCN [11] uses label co-occurrence in natural images, while DCNet [12] combines information from both eyes to recognize multiple ocular diseases at the patient level. Signs of coexisting diseases may appear in different regions of the same fundus image, for example along the retinal vessels or in the macula. A model therefore needs to account for relationships among diseases and learn which local image features are relevant to each disease label.
+
+修改后中文（已通过）
+1. 在眼病的临床诊断中，同一只眼可能同时患有多种疾病。因此，采用标准的单标签分类器，或将不同疾病视为完全独立的任务进行建模，可能导致假阳性和假阴性［10］。已有方法利用不同来源的信息辅助多标签预测，例如，ML-GCN［11］利用自然图像中的标签共现关系，DCNet［12］则融合双眼信息，在患者层面识别多种眼病。共存疾病的征象可能出现在同一幅眼底图像的不同区域，例如视网膜血管沿线或黄斑区。因此，模型需要考虑疾病之间的关联，并学习哪些局部图像特征与各个疾病标签相关。
