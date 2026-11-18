@@ -4,13 +4,13 @@
 
 在多标签眼病识别中，了解模型的类别响应分布于图像中的哪些位置，有助于检查分类结果所关联的视觉信息。本文第 3.1 节采用基于 Grad-CAM 的计算方式，根据目标类别得分对卷积特征的梯度确定通道权重，生成类别相关的空间响应图。将这些响应与原始眼底图像对应，可以直观查看模型关注的结构及区域。标题中的“可解释性”主要体现为这种对模型预测提供空间视觉解释的能力。
 
-这一用途与相关眼底分类研究的做法一致。Ghadai 等［54］在糖尿病视网膜病变分类中使用 Grad-CAM 展示模型关注的眼底区域，并以定性可视化支持对分类结果的解释。本文采用 CAM 的目的同样是使模型关注区域能够被观察和检查。在此基础上，我们进一步利用区域重叠指标比较 Baseline 与本文方法，使视觉差异具有相应的数值依据。
+这一用途与相关眼底分类研究的做法一致。Ghadai 等［56］在糖尿病视网膜病变分类中使用 Grad-CAM 展示模型关注的眼底区域，并以定性可视化支持对分类结果的解释。本文采用 CAM 的目的同样是使模型关注区域能够被观察和检查。在此基础上，我们进一步利用区域重叠指标比较 Baseline 与本文方法，使视觉差异具有相应的数值依据。
 
 （2）结合现有标注条件，构建 AI 辅助区域参照并采用统一规则计算 IoU。
 
 审稿人提出的专家病灶掩码 IoU，需要与图像对应的空间标注。本研究使用的 ODIR 数据提供图像级多标签分类信息，但未配套提供这些图像的专家区域框或像素级病灶掩码；补充这类标注需要眼科专家逐图定位和复核。因此，我们围绕图 9 的案例构建 AI 辅助区域参照，用于补充空间一致性分析。
 
-AI 辅助标注与医学区域生成具有相关研究基础。Hier 等［55］报告，GPT-5.2 在多发性硬化临床病历的表型标注任务中取得了接近人工标注的表现。Pham 和 Cheng［56］利用视觉语言模型从医学图像中生成感兴趣区域的边界框，并将其作为空间先验引导后续分割。参考这些 AI 辅助标注与区域生成的研究，我们采用 ChatGPT 辅助标注原始眼底图像中的可见解剖结构与外观区域，形成候选区域框。由于这些案例包含正常与疾病图像，参照区域相应涵盖可见眼底结构及局部外观特征。这些候选参照框在首次 IoU 计算前固定，并供 Baseline 与本文方法共同使用，以比较两种方法的 CAM 关注区域与候选参照之间的空间一致性。
+AI 辅助标注与医学区域生成具有相关研究基础。Hier 等［57］报告，GPT-5.2 在多发性硬化临床病历的表型标注任务中取得了接近人工标注的表现。Pham 和 Cheng［58］利用视觉语言模型从医学图像中生成感兴趣区域的边界框，并将其作为空间先验引导后续分割。参考这些 AI 辅助标注与区域生成的研究，我们采用 ChatGPT 辅助标注原始眼底图像中的可见解剖结构与外观区域，形成候选区域框。由于这些案例包含正常与疾病图像，参照区域相应涵盖可见眼底结构及局部外观特征。这些候选参照框在首次 IoU 计算前固定，并供 Baseline 与本文方法共同使用，以比较两种方法的 CAM 关注区域与候选参照之间的空间一致性。
 
 分析纳入图 9 展示的全部九个 ODIR 训练集案例。对同一图像，Baseline 与本文方法采用相同的类别集合，将对应类别 CAM 逐像素取最大值并归一化至［0，1］，以统一阈值 0.5 提取高响应区域，再获得各连通区域的外接框，保留全部生成框。对每幅图像，将全部 CAM 框覆盖的像素区域取并集，将全部参照框覆盖的像素区域取并集，两者交集面积与并集面积之比即为该图像的区域 IoU。同一参照用于两种方法，九个案例分别计算后等权取平均，从而保持比较对象和计算规则一致。
 
@@ -22,12 +22,12 @@ AI 辅助标注与医学区域生成具有相关研究基础。Hier 等［55］�
 
 上述分析将 CAM 的视觉解释与同一组案例上的区域量化联系起来：CAM 展示模型关注的位置，IoU 比较其与 AI 辅助参照的空间重叠，案例 f 则说明这种差异在图像中如何体现。九例平均结果与具体案例共同为本文的视觉解释分析提供了补充证据。
 
-相应修改已落实在修订稿第 4.4 节：补充 CAM 视觉解释的研究依据、候选参照的构建及统一 IoU 计算规则；更新图 9，以五例加四例的布局展示全部九例的原图、CAM 及区域框，并将案例统一编号为(a)—(i)；新增表 5，报告逐例 IoU 及均值；结合整体结果与图 9(f) 补充分析。上述三篇文献已纳入修订稿参考文献［54—56］。
+相应修改已落实在修订稿第 4.4 节：补充 CAM 视觉解释的研究依据、候选参照的构建及统一 IoU 计算规则；更新图 9，以五例加四例的布局展示全部九例的原图、CAM 及区域框，并将案例统一编号为(a)—(i)；新增表 5，报告逐例 IoU 及均值；结合整体结果与图 9(f) 补充分析。上述三篇文献已纳入修订稿参考文献［56—58］。
 
 参考文献（与修订稿编号一致）
 
-［54］Ghadai K K, Nayak S K, Senapati B R. A clinically interpretable deep learning pipeline for diabetic retinopathy classification using EfficientNet, advanced data augmentation and GradCAM. BMC Ophthalmology, 2026, 26: 406. DOI: 10.1186/s12886-026-04897-4.
+［56］Ghadai K K, Nayak S K, Senapati B R. A clinically interpretable deep learning pipeline for diabetic retinopathy classification using EfficientNet, advanced data augmentation and GradCAM. BMC Ophthalmology, 2026, 26: 406. DOI: 10.1186/s12886-026-04897-4.
 
-［55］Hier D B, Srinivasula P Y, Carrithers M D. Note-Level Phenotyping of Multiple-Sclerosis Notes by a Large Language Model Achieves near Human-Level Agreement. Journal of Clinical Medicine, 2026, 15(11): 4092. DOI: 10.3390/jcm15114092.
+［57］Hier D B, Srinivasula P Y, Carrithers M D. Note-Level Phenotyping of Multiple-Sclerosis Notes by a Large Language Model Achieves near Human-Level Agreement. Journal of Clinical Medicine, 2026, 15(11): 4092. DOI: 10.3390/jcm15114092.
 
-［56］Pham H, Cheng S. Prototype-Guided Zero-Shot Medical Image Segmentation with Large Vision-Language Models. Applied Sciences, 2025, 15(21): 11441. DOI: 10.3390/app152111441.
+［58］Pham H, Cheng S. Prototype-Guided Zero-Shot Medical Image Segmentation with Large Vision-Language Models. Applied Sciences, 2025, 15(21): 11441. DOI: 10.3390/app152111441.

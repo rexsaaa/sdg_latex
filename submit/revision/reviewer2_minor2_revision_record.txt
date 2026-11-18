@@ -132,3 +132,7 @@ submit/build/images/plots/fig_sota_compare.pdf（保持）
 SHA256: 73238c1cbeb295b01803f12cc85c447e691777897d9bf6a04b6795e147254aba
 submit/build/main_cas.pdf（原投稿，保持）
 SHA256: 4ab600a020e628f3d000b2b748b22ad6b52380b4761db4bea752a02b89b96412
+
+
+2026-11-18：R3意见2新增文献后的引用编号联动
+当前最终中文回复的参考文献编号已按新增smartMRI与Alzubaidi综述后的文献表更新（旧9—23加1，24—58加2），回复论证、数值与章节表号不变。原逐处对照中的历史编号保留；本次编号映射及核验见reviewer3_point2_revision_record.txt。

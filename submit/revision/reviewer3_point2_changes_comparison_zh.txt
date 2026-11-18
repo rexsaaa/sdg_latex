@@ -1,0 +1,121 @@
+审稿人3意见2：中英文修改前后对照
+日期：2026-11-18
+当前状态：2026-11-18用户已通过参考文献方案并明确授权实施。两处正文与两条文献均已按通过稿写入，保留既有修改及黄色高亮；高亮版和清洁版均已编译并检查，均30页。2026-11-18用户已确认最终中文回复及对应正文/PDF，本点当前中文返修阶段已完成，并授权本地Git归档。
+
+第一处：数据稀缺综述（已落实）
+
+位置：submit/build/sections/02_related_work_trans.tex，第2.2节Domain Generalization首段（当前第16行），原第2句之后、DA介绍之前。
+修改原因：保留原有域偏移—DA—DG—SDG的展开顺序，用一句话补充数据稀缺与泛化的背景。
+对应回复要点：引入Alzubaidi综述对数据受限条件下泛化挑战与相关学习策略的讨论。
+修改范围：仅插入一句；原首段全部文字、后续DA/DG/SDG论述及既有高亮保持。不再补充数据获取与标注成本、模型复用等开篇铺垫。
+上下文范围：完整首段及下一段开头两句；下一段其余内容和SDG段保持不变。
+引用说明：原始块保留修改前编号；修改后块使用实际编译后的编号。smartMRI为[9]，Alzubaidi综述为[25]；既有编号9—23加1，24—58加2。正文措辞保持通过版，仅编号联动。落实使用引用键_RefAlzubaidi2023DataScarcity，实际编号已通过两版PDF及辅助文件核验。
+
+【原始英文】
+2.2. Domain Generalization
+
+In computer vision tasks, a model may perform well on training data but degrade when deployed on data collected by new institutions or devices because of differences in imaging conditions, illumination environments, and data distributions. This domain shift is especially prominent in medical imaging, where differences among hospitals, devices, and acquisition procedures can directly affect model generalization [23]. Domain Adaptation (DA) is a common approach for alleviating domain shift, with the core idea of aligning distributions using both source-domain and target-domain data during training. For example, maximum-mean-discrepancy-based Deep Domain Confusion [24] and the correlation alignment method CORAL [25] improve transfer performance by reducing feature distribution differences. DANN [26] uses adversarial training to learn domain-invariant features. CycleGAN [27] and related unsupervised domain adaptation methods [28] alleviate domain shift through image style transfer or cross-domain contrastive learning. However, DA usually requires access to target-domain data during training, an assumption that often fails when medical data are privacy-sensitive or data from the target institution cannot be obtained in advance.
+
+（下一段开头两句，上下文保持不变）
+Unlike DA, Domain Generalization (DG) aims to learn predictive models using only source-domain data for application to unseen target domains [29]. Domain-invariant representation learning is one approach to this task, aiming to reduce the influence of domain-related variations on the learned features.
+
+【原始中文】
+2.2. 域泛化
+
+在计算机视觉任务中，模型可能在训练数据上表现良好，但由于成像条件、照明环境和数据分布的差异，在部署到新机构或设备采集的数据时出现性能下降。这种域偏移在医学图像中尤为突出，不同医院、设备和采集流程之间的差异会直接影响模型的泛化能力［23］。域适应（DA）是缓解域偏移的一种常见方法，其核心思想是在训练过程中同时利用源域和目标域数据进行分布对齐。例如，基于最大均值差异的深度域混淆（Deep Domain Confusion）［24］和相关性对齐方法 CORAL［25］通过减小特征分布差异来提高迁移性能。DANN［26］通过对抗训练学习域不变特征。CycleGAN［27］及相关的无监督域适应方法［28］通过图像风格迁移或跨域对比学习缓解域偏移。然而，DA 通常要求在训练期间访问目标域数据，当医学数据具有隐私敏感性或无法提前获取目标机构的数据时，这一假设往往难以满足。
+
+（下一段开头两句，上下文保持不变）
+与 DA 不同，域泛化（DG）旨在仅利用源域数据学习预测模型，以应用于未见目标域［29］。域不变表示学习是实现这一任务的一种途径，其目标是减少与域相关的变化对所学特征的影响。
+
+【修改后英文】
+2.2. Domain Generalization
+
+In computer vision tasks, a model may perform well on training data but degrade when deployed on data collected by new institutions or devices because of differences in imaging conditions, illumination environments, and data distributions. This domain shift is especially prominent in medical imaging, where differences among hospitals, devices, and acquisition procedures can directly affect model generalization [24]. The survey by Alzubaidi et al. [25] also examines generalization challenges under data scarcity and reviews learning strategies such as transfer learning and self-supervised learning. Domain Adaptation (DA) is a common approach for alleviating domain shift, with the core idea of aligning distributions using both source-domain and target-domain data during training. For example, maximum-mean-discrepancy-based Deep Domain Confusion [26] and the correlation alignment method CORAL [27] improve transfer performance by reducing feature distribution differences. DANN [28] uses adversarial training to learn domain-invariant features. CycleGAN [29] and related unsupervised domain adaptation methods [30] alleviate domain shift through image style transfer or cross-domain contrastive learning. However, DA usually requires access to target-domain data during training, an assumption that often fails when medical data are privacy-sensitive or data from the target institution cannot be obtained in advance.
+
+（下一段开头两句，上下文保持不变）
+Unlike DA, Domain Generalization (DG) aims to learn predictive models using only source-domain data for application to unseen target domains [31]. Domain-invariant representation learning is one approach to this task, aiming to reduce the influence of domain-related variations on the learned features.
+
+【修改后中文】
+2.2. 域泛化
+
+在计算机视觉任务中，模型可能在训练数据上表现良好，但由于成像条件、照明环境和数据分布的差异，在部署到新机构或设备采集的数据时出现性能下降。这种域偏移在医学图像中尤为突出，不同医院、设备和采集流程之间的差异会直接影响模型的泛化能力［24］。Alzubaidi 等人［25］的综述还讨论了数据稀缺条件下的泛化挑战，并梳理了迁移学习、自监督学习等学习策略。域适应（DA）是缓解域偏移的一种常见方法，其核心思想是在训练过程中同时利用源域和目标域数据进行分布对齐。例如，基于最大均值差异的深度域混淆（Deep Domain Confusion）［26］和相关性对齐方法 CORAL［27］通过减小特征分布差异来提高迁移性能。DANN［28］通过对抗训练学习域不变特征。CycleGAN［29］及相关的无监督域适应方法［30］通过图像风格迁移或跨域对比学习缓解域偏移。然而，DA 通常要求在训练期间访问目标域数据，当医学数据具有隐私敏感性或无法提前获取目标机构的数据时，这一假设往往难以满足。
+
+（下一段开头两句，上下文保持不变）
+与 DA 不同，域泛化（DG）旨在仅利用源域数据学习预测模型，以应用于未见目标域［31］。域不变表示学习是实现这一任务的一种途径，其目标是减少与域相关的变化对所学特征的影响。
+
+第二处：smartMRI应用背景（引言一句插入已落实）
+
+位置：submit/build/sections/01_introduction_trans.tex，第1节首段（当前第4行），CNN应用列举句之后、Therefore引出的CNN建模选择之前。
+修改原因：此处已有CNN用于识别、分割和重建的应用背景，MR分割实例直接承接该主题；用一句话补充smartMRI，控制新增篇幅。
+对应回复要点：简短提及smartMRI及U-Net在MR图像分割中的应用，充实深度学习医学图像应用背景。
+修改范围：仅插入一句；第一段原有文字全部保留，包含此前R1/R2等已经通过的内容。既有黄色高亮保持，新增句已按原有revision机制标黄。
+位置变化：用户已通过引言插入及“例如”措辞，并于2026-11-18明确授权写入及编译。第2节总标题后及第2.1节第三段的旧候选均撤回。第2.2节已通过的综述句保持。
+引用：原始块保留修改前编号，修改后使用smartMRI实际编号[9]；正式实施使用_RefManoila2022SmartMRI引用键，实际编号已通过两版PDF及辅助文件核验。
+
+【原始英文】
+（引言第一段全文）
+Early fundus screening is an effective approach for ocular disease diagnosis, as it can reveal diverse pathological signs in the retina, optic disc, blood vessels, and macular region. Analyzing fundus images helps identify potential lesions and supports early intervention, thereby reducing the risk of irreversible visual impairment or even vision loss. As fundus screening continues to expand, manual fundus screening is limited by its time cost, dependence on expert experience, and shortage of primary medical resources. Fundus-image-based ocular disease diagnosis therefore has important practical value [1]. Existing methods for fundus screening can be broadly grouped into three technical directions: Machine Learning (ML), Vision-Language Model (VLM), and Convolutional Neural Network (CNN). ML methods usually rely on hand-crafted features such as image enhancement, lesion segmentation, texture, or morphology, followed by classifiers such as support vector machines or random forests for recognition [2]. These methods offer a degree of interpretability, but their feature design depends heavily on prior experience and has limited capacity to represent complex fundus lesions and multi-disease co-occurrence. In recent years, VLM has opened new directions for fundus image understanding, image-text joint analysis, and medical report generation [3] [4]. However, their training and fine-tuning generally require large-scale high-quality annotations, paired image-text data, and substantial computational resources, which remain costly when medical data are scarce, privacy is restricted, and clinical deployment resources are limited. In contrast, CNN-based deep visual models can directly learn local textures, lesion regions, and spatial structural features from fundus images, and have been widely applied to disease recognition [5], lesion segmentation [6], medical image reconstruction [7], and diagnosis and prediction of ocular diseases [8]. Therefore, a CNN serves as the main modeling backbone for multi-label ocular disease recognition. Nevertheless, in real-world clinical deployment, CNN-based ocular disease recognition methods still face challenges including multi-disease co-occurrence, degraded generalization performance across institutions, and privacy preservation during cross-institutional deployment. Specifically:
+
+【原始中文】
+（引言第一段全文）
+早期眼底筛查是诊断眼病的有效手段，能够揭示视网膜、视盘、血管和黄斑区域的多种病理征象。分析眼底图像有助于识别潜在病灶并支持早期干预，从而降低不可逆视力损伤甚至失明的风险。随着眼底筛查规模不断扩大，人工眼底筛查受到时间成本、对专家经验的依赖以及基层医疗资源不足等因素的限制。因此，基于眼底图像的眼病诊断具有重要的实际价值［1］。现有眼底筛查方法大致可分为机器学习（ML）、视觉语言模型（VLM）和卷积神经网络（CNN）三个技术方向。ML 方法通常依赖图像增强、病灶分割、纹理或形态学等手工设计特征，再使用支持向量机或随机森林等分类器进行识别［2］。这些方法具有一定的可解释性，但其特征设计高度依赖先验经验，对复杂眼底病灶和多病共现的表征能力有限。近年来，VLM 为眼底图像理解、图文联合分析和医学报告生成开辟了新的方向［3］［4］。然而，这类模型的训练和微调通常需要大规模高质量标注、配对图文数据以及大量计算资源，在医学数据稀缺、隐私受到限制且临床部署资源有限的条件下，这些需求仍然代价较高。相比之下，基于 CNN 的深度视觉模型能够直接从眼底图像中学习局部纹理、病灶区域和空间结构特征，并已广泛应用于疾病识别［5］、病灶分割［6］、医学图像重建［7］以及眼病诊断与预测［8］。因此，本文采用 CNN 作为多标签眼病识别的主要建模骨干。尽管如此，在实际临床部署中，基于 CNN 的眼病识别方法仍面临多病共现、跨机构泛化性能下降以及跨机构部署期间的隐私保护等挑战。具体而言：
+
+【修改后英文】
+（引言第一段全文）
+Early fundus screening is an effective approach for ocular disease diagnosis, as it can reveal diverse pathological signs in the retina, optic disc, blood vessels, and macular region. Analyzing fundus images helps identify potential lesions and supports early intervention, thereby reducing the risk of irreversible visual impairment or even vision loss. As fundus screening continues to expand, manual fundus screening is limited by its time cost, dependence on expert experience, and shortage of primary medical resources. Fundus-image-based ocular disease diagnosis therefore has important practical value [1]. Existing methods for fundus screening can be broadly grouped into three technical directions: Machine Learning (ML), Vision-Language Model (VLM), and Convolutional Neural Network (CNN). ML methods usually rely on hand-crafted features such as image enhancement, lesion segmentation, texture, or morphology, followed by classifiers such as support vector machines or random forests for recognition [2]. These methods offer a degree of interpretability, but their feature design depends heavily on prior experience and has limited capacity to represent complex fundus lesions and multi-disease co-occurrence. In recent years, VLM has opened new directions for fundus image understanding, image-text joint analysis, and medical report generation [3] [4]. However, their training and fine-tuning generally require large-scale high-quality annotations, paired image-text data, and substantial computational resources, which remain costly when medical data are scarce, privacy is restricted, and clinical deployment resources are limited. In contrast, CNN-based deep visual models can directly learn local textures, lesion regions, and spatial structural features from fundus images, and have been widely applied to disease recognition [5], lesion segmentation [6], medical image reconstruction [7], and diagnosis and prediction of ocular diseases [8]. For example, the smartMRI framework of Manoila et al. [9] applies U-Net and its variants to knee-bone segmentation in MR images. Therefore, a CNN serves as the main modeling backbone for multi-label ocular disease recognition. Nevertheless, in real-world clinical deployment, CNN-based ocular disease recognition methods still face challenges including multi-disease co-occurrence, degraded generalization performance across institutions, and privacy preservation during cross-institutional deployment. Specifically:
+
+【修改后中文】
+（引言第一段全文）
+早期眼底筛查是诊断眼病的有效手段，能够揭示视网膜、视盘、血管和黄斑区域的多种病理征象。分析眼底图像有助于识别潜在病灶并支持早期干预，从而降低不可逆视力损伤甚至失明的风险。随着眼底筛查规模不断扩大，人工眼底筛查受到时间成本、对专家经验的依赖以及基层医疗资源不足等因素的限制。因此，基于眼底图像的眼病诊断具有重要的实际价值［1］。现有眼底筛查方法大致可分为机器学习（ML）、视觉语言模型（VLM）和卷积神经网络（CNN）三个技术方向。ML 方法通常依赖图像增强、病灶分割、纹理或形态学等手工设计特征，再使用支持向量机或随机森林等分类器进行识别［2］。这些方法具有一定的可解释性，但其特征设计高度依赖先验经验，对复杂眼底病灶和多病共现的表征能力有限。近年来，VLM 为眼底图像理解、图文联合分析和医学报告生成开辟了新的方向［3］［4］。然而，这类模型的训练和微调通常需要大规模高质量标注、配对图文数据以及大量计算资源，在医学数据稀缺、隐私受到限制且临床部署资源有限的条件下，这些需求仍然代价较高。相比之下，基于 CNN 的深度视觉模型能够直接从眼底图像中学习局部纹理、病灶区域和空间结构特征，并已广泛应用于疾病识别［5］、病灶分割［6］、医学图像重建［7］以及眼病诊断与预测［8］。例如，Manoila 等人［9］的 smartMRI 框架将 U-Net 及其变体用于 MR 图像中的膝骨分割。因此，本文采用 CNN 作为多标签眼病识别的主要建模骨干。尽管如此，在实际临床部署中，基于 CNN 的眼病识别方法仍面临多病共现、跨机构泛化性能下降以及跨机构部署期间的隐私保护等挑战。具体而言：
+
+第三处：参考文献条目与编号联动（已落实）
+
+位置：submit/build/sections/06_references_trans.tex。smartMRI插在修改前第8条之后，现为第9条；Alzubaidi综述插在修改前第23条之后，现为第25条。
+原因及对应回复：两篇新引用需要完整文献信息；按当前已通过的正文首次引用位置调整条目顺序。
+保留范围：修改前58条文献的内容和相对顺序保持，新增2条后共60条；现有1—8不变、9—23加1、24—58加2。
+中文题名为审核释义，正式参考文献保留原英文题名。
+
+【原始英文】
+位置A（引言新增引用对应处）：
+[8] Hasan S M M, Uddin M P, Al Mamun M, et al. A machine learning framework for early-stage detection of autism spectrum disorders. IEEE Access 2022;11: 15038-15057.
+[9] Al-Fahdawi S, Al-Waisy A S, Zeebaree D Q, et al. Fundus-deepnet: Multi-label deep learning classification system for enhanced detection of multiple ocular diseases through data fusion of fundus images. Information Fusion 2024;102: 102059.
+
+位置B（第2.2节新增引用对应处）：
+[23] Guan H, Liu M. Domain adaptation for medical image analysis: a survey. IEEE Transactions on Biomedical Engineering 2021;69(3): 1173-1185.
+[24] Tzeng E, Hoffman J, Zhang N, et al. Deep domain confusion: Maximizing for domain invariance. arXiv preprint arXiv:1412.3474. 2014.
+
+【原始中文】
+位置A：
+［8］Hasan 等：《用于自闭症谱系障碍早期检测的机器学习框架》，IEEE Access，2022；11：15038–15057。
+［9］Al-Fahdawi 等：《Fundus-deepnet：通过眼底图像数据融合增强多种眼病检测的多标签深度学习分类系统》，Information Fusion，2024；102：102059。
+
+位置B：
+［23］Guan、Liu：《医学图像分析中的域适应：综述》，IEEE Transactions on Biomedical Engineering，2021；69(3)：1173–1185。
+［24］Tzeng 等：《深度域混淆：最大化域不变性》，arXiv:1412.3474，2014。
+
+【修改后英文】
+位置A：
+[8] Hasan S M M, Uddin M P, Al Mamun M, et al. A machine learning framework for early-stage detection of autism spectrum disorders. IEEE Access 2022;11: 15038-15057.
+[9] Manoila C P, Ciurea A, Albu F. SmartMRI Framework for Segmentation of MR Images Using Multiple Deep Learning Methods. In: 2022 E-Health and Bioengineering Conference (EHB). IEEE; 2022. p. 1-4. doi:10.1109/EHB55594.2022.9991496.
+[10] Al-Fahdawi S, Al-Waisy A S, Zeebaree D Q, et al. Fundus-deepnet: Multi-label deep learning classification system for enhanced detection of multiple ocular diseases through data fusion of fundus images. Information Fusion 2024;102: 102059.
+
+位置B：
+[24] Guan H, Liu M. Domain adaptation for medical image analysis: a survey. IEEE Transactions on Biomedical Engineering 2021;69(3): 1173-1185.
+[25] Alzubaidi L, Bai J, Al-Sabaawi A, et al. A survey on deep learning tools dealing with data scarcity: definitions, challenges, solutions, tips, and applications. Journal of Big Data 2023;10: 46. doi:10.1186/s40537-023-00727-2.
+[26] Tzeng E, Hoffman J, Zhang N, et al. Deep domain confusion: Maximizing for domain invariance. arXiv preprint arXiv:1412.3474. 2014.
+
+【修改后中文】
+位置A：
+［8］Hasan 等：《用于自闭症谱系障碍早期检测的机器学习框架》，IEEE Access，2022；11：15038–15057。
+［9］Manoila、Ciurea、Albu：《SmartMRI：使用多种深度学习方法进行MR图像分割的框架》，2022年电子健康与生物工程会议（EHB），IEEE，2022，第1–4页。DOI：10.1109/EHB55594.2022.9991496。
+［10］Al-Fahdawi 等：《Fundus-deepnet：通过眼底图像数据融合增强多种眼病检测的多标签深度学习分类系统》，Information Fusion，2024；102：102059。
+
+位置B：
+［24］Guan、Liu：《医学图像分析中的域适应：综述》，IEEE Transactions on Biomedical Engineering，2021；69(3)：1173–1185。
+［25］Alzubaidi 等：《应对数据稀缺的深度学习工具综述：定义、挑战、解决方案、实用建议与应用》，Journal of Big Data，2023；10：文章46。DOI：10.1186/s40537-023-00727-2。
+［26］Tzeng 等：《深度域混淆：最大化域不变性》，arXiv:1412.3474，2014。
+
+整体文字核对：按引言→第2.2节连读，两句分别承担CNN医学图像应用实例和数据稀缺下的泛化背景，保留原有研究问题及DA/DG/SDG递进；不新增段落，不展开smartMRI机制或分割性能。两版PDF已实际检查：新增smartMRI句位于第2页，综述句位于第5页，两条新文献位于第28页；均已目视核对排版、数字引用和高亮。
+编号联动：已按作者和题名更新R2主要1、主要2、主要5、次要2、次要8的最终回复及相应记录。R2主要2末段原[55]经第4.5节现有引用键核实应指Tayebi Arasteh（原58），已纠正，当前该处为[59][60]；各回复论证、数值和表号保持。
+历史方案说明：第2节总标题后集中加段和第2.1节插入smartMRI均已撤回。当前以本文件通过稿与编号方案为准，相关讨论保存在revision_record。
+实施检查：三个论文源文件仅新增两句和两个文献条目；删除这些新增片段后，与实施前原文完全一致。其余正文、表格、原投稿PDF及摘要代码链接保持。高亮版有新增及既有黄色标记，清洁版无黄色标记；60条文献均被引用，无未定义引用。两版除高亮及浮动分页差别外，文字内容一致。核验记录与页面预览位于build/revision/reviewer3_point2_review/。用户已确认最终中文回复及PDF，本点当前中文返修阶段已完成；本次归档范围及检查见同点revision_record，未推送或同步Mac。

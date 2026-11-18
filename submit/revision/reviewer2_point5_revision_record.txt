@@ -124,3 +124,7 @@ reply_zh.txt 的第（1）部分：眼病识别的查看需求—Grad-CAM 的类
 当前唯一回复：sdg_latex/submit/revision/reviewer2_point5_reply_zh.txt。
 本记录：sdg_latex/submit/revision/reviewer2_point5_revision_record.txt。
 仅保存回复/内部记录并更新项目接续索引；未写正文、参考文献、图片、表格或 PDF，未编译、同步 Mac、Git 暂存、提交或推送。
+
+
+2026-11-18：R3意见2新增文献后的引用编号联动
+当前最终中文回复的参考文献编号已按新增smartMRI与Alzubaidi综述后的文献表更新（旧9—23加1，24—58加2），回复论证、数值与章节表号不变。原逐处对照中的历史编号保留；本次编号映射及核验见reviewer3_point2_revision_record.txt。
