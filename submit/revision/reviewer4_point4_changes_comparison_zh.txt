@@ -1,0 +1,61 @@
+审稿人4意见4：第2节相关工作与研究空缺｜逐处审核对照
+
+用户已确认最终中文回复、第2.1、2.2、2.3节三处修改及两版30页修订PDF，本点中文返修定稿。第2.1节介绍Query2Label的句子沿用现稿。下列英文均已写入正文，三处修改在高亮版中累计标黄。
+
+第一处　第2.1节末段
+
+位置：submit/build/sections/02_related_work_trans.tex，第2.1节最后一段。
+原因及对应回复要点：说明源域中已学到的标签—特征关联为什么可能受跨机构成像差异影响，再提出各疾病判别依据能否迁移的问题。
+保留范围：前三句及末句沿用原文，原倒数第二句调整为两句。用户确认按下列版本。
+
+原始英文
+Overall, existing methods have partially addressed label relevance modeling and class imbalance. However, in fundus images with multi-disease co-occurrence, disease relationships are complex and lesion manifestations are often localized. Relying only on disease co-occurrence statistics or generic attention mechanisms may still be insufficient to characterize label-feature relevance reliably. Therefore, adaptive label-feature relevance construction for fundus images remains an important research problem. Building on label relevance modeling, this study couples adaptive label-feature relevance construction with single-source domain-invariant feature learning to address disease co-occurrence and cross-dataset application needs.
+
+原始中文
+总体而言，已有方法在一定程度上解决了标签关联建模和类别不平衡问题。然而，在多种疾病共存的眼底图像中，疾病之间的关系复杂，病变表现往往具有局部性。仅依赖疾病共现统计或通用注意力机制，仍可能难以可靠地刻画标签与特征之间的关联。因此，如何针对眼底图像自适应地构建标签与特征之间的关联，仍是一个重要的研究问题。在标签关联建模的基础上，本文将自适应标签—特征关联构建与单源域不变特征学习相结合，以应对多病共存和跨数据集应用的需求。
+
+修改后英文（已落实，高亮版和清洁版第5页）
+Overall, existing methods have partially addressed label relevance modeling and class imbalance. However, in fundus images with multi-disease co-occurrence, disease relationships are complex and lesion manifestations are often localized. Relying only on disease co-occurrence statistics or generic attention mechanisms may still be insufficient to characterize label-feature relevance reliably. Even when a model learns these associations in the source domain, differences in imaging conditions may alter the visibility of local disease signs, making the visual cues associated with a given label less reliable at another institution. Therefore, an important research question is how a model trained on a single source domain can learn label-feature relationships that remain useful for recognizing each disease across imaging conditions. Building on label relevance modeling, this study couples adaptive label-feature relevance construction with single-source domain-invariant feature learning to address disease co-occurrence and cross-dataset application needs.
+
+修改后中文（对应已落实英文）
+总体而言，已有方法在一定程度上解决了标签关联建模和类别不平衡问题。然而，在多种疾病共存的眼底图像中，疾病之间的关系复杂，病变表现往往具有局部性。仅依赖疾病共现统计或通用注意力机制，仍可能难以可靠地刻画标签与特征之间的关联。即使模型在源域中学到了这些关联，成像条件的差异也可能改变局部疾病征象的可见性，使与某一标签相关的视觉线索在另一机构中难以继续作为可靠的判别依据。因此，一个重要的研究问题是，如何使仅在单一源域上训练的模型学到标签与特征之间的关联，使其在不同成像条件下仍能支持对各疾病的识别。在标签关联建模的基础上，本文将自适应标签—特征关联构建与单源域不变特征学习相结合，以应对多病共存和跨数据集应用的需求。
+
+第二处　第2.2节末段
+
+位置：submit/build/sections/02_related_work_trans.tex，第2.2节原末段之后。
+原因及对应回复要点：从单源训练无法观察目标机构成像变化，引出增强视图、FACT的预测一致性，以及多标签判别依据的稳定性问题，最后说明本文做法。
+保留范围：原末段四句及上文的FACT说明沿用。用户选定以下六句中文新增段，对应英文沿用该版审核对照。
+
+原始英文
+Against this background, Single-Domain Generalization (SDG) is a more constrained generalization setting in which a model is trained using data from a single source domain for application to unseen target domains. Studies on single-source DG in medical images [37] also indicate that mining more stable disease-related features from a single source domain has practical value when multi-institutional data cannot be centrally used. In summary, the assumptions of target-domain accessibility or multi-source collaboration presumed by common cross-domain methods are difficult to satisfy simultaneously in real-world medical scenarios. Therefore, learning transferable disease-related representations from a single source domain is well aligned with the deployment constraints of cross-institutional multi-label ocular disease recognition.
+
+原始中文
+在此背景下，单域泛化（SDG）是一种约束更强的泛化设定，即仅使用一个源域的数据训练模型，并将其应用于未见目标域。医学图像领域的单源域泛化研究［37］也表明，当多机构数据无法集中使用时，从单一源域中挖掘更稳定的疾病相关特征具有实际价值。综上，常见跨域方法对目标域数据可访问性或多源协作的假设，在真实医疗场景中难以同时满足。因此，从单一源域学习可迁移的疾病相关表示，符合跨机构多标签眼病识别的部署约束。
+
+修改后英文（按选定版本已落实，新增段跨两版第5至6页）
+Against this background, Single-Domain Generalization (SDG) is a more constrained generalization setting in which a model is trained using data from a single source domain for application to unseen target domains. Studies on single-source DG in medical images [37] also indicate that mining more stable disease-related features from a single source domain has practical value when multi-institutional data cannot be centrally used. In summary, the assumptions of target-domain accessibility or multi-source collaboration presumed by common cross-domain methods are difficult to satisfy simultaneously in real-world medical scenarios. Therefore, learning transferable disease-related representations from a single source domain is well aligned with the deployment constraints of cross-institutional multi-label ocular disease recognition.
+
+In this setting, images from the target institution are unavailable during training, so the model cannot directly observe how imaging conditions at that institution affect the appearance of disease signs. Augmenting source images offers a way to simulate appearance changes during training. For example, FACT [34] uses Fourier-based augmentation and encourages consistent predictions for the original and augmented images. In multi-label ocular disease recognition, however, similar scores for a given disease in the two views may be based on different visual cues. An important question, therefore, is how to learn features that remain stable under appearance changes while retaining the information needed to recognize each coexisting disease. To this end, our method filters features across the two views, uses disease-label queries to extract discriminative representations from the retained features, and encourages the attention vectors for the same disease label to remain consistent across views.
+
+修改后中文（对应已落实英文）
+在此背景下，单域泛化（SDG）是一种约束更强的泛化设定，即仅使用一个源域的数据训练模型，并将其应用于未见目标域。医学图像领域的单源域泛化研究［37］也表明，当多机构数据无法集中使用时，从单一源域中挖掘更稳定的疾病相关特征具有实际价值。综上，常见跨域方法对目标域数据可访问性或多源协作的假设，在真实医疗场景中难以同时满足。因此，从单一源域学习可迁移的疾病相关表示，符合跨机构多标签眼病识别的部署约束。
+
+在这一设定下，训练时无法获取目标机构的图像，模型因而无法直接观察该机构的成像条件会如何影响疾病征象的呈现。对源域图像进行增强，为训练时模拟外观变化提供了一种途径。例如，FACT［34］采用傅里叶增强，并约束模型对原图与增强图给出一致的预测。然而，在多标签眼病识别中，即使模型在两个视图中对同一疾病给出相近的分数，其判断所依据的视觉线索仍可能不同。因此，一个重要的研究问题是，如何学习在外观变化下保持稳定的特征，同时保留识别各共存疾病所需的判别信息。为此，本文通过双视图特征筛选，以疾病标签为查询从保留的特征中提取判别表示，并约束同一疾病标签的注意力向量在两个视图中保持一致。
+
+第三处　第2.3节末段
+
+位置：submit/build/sections/02_related_work_trans.tex，第2.3节最后一段。
+原因及对应回复要点：按引言先提出减少跨机构患者数据暴露、保护个体训练样本信息与维持识别效用的共同问题，再介绍单源数据隔离和AdaGDP训练信息保护。
+保留范围：前五句沿用现稿；中文收束段经用户认可。已按完整英文审核稿替换原最后两句。
+
+原始英文
+Existing privacy-preserving mechanisms can reduce privacy leakage risk, but they still face additional challenges in domain generalization tasks. Federated learning, homomorphic encryption, and secure multi-party computation often introduce communication, computation, or system-level collaboration costs. Differential privacy is relatively straightforward to deploy, but noise injection may affect model accuracy, and this effect may vary across classes or data distributions [46]. These issues make privacy preservation more challenging under multi-domain generalization. In summary, the privacy sensitivity of medical data further restricts cross-institutional data sharing and makes the aforementioned multi-source collaboration assumption even harder to hold. Therefore, controlling the privacy-performance trade-off during local single-source training is important for cross-institutional multi-label ocular disease recognition. Building on Gaussian gradient perturbation, this study adjusts noise intensity over training to examine this trade-off within the proposed framework.
+
+原始中文
+现有隐私保护机制可以降低隐私泄露风险，但在域泛化任务中仍面临额外挑战。联邦学习、同态加密和安全多方计算通常会带来通信、计算或系统层面的协作成本。差分隐私相对容易部署，但噪声注入可能影响模型准确率，而且这种影响可能因类别或数据分布而异［46］。这些问题使多域泛化条件下的隐私保护更具挑战。综上，医疗数据的隐私敏感性进一步限制了跨机构数据共享，使前述多源协作假设更加难以成立。因此，在本地单源训练中控制隐私与性能之间的权衡，对于跨机构多标签眼病识别十分重要。本文以高斯梯度扰动为基础，在训练过程中调整噪声强度，以考察所提框架中的这一权衡。
+
+修改后英文（已落实，高亮版和清洁版第6页）
+Existing privacy-preserving mechanisms can reduce privacy leakage risk, but they still face additional challenges in domain generalization tasks. Federated learning, homomorphic encryption, and secure multi-party computation often introduce communication, computation, or system-level collaboration costs. Differential privacy is relatively straightforward to deploy, but noise injection may affect model accuracy, and this effect may vary across classes or data distributions [46]. These issues make privacy preservation more challenging under multi-domain generalization. In summary, the privacy sensitivity of medical data further restricts cross-institutional data sharing and makes the aforementioned multi-source collaboration assumption even harder to hold. For cross-institutional multi-label ocular disease recognition, the challenge is therefore to limit patient data exposure by reducing the need for data access and interaction across institutions during cross-domain learning, while protecting information about individual training samples and preserving recognition performance in unseen domains as far as possible. To address this challenge, we first adopt single-source domain generalization and restrict training updates to the available source domain. This data isolation limits exposure by reducing the need to obtain target-institution data for model adaptation or to pool raw images across institutions. Gradients and model parameters from local training may still carry information about source-domain samples. We therefore incorporate AdaGDP into the joint training of DFE and ARC to protect source-domain training information through gradient clipping and scheduled noise injection. We assess how much recognition utility this configuration retains by examining performance alongside the recorded privacy budget.
+
+修改后中文（收束段按用户认可原文）
+现有隐私保护机制可以降低隐私泄露风险，但在域泛化任务中仍面临额外挑战。联邦学习、同态加密和安全多方计算通常会带来通信、计算或系统层面的协作成本。差分隐私相对容易部署，但噪声注入可能影响模型准确率，而且这种影响可能因类别或数据分布而异［46］。这些问题使多域泛化条件下的隐私保护更具挑战。综上，医疗数据的隐私敏感性进一步限制了跨机构数据共享，使前述多源协作假设更加难以成立。因此，对于跨机构多标签眼病识别，一个重要的研究问题是，如何减少跨域学习所需的跨机构数据访问与交互，降低患者数据的暴露风险，同时保护个体训练样本的信息，并尽可能保持模型在未知域中的识别性能。为此，本文首先采用单源域泛化，将训练更新限定于可访问的源域，减少为模型适配而获取目标机构数据或跨机构汇集原始图像的需要，从数据隔离层面降低暴露风险。在此基础上，考虑到本地训练产生的梯度和模型参数仍可能携带源域样本的信息，本文进一步将 AdaGDP 纳入 DFE 与 ARC 的联合训练，通过梯度裁剪和按训练进程调整的噪声保护源域训练信息，并结合隐私预算与识别性能考察这一训练配置下保留的识别效用。
