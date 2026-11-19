@@ -1,0 +1,42 @@
+审稿人 5 意见 2　中英文修改前后对照（两处已落实，最终中文回复及对应正文已通过）
+
+第 4.5 节两处正文均已按通过稿写入，以论文已有参考文献［59］和［49］解释学习率重调和两阶段调度。第二处具体说明［59］与［49］分别支持的判断，并说明 ODIR 参数取值的经验来源。原方案中追加 De 等文献的第三处已撤回。两处均与审稿人 2 主要意见 2 已通过的段落重叠。第 4.2 节、表 10 数据、表 11、图 11 和 e74 的分析沿用现稿。下列原始英文按当前源码展开引用和表号，省略排版宏。2026-11-19 用户先后确认第二处和第一处，授权将两处一并写入并编译两版 PDF。已核对最终两版 PDF 提取的两段英文与下列通过稿逐字一致。
+
+第一处　第 4.5 节第 2 项，表 10 的引入段
+
+位置为 submit/build/sections/04_experiments_trans.tex 第 200 行。当前清洁版 PDF 第 25 页引入，表 10 在第 26 页。现稿已报告八组预算范围、初始噪声乘数及衰减率的含义，末尾新增固定初始乘数的两组比较及其对选取配置的含义。后面两段分别交代关注 ε≈10 的文献背景和第 5 组的预算记录，保持原文。表中第 4/5 组的初始乘数为 0.35，记录 ε 为 9.96/10.15；第 7/8 组为 0.25，记录 ε 为 15.11/20.01。两组比较的衰减率均从 2×10⁻⁶ 到 4×10⁻⁶。结论限于记录的预算。
+
+【原始英文】
+2. Noise configuration and privacy-budget selection. Table 10 summarizes the ε values recorded after 80 epochs for eight combinations of initial noise multiplier and noise decay rate, ranging from 5.01 to 20.01. The initial noise multiplier controls the starting perturbation strength, while the decay rate determines how the noise multiplier changes over training.
+
+【原始中文】
+2. 噪声配置与隐私预算选择。表 10 汇总了八组初始噪声乘数与噪声衰减率组合在训练 80 轮后的 ε 记录值，其范围为 5.01 至 20.01。初始噪声乘数控制训练开始时的扰动强度，衰减率决定噪声乘数在训练过程中如何变化。
+
+【修改后英文】
+2. Noise configuration and privacy-budget selection. Table 10 summarizes the ε values recorded after 80 epochs for eight combinations of initial noise multiplier and noise decay rate, ranging from 5.01 to 20.01. The initial noise multiplier controls the starting perturbation strength, while the decay rate determines how the noise multiplier changes over training. At the same initial multiplier, faster decay corresponded to a higher recorded ε in both comparisons (Settings 4 and 5, and Settings 7 and 8). Both parameters were therefore considered when selecting a configuration near the target budget.
+
+【修改后中文】
+2. 噪声配置与隐私预算选择。表 10 汇总了八组初始噪声乘数与噪声衰减率组合在训练 80 轮后的 ε 记录值，其范围为 5.01 至 20.01。初始噪声乘数控制训练开始时的扰动强度，衰减率决定噪声乘数在训练过程中如何变化。在初始噪声乘数相同的两组比较中（第 4 组与第 5 组、第 7 组与第 8 组），噪声衰减较快的配置均对应较高的 ε 记录值。因此，在选择接近目标预算的配置时，我们同时考虑了这两个参数。
+
+第二处　第 4.5 节第 3 项，两条学习率设置之后的解释段
+
+位置为 submit/build/sections/04_experiments_trans.tex 第 224 行。当前清洁版 PDF 第 25—26 页。上文两条列举给出初始学习率 7.5×10⁻⁵、前 75% 轮次线性衰减至初值的 80%、此后保持。沿用现稿先讨论学习率、再讨论调度的顺序。第一层完整说明 Ponomareva［59］关于学习率重调与裁剪阈值的依据。第二层从第 4.2 节的非隐私调度过渡到隐私训练中的持续扰动与预算消耗，在此交代 Abadi［49］的两阶段调度先例，随后说明同一调度在 ODIR 任务中的设计理由及三个参数的经验来源。下文接现稿对所用配置识别表现的报告。
+
+【原始英文】
+This adjustment is motivated by the differences between privacy-preserving training and non-private training. For the learning rate, gradient clipping limits gradient magnitude, while noise injection perturbs the update direction and introduces additional variability. The learning rate therefore needs to be adjusted together with the perturbation settings. A moderately larger initial learning rate is adopted to provide sufficient step sizes for learning within a finite number of training epochs. For the learning-rate schedule, non-private training usually decreases the learning rate as the model approaches an optimum. Privacy-preserving training also needs to account for ongoing gradient perturbations and cumulative privacy expenditure. The learning rate is therefore first decreased linearly to balance learning progress and update variability, and then kept at an appropriate constant value to sustain learning of disease-discriminative information. This use of a relatively large initial learning rate followed by linear decay and a constant phase is also consistent with the practice reported by Abadi et al. [49] for differentially private training.
+
+【原始中文】
+这一调整源于隐私训练与非隐私训练之间的差异。就学习率而言，梯度裁剪限制了梯度幅度，噪声注入则扰动更新方向并引入额外波动。因此，学习率需要结合扰动设置进行调整。本文采用较大的初始学习率，以便在有限的训练轮次内保持足够的更新步长。就学习率调度而言，非隐私训练通常会在模型接近最优解时降低学习率。隐私训练还需要考虑持续的梯度扰动和累计隐私预算消耗。因此，本文先线性降低学习率，以兼顾学习进展与更新波动，再将其保持在适当的恒定值，以持续学习疾病判别信息。采用较大的初始学习率、先线性衰减再保持恒定的做法，也与 Abadi 等［49］报告的差分隐私训练实践一致。
+
+【修改后英文】
+This adjustment is motivated by the differences between privacy-preserving training and non-private training. For the learning rate, gradient clipping limits gradient magnitude, while noise injection perturbs the update direction and introduces additional variability. Ponomareva et al. [59] recommend retuning the learning rate when using a private optimizer and discuss how its choice depends on the clipping threshold. A moderately larger initial learning rate is adopted to provide sufficient step sizes for learning within a finite number of training epochs. For the learning-rate schedule, the non-private configuration in Section 4.2 reduces the learning rate after warm-up. Privacy-preserving training also needs to account for ongoing gradient perturbations and cumulative privacy expenditure. In their differentially private training experiments, Abadi et al. [49] started with a relatively high learning rate, reduced it linearly, and then held it constant. The ODIR experiments use this schedule to balance learning progress and update variability during the initial decay phase and to sustain learning of disease-discriminative features during the constant phase. The initial learning rate, the number of epochs of linear decay, and the final rate as a fraction of the initial rate were chosen based on our training experience with ODIR.
+
+【修改后中文】
+这一调整源于隐私训练与非隐私训练之间的差异。就学习率而言，梯度裁剪限制了梯度幅度，噪声注入则扰动更新方向并引入额外波动。Ponomareva 等［59］建议在采用隐私优化器时重新调整学习率，并讨论了学习率的选择如何受到裁剪阈值的影响。本文采用较大的初始学习率，以便在有限的训练轮次内保持足够的更新步长。就学习率调度而言，第 4.2 节的非隐私训练在预热后逐步降低学习率。隐私训练还需要考虑持续的梯度扰动和累计隐私预算消耗。Abadi 等［49］在其差分隐私训练实验中采用较大的初始学习率，先线性降低，再保持恒定。本文在 ODIR 任务中采用这一调度形式，前期通过线性衰减兼顾学习进展与更新波动，后期保持恒定学习率以持续学习疾病判别特征。初始学习率、线性衰减持续的轮数以及最终学习率占初始学习率的比例，均根据我们在 ODIR 任务中的训练经验设定。
+
+本轮文献核对
+Ponomareva 等，第 5.4.1 节，改用隐私优化器后重调学习率及其与裁剪阈值的关系。https://arxiv.org/html/2303.00654v3#S5.SS4.SSS1
+Abadi 等，在差分隐私训练中从较大初值线性降低学习率，随后保持恒定。https://arxiv.org/pdf/1607.00133#page=5
+De 等在其差分隐私图像分类实验中采用全程恒定学习率，本段采用的两阶段形式已有 Abadi 直接支撑。https://arxiv.org/html/2204.13650v2#S3.SS1
+
+两处文字均已通过并落实。高亮版与清洁版均为 30 页，第一处在第 25 页，第二处跨第 25、26 页；两版表 10 均在第 26 页。已核对全部八组数据、两处正文引文和文末 60 条文献编号，已目视检查两版相关页面。中文回复已补入两处实际修改位置，用户已于 2026-11-19 确认最终中文回复和对应论文修改。详细核验见 reviewer5_point2_revision_record.txt。
