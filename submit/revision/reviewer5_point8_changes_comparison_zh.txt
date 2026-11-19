@@ -1,0 +1,68 @@
+审稿人 5 意见 8｜方法部分两处修改对照
+2026-11-19，两处论文修改与最终中文回复均获用户确认，本点中文返修已完成。
+
+一、第 3.1 节 CAM 来源段。具体文字已通过并写入论文，两版 PDF 已核验。
+本处仅调整生成 CAM 的 ResNet50 基线模型所用的训练损失。
+
+原始英文
+To this end, the framework incorporates the class feature guidance module shown in Fig. 2.b to improve the disease relevance and interpretability of features. A CAM guidance map is generated on the training set in advance using the baseline model, namely ResNet50 with BCE loss. The CAM guidance map highlights the regions attended by the model for different diseases; for example, Diabetic Retinopathy (DR) mainly corresponds to vascular regions, whereas Age-Related Macular Degeneration (AMD) mainly corresponds to the macular region. For a target class \(c\), it is calculated as follows:
+
+原始中文
+为此，该框架引入了图 2.b 所示的类别特征引导模块，以提高特征与疾病的相关性及特征的可解释性。训练集上的 CAM 引导图由基线模型预先生成，该基线模型为采用二元交叉熵（BCE）损失的 ResNet50。CAM 引导图突出显示模型针对不同疾病所关注的区域。例如，糖尿病视网膜病变（DR）主要对应血管区域，而年龄相关性黄斑变性（AMD）主要对应黄斑区域。对于目标类别 \(c\)，其 CAM 引导图的计算方式如下：
+
+修改后英文
+To this end, the framework incorporates the class feature guidance module shown in Fig. 2.b to improve the disease relevance and interpretability of features. A CAM guidance map is generated on the training set in advance using the baseline model, namely ResNet50 trained with asymmetric loss (ASL). The CAM guidance map highlights the regions attended by the model for different diseases; for example, Diabetic Retinopathy (DR) mainly corresponds to vascular regions, whereas Age-Related Macular Degeneration (AMD) mainly corresponds to the macular region. For a target class \(c\), it is calculated as follows:
+
+修改后中文
+为此，该框架引入了图 2.b 所示的类别特征引导模块，以提高特征与疾病的相关性及特征的可解释性。训练集上的 CAM 引导图由基线模型预先生成，该基线模型为使用非对称损失（ASL）训练的 ResNet50。CAM 引导图突出显示模型针对不同疾病所关注的区域。例如，糖尿病视网膜病变（DR）主要对应血管区域，而年龄相关性黄斑变性（AMD）主要对应黄斑区域。对于目标类别 \(c\)，其 CAM 引导图的计算方式如下：
+
+二、第 3.2 节分类器段、公式（10）及其后联合目标段。用户选定的分支索引 v 版本已写入论文，公式、完整段落及两版 PDF 已核验。
+以实际训练的 ASL 替换普通 BCE，说明两分支的标签监督、聚焦参数、批内平均与缩放，以及每个阳性标签和易判阴性标签的贡献。保留分类器和联合目标原文。
+
+原始英文
+Finally, the attention vectors are fed into the multi-label classifier. LayerNorm and Dropout are first applied to the class query features for lightweight feature enhancement, normalization, and regularization. Class-wise linear transformations are then used to obtain logits for each class. After Sigmoid activation, the prediction probabilities \(p^{ori}\) are obtained for each class, and \(p^{aug}\) is obtained in the same way. The classification loss uses binary cross entropy (BCE):
+
+\[
+L_{cls}^{ori}=-\frac{1}{8}\sum_{k=1}^{8}
+\left[y_k\log p_k^{ori}+(1-y_k)\log(1-p_k^{ori})\right],
+\tag{10}
+\]
+
+The total loss is \(L = L_{cls}^{ori} + L_{cls}^{aug} + \lambda L_{consist}\), where \(\lambda\) is a hyperparameter that balances the consistency term. The classification and consistency losses jointly optimize the representations of the two branches, connecting feature filtering and disease-label learning through a shared training objective and combining representation stability under appearance perturbations with multi-label discrimination.
+
+原始中文
+最后，将注意力向量输入多标签分类器。首先对类别查询特征应用 LayerNorm 和 Dropout，进行轻量级特征增强、归一化和正则化。随后，通过逐类别线性变换得到各类别的 logits。经过 Sigmoid 激活后，得到原图分支对各类别的预测概率 \(p^{ori}\)，增强图分支的预测概率 \(p^{aug}\) 以相同方式得到。分类损失采用二元交叉熵（BCE）：
+
+\[
+L_{cls}^{ori}=-\frac{1}{8}\sum_{k=1}^{8}
+\left[y_k\log p_k^{ori}+(1-y_k)\log(1-p_k^{ori})\right],
+\tag{10}
+\]
+
+总损失为 \(L = L_{cls}^{ori} + L_{cls}^{aug} + \lambda L_{consist}\)，其中 \(\lambda\) 是调节一致性项权重的超参数。分类损失和一致性损失共同优化两个分支的表示，通过共享的训练目标连接特征筛选与疾病标签学习，将外观扰动下的表示稳定性与多标签判别结合起来。
+
+修改后英文
+Finally, the attention vectors are fed into the multi-label classifier. LayerNorm and Dropout are first applied to the class query features for lightweight feature enhancement, normalization, and regularization. Class-wise linear transformations are then used to obtain logits for each class. After Sigmoid activation, the prediction probabilities \(p^{ori}\) are obtained for each class, and \(p^{aug}\) is obtained in the same way. Both branches use asymmetric loss (ASL) [19] with positive and negative focusing parameters of \(\gamma_{+}=0\) and \(\gamma_{-}=2\), respectively, and with negative probability shifting disabled. For each branch \(v\in\{\mathrm{ori},\mathrm{aug}\}\), the classification loss is averaged over the \(B\) images in a batch and the \(N=8\) labels, then scaled by 1000:
+
+\[
+L_{cls}^{v}=-\frac{1000}{BN}\sum_{i=1}^{B}\sum_{k=1}^{N}
+\left[y_{ik}\log p_{ik}^{v}+(1-y_{ik})(p_{ik}^{v})^{2}\log(1-p_{ik}^{v})\right].
+\tag{10}
+\]
+
+Here, \(y_{ik}\) is the binary target for label \(k\) in image \(i\), and \(p_{ik}^{v}\) is its predicted probability in branch \(v\). Each logarithm is evaluated with its argument bounded below by \(10^{-5}\) for numerical stability. When multiple diseases co-occur, each positive label retains a focusing weight of 1. For a negative label, the weight \((p_{ik}^{v})^{2}\) reduces its loss contribution when the predicted probability of disease is low.
+
+The total loss is \(L = L_{cls}^{ori} + L_{cls}^{aug} + \lambda L_{consist}\), where \(\lambda\) is a hyperparameter that balances the consistency term. The classification and consistency losses jointly optimize the representations of the two branches, connecting feature filtering and disease-label learning through a shared training objective and combining representation stability under appearance perturbations with multi-label discrimination.
+
+修改后中文
+最后，将注意力向量输入多标签分类器。首先对类别查询特征应用 LayerNorm 和 Dropout，进行轻量级特征增强、归一化和正则化。随后，通过逐类别线性变换得到各类别的 logits。经过 Sigmoid 激活后，得到原图分支对各类别的预测概率 \(p^{ori}\)，增强图分支的预测概率 \(p^{aug}\) 以相同方式得到。两个分支均采用非对称损失（ASL）［19］，正、负标签的聚焦参数分别设为 \(\gamma_{+}=0\) 和 \(\gamma_{-}=2\)，并关闭负类概率平移。对于每个分支 \(v\in\{\mathrm{ori},\mathrm{aug}\}\)，分类损失先对批内 \(B\) 张图像及 \(N=8\) 个标签取平均，再乘以 1000：
+
+\[
+L_{cls}^{v}=-\frac{1000}{BN}\sum_{i=1}^{B}\sum_{k=1}^{N}
+\left[y_{ik}\log p_{ik}^{v}+(1-y_{ik})(p_{ik}^{v})^{2}\log(1-p_{ik}^{v})\right].
+\tag{10}
+\]
+
+其中，\(y_{ik}\) 表示第 \(i\) 张图像第 \(k\) 个标签的二元真值，\(p_{ik}^{v}\) 表示分支 \(v\) 对该标签的预测阳性概率。为保证数值稳定性，计算对数时将其自变量的下限设为 \(10^{-5}\)。当多种疾病共现时，每个阳性标签的聚焦权重均为 1。对于阴性标签，若模型预测该疾病存在的概率较低，权重 \((p_{ik}^{v})^{2}\) 就会降低该标签对损失的贡献。
+
+总损失为 \(L = L_{cls}^{ori} + L_{cls}^{aug} + \lambda L_{consist}\)，其中 \(\lambda\) 是调节一致性项权重的超参数。分类损失和一致性损失共同优化两个分支的表示，通过共享的训练目标连接特征筛选与疾病标签学习，将外观扰动下的表示稳定性与多标签判别结合起来。

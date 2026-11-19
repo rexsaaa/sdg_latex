@@ -18,7 +18,7 @@ To address these issues, this study does not treat multi-disease co-occurrence a
 
 First, as shown in \hyperref[fig:method-framework]{Fig.~\ref*{fig:method-framework}.a}, both \(I^{ori}\) and \(I^{aug}\) are fed into the backbone network to extract features \(F^{ori}\) and \(F^{aug}\). Let \(F^{ori} \in \mathbb{R}^{C \times H \times W}\) and \(F^{aug} \in \mathbb{R}^{C \times H \times W}\), where \(C\), \(H\), and \(W\) denote the number of channels, height, and width of the final feature map of the backbone network, respectively. ResNet50 \cite{_RefResNet2016} is selected as the backbone because it performs well in image recognition tasks and offers good feature extraction capability and computational efficiency. However, relying only on contrastive constraints between original and augmented source-domain images remains limited. The model may still learn domain-specific noise such as background textures, illumination variations, or image-edge artifacts, which can affect multi-label ocular disease recognition on unseen domains.
 
-\revision{To this end, the framework incorporates the class feature guidance module} shown in \hyperref[fig:method-framework]{Fig.~\ref*{fig:method-framework}.b} to improve the disease relevance and interpretability of features. A CAM guidance map is generated on the training set in advance using the baseline model, namely ResNet50 with BCE loss. The CAM guidance map highlights the regions attended by the model for different diseases; for example, Diabetic Retinopathy (DR) mainly corresponds to vascular regions, whereas Age-Related Macular Degeneration (AMD) mainly corresponds to the macular region. For a target class \(c\), it is calculated as follows:
+\revision{To this end, the framework incorporates the class feature guidance module} shown in \hyperref[fig:method-framework]{Fig.~\ref*{fig:method-framework}.b} to improve the disease relevance and interpretability of features. A CAM guidance map is generated on the training set in advance using the baseline model, namely ResNet50 \revision{trained with asymmetric loss (ASL)}. The CAM guidance map highlights the regions attended by the model for different diseases; for example, Diabetic Retinopathy (DR) mainly corresponds to vascular regions, whereas Age-Related Macular Degeneration (AMD) mainly corresponds to the macular region. For a target class \(c\), it is calculated as follows:
 
 \begin{equation}\label{eq:cam}
 I^{cam,c} = \operatorname{ReLU}\left(\sum_{k = 1}^{C}\omega_{k}^{c} \cdot A_{k}\right),
@@ -92,11 +92,23 @@ L_{consist} = \frac{1}{N \cdot d}\sum_{k = 1}^{N}\sum_{j = 1}^{d}
 
 Here, \(N = 8\) is the number of labels and \revision{$d = 2048$} is the embedding dimension. Softmax normalizes attention vectors into comparable distribution forms. The attention consistency loss improves model stability under domain shift by minimizing differences between normalized attention features of the two branches.
 
-Finally, the attention vectors are fed into the multi-label classifier. LayerNorm and Dropout are first applied to the class query features for lightweight feature enhancement, normalization, and regularization. Class-wise linear transformations are then used to obtain logits for each class. After Sigmoid activation, the prediction probabilities \(p^{ori}\) are obtained for each class, and \(p^{aug}\) is obtained in the same way. The classification loss uses binary cross entropy (BCE):
+Finally, the attention vectors are fed into the multi-label classifier. LayerNorm and Dropout are first applied to the class query features for lightweight feature enhancement, normalization, and regularization. Class-wise linear transformations are then used to obtain logits for each class. After Sigmoid activation, the prediction probabilities \(p^{ori}\) are obtained for each class, and \(p^{aug}\) is obtained in the same way. \revision{Both branches use asymmetric loss (ASL) \mbox{\cite{_Ref213949927}} with positive and negative focusing parameters of \mbox{$\gamma_{+}=0$ and $\gamma_{-}=2$}, respectively, and with negative probability shifting disabled. For each branch $v\in\{\mathrm{ori},\mathrm{aug}\}$, the classification loss is averaged over the $B$ images in a batch and the $N=8$ labels, then scaled by 1000:}
 
 \begin{equation}\label{eq:cls-loss}
-L_{cls}^{ori} = - \frac{1}{8}\sum_{k = 1}^{8}{\lbrack y_{k}\log p_{k}^{ori} + (1 - y_{k})\log(1 - p_{k}^{ori})\rbrack},
+\begingroup
+\ifshowrevisions
+  \setlength{\fboxsep}{2pt}\def\asleqbox{\colorbox{yellow}}
+\else
+  \let\asleqbox\mbox
+\fi
+\asleqbox{$\displaystyle
+L_{cls}^{v}=-\frac{1000}{BN}\sum_{i=1}^{B}\sum_{k=1}^{N}
+\left[y_{ik}\log p_{ik}^{v}+(1-y_{ik})(p_{ik}^{v})^{2}\log(1-p_{ik}^{v})\right].
+$}
+\endgroup
 \end{equation}
+
+\revision{Here, $y_{ik}$ is the binary target for label $k$ in image $i$, and $p_{ik}^{v}$ is its predicted probability in branch $v$. Each logarithm is evaluated with its argument bounded below by $10^{-5}$ for numerical stability. When multiple diseases co-occur, each positive label retains a focusing weight of 1. For a negative label, the weight $(p_{ik}^{v})^{2}$ reduces its loss contribution when the predicted probability of disease is low.}
 
 The total loss is \(L = L_{cls}^{ori} + L_{cls}^{aug} + \lambda L_{consist}\), where \(\lambda\) is a hyperparameter that balances the consistency term. \revision{The classification and consistency losses jointly optimize the representations of the two branches, connecting feature filtering and disease-label learning through a shared training objective and combining representation stability under appearance perturbations with multi-label discrimination.}
 
