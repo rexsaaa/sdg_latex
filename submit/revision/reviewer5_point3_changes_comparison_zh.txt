@@ -1,0 +1,17 @@
+审稿人 5 意见 3｜第 3.3 节修改对照
+状态：本处中英文对照已获用户确认，英文已落实。
+
+位置与理由
+第 3.3 节，样本级差分隐私定义公式之后、梯度裁剪公式之前的解释段，sections/03_method_trans.tex 第 120 行。将原段第三句扩为两句，明确任务的目标 ε、固定 δ 及各检查点累计 ε 估计的来源。前两句解释形式定义，段末原句引出梯度裁剪公式；第 4.5 节表 11 和表 12 承接检查点选择和最终双眼结果。
+
+原始英文
+Here, ε controls the multiplicative bound on output probabilities, while δ is the additive relaxation term. Under the same adjacency definition and δ, a smaller ε specifies a tighter privacy constraint. The privacy experiments in this study use δ = 10⁻⁵ and report cumulative ε values alongside recognition performance. Under the DP-SGD framework, the per-sample gradient g is first clipped by its L2 norm at each iteration:
+
+原始中文
+其中，ε 控制输出概率的乘性界限，δ 为加性放宽项。在邻接关系定义和 δ 相同的条件下，较小的 ε 对应更严格的隐私约束。本文的隐私实验采用 δ＝10⁻⁵，并同时报告累计 ε 值和识别性能。在 DP-SGD 框架下，每次迭代首先按 L2 范数对逐样本梯度 g 进行裁剪：
+
+修改后英文
+Here, ε controls the multiplicative bound on output probabilities, while δ is the additive relaxation term. Under the same adjacency definition and δ, a smaller ε specifies a tighter privacy constraint. In our privacy experiments, we set a target privacy budget of ε = 10 and fix δ at 10⁻⁵. We estimate cumulative privacy loss using the sampling rate and the noise multiplier at each training step, and report the resulting ε estimate alongside recognition performance at each evaluated checkpoint. Under the DP-SGD framework, the per-sample gradient g is first clipped by its L2 norm at each iteration:
+
+修改后中文
+其中，ε 控制输出概率的乘性界限，δ 为加性放宽项。在邻接关系定义和 δ 相同的条件下，较小的 ε 对应更严格的隐私约束。在隐私实验中，我们将目标隐私预算设为 ε＝10，并将 δ 固定为 10⁻⁵。我们根据采样率和每个训练步的噪声乘数估计累计隐私损耗，并在评估各检查点时，同时报告相应的 ε 估计值和识别性能。在 DP-SGD 框架下，每次迭代首先按 L2 范数对逐样本梯度 g 进行裁剪：

@@ -117,7 +117,7 @@ The total loss is \(L = L_{cls}^{ori} + L_{cls}^{aug} + \lambda L_{consist}\), w
 \Pr\lbrack M(D) \in S\rbrack \leq e^{\epsilon}\Pr\lbrack M(D') \in S\rbrack + \delta,
 \end{equation}
 
-\revision{Here, $\epsilon$ controls the multiplicative bound on output probabilities, while $\delta$ is the additive relaxation term. Under the same adjacency definition and $\delta$, a smaller $\epsilon$ specifies a tighter privacy constraint. The privacy experiments in this study use $\delta=10^{-5}$ and report cumulative $\epsilon$ values alongside recognition performance.} Under the DP-SGD framework, the per-sample gradient \(g\) is first clipped by its L2 norm at each iteration:
+\revision{Here, $\epsilon$ controls the multiplicative bound on output probabilities, while $\delta$ is the additive relaxation term. Under the same adjacency definition and $\delta$, a smaller $\epsilon$ specifies a tighter privacy constraint. In our privacy experiments, we set a target privacy budget of $\epsilon=10$ and fix $\delta$ at $10^{-5}$. We estimate cumulative privacy loss using the sampling rate and the noise multiplier at each training step, and report the resulting $\epsilon$ estimate alongside recognition performance at each evaluated checkpoint.} Under the DP-SGD framework, the per-sample gradient \(g\) is first clipped by its L2 norm at each iteration:
 
 \begin{equation}\label{eq:gradient-clip}
 g' = g/max(1, \parallel g \parallel_{2}/C),
