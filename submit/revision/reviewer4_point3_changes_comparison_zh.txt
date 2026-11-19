@@ -1,0 +1,36 @@
+审稿人4意见3　图1与DFE设计动机的修改对照
+
+2026-11-20，用户确认最终中文回复与对应论文修改。本点中文返修已完成。当前累计稿两版各31页，第3页图1图注与通过稿一致。
+
+第一处　第1节图1图注
+状态：用户已通过以下中英文图注并授权实施。英文已写入论文，两版修订PDF第3页的图注与通过稿逐字核对一致。
+位置：submit/build/sections/01_introduction_trans.tex，fig:intro-domain-gap。
+修改理由：明确b1、c1两条边界的训练视图来源，以及b2、c2将各自边界用于a3中同一批目标样本时的图示结果。保留原图、概念示意定位和此前通过的设计目标措辞。
+
+原始英文
+Schematic illustration of the decision boundaries of a conventional model and a dual-branch model under domain shift. (a) shows the distribution relationship among original source-domain images (training set), augmented source-domain images, and the target domain (test set), where augmented source-domain images are used to simulate possible distribution shifts in the target domain. (b) When the model is trained only with original source-domain images, the learned decision boundary may not fit the target domain and can therefore cause classification errors on target-domain samples. (c) By constructing a dual-branch structure with original and augmented source-domain images and incorporating contrastive learning with CAM guidance, the model aims to learn transferable disease-related features and a decision boundary that is more applicable to unseen domains.
+
+原始中文
+域偏移下常规模型与双分支模型的决策边界示意图。(a) 展示原始源域图像（训练集）、增强源域图像与目标域（测试集）之间的分布关系，其中增强源域图像用于模拟目标域中可能出现的分布偏移。(b) 当模型仅使用原始源域图像训练时，学到的决策边界可能不适用于目标域，因此可能导致目标域样本的分类错误。(c) 通过使用原始源域图像和增强源域图像构建双分支结构，并结合 CAM 引导的对比学习，模型旨在学习可迁移的疾病相关特征，以及更适用于未见域的决策边界。
+
+修改后英文（已通过）
+Schematic illustration of the decision boundaries of a conventional model and a dual-branch model under domain shift. Panels (a1)–(a3) show the distributions of original source images, their style-augmented views, and images from the unseen target domain, respectively. In (b1), the conventional model learns a boundary that separates the two classes using only the original source images in (a1). In (b2), this boundary misclassifies some of the target samples from (a3). In (c1), the dual-branch model learns a boundary from both (a1) and (a2) that separates the two classes across the original and augmented source views. In (c2), this boundary also separates the two classes for the same target samples from (a3). By combining the two source views with CAM guidance and contrastive learning, the model aims to learn transferable disease-related features and a decision boundary that is more applicable to unseen domains.
+
+修改后中文（已通过）
+域偏移下常规模型与双分支模型的决策边界示意图。(a1)–(a3) 分别展示原始源域图像、其风格增强视图以及未见目标域图像的分布。在 (b1) 中，常规模型仅利用 (a1) 中的原始源域图像，学到一条能够分开两个类别的决策边界。在 (b2) 中，将这条边界用于 (a3) 中的目标样本时，部分样本被错误分类。在 (c1) 中，双分支模型利用 (a1) 和 (a2) 共同学习决策边界，该边界在原始和增强两种源域视图中均能分开两个类别。在 (c2) 中，将这条边界用于 (a3) 中的同一批目标样本时，仍能分开两个类别。通过结合两种源域视图、CAM 引导和对比学习，模型旨在学习可迁移的疾病相关特征，以及更适用于未见域的决策边界。
+
+第二处　第1节框架总述后、隐私方案前的DFE介绍
+审核决定：用户确认本处保留修改前的完整DFE段落，包括分别引用c1和c2的原句。ARC与DFE继续分段。本点实际写入论文的修改仅为第一处图1图注。
+位置及理由：DFE段的倒数第二句分别引出c1与c2，便于逐图阅读。此前讨论的新增特征比较句及两种原句替换方案均撤回。R2次要意见5的合段仍按原安排暂缓。
+
+保留的现稿英文
+To learn representations that transfer across imaging conditions, the framework includes a Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) module. This module is trained using only a single source domain and constructs a dual-branch structure from original source-domain images and style-disturbed augmented source-domain images, as shown in Fig. 1.a1 and Fig. 1.a2, to learn their shared representations at the feature level. Meanwhile, Class Activation Mapping (CAM) is introduced as prior guidance to encourage the model to focus on disease-related regions and suppress the learning of domain-specific noise. This enables the model to form a decision boundary that is more suitable for unseen-domain distributions (Fig. 1.c1) and to maintain stable recognition performance on unseen domains (Fig. 1.c2). In addition, CAM visualizes model-attended regions and enhances model interpretability.
+
+保留的现稿中文
+为学习能够跨成像条件迁移的表示，框架引入双分支引导的域不变特征提取（DFE）模块。该模块仅使用单一源域进行训练，并利用原始源域图像及经过风格扰动的增强源域图像构建双分支结构，如图1.a1和图1.a2所示，以在特征层面学习两者共享的表示。同时，引入类激活映射（CAM）作为先验引导，促使模型关注疾病相关区域，并抑制对域特定噪声的学习。这使模型能够形成更适合未见域分布的决策边界（图1.c1），并在未见域上保持稳定的识别性能（图1.c2）。此外，CAM将模型关注的区域可视化，增强模型的可解释性。
+
+历史候选英文（已撤回）
+To learn representations that transfer across imaging conditions, the framework includes a Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) module. This module is trained using only a single source domain and constructs a dual-branch structure from original source-domain images and style-disturbed augmented source-domain images, as shown in Fig. 1.a1 and Fig. 1.a2, to learn their shared representations at the feature level. Meanwhile, Class Activation Mapping (CAM) is introduced as prior guidance to encourage the model to focus on disease-related regions and suppress the learning of domain-specific noise. This design aims to learn decision boundaries that remain effective on unseen domains, as illustrated in Fig. 1.c1–c2. In addition, CAM visualizes model-attended regions and enhances model interpretability.
+
+历史候选中文（已撤回）
+为学习能够跨成像条件迁移的表示，框架引入双分支引导的域不变特征提取（DFE）模块。该模块仅使用单一源域进行训练，并利用原始源域图像及经过风格扰动的增强源域图像构建双分支结构，如图1.a1和图1.a2所示，以在特征层面学习两者共享的表示。同时，引入类激活映射（CAM）作为先验引导，促使模型关注疾病相关区域，并抑制对域特定噪声的学习。这一设计旨在学习对未见域仍然有效的决策边界，如图1.c1–c2所示。此外，CAM将模型关注的区域可视化，增强模型的可解释性。
