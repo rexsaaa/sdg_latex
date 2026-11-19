@@ -1,0 +1,23 @@
+审稿人 4 意见 6　已通过的中英对照
+2026-11-19　中文返修已完成。正文已按通过稿落实，最终中文回复已获用户确认，图 7 图例校正后的两版 PDF 已核验归档。
+
+位置与上下文
+第 4.3 节表 3 和图 7 的结果分析段，位于 Ou 等方法介绍之后、表 3 之前。下文从 ODIR 域内识别转入跨数据集泛化与隐私保护实验。
+
+修改范围和理由
+在引出图表后补充与 Li 等、Gour 和 Khanna 及 He 等三种方法的分项比较。将与 Ou 等的分项比较从 Off-site 扩展到 On-site，给出两组 Kappa 增益，解释其与 F1、AUC 差距及 Final 的关系。既有 Kappa 解释、综合得分及优势结论保留。表 7 与表 12 的既有结果用于回复的补充解释。
+
+图 7 图内图例（后续单独通过的编号校正）
+Li et al. [46] → [51]，Gour & Khanna [49] → [54]，He et al. [20] → [12]，Ou et al. [50] → [55]。已核对两版 PDF 中的表 3。
+
+原始英文
+Table 3 and Fig. 7 compare binocular metrics on the Off-site test and On-site test sets. The proposed method achieves a Final score of 78.85 on Off-site, outperforming Ou et al. [55] by 0.85, and achieves 77.49 on On-site, outperforming Ou et al. [55] by 0.79. On Off-site, the proposed method achieves higher Kappa, whereas Ou et al. [55] obtain slightly higher F1 and AUC. The Kappa gain reflects greater chance-corrected agreement between predictions and ground-truth labels and drives the improvement in Final under the ODIR evaluation protocol. Overall, the proposed method achieves the highest Final scores among the compared methods on both test sets, demonstrating superior overall recognition performance under the ODIR evaluation protocol.
+
+原始中文
+表 3 和图 7 比较了 Off-site 与 On-site 测试集上的双眼评价指标。本文方法在 Off-site 上的 Final 得分为 78.85，比 Ou 等人的方法［55］高 0.85 分，在 On-site 上的得分为 77.49，比 Ou 等人的方法［55］高 0.79 分。在 Off-site 上，本文方法的 Kappa 更高，而 Ou 等人的方法［55］在 F1 和 AUC 上略高。Kappa 的提升体现了预测结果与真实标签之间更高的机会校正一致性，并带动了 ODIR 评价规则下 Final 得分的提高。总体而言，本文方法在两个测试集上均取得了所比较方法中最高的 Final 得分，表明其在 ODIR 评价体系下具有更优的综合识别性能。
+
+修改后英文（已通过并落实）
+Table 3 and Fig. 7 compare binocular metrics on the Off-site test and On-site test sets. On both test sets, the proposed method achieves higher Kappa, F1, and AUC scores than those reported by Li et al. [51], Gour and Khanna [54], and He et al. [12]. The proposed method achieves a Final score of 78.85 on Off-site, outperforming Ou et al. [55] by 0.85, and achieves 77.49 on On-site, outperforming Ou et al. [55] by 0.79. Relative to Ou et al. [55], the proposed method gains 3.55 points in Kappa on Off-site and 2.73 points on On-site, more than offsetting its slightly lower F1 and AUC scores on each test set. The Kappa gain reflects greater chance-corrected agreement between predictions and ground-truth labels and drives the improvement in Final under the ODIR evaluation protocol. Overall, the proposed method achieves the highest Final scores among the compared methods on both test sets, demonstrating superior overall recognition performance under the ODIR evaluation protocol.
+
+修改后中文（通过稿对应译文）
+表 3 和图 7 比较了 Off-site 与 On-site 测试集上的双眼评价指标。 在两个测试集上，本文方法的 Kappa、F1 和 AUC 均高于 Li 等［51］、Gour 和 Khanna［54］以及 He 等［12］报告的结果。 本文方法在 Off-site 上的 Final 得分为 78.85，比 Ou 等人的方法［55］高 0.85 分，在 On-site 上的得分为 77.49，比 Ou 等人的方法［55］高 0.79 分。 与 Ou 等人的方法［55］相比，本文方法在 Off-site 和 On-site 上的 Kappa 分别高出 3.55 分和 2.73 分，在两个测试集上，这一增益均超过了 F1 和 AUC 两项指标的小幅差距之和。 Kappa 的提升体现了预测结果与真实标签之间更高的机会校正一致性，并带动了 ODIR 评价规则下 Final 得分的提高。总体而言，本文方法在两个测试集上均取得了所比较方法中最高的 Final 得分，表明其在 ODIR 评价体系下具有更优的综合识别性能。

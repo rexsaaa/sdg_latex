@@ -11,7 +11,7 @@ import matplotlib as mpl
 import numpy as np
 
 # ---- Data from Table 7 (SOTA comparison) ----
-methods = ["Li et al. [46]", "Gour & Khanna [49]", "He et al. [20]", "Ou et al. [50]", "Ours"]
+methods = ["Li et al. [51]", "Gour & Khanna [54]", "He et al. [12]", "Ou et al. [55]", "Ours"]
 metrics = ["Kappa", "F1", "AUC", "Final"]
 offsite = np.array([
     [35.45, 84.83, 83.72, 68.00],
