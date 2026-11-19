@@ -1,0 +1,24 @@
+\begin{table}[pos=H]
+\centering
+\caption{\protect\revision{Class-wise false positive and false negative rates in eyes with co-occurring diseases. All 66 eyes with at least two disease labels in the 1,000-eye ODIR Off-site test set were evaluated at a threshold of 0.5. Entries show error counts over the corresponding negative ($N_{-}$) or positive ($N_{+}$) label counts, with rates in parentheses. Bold values denote reductions relative to ResNet50 in percentage points (pp).}}
+\label{tab:arc-cooccurrence-errors}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+\multirow{2}{*}{\revision{Disease class}} & \multicolumn{2}{c}{\revision{ResNet50}} & \multicolumn{2}{c}{\revision{ResNet50+ARC}} & \multicolumn{2}{c}{\revision{Change with ARC (pp)}} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}
+ & \revision{\mbox{FP/$N_{-}$ (FPR)}} & \revision{\mbox{FN/$N_{+}$ (FNR)}} & \revision{\mbox{FP/$N_{-}$ (FPR)}} & \revision{\mbox{FN/$N_{+}$ (FNR)}} & \revision{\mbox{$\Delta$FPR}} & \revision{\mbox{$\Delta$FNR}} \\
+\midrule
+\revision{DR} & \revision{\mbox{2/14\,(14.29\%)}} & \revision{\mbox{20/52\,(38.46\%)}} & \revision{\mbox{0/14\,(0.00\%)}} & \revision{\mbox{19/52\,(36.54\%)}} & {\boldmath\revision{\mbox{\(-14.29\)}}} & {\boldmath\revision{\mbox{\(-1.92\)}}} \\
+\revision{Glaucoma} & \revision{\mbox{0/53\,(0.00\%)}} & \revision{\mbox{9/13\,(69.23\%)}} & \revision{\mbox{2/53\,(3.77\%)}} & \revision{\mbox{8/13\,(61.54\%)}} & \revision{\mbox{\(+3.77\)}} & {\boldmath\revision{\mbox{\(-7.69\)}}} \\
+\revision{Cataract} & \revision{\mbox{0/64\,(0.00\%)}} & \revision{\mbox{0/2\,(0.00\%)}} & \revision{\mbox{1/64\,(1.56\%)}} & \revision{\mbox{0/2\,(0.00\%)}} & \revision{\mbox{\(+1.56\)}} & \revision{\mbox{\(0.00\)}} \\
+\revision{AMD} & \revision{\mbox{1/58\,(1.72\%)}} & \revision{\mbox{6/8\,(75.00\%)}} & \revision{\mbox{0/58\,(0.00\%)}} & \revision{\mbox{4/8\,(50.00\%)}} & {\boldmath\revision{\mbox{\(-1.72\)}}} & {\boldmath\revision{\mbox{\(-25.00\)}}} \\
+\revision{Hypertension} & \revision{\mbox{0/51\,(0.00\%)}} & \revision{\mbox{15/15\,(100.00\%)}} & \revision{\mbox{1/51\,(1.96\%)}} & \revision{\mbox{13/15\,(86.67\%)}} & \revision{\mbox{\(+1.96\)}} & {\boldmath\revision{\mbox{\(-13.33\)}}} \\
+\revision{Myopia} & \revision{\mbox{0/64\,(0.00\%)}} & \revision{\mbox{0/2\,(0.00\%)}} & \revision{\mbox{0/64\,(0.00\%)}} & \revision{\mbox{0/2\,(0.00\%)}} & \revision{\mbox{\(0.00\)}} & \revision{\mbox{\(0.00\)}} \\
+\revision{Others (O)} & \revision{\mbox{6/24\,(25.00\%)}} & \revision{\mbox{21/42\,(50.00\%)}} & \revision{\mbox{2/24\,(8.33\%)}} & \revision{\mbox{22/42\,(52.38\%)}} & {\boldmath\revision{\mbox{\(-16.67\)}}} & \revision{\mbox{\(+2.38\)}} \\
+\midrule
+\revision{All classes (pooled)} & \revision{\mbox{9/328\,(2.74\%)}} & \revision{\mbox{71/134\,(52.99\%)}} & \revision{\mbox{6/328\,(1.83\%)}} & \revision{\mbox{66/134\,(49.25\%)}} & {\boldmath\revision{\mbox{\(-0.91\)}}} & {\boldmath\revision{\mbox{\(-3.73\)}}} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}

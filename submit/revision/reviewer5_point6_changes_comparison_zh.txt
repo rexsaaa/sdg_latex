@@ -1,0 +1,63 @@
+审稿人 5 意见 6　修改范围与逐处中英文对照
+
+审核状态
+2026-11-19，用户通过两段 ARC 分析、英文表注、分组表头及负差值加粗样式，授权写入第 4.4 节。已落实并编译两版 31 页 PDF，两段正文、表 5 和第四项完整模型的开头均见第 19 页。用户已确认两版实排、四段中文回复原文及对应论文修改。本点中文返修已完成。
+
+修改范围
+一、第 4.4 节四项消融分析中的第三项 ResNet50+ARC。保留表 4 的双眼患者级综合结果，把末句的两组疾病关系示例换成对同眼多病样本逐类错误分析的引入。原句连举 DR–AMD、近视–视盘异常后泛称该模块降低漏报率；新表按目标类别统计每种疾病的假阳性率与假阴性率。这次分别解释 DR 和 AMD 在多病眼中的结果。八类输出中没有单独的视盘异常类别。第 4.3 节提及 DCNet 的 DR–AMD 示例属于对文献方法的介绍，沿用现稿。
+二、仍在第三项下，原引表句另起一段，紧接逐类分析、七类汇总和机制结论。将表 5 源码放在这段结束后、第四项 ResNet50+DFE+ARC 之前。解读重点是 DR 的假阳性率与假阴性率分别下降 14.29、1.92 个百分点，AMD 分别下降 1.72、25.00 个百分点；表 5 的七类合计行给出误报 9→6、漏报 71→66。第二处完整连读稿列于下方，已按通过稿落实。
+正文及表 5 的阅读顺序已在两版 PDF 中核验。表 4 及图 8 继续引出四项总体消融，第四项末尾继续引出图 9 的 CAM 分析，保留其后九例 IoU 和外部 EDID 的论述。节首“focuses on the binocular metrics”与总体指标分析相符，在 ARC 条目按其同眼多病识别目标引入逐类比较即可。其他章节中的方法动机与机制说明不追加本表结果，摘要与结论沿用项目既定安排。新表标签为 tab:arc-cooccurrence-errors，原表 5 至 12 现为表 6 至 13，图号保持。两版 PDF 的表号及其他意见回复中涉及的旧表号已核对，衔接记录见本点实施记录。
+
+第一处　第 4.4 节 ResNet50+ARC 条目
+原句定位为 submit/build/sections/04_experiments_trans.tex 第 105 行，落实前该条原文与返修基准相同。前一项解释 ResNet50+DFE 的总体收益，后一项说明完整模型及 CAM。前两句照录现稿，仅替换第三句。完整模型条目以 CAM 解释模型的空间响应，ARC 条目则从标签关系与标签对应的图像特征出发，以逐类误报和漏报评价其对同眼多病识别的贡献。66 只眼界定这一比较的样本范围。引表句和 DR、AMD 的结果分析相连。以下“表 5”在正式源码中已通过交叉引用排印。
+
+【原始英文】
+ResNet50+ARC: only the Adaptive Label-Feature Relevance Construction module is introduced. The Final score increases to 76.98 (+0.79), Kappa increases by 0.44, and AUC increases by 2.29. By explicitly modeling disease co-occurrence dependencies, such as DR and AMD or Myopia and optic-disc abnormalities, this module reduces the false-negative rate and improves multi-label recognition performance.
+
+【原始中文】
+ResNet50+ARC：仅引入自适应标签–特征相关性构建模块。Final 得分提高至 76.98（+0.79），Kappa 提高 0.44，AUC 提高 2.29。通过显式建模疾病共现依赖关系，例如 DR 与 AMD，或近视与视盘异常之间的关系，该模块降低了假阴性率，并改善了多标签识别性能。
+
+【修改后英文·已通过并落实】
+ResNet50+ARC: only the Adaptive Label-Feature Relevance Construction module is introduced. The Final score increases to 76.98 (+0.79), Kappa increases by 0.44, and AUC increases by 2.29. ARC models relationships among disease labels and links each label to relevant image features.
+
+To assess its contribution to recognizing diseases that coexist in the same eye, we compared the class-wise false positive and false negative rates of ResNet50 and ResNet50+ARC in all 66 ODIR Off-site test eyes with at least two disease labels (Table 5).
+
+【修改后中文·已通过并落实】
+ResNet50+ARC：仅引入自适应标签–特征相关性构建模块。Final 得分提高至 76.98（+0.79），Kappa 提高 0.44，AUC 提高 2.29。ARC 对疾病标签之间的关联进行建模，并将每个标签与相关的图像特征联系起来。
+
+为评价 ARC 在同眼多病识别中的作用，我们纳入 ODIR Off-site 测试集中全部 66 只具有至少两个疾病标签的眼，逐类比较了 ResNet50 与 ResNet50+ARC 的假阳性率和假阴性率（表 5）。
+
+第二处　第 4.4 节第三项内另起分析段，并按本刊现稿表格样式呈现表 5
+
+位置与范围
+第一处已通过的文字按原文保留，第 1 段止于 ARC 的机制说明。原引表句移至第 2 段开头，同段先分别解释 DR 和 AMD，再用一句话汇总七类，末句解释 ARC 对同眼多病识别的作用。分析段后排表，再进入现稿第四项。表 5 数据与三组表头保持已确认口径，说明合入表上方的单一 caption，两个差值列中的九个负值加粗。以下摘录第四项首句作为后文定位，其余已通过的完整模型及 CAM 分析沿用现稿。表号与两版 PDF 一致。
+
+【原始英文】
+ResNet50+ARC: only the Adaptive Label-Feature Relevance Construction module is introduced. The Final score increases to 76.98 (+0.79), Kappa increases by 0.44, and AUC increases by 2.29. By explicitly modeling disease co-occurrence dependencies, such as DR and AMD or Myopia and optic-disc abnormalities, this module reduces the false-negative rate and improves multi-label recognition performance.
+
+ResNet50+DFE+ARC (the proposed method, ours): when both modules are enabled, the Final score further increases to 78.85 (+2.66 over the baseline), Kappa reaches 57.05 (+4.30), and F1 and AUC reach 89.03 (+1.20) and 90.48 (+2.48), respectively.
+
+【原始中文】
+ResNet50+ARC：仅引入自适应标签–特征相关性构建模块。Final 得分提高至 76.98（+0.79），Kappa 提高 0.44，AUC 提高 2.29。通过显式建模疾病共现依赖关系，例如 DR 与 AMD，或近视与视盘异常之间的关系，该模块降低了假阴性率，并改善了多标签识别性能。
+
+ResNet50+DFE+ARC（本文提出的方法）：同时启用两个模块时，Final 得分进一步提高至 78.85（较基线提高 2.66），Kappa 达到 57.05（提高 4.30），F1 和 AUC 分别达到 89.03（提高 1.20）和 90.48（提高 2.48）。
+
+【修改后英文】
+ResNet50+ARC: only the Adaptive Label-Feature Relevance Construction module is introduced. The Final score increases to 76.98 (+0.79), Kappa increases by 0.44, and AUC increases by 2.29. ARC models relationships among disease labels and links each label to relevant image features.
+
+To assess its contribution to recognizing diseases that coexist in the same eye, we compared the class-wise false positive and false negative rates of ResNet50 and ResNet50+ARC in all 66 ODIR Off-site test eyes with at least two disease labels (Table 5). For DR, adding ARC lowered the FPR by 14.29 percentage points (2/14 to 0/14) and the FNR by 1.92 points (20/52 to 19/52). For AMD, the FNR fell by 25.00 percentage points as the number of missed cases dropped from six to four among eight AMD-positive eyes. The FPR also fell by 1.72 points, with one false positive among 58 AMD-negative eyes for ResNet50 and none for ResNet50+ARC. Across the seven classes, the pooled FPR and FNR fell by 0.91 and 3.73 percentage points, respectively. These findings suggest that ARC can reduce both false positives and missed detections in eyes with co-occurring diseases by using relationships among disease labels together with the visual features relevant to each label.
+
+Table 5. Class-wise false positive and false negative rates in eyes with co-occurring diseases. All 66 eyes with at least two disease labels in the 1,000-eye ODIR Off-site test set were evaluated at a threshold of 0.5. Entries show error counts over the corresponding negative (N₋) or positive (N₊) label counts, with rates in parentheses. Bold values denote reductions relative to ResNet50 in percentage points (pp).
+〔此处为表身，正式源码见 submit/build/tables/src/table_arc_cooccurrence_errors_trans.tex。〕
+
+ResNet50+DFE+ARC (the proposed method, ours): when both modules are enabled, the Final score further increases to 78.85 (+2.66 over the baseline), Kappa reaches 57.05 (+4.30), and F1 and AUC reach 89.03 (+1.20) and 90.48 (+2.48), respectively.
+
+【修改后中文】
+ResNet50+ARC：仅引入自适应标签–特征相关性构建模块。Final 得分提高至 76.98（+0.79），Kappa 提高 0.44，AUC 提高 2.29。ARC 对疾病标签之间的关联进行建模，并将每个标签与相关的图像特征联系起来。
+
+为评价 ARC 在同眼多病识别中的作用，我们纳入 ODIR Off-site 测试集中全部 66 只具有至少两个疾病标签的眼，逐类比较了 ResNet50 与 ResNet50+ARC 的假阳性率和假阴性率（表 5）。对于 DR，加入 ARC 后，假阳性率下降 14.29 个百分点（误报由 2/14 降至 0/14），假阴性率下降 1.92 个百分点（漏报由 20/52 降至 19/52）。对于 AMD，8 只 AMD 阳性眼中的漏报由 6 只减至 4 只，假阴性率下降 25.00 个百分点。58 只 AMD 阴性眼中，ResNet50 误报 1 只，ResNet50+ARC 的误报为 0 只，假阳性率也下降了 1.72 个百分点。汇总七个疾病类别，假阳性率和假阴性率分别下降 0.91 和 3.73 个百分点。这些结果表明，ARC 结合疾病标签之间的关联和各标签对应的视觉特征，有助于减少同眼多病识别中的误报和漏报。
+
+表 5　同眼多病样本中各疾病类别的假阳性率和假阴性率。在 ODIR Off-site 全部 1,000 只测试眼中，所有具有至少两个疾病标签的眼（共 66 只）均按 0.5 阈值评估。各栏列出错误数与相应阴性或阳性标签数的比值，括号内为对应的错误率。粗体表示相对 ResNet50 的错误率降幅，单位为百分点。
+〔此处为相同的表身。〕
+
+ResNet50+DFE+ARC（本文提出的方法）：同时启用两个模块时，Final 得分进一步提高至 78.85（较基线提高 2.66），Kappa 达到 57.05（提高 4.30），F1 和 AUC 分别达到 89.03（提高 1.20）和 90.48（提高 2.48）。
