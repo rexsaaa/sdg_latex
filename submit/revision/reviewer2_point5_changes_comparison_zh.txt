@@ -23,7 +23,7 @@
 第7处新增三条必要文献：Ghadai支持CAM定性解释，Hier支持GPT-5.2在临床文本表型标注中的具体能力，Pham/Cheng支持医学区域框生成。正文保持已通过的具体任务表述，无新增节号或公式编号。
 
 图9采用现有独立预览的原统一配置，九例编号统一为(a)–(i)；上组(a)–(e)，下组(f)/(g)/(h)/(i)居中，每组均为Original image、Baseline、Ours三行。黄色虚线为AI辅助参照，洋红实线为CAM框，均有黑描边。各小图放大，保持框坐标和图像比例，图内不重复列IoU。
-图9审核来源：revision_drafts/experiments/cam_roi_iou_20261115/figure_table_preview_5plus4/annotated_5plus4.pdf；正式资产为sdg_latex/submit/build/images/plots/fig_cam_roi_iou_5plus4.pdf，两者字节一致。
+2026-11-15 首版图9采用 revision_drafts/experiments/cam_roi_iou_20261115/figure_table_preview_5plus4/annotated_5plus4.pdf。2026-11-20 用户确认恢复原投稿图的眼底照片构图，正式图件已在同一路径 sdg_latex/submit/build/images/plots/fig_cam_roi_iou_5plus4.pdf 替换。九张眼底照片沿用原投稿图的显示比例，黄色参考框按对应位置重新映射；两行 CAM 沿用统一配置的完整热图和区域框。当前两版修订 PDF 的图9均在第20页。
 IoU小表使用原逐图CSV和等权均值，独立LaTeX表排版，保留四位小数、逐列加粗较高值，包含g列Baseline较高。
 图表按正文全宽排版；实际图9在第19页，表5与结果在紧接的第20页。原images/media/image8_padded.pdf作为历史资产保留；正式正文已使用新图9资产。两版正式修订PDF均已更新。
 注意：候选CAM面板来自原始浮点CAM按统一数值融合/归一化重新渲染，尤其a的Base历史RGB融合与本次规则不同，不能把新版称为仅在旧拼图上叠框。原上传图片与原实验资料继续保留。
