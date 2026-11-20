@@ -1,0 +1,204 @@
+审稿人2次要意见5：修改对照（中文返修已完成，实际归档版本见第八部分）
+更新日期：2026-11-20
+
+一、状态与范围
+本点已完成。第二至第六部分为11月16日审核历史，第七部分为恢复讨论后的候选。最终落实版本见第八部分。
+2026-11-16用户要求本对话先暂时搁置，待全文其余修改完成后再接续。下方引言与第3节总述通过稿保留；第六部分结论旧候选未通过、不得作为落实版本。所有论文与PDF保持未实施状态。
+用户已确认：“可以，引言这部分通过，第2项挑战的两段按你说的归在同一条目下。然后给我呈现我看看效果。”
+本文件保存引言与第3节总述已通过的英文及对应中文，以及结论中文候选；各组审核状态分别标明。尚未写入论文正文、编译PDF或Git提交。
+原始英文取自当前累计修订稿，省略黄色高亮命令并将图表/文献引用显示为阅读形式。
+实际文字修改为下列两组：原ARC/DFE两段合并精简为一段，原隐私方案段精简为一段。
+引言开篇、三个挑战的文字、图1及图注、框架总述、实验概述、三项贡献和章节安排保持原文。
+摘要不纳入本点修改，待所有审稿意见处理完成后整体重写；此前摘要末句候选已经撤回。
+第3节总述已通过版本见第五部分；第六部分结论旧候选仅供追踪，后续按最终全文重新组织。
+
+二、ARC与DFE方案介绍
+位置：第1节框架总述之后、隐私方案之前。
+原因：保留研究需求与模块作用的对应、图1关联，避免与贡献列表和方法章节重复展开操作与收益。
+前文衔接：已通过的框架总述原文保持，仍说明CAM引导双视图筛选与疾病标签表示一致性的联合优化。
+后文衔接：接第三部分的隐私方案段，再接原有实验概述和贡献列表。
+表述调整：将图1.c1–c2附近的效果陈述收束为设计目标；CAM可视化、具体注意力操作等在贡献列表或方法原文中继续保留。
+
+原始英文
+For the common issue of multi-disease co-occurrence in ocular disease recognition, the framework incorporates a Transformer-based Adaptive Label-Feature Relevance Construction (ARC) module. It models label relevance using Transformer self-attention and fuses label semantics with corresponding image features using Transformer cross-attention, thereby constructing disease co-occurrence dependencies at both the label and feature levels to reduce false positives and false negatives in multi-label recognition.
+
+To learn representations that transfer across imaging conditions, the framework includes a Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) module. This module is trained using only a single source domain and constructs a dual-branch structure from original source-domain images and style-disturbed augmented source-domain images, as shown in Fig. 1.a1 and Fig. 1.a2, to learn their shared representations at the feature level. Meanwhile, Class Activation Mapping (CAM) is introduced as prior guidance to encourage the model to focus on disease-related regions and suppress the learning of domain-specific noise. This enables the model to form a decision boundary that is more suitable for unseen-domain distributions (Fig. 1.c1) and to maintain stable recognition performance on unseen domains (Fig. 1.c2). In addition, CAM visualizes model-attended regions and enhances model interpretability.
+
+原始中文
+针对眼病识别中常见的多病共存问题，框架引入基于Transformer的自适应标签—特征关联构建（ARC）模块。该模块利用Transformer自注意力建模标签关联，并通过Transformer交叉注意力融合标签语义与相应的图像特征，从而在标签和特征两个层面构建疾病共现依赖关系，减少多标签识别中的假阳性和假阴性。
+
+为学习能够跨成像条件迁移的表示，框架引入双分支引导的域不变特征提取（DFE）模块。该模块仅使用单一源域进行训练，并利用原始源域图像及经过风格扰动的增强源域图像构建双分支结构，如图1.a1和图1.a2所示，以在特征层面学习两者共享的表示。同时，引入类激活映射（CAM）作为先验引导，促使模型关注疾病相关区域，并抑制对域特定噪声的学习。这使模型能够形成更适合未见域分布的决策边界（图1.c1），并在未见域上保持稳定的识别性能（图1.c2）。此外，CAM将模型关注的区域可视化，增强模型的可解释性。
+
+修改后英文（用户已通过）
+The Adaptive Label-Feature Relevance Construction (ARC) module models relationships among disease labels and between labels and image features to address multi-disease co-occurrence. To support transfer across imaging conditions, the Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) module learns shared representations from original and style-augmented source-domain images (Fig. 1.a1–a2), with Class Activation Mapping (CAM) guiding feature learning toward disease-related regions. This design aims to learn decision boundaries that remain effective on unseen domains, as illustrated in Fig. 1.c1–c2.
+
+修改后中文（用户已通过）
+自适应标签—特征关联构建（ARC）模块通过建模疾病标签之间以及标签与图像特征之间的关系，应对多病共存问题。为支持跨成像条件的迁移，双分支引导的域不变特征提取（DFE）模块从原始源域图像及经过风格增强的源域图像中学习共享表示（图1.a1–a2），并利用类激活映射（CAM）引导特征学习关注疾病相关区域。这一设计旨在学习对未见域仍然有效的决策边界，如图1.c1–c2所示。
+
+三、隐私方案介绍
+位置：上述ARC与DFE段之后、实验概述之前。
+保留：单源训练范围、数据隔离与训练信息保护的两层关系、文献［14］、DFE/ARC联合模型、噪声调度与优化目标。
+精简：合并句子；此处不再展开梯度裁剪与动态噪声操作，第三项贡献和第3.3节继续保留具体操作。
+后续实验概述保持，仍明确非隐私识别/跨域评价和隐私预算下的识别结果。
+
+原始英文
+To address privacy requirements in cross-domain applications, the single-source domain generalization approach adopted in this study restricts training updates to source-domain data. This reduces the need to access target-domain training data or pool raw data across institutions, providing protection through data isolation. Research on medical single-source domain generalization likewise identifies privacy and data access constraints as motivations for this setting [14]. Building on this setting, the framework incorporates an Adaptive Gaussian Differential Privacy (AdaGDP) mechanism into the joint optimization of DFE and ARC. Gradient clipping and dynamic noise injection impose privacy constraints on parameter updates to further protect source-domain training information. The noise schedule and optimization settings aim to minimize the impact of privacy-preserving training on cross-domain recognition performance.
+
+原始中文
+针对跨域应用中的隐私保护需求，本文采用的单源域泛化方法将训练更新限定于源域数据。这减少了目标域训练数据访问及跨机构原始数据汇集的需求，从而提供数据隔离层面的保护。已有医学单源域泛化研究同样将隐私与数据获取限制作为采用这一设定的动机［14］。在此基础上，框架将自适应高斯差分隐私（AdaGDP）机制纳入DFE与ARC的联合优化。梯度裁剪与动态噪声注入对参数更新施加隐私约束，进一步保护源域训练信息。噪声调度与优化设置旨在尽可能减少隐私保护训练对跨域识别性能的影响。
+
+修改后英文（用户已通过）
+Training updates are restricted to source-domain data, reducing the need to access target-domain training data or pool raw data across institutions and providing protection through data isolation. Privacy and data access constraints likewise motivate medical single-source domain generalization in prior research [14]. Within this setting, Adaptive Gaussian Differential Privacy (AdaGDP) imposes privacy constraints on updates of the joint DFE and ARC model to further protect source-domain training information. The noise schedule and optimization settings aim to minimize the impact of privacy-preserving training on cross-domain recognition performance.
+
+修改后中文（用户已通过）
+训练更新限定于源域数据，减少了目标域训练数据访问及跨机构原始数据汇集的需求，并提供数据隔离层面的保护。已有研究同样将隐私与数据获取限制作为医学单源域泛化的研究动机［14］。在这一设定下，自适应高斯差分隐私（AdaGDP）对DFE与ARC联合模型的更新施加隐私约束，进一步保护源域训练信息。噪声调度与优化设置旨在尽可能减少隐私保护训练对跨域识别性能的影响。
+
+四、第2项挑战的编号归属（排版已通过，文字不改）
+第2项的第一段从“The high cost of medical image acquisition...”开始，解释医疗数据成本、DA/多源DG访问条件与单源设定需求。
+第二段从“However, a single source domain cannot fully cover...”开始，解释单源难以覆盖成像变化、图1的分布/边界示意和疾病判别表示的研究问题。
+两个自然段均归在编号2同一个条目中，第二段与第一段正文保持相同缩进；编号3开启第三项挑战。保留两段，不合并成一长段，不改写其文字。
+正式落实时应核对期刊模板的编号与缩进效果，保留图1、图注及正文引用；不得以本记录声称PDF排版已完成。
+
+五、第3节方法开头：已通过修改（尚未落实）
+用户确认：“可以，第3节开头就按这个版本。”通过的是先前候选的完整两段，文字保持。
+位置：第3节标题之后、图2之前的两段。图2/图注及第3.1节以下原文保持。
+具体改动：
+1. 删除开头完整的三项挑战回顾；梯度/参数可能泄露训练信息的理由在第3.3节已有说明。
+2. 直接从图2与两个模块的处理流程进入，明确原始/增强图像特征与随后“两个视图”的关系；压缩重复的泛化、可解释性和误判收益概括。
+3. 逐字保留主要意见1通过的四句模块联系与联合训练解释，以及三句单源训练/AdaGDP作用说明。
+4. 删除末尾再次完整命名框架的句子；将训练约束另起一段，保留引入后续三个小节的原句。
+衔接：第一段交代框架组成、特征处理与疾病标签表示的联合学习；第二段交代同一模型的单源与隐私训练安排。之后仍接图2及第3.1节。
+
+原始英文
+In domain generalization for multi-label ocular disease recognition, model performance is mainly affected by three factors. First, multiple diseases may coexist in the same fundus image. If the model cannot effectively capture relevance among disease labels and between labels and disease-related features, false positives and false negatives may occur, degrading multi-label recognition performance. Second, distribution shifts commonly arise between the source domain and target domain. If the learned features contain substantial source-domain-specific noise, the transferability of disease-related features is weakened, resulting in poorer domain generalization performance. In addition, medical data are privacy-sensitive, and the gradients or parameters produced during training may introduce privacy leakage risk, requiring a privacy-preserving mechanism to be incorporated into the training process. However, privacy-preserving mechanisms usually affect model optimization through additional training constraints, so the balance between privacy preservation and model performance must be considered.
+
+To address these issues, this study does not treat multi-disease co-occurrence and domain shift as separate problems. Instead, they are jointly modeled within a single-domain generalization framework for multi-label ocular disease recognition. As shown in Fig. 2, the proposed interpretable single-domain generalization framework consists of two main parts: Part 1, Dual-Branch Guided Domain-Invariant Feature Extraction (DFE), and Part 2, Adaptive Label-Feature Relevance Construction (ARC). Part 1 uses CAM guidance together with a dual-branch feature filtering mechanism to extract more stable domain-invariant features from a single source domain, thereby reducing the influence of distribution shift between the source domain and unseen domains. CAM also visualizes model-attended regions and enhances interpretability. Based on the domain-invariant features produced by Part 1, Part 2 uses Transformer attention mechanisms to model label-label relevance and label-feature relevance, reducing false positives and false negatives in multi-label recognition. DFE and ARC are connected through feature filtering and label-representation consistency. DFE first selects feature components with small normalized differences between the two views as inputs to ARC. ARC then extracts a representation for each disease label and constrains the corresponding representations to remain close across the two views. The classification and consistency objectives jointly guide feature learning, applying the stability requirement under appearance perturbations to the representations associated with disease labels. The framework adopts single-source domain generalization, restricting training updates to the accessible source domain and reducing the need to access target-domain training data or pool raw data across institutions. Building on this setting, AdaGDP is applied to the training updates of the joint DFE and ARC model to further protect source-domain training information. Its noise schedule aims to preserve recognition performance as much as possible. Overall, the proposed method constructs a Privacy-Preserving Interpretable Single-Domain Generalization framework for multi-label ocular disease recognition. The implementation details of each module are described in the following three subsections.
+
+原始中文
+在多标签眼病识别的域泛化任务中，模型性能主要受到三个因素的影响。首先，同一幅眼底图像中可能存在多种疾病。如果模型无法有效捕捉疾病标签之间以及标签与疾病相关特征之间的关联，就可能产生假阳性和假阴性，降低多标签识别性能。其次，源域与目标域之间通常存在分布偏移。如果学习到的特征包含大量源域特定噪声，疾病相关特征的可迁移性就会减弱，从而降低域泛化性能。此外，医疗数据具有隐私敏感性，训练过程中产生的梯度或参数可能引入隐私泄露风险，因此需要在训练过程中引入隐私保护机制。然而，隐私保护机制通常会通过额外的训练约束影响模型优化，因此必须考虑隐私保护与模型性能之间的平衡。
+
+为应对这些问题，本文不将多病共存与域偏移视为相互独立的问题，而是在用于多标签眼病识别的单域泛化框架中对二者进行联合建模。如图2所示，所提出的可解释单域泛化框架由两个主要部分组成：第1部分为双分支引导的域不变特征提取（DFE），第2部分为自适应标签—特征关联构建（ARC）。第1部分将CAM引导与双分支特征筛选机制相结合，从单一源域中提取更加稳定的域不变特征，从而减小源域与未见域之间分布偏移的影响。CAM还能够将模型关注的区域可视化，增强可解释性。在第1部分生成的域不变特征基础上，第2部分利用Transformer注意力机制建模标签—标签关联与标签—特征关联，减少多标签识别中的假阳性和假阴性。DFE与ARC通过特征筛选和标签表示一致性相互连接。DFE首先选取两个视图之间归一化差异较小的特征成分，作为ARC的输入。随后，ARC为每个疾病标签提取表示，并约束对应表示在两个视图之间保持接近。分类目标与一致性目标共同引导特征学习，将外观扰动下的稳定性要求落实到疾病标签对应的表示上。整体框架采用单源域泛化设定，将训练更新限定于可访问的源域，减少对目标域训练数据访问及跨机构原始数据汇集的需求。在此基础上，AdaGDP作用于DFE与ARC联合模型的训练更新，进一步保护源域训练信息。其噪声调度旨在尽可能维持识别性能。总体而言，所提出的方法构建了一个用于多标签眼病识别的隐私保护可解释单域泛化框架。各模块的实现细节将在以下三个小节中介绍。
+
+修改后英文（用户已通过）
+As shown in Fig. 2, the framework consists of two main parts: Part 1, Dual-Branch Guided Domain-Invariant Feature Extraction (DFE), and Part 2, Adaptive Label-Feature Relevance Construction (ARC). DFE uses CAM guidance and dual-branch feature filtering to process features from the original and augmented images, while ARC uses Transformer attention to model label-label relevance and label-feature relevance. DFE and ARC are connected through feature filtering and label-representation consistency. DFE first selects feature components with small normalized differences between the two views as inputs to ARC. ARC then extracts a representation for each disease label and constrains the corresponding representations to remain close across the two views. The classification and consistency objectives jointly guide feature learning, applying the stability requirement under appearance perturbations to the representations associated with disease labels.
+
+The framework adopts single-source domain generalization, restricting training updates to the accessible source domain and reducing the need to access target-domain training data or pool raw data across institutions. Building on this setting, AdaGDP is applied to the training updates of the joint DFE and ARC model to further protect source-domain training information. Its noise schedule aims to preserve recognition performance as much as possible. The implementation details of each module are described in the following three subsections.
+
+修改后中文（用户已通过）
+如图2所示，框架由两个主要部分组成：第1部分为双分支引导的域不变特征提取（DFE），第2部分为自适应标签—特征关联构建（ARC）。DFE利用CAM引导和双分支特征筛选处理原始图像与增强图像的特征，ARC则利用Transformer注意力建模标签—标签关联与标签—特征关联。DFE与ARC通过特征筛选和标签表示一致性相互连接。DFE首先选取两个视图之间归一化差异较小的特征成分，作为ARC的输入。随后，ARC为每个疾病标签提取表示，并约束对应表示在两个视图之间保持接近。分类目标与一致性目标共同引导特征学习，将外观扰动下的稳定性要求落实到疾病标签对应的表示上。
+
+整体框架采用单源域泛化设定，将训练更新限定于可访问的源域，减少对目标域训练数据访问及跨机构原始数据汇集的需求。在此基础上，AdaGDP作用于DFE与ARC联合模型的训练更新，进一步保护源域训练信息。其噪声调度旨在尽可能维持识别性能。各模块的实现细节将在以下三个小节中介绍。
+
+六、第5节结论与讨论：中文精简候选（待用户审核，尚未落实）
+后续审核状态：用户指出本候选主要沿旧结论删减，未充分反映当前全文叙事。本轮核对确认需重新组织；以下候选仅保留供追踪，不作为可落实版本。尚未提供新的结论文字。
+用户最新要求：先说明删改，再呈现修改前后的完整中文段落；保留此前实质内容，不写论文，摘要先不动。用户同时询问结论是否应待全文完成后修改。
+本次建议（尚未获用户确认）：现在先去除确定重复的挑战与模块实现复述；结论对全稿的最终结果提炼、研究意义和未来方向核对，留到全部意见处理完成后再统一进行。
+本候选属于局部去重稿，不是全文修改完成后的最终结论；本次仅提供中文，英文改写尚未提交审核。
+具体改动：删去再次列举三个挑战的句子；以一段联合设计概括替代ARC/DFE逐项实现复述；保留AdaGDP定位及ε≈10下的基线比较；当前实验有效性概括和未来工作文字保持，将未来工作另起一段。
+本点原始中文忠实翻译当前英文，因此保留原文中的“基于双分支掩码的对比学习机制”；候选采用此前批准的特征筛选与标签表示一致性逻辑，不改其他章节术语。
+
+原始中文
+本文提出一种用于多标签眼病识别的隐私保护可解释单域泛化框架。该框架为一组递进式挑战提供统一解决方案，包括临床多病共存、跨机构域偏移，以及进一步限制多源协作的隐私敏感性。核心贡献如下：（1）自适应标签—特征关联构建（ARC）模块利用Transformer自注意力和交叉注意力机制捕捉标签—标签关联与标签—特征关联，并通过注意力一致性损失对齐双分支输出，有助于减少多标签识别中的假阳性和假阴性；（2）双分支引导的域不变特征提取（DFE）模块通过风格增强模拟潜在域偏移，利用CAM提供疾病区域先验引导，并结合空间／通道注意力与基于双分支掩码的对比学习机制提取域不变特征，在提高未见域泛化性能的同时增强模型可解释性；（3）自适应高斯差分隐私（AdaGDP）机制通过动态衰减噪声强度，兼顾源域训练信息保护与识别性能。在记录的ε≈10时，模型仍能保持接近ODIR官方非隐私ResNet50基线水平的识别表现。系统性实验验证了所提出方法的有效性。尽管取得了这些进展，该框架仍存在一些局限。类别不平衡可能影响少数疾病类别识别的稳定性，未来可通过重采样或损失加权进一步缓解。此外，当前跨域泛化主要基于共享标签空间，未来可探索开放类别和更复杂分布外场景下的泛化。进一步而言，在隐私保护方面，未来可探索在更严格隐私预算下保持性能的方法，或将所提出的机制与联邦学习等技术相结合，以适应更加复杂的跨机构部署场景。
+
+修改后中文（候选，待审核）
+本文提出一种用于多标签眼病识别的隐私保护可解释单域泛化框架。该框架在单源训练条件下联合优化DFE的特征筛选与ARC的疾病标签表示一致性，将外观变化下的表示稳定性与多标签判别相联系，并利用CAM可视化模型关注的区域。自适应高斯差分隐私（AdaGDP）机制通过动态衰减噪声强度，兼顾源域训练信息保护与识别性能。在记录的ε≈10时，模型仍能保持接近ODIR官方非隐私ResNet50基线水平的识别表现。系统性实验验证了所提出方法的有效性。
+
+尽管取得了这些进展，该框架仍存在一些局限。类别不平衡可能影响少数疾病类别识别的稳定性，未来可通过重采样或损失加权进一步缓解。此外，当前跨域泛化主要基于共享标签空间，未来可探索开放类别和更复杂分布外场景下的泛化。进一步而言，在隐私保护方面，未来可探索在更严格隐私预算下保持性能的方法，或将所提出的机制与联邦学习等技术相结合，以适应更加复杂的跨机构部署场景。
+
+七、2026-11-20 全文收尾审核稿：第5节结论与摘要
+用户恢复本点，要求按当前累计修订稿统合结论与摘要。以下为本轮完整候选，尚待审核。修改前英文取自现稿并移除排版标记，中文为对应译文。
+结论以联合消融和同眼多病误差解释方法作用，区分单源数据访问与源域训练更新的隐私；保留少样本类、共享标签空间及隐私协作的后续方向。摘要以单源识别问题和双视图疾病表示引出方法，报告非隐私域内与外部识别、九例CAM区域比较及隐私预算下的双眼结果。
+数值核对：ODIR 78.85是非隐私双眼Off-site结果。EDID主比较为55.35−52.16=3.19，独立列出的EDID消融为55.42−52.16=3.26。同眼多病统计是ResNet50与单加ARC的比较。CAM对照使用九幅展示的训练图像及AI辅助候选参考区域。旧结论的自注意力描述有已记录的配置差异，新稿在摘要使用“疾病标签查询”。
+
+第5节结论与讨论
+
+修改前英文
+This study presents a Privacy-Preserving Interpretable Single-Domain Generalization framework for multi-label ocular disease recognition. The framework provides a unified solution to a set of progressive challenges: clinical multi-disease co-occurrence, cross-institutional domain shift, and the privacy sensitivity that further restricts multi-source collaboration. The core contributions are as follows: (1) the Adaptive Label-Feature Relevance Construction (ARC) module uses Transformer self-attention and cross-attention mechanisms to capture label-label relevance and label-feature relevance, and aligns dual-branch outputs through attention consistency loss, helping reduce false positives and false negatives in multi-label recognition; (2) the Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) module simulates potential domain shift through style augmentation, uses CAM to provide disease-region prior guidance, and combines spatial/channel attention with a dual-branch mask-based contrastive learning mechanism to extract domain-invariant features, improving unseen-domain generalization performance while enhancing model interpretability; and (3) the Adaptive Gaussian Differential Privacy (AdaGDP) mechanism dynamically decays noise intensity to balance source-domain training-information protection and recognition performance. At a reported ε≈10, the model retains recognition performance close to the official non-private ODIR ResNet50 baseline. Systematic experiments validate the effectiveness of the proposed method. Despite these advances, the framework still has limitations. Class imbalance may affect the stability of recognition for minority disease classes, which could be further alleviated by resampling or loss weighting in future work. In addition, current cross-domain generalization is mainly based on shared label spaces, and future work can explore generalization under open-category and more complex out-of-distribution scenarios. Furthermore, in terms of privacy preservation, future work can explore methods that retain performance under tighter privacy budgets, or combine the proposed mechanism with federated learning and similar techniques to adapt to more complex cross-institutional deployment scenarios.
+
+修改前中文
+本文提出一种用于多标签眼病识别的隐私保护可解释单域泛化框架。该框架为一组递进式挑战提供统一解决方案，包括临床多病共存、跨机构域偏移，以及进一步限制多源协作的隐私敏感性。核心贡献如下：（1）自适应标签—特征关联构建（ARC）模块利用Transformer自注意力和交叉注意力机制捕捉标签—标签关联与标签—特征关联，并通过注意力一致性损失对齐双分支输出，有助于减少多标签识别中的假阳性和假阴性；（2）双分支引导的域不变特征提取（DFE）模块通过风格增强模拟潜在域偏移，利用CAM提供疾病区域先验引导，并结合空间／通道注意力与基于双分支掩码的对比学习机制提取域不变特征，在提高未见域泛化性能的同时增强模型可解释性；（3）自适应高斯差分隐私（AdaGDP）机制通过动态衰减噪声强度，兼顾源域训练信息保护与识别性能。在记录的ε≈10时，模型仍能保持接近ODIR官方非隐私ResNet50基线水平的识别表现。系统性实验验证了所提出方法的有效性。尽管取得了这些进展，该框架仍存在一些局限。类别不平衡可能影响少数疾病类别识别的稳定性，未来可通过重采样或损失加权进一步缓解。此外，当前跨域泛化主要基于共享标签空间，未来可探索开放类别和更复杂分布外场景下的泛化。进一步而言，在隐私保护方面，未来可探索在更严格隐私预算下保持性能的方法，或将所提出的机制与联邦学习等技术相结合，以适应更加复杂的跨机构部署场景。
+
+修改后英文（候选）
+Feature filtering and disease-specific label representations made complementary contributions to recognition. In non-private ablations on ODIR Off-site and EDID, the joint model achieved a higher Final score than either module alone. The contribution of label-feature modeling was also evident in the 66 ODIR Off-site eyes with co-occurring diseases. Across seven disease labels, adding ARC alone to ResNet50 reduced false-positive predictions from nine to six and missed positive labels from 71 to 66.
+
+Restricting training updates to one source reduces the need to obtain target-domain training images or pool raw patient images across institutions. AdaGDP further limits exposure of source training information by perturbing the gradients used to update the model. With adaptive noise and an adjusted learning rate schedule, the selected checkpoint achieved a higher monocular Final score at a lower estimated privacy cost than the final checkpoint. Its binocular recognition performance remained close to the official non-private ODIR ResNet50 baseline.
+
+Future work could evaluate class-frequency weighting or resampling for underrepresented diseases and extend cross-domain evaluation beyond shared labels to previously unseen disease categories. Tighter privacy budgets and federated training across institutions are two further settings in which to examine how much recognition performance can be retained.
+
+修改后中文（候选）
+特征筛选与疾病标签表示学习在眼病识别中起到了互补作用。在 ODIR Off-site 和 EDID 的非隐私消融实验中，联合模型的 Final 得分均高于单独使用任一模块时的得分。在 ODIR Off-site 的 66 只多病共存眼中，还可以从错误类型看出标签—特征关联建模的作用。在 ResNet50 上单独加入 ARC 后，七种疾病标签累计的假阳性预测从 9 个减至 6 个，漏检的阳性标签从 71 个减至 66 个。
+
+将训练更新限定于单一源域，减少了获取目标域训练图像或跨机构汇集患者原始图像的需求。AdaGDP 进一步对模型更新所用的梯度施加扰动，以限制源域训练信息的暴露。采用自适应噪声并调整学习率调度后，所选检查点的估计累计隐私损失低于训练结束时，单眼 Final 得分则更高。该检查点的双眼识别表现接近 ODIR 官方非隐私 ResNet50 基线。
+
+后续可针对样本较少的疾病评估按类别频率加权或重采样的效果，并将跨域评价从共享标签扩展到训练中未见的疾病类别。还可在更严格的隐私预算和跨机构联邦训练两种设定下，考察模型能够保留多少识别性能。
+
+摘要
+
+修改前英文
+Early fundus screening is effective for ocular disease diagnosis. Deep learning has provided tools for fundus image analysis. However, clinical deployment still faces three major challenges: (1) multiple diseases often co-occur in a single eye, causing false positives and false negatives when modeled independently; (2) cross-institutional deployment suffers from domain shift, yet conventional cross-domain methods typically require target-domain or multi-source data, often infeasible; (3) medical data are privacy-sensitive, further restricting cross-institutional sharing and invalidating the multi-source assumption, calling for generalization with local privacy preservation. To address these three challenges in order, the proposed framework first incorporates an Adaptive Label-Feature Relevance Construction (ARC) module that captures disease co-occurrence dependencies via Transformer attention to reduce false positives and negatives. The framework also includes a Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) module that learns domain-invariant features from a single source domain under Class Activation Mapping (CAM) guidance, improving unseen-domain generalization and interpretability. Finally, an Adaptive Gaussian Differential Privacy (AdaGDP) mechanism is integrated into training, preserving privacy through dynamic gradient noise injection with controlled performance loss. Experiments under non-private training show that our method reaches a Final score of 78.85 on the ODIR dataset, outperforming representative multi-label ocular disease recognition methods, and yields a 3.19-point gain on the EDID dataset. With AdaGDP, ODIR recognition performance remains close to the official non-private ResNet50 baseline. Overall, this study presents an interpretable and privacy-preserving single-domain generalization framework for multi-label ocular disease recognition, improving cross-domain performance and providing insights into ocular diagnosis under privacy constraints.
+Code is available at https://github.com/rexsaaa/ppisdg-ocular.
+
+修改前中文
+早期眼底筛查有助于眼病诊断，深度学习为眼底图像分析提供了工具。然而，临床部署仍面临三项主要挑战。（1）同一只眼中常有多种疾病共存，对各疾病独立建模时容易产生假阳性和假阴性。（2）跨机构部署面临域偏移，而传统跨域方法通常需要目标域或多源域数据，实际中往往难以获取。（3）医疗数据具有隐私敏感性，进一步限制了跨机构共享，使多源假设难以成立，因此需要在保护本地隐私的条件下实现泛化。为依次应对这三个挑战，所提出的框架首先引入自适应标签—特征关联构建（ARC）模块，通过 Transformer 注意力捕捉疾病共存依赖关系，以减少假阳性和假阴性。框架还包括双分支引导的域不变特征提取（DFE）模块，在类激活映射（CAM）引导下从单一源域学习域不变特征，提高未见域泛化能力和可解释性。最后，框架将自适应高斯差分隐私（AdaGDP）机制融入训练，通过动态注入梯度噪声保护隐私，同时控制性能损失。非隐私训练实验表明，本文方法在 ODIR 数据集上的 Final 得分达到 78.85，优于具有代表性的多标签眼病识别方法，并在 EDID 数据集上取得 3.19 分的提升。采用 AdaGDP 后，模型在 ODIR 上的识别性能仍接近官方非隐私 ResNet50 基线。总体而言，本文提出一种用于多标签眼病识别的可解释、隐私保护单域泛化框架，提高了跨域性能，并为隐私约束下的眼病诊断提供了参考。
+代码可从 https://github.com/rexsaaa/ppisdg-ocular 获取。
+
+修改后英文（候选）
+When privacy constraints limit access to fundus images from other institutions, a model trained on one source must recognize co-occurring diseases under unfamiliar imaging conditions. The proposed single-domain generalization framework uses class activation maps to guide feature learning and retains features that change little between a source image and its style-augmented counterpart. Disease-label queries extract visual evidence from these features, and joint training encourages each disease representation to agree across the two views. Under non-private training, the model achieved the highest binocular Final score among the methods compared on ODIR Off-site (78.85, averaged over kappa, micro-F1 and AUC). Each external evaluation covered three disease classes shared with ODIR. Among five checkpoints shortlisted for each method using source-domain validation, the model’s best monocular Final score exceeded the corresponding ResNet50 score by 1.20 points on RFMiD and 3.19 on EDID. In eight of nine illustrated ODIR training images, regions derived from the model’s activation maps overlapped AI-assisted candidate reference regions more closely than those of ResNet50. With Adaptive Gaussian Differential Privacy (AdaGDP) applied to source-domain updates, binocular Final scores on both ODIR test sets were within one point of the official non-private ResNet50 baseline at an estimated ε of 9.76 (δ = 10⁻⁵).
+Code is available at https://github.com/rexsaaa/ppisdg-ocular.
+
+修改后中文（候选）
+当隐私要求限制了对其他机构眼底图像的访问时，仅用单一源域训练的模型需要在未见的成像条件下识别同一眼中并存的多种疾病。本文提出的单域泛化框架利用类激活图引导特征学习，保留源域图像与其风格增强视图之间变化较小的特征。模型以疾病标签为查询，从这些特征中提取相应的视觉证据，并通过联合训练使同一疾病在两个视图中的表示保持一致。在非隐私训练下，模型在 ODIR Off-site 上取得了所比较方法中最高的双眼 Final 得分（78.85，为 Kappa、micro-F1 和 AUC 的算术平均值）。两项外部评价各涵盖与源域共享的三种疾病。每种方法先根据源域验证结果筛选五个候选检查点，再比较各方法在目标域取得的最高单眼 Final 得分。本文模型在 RFMiD 和 EDID 上分别比 ResNet50 高 1.20 分和 3.19 分。以 AI 辅助生成的候选区域为参照，在展示的九幅 ODIR 训练图像中，本模型有八幅的激活区域重叠度高于 ResNet50。对源域训练更新应用自适应高斯差分隐私（AdaGDP）后，在估计 ε 为 9.76（δ = 10⁻⁵）时，模型在 ODIR 两个测试集上的双眼 Final 得分与官方非隐私 ResNet50 基线的差距均在 1 分以内。
+代码可从 https://github.com/rexsaaa/ppisdg-ocular 获取。
+
+八、2026-11-20 最终落实版本（本点中文返修完成）
+用户确认按给定回复结项。第一至第七部分保留此前审核过程，第八部分记录本次归档的实际正文。引言仍分三段介绍三个方案，第 2 项挑战的两个自然段归入同一编号，第 3 节在引入图 2 前保留一句承接。图 1 图注沿用父提交。下列英文仅展开排版标记及引用，中文用于核对。
+
+摘要
+实际英文
+Early fundus screening is effective for ocular disease diagnosis, and deep learning has provided tools for fundus image analysis. Clinical deployment nevertheless faces three difficulties: multiple diseases often co-occur in a single eye; cross-institutional images differ in appearance while data sharing remains restricted; and medical data are privacy-sensitive. Within a single-source training setting, an Adaptive Label-Feature Relevance Construction (ARC) module captures disease co-occurrence dependencies via Transformer attention, and a Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) module learns transferable features under Class Activation Mapping (CAM) guidance. This source-only training also limits access to target-domain images and raw-image pooling across institutions, while an Adaptive Gaussian Differential Privacy (AdaGDP) mechanism further protects source-domain training information. Under non-private training, the method reaches a Final score of 78.85 on the ODIR dataset, outperforming representative multi-label ocular disease recognition methods. In comparisons with the domain generalization methods MixStyle, RSC, and FACT, it also achieves the highest results on ODIR On-site and EDID. With AdaGDP, ODIR recognition performance at a recorded ε of 9.76 (δ=10⁻⁵) remains close to the official non-private ResNet50 baseline. Overall, this study presents an interpretable and privacy-preserving single-domain generalization framework for multi-label ocular disease recognition, improving cross-domain performance and providing insights into ocular diagnosis under privacy constraints.
+
+Code is available at https://github.com/rexsaaa/ppisdg-ocular.
+
+对应中文
+早期眼底筛查有助于眼病诊断，深度学习为眼底图像分析提供了工具。临床部署面临三方面困难：同一只眼中常有多种疾病共存，不同机构图像的外观存在差异且数据共享受限，医疗数据具有隐私敏感性。在单源训练设定下，自适应标签—特征关联构建（ARC）模块通过 Transformer 注意力捕捉疾病共现依赖，双分支引导的域不变特征提取（DFE）模块在类激活映射（CAM）引导下学习可迁移特征。单源训练还限制了对目标域图像的访问及跨机构原始图像汇集，自适应高斯差分隐私（AdaGDP）机制进一步保护源域训练信息。非隐私训练下，本文方法在 ODIR 上的 Final 得分为 78.85，优于具有代表性的多标签眼病识别方法。与域泛化方法 MixStyle、RSC 和 FACT 相比，本文方法在 ODIR On-site 和 EDID 上也取得最高结果。引入 AdaGDP 后，在记录的 ε 为 9.76（δ=10⁻⁵）时，ODIR 上的识别表现接近官方非隐私 ResNet50 基线。总体而言，本研究提出了一种用于多标签眼病识别的可解释、隐私保护单域泛化框架，提升了跨域性能，并为隐私约束下的眼病诊断提供了思路。代码可从 https://github.com/rexsaaa/ppisdg-ocular 获取。
+
+第 1 节贡献列表前的三段
+实际英文
+For the first challenge, the Adaptive Label-Feature Relevance Construction (ARC) module models relationships among disease labels with Transformer self-attention and uses disease-label queries in cross-attention to extract image features relevant to each disease. Predictions for coexisting diseases are thus based on the image evidence associated with each label rather than on co-occurrence statistics alone, which helps reduce false positives and false negatives in multi-label recognition.
+
+For the second challenge, the framework includes a Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) module. This module is trained using only a single source domain and constructs a dual-branch structure from original source-domain images and style-disturbed augmented source-domain images, as shown in Fig. 1.a1 and Fig. 1.a2, to learn their shared representations at the feature level. Meanwhile, Class Activation Mapping (CAM) is introduced as prior guidance to encourage the model to focus on disease-related regions and suppress the learning of domain-specific noise. This design aims to enable the model to form a decision boundary that is more suitable for unseen-domain distributions (Fig. 1.c1) and to maintain stable recognition performance on unseen domains (Fig. 1.c2). In addition, CAM visualizes model-attended regions and enhances model interpretability.
+
+For the third challenge, the single-source setting restricts training updates to source-domain data, reducing the need to access target-domain training data or pool raw data across institutions and providing protection through data isolation. Privacy and data access constraints likewise motivate medical single-source domain generalization in prior research [14]. Within this setting, Adaptive Gaussian Differential Privacy (AdaGDP) imposes privacy constraints on updates of the joint DFE and ARC model to further protect source-domain training information. The noise schedule and optimization settings aim to minimize the impact of privacy-preserving training on cross-domain recognition performance.
+
+对应中文
+针对第一项挑战，ARC 通过 Transformer 自注意力建模疾病标签之间的关系，并以疾病标签为查询，通过交叉注意力提取与各疾病相关的图像特征。对共存疾病的预测因而结合了各标签对应的图像证据，有助于减少多标签识别中的假阳性和假阴性。
+
+针对第二项挑战，DFE 仅在单一源域上训练。该模块由原始源域图像和风格扰动后的增强图像构建双分支，在特征层面学习共享表示（图 1.a1、a2）。CAM 为特征学习提供先验引导，使模型关注疾病相关区域，抑制对域特定噪声的学习。这一设计旨在形成更适用于未见域分布的决策边界，并在未见域中维持稳定识别性能（图 1.c1、c2）。CAM 还可将模型关注的区域可视化，增强可解释性。
+
+针对第三项挑战，单源设定将训练更新限定于源域数据，减少获取目标域训练数据和跨机构汇集原始数据的需求，从而提供数据隔离层面的保护。此前关于医学单源域泛化的研究同样以隐私和数据访问约束为动机［14］。在此基础上，AdaGDP 对 DFE 与 ARC 联合模型的更新施加隐私约束，进一步保护源域训练信息。噪声调度及优化设置旨在尽量减小隐私训练对跨域识别表现的影响。
+
+第 3 节方法开头
+实际英文
+To address the challenges outlined in Section 1, multi-disease co-occurrence and domain shift are jointly modeled rather than treated as separate problems. As shown in Fig. 2, the framework consists of two main parts: Part 1, Dual-Branch Guided Domain-Invariant Feature Extraction (DFE), and Part 2, Adaptive Label-Feature Relevance Construction (ARC). DFE uses CAM guidance and dual-branch feature filtering to process features from the original and augmented images, while ARC uses Transformer attention to model label-label relevance and label-feature relevance. DFE and ARC are connected through feature filtering and label-representation consistency. DFE first selects feature components with small normalized differences between the two views as inputs to ARC. ARC then extracts a representation for each disease label and constrains the corresponding representations to remain close across the two views. The classification and consistency objectives jointly guide feature learning, applying the stability requirement under appearance perturbations to the representations associated with disease labels.
+
+The framework adopts single-source domain generalization, restricting training updates to the accessible source domain and reducing the need to access target-domain training data or pool raw data across institutions. Building on this setting, AdaGDP is applied to the training updates of the joint DFE and ARC model to further protect source-domain training information. Its noise schedule aims to preserve recognition performance as much as possible. The implementation details of each module are described in the following three subsections.
+
+对应中文
+针对第 1 节提出的挑战，框架对多病共存与域偏移进行联合建模。如图 2 所示，框架包括 DFE 和 ARC。DFE 借助 CAM 引导和双分支筛选处理原图与增强图像的特征，ARC 通过 Transformer 注意力建模标签之间和标签与特征之间的关联。两个模块通过特征筛选和标签表示一致性相联系。DFE 选取两种视图中归一化差异较小的特征成分作为 ARC 的输入。ARC 为每个疾病标签提取表示，并约束对应表示在两种视图中保持接近。分类与一致性目标共同引导特征学习，将外观扰动下的稳定性要求施加于疾病标签对应的表示。
+
+框架采用单源域泛化，将训练更新限定于可访问的源域，减少获取目标域训练数据及跨机构汇集原始数据的需求。在此基础上，AdaGDP 作用于 DFE 与 ARC 联合模型的训练更新，进一步保护源域训练信息。其噪声调度旨在尽量保持识别性能。各模块的实现细节见随后的三个小节。
+
+第 5 节结论与讨论
+实际英文
+This study presents a privacy-preserving interpretable single-domain generalization framework for multi-label ocular disease recognition under restricted cross-institutional data access. DFE uses CAM guidance and dual-branch feature filtering to retain feature components that are relatively stable between original and style-augmented source images, and ARC models label-label and label-feature relevance while constraining the representation of each disease label to remain close across the two views. The single-source setting contributes to privacy: restricting updates to the accessible source domain avoids the target-domain access and cross-institutional data pooling that would otherwise be needed, and AdaGDP further protects the training information that remains in the source domain.
+
+The experimental results indicate that the gains come from the joint design. In both the ODIR Off-site and external EDID ablations, combining DFE and ARC outperforms either module alone. Compared with MixStyle, RSC, and FACT, the proposed method remains best on ODIR On-site and EDID in both the best-observed and mean candidate results, whereas FACT performs best on RFMiD. CAM visualizations and region-overlap analysis provide a way to inspect the image regions underlying the predictions. With AdaGDP, the selected model at a recorded ε of 9.76 (δ=10⁻⁵) maintains recognition performance close to the official non-private ODIR ResNet50 baseline.
+
+Several limitations remain. Although the asymmetric loss reduces the dominance of easy negative labels, class imbalance may still affect recognition stability for minority disease classes, and class-frequency-based weighting or resampling could be examined in future work. Cross-domain evaluation in this study relies on shared label spaces; future work can explore open-category and more complex out-of-distribution scenarios. For privacy preservation, future work can explore methods that retain performance under tighter privacy budgets, or combine the proposed mechanism with federated learning to support more complex cross-institutional deployment.
+
+对应中文
+本研究提出一种适用于跨机构数据访问受限条件的隐私保护可解释单域泛化框架，用于多标签眼病识别。DFE 通过 CAM 引导和双分支特征筛选，保留原始图像与风格增强源域图像之间相对稳定的特征成分。ARC 建模标签之间和标签与特征之间的关联，并约束各疾病标签在两种视图中的表示保持接近。将更新限制在可访问的源域，可避免原本需要的目标域访问和跨机构数据汇集；AdaGDP 进一步保护留在源域的训练信息。
+
+实验结果表明，收益来自联合设计。在 ODIR Off-site 和外部 EDID 消融中，联合使用 DFE 与 ARC 均优于单独使用任一模块。与 MixStyle、RSC 和 FACT 相比，本文方法在 ODIR On-site 和 EDID 上的候选最佳观测和平均结果均居首，FACT 在 RFMiD 上表现最好。CAM 可视化和区域重叠分析使读者能够检查预测所依据的图像区域。采用 AdaGDP 后，所选模型在记录的 ε 为 9.76（δ=10⁻⁵）时，识别表现接近 ODIR 官方非隐私 ResNet50 基线。
+
+尽管非对称损失降低了易分类负标签的主导作用，类别不平衡仍可能影响少数疾病类别识别的稳定性。后续可研究基于类别频率的加权或重采样。当前跨域评价依赖共享标签空间，后续可研究开放类别及更复杂的分布外场景。在隐私保护方面，可研究如何在更严格的隐私预算下保持性能，或将本机制与联邦学习结合，以支持更复杂的跨机构部署。
