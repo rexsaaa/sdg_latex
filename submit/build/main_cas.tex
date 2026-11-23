@@ -33,7 +33,7 @@
 \emergencystretch=2em
 
 \providecommand{\figref}[1]{\hyperref[#1]{Fig.~\ref*{#1}}}
-\providecommand{\figsubref}[2]{\hyperref[#1]{Fig.~\ref*{#1}.#2}}
+\providecommand{\figsubref}[2]{\hyperref[#1]{\revision{Fig.}~\ref*{#1}\revision{(#2)}}}
 \renewcommand{\tabref}[1]{\hyperref[#1]{Table~\ref*{#1}}}
 
 \begin{document}
@@ -80,8 +80,16 @@
 \cortext[cor1]{Corresponding author: Prof. Zhi-Ri Tang}
 
 \begin{abstract}
-Early fundus screening is effective for ocular disease diagnosis\revision{, and deep} learning has provided tools for fundus image analysis. \revision{Clinical deployment nevertheless faces three difficulties: multiple diseases often co-occur in a single eye; cross-institutional images differ in appearance while data sharing remains restricted; and medical data are privacy-sensitive. Within a single-source training setting, an Adaptive Label-Feature Relevance Construction (ARC) module captures disease co-occurrence dependencies via Transformer attention, and a Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) module learns transferable features under Class Activation Mapping (CAM) guidance. This source-only training also limits access to target-domain images and raw-image pooling across institutions, while an Adaptive Gaussian Differential Privacy (AdaGDP) mechanism further protects source-domain training information. Under non-private training, the method reaches a Final score of 78.85 on the ODIR dataset, outperforming representative multi-label ocular disease recognition methods. In comparisons with the domain generalization methods MixStyle, RSC, and FACT, it also achieves the highest results on ODIR On-site and EDID. With AdaGDP, ODIR recognition performance at a recorded $\epsilon$ of 9.76 ($\delta=10^{-5}$) remains close to the official non-private ResNet50 baseline.} \revision{Overall, this study presents an} interpretable and privacy-preserving single-domain generalization framework for multi-label ocular disease recognition, improving cross-domain performance and providing insights into ocular diagnosis under privacy constraints.
-\revision{Code is available at} \href{https://github.com/rexsaaa/ppisdg-ocular}{\revision{https://github.com/rexsaaa/ppisdg-ocular}}\revision{.}
+Early fundus screening is effective for ocular disease diagnosis. Deep learning has provided tools for fundus image analysis.
+However, clinical deployment still faces three major challenges: (1) multiple diseases often co-occur in a single eye, causing false positives and false negatives when modeled independently; (2) cross-institutional deployment suffers from domain shift, yet conventional cross-domain methods typically require target-domain or multi-source data, often infeasible; (3) medical data are privacy-sensitive, further restricting cross-institutional sharing and invalidating the multi-source assumption, calling for generalization with local privacy preservation.
+To address these three challenges in order, we first propose an Adaptive Label-Feature Relevance Construction (ARC) module that captures disease co-occurrence dependencies and links each disease label to the corresponding image features via Transformer attention to reduce false positives and negatives.
+Then, we design a Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) module that learns transferable features from a single source domain under Class Activation Mapping (CAM) guidance, improving unseen-domain generalization and interpretability.
+Finally, we integrate an Adaptive Gaussian Differential Privacy (AdaGDP) mechanism into training, preserving privacy through dynamic gradient noise injection with controlled performance loss.
+Experiments show that our method achieves a Final score of 78.85 on the ODIR Off-site set, outperforming representative multi-label ocular disease recognition methods.
+\revision{In comparisons with established domain generalization methods, our method also achieves the highest Final scores in both the in-domain evaluation on ODIR On-site set and the cross-domain evaluation on EDID dataset.}
+\revision{With AdaGDP, our method protects source-domain training information while achieving recognition performance comparable to that of the official non-private ODIR baseline.}
+In summary, we establish an interpretable and privacy-preserving single-domain generalization framework for multi-label ocular disease recognition, improving cross-domain performance and providing insights into ocular diagnosis under privacy constraints.
+Code is available at \href{https://github.com/rexsaaa/ppisdg-ocular}{https://github.com/rexsaaa/ppisdg-ocular}.
 \end{abstract}
 
 \begin{highlights}
@@ -91,6 +99,7 @@ Early fundus screening is effective for ocular disease diagnosis\revision{, and 
 \end{highlights}
 
 \begin{keywords}
+\raggedright
 Domain Generalization \sep Multi-Label Ocular Disease Recognition \sep Data Privacy \sep Interpretability
 \end{keywords}
 

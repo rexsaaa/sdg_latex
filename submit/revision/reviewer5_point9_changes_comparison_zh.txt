@@ -1,0 +1,199 @@
+审稿人 5 意见 9　全文语言与排版审核清单
+
+2026-11-20　当前稿实施与复核，待作者审阅成稿
+
+本次按作者通过的范围处理英文及排版。两版正文均为 30 页。下方 11 月 19 日的 31 页清单是实施前记录，其中页码、候选措辞及待审状态按当日理解。
+
+第 1、2 节。统一引言列举的方法类别，VLM has 改为 VLMs have，与下句 their 指向同一复数主语；合并医学生成报告旁的两项相邻引用。简化人工筛查限制的句法，明确跨机构评价中变化的是识别性能，理顺 non-IID 以及加密计算和多源协作条件的措辞。
+
+第 3 节及图 2。将增强视图的构造改由 DFE 作主语。依公式与后文的句法调整标点，公式（2）后的 where 接续同句，公式（6）两个等式之间留出数学间隔。公式（3）—（4）及紧随其后的参数说明在两版第 8 页均完整同页。图 2 的原矢量图件中，(a)Backbone 改为 (a) Backbone，图例中的 Cam guidance feature 改为 CAM guidance feature。正文子图统一采用 Fig. 1(a1)、Fig. 2(a)、Fig. 4(a)–(h)、Fig. 10(b) 等形式。图 9(f) 的句首保留 Figure。
+
+第 4 节及表格。图 4–6 的图注各保留一组子图标记，数据段明确由已有 ODIR 图像组成训练子集。表 1 排在第 13 页，在第 12 页正文引入之后。统一 GPU 型号大小写，清楚区分文献方法与其训练操作，拆开消融段首长句。图 10 的引入与图注均明确包含源域和目标域。表 11 的表头写明初始噪声乘数、衰减率和 80 轮后的预算，行名统一为 Setting 1 至 Setting 8，衰减率按数学记数排版，保留第 5 行的红色标记。第 4.5 节明确预算范围和恒定学习率阶段。
+
+作者复核后，表 1 的首列表头和汇总行恢复为 Labels 和 All，表 4 的消融实验表题恢复为上一版原文。
+
+本轮已按作者意见撤回第 4.3 节比较方法及 DR 与 AMD 共现示例、第 4.5 节隐私曲线引入、表 11 末句四处改写。引言沿用 grouped into three technical directions。作者已通过第 2.2、3.1、4.4 节的 A、B、C 三处建议，正文已按通过稿落实。下方列出原文、审核前的暂存稿及通过稿。
+
+首页和参考文献。关键词栏采用左对齐以改善第二个关键词的词间距；参考文献统一页码范围横线及同一期刊名称的大小写，在 DOI 的自然分隔处允许换行。重新编译后已核对两版逐页版面、图表顺序、公式和文献定位，无未定义引用。
+
+回复汇总。按现稿核对五位审稿人的 33 条回复，更新 v2.txt 与 v2.docx 中作者所指的现稿章节标签、表号和参考文献编号。审稿人原问题仍保留所评原稿的编号。R2 次要 5 的六段已通过回复已补入 Word，并核对 Word 导出结果。R5 第 9 条的完成时态和 R3 第 3 条的代码声明依作者决定保留。
+
+Highlights 用词已确认。作者同意第二条采用 “Learns CAM-guided transferable features from a single source domain.”，已将通过的清洁编译稿单页写入 submit/build/highlights.pdf，并核对三条亮点与主文件一致。
+
+现稿中文对照　67f3530 → 当前工作区
+
+这里比较提交 67f3530 与当前工作区有差异的七个 .tex 文件。下方按论文顺序摘录发生变化的句子或短语，省去高亮和链接命令，图表号按当前编译稿显示。先看第 3.1、4.1、4.4、4.5 节，可直接判断改动有没有影响论文的科学含义。
+
+第 1 节　引言首段（01_introduction_trans.tex 第 4 行）
+
+原英文　manual fundus screening is limited by its time cost, dependence on expert experience, and shortage of primary medical resources
+原中文　人工眼底筛查受时间成本、对专家经验的依赖和基层医疗资源短缺的限制。
+现英文　manual screening takes time, requires clinical expertise, and is constrained by limited resources in primary care
+现中文　人工筛查耗时，需要临床专业知识，还受基层医疗资源有限的制约。
+判断　三项理由均保留。英文分别指出筛查需要什么、资源限制来自哪里，能自然接到下一句眼底图像辅助诊断的实际价值。
+
+原英文　broadly grouped into three technical directions: Machine Learning (ML), Vision-Language Model (VLM), and Convolutional Neural Network (CNN) ｜ VLM has opened … However, their training
+原中文　大致分为机器学习、视觉语言模型、卷积神经网络三个技术方向。后文先用单数 VLM，再用复数“它们”回指。
+现英文　broadly grouped into three technical directions: traditional machine learning (ML) methods, vision-language models (VLMs), and convolutional neural networks (CNNs) ｜ VLMs have opened … However, their training
+现中文　大致分为传统机器学习方法、视觉语言模型和卷积神经网络三个技术方向。后文的“它们”指视觉语言模型。
+判断　技术方向的引导短语沿用原文。“传统”与下句的人工设计特征、支持向量机和随机森林相符。VLM 的单复数已对齐。医学报告生成后的两条文献合并显示，所引文章相同。
+
+第 2.2、2.3 节　相关工作（02_related_work_trans.tex 第 16、18、28、30 行）
+
+已通过 A　这是第 2.2 节的开头，下一句以医院、设备和采集流程的差异解释医学影像中的域偏移，随后引入域适应。
+原英文　In computer vision tasks, a model may perform well on training data but degrade when deployed on data collected by new institutions or devices because of differences in imaging conditions, illumination environments, and data distributions.
+原中文　在计算机视觉任务中，模型在训练数据上可能表现良好，但由于成像条件、光照环境和数据分布存在差异，部署到由新机构或设备采集的数据上时，表现可能变差。
+审核前暂存英文　In computer vision tasks, recognition performance may decline when a model is evaluated on data acquired at other institutions or with different devices because of differences in imaging conditions, illumination environments, and data distributions.
+审核前暂存中文　在计算机视觉任务中，由于成像条件、光照环境和数据分布存在差异，在其他机构或用不同设备采集的数据上评估模型时，识别性能可能下降。
+通过稿英文　In computer vision tasks, a model may perform well on training data, but its recognition performance may decline on data acquired at other institutions or with different devices because of differences in imaging conditions, illumination environments, and data distributions.
+通过稿中文　在计算机视觉任务中，模型在训练数据上可能表现良好，但由于成像条件、光照环境和数据分布存在差异，在其他机构或用不同设备采集的数据上，其识别性能可能下降。
+审核要点　通过稿恢复了训练数据上的表现作为对照，同时明确下降的是识别性能。
+
+原英文　non-independent and identically distributed data ｜ stronger privacy preservation against privacy leakage ｜ makes the aforementioned multi-source collaboration assumption even harder to hold
+原中文　非独立同分布数据；对隐私泄露提供更强保护；使前述多源协作假设更难成立。
+现英文　data that are not independent and identically distributed ｜ encrypted computation can protect data during processing ｜ makes the conditions for multi-source collaboration harder to meet
+现中文　不满足独立同分布条件的数据；加密计算可在处理过程中保护数据；使多源协作所需条件更难满足。
+判断　第一处明确了否定范围。第二处去掉没有指明比较对象的“更强”，接下来用同态加密解释如何处理密文。第三处说清多机构数据协作的实际困难。这三句都位于背景综述。
+
+第 3.1、3.2 节　DFE 与 Transformer（03_method_trans.tex 第 19、61、75 行）
+
+已通过 B　上一句给出 DFE 的学习目标。随后两句定义原始和增强视图，举例说明亮度、对比度和饱和度扰动如何模拟外观变化。
+原英文　Inspired by contrastive learning, original source-domain images are transformed into augmented source-domain images through augmentation techniques such as style disturbance to simulate possible distribution shifts in unseen domains.
+原中文　受对比学习启发，通过风格扰动等增强技术把原始源域图像转为增强图像，以模拟未见域中可能出现的分布偏移。
+审核前暂存英文　Drawing on contrastive learning, DFE uses style perturbations to generate augmented views of source images and simulate appearance changes in unseen domains.
+审核前暂存中文　DFE 借鉴对比学习，通过风格扰动生成源图像的增强视图，以模拟未见域中的外观变化。
+通过稿英文　Drawing on contrastive learning, DFE uses style perturbations to generate augmented views of source images and simulate possible distribution shifts in unseen domains.
+通过稿中文　DFE 借鉴对比学习，通过风格扰动生成源图像的增强视图，以模拟未见域中可能出现的分布偏移。
+审核要点　通过稿保留 DFE 作主语，恢复原文“模拟可能的分布偏移”的目的，具体的外观变化由下文解释。
+
+原英文　pixel-wise element-wise multiplication ｜ Since Transformer requires sequential input
+原中文　逐像素逐元素乘法；由于 Transformer 需要序列输入。
+现英文　element-wise multiplication ｜ Because the Transformer takes a sequence as input
+现中文　逐元素乘法；由于该 Transformer 以序列为输入。
+判断　第一处对应特征张量与掩码逐元素相乘。第二处引出展平特征的操作，后半句对 Query、Key、Value 的说明沿用上版。
+
+第 4.1、4.2 节　训练子集与训练次数（04_experiments_trans.tex 第 20、38、46、50 行）
+
+原英文　1,907 D/A/M training images are constructed on the ODIR side ｜ a D/G/M training subset is constructed on the ODIR side, containing 1,871 images
+原中文　在 ODIR 侧构建了 1,907 张 D/A/M 训练图像；在 ODIR 侧构建的 D/G/M 训练子集包含 1,871 张图像。
+现英文　the ODIR training subset contains 1,907 D/A/M images ｜ the ODIR D/G/M training subset contains 1,871 images
+现中文　针对 RFMiD 的评估，ODIR 训练子集包含 1,907 张 D/A/M 图像。针对 EDID 的评估，ODIR 的 D/G/M 训练子集包含 1,871 张图像。
+判断　读者可以直接看出两组数字指源域 ODIR 的训练图像。标签组合、样本数、目标数据集与上版相同。
+
+原英文　The two sweeps are conducted independently, with each parameter value trained in a separate run.
+原中文　两组扫描分别进行，每个参数取值单独训练。
+现英文　The two sweeps are conducted independently, with a separate training run for each parameter value.
+现中文　两组扫描分别进行，每个参数取值对应一次单独的训练。
+判断　明确训练次数的含义。相邻训练设置中的 GPU 型号统一写成 RTX 4080 SUPER。
+
+第 4.3 节　与已有方法比较（04_experiments_trans.tex 第 64 行）
+
+原英文　The ODIR dataset is expanded through data augmentation, and the model is fine-tuned using the SGD optimizer.
+原中文　ODIR 数据集通过数据增强得到扩充，模型采用 SGD 优化器微调。
+现英文　They augmented the ODIR training data and fine-tuned their model using SGD.
+现中文　Gour 和 Khanna 对 ODIR 训练数据做了增强，并使用 SGD 微调其模型。
+判断　They 回指上一句的两位作者，使读者能区分文献中的 SGD 与本文的 AdamW。
+
+第 4.4 节　消融实验的引入（04_experiments_trans.tex 第 85 行）
+
+已通过 C　段首引出两项目的。紧随其后的是表 4 和图 8 的 ODIR 识别结果，本节后文以图 9 和表 6 比较关注区域。
+原英文　To assess the independent contributions and combined effects of the two core modules in the proposed method, namely Dual-Branch Guided Domain-Invariant Feature Extraction (DFE) and Adaptive Label-Feature Relevance Construction (ARC), and to examine the improvement in model interpretability brought by CAM guidance, module-wise ablation experiments are conducted using ODIR Off-site metrics.
+原中文　为评估所提方法中双分支引导的域不变特征提取（DFE）和自适应标签–特征关联构建（ARC）两个核心模块各自的贡献与联用效果，并考察 CAM 引导带来的模型可解释性提升，本文使用 ODIR Off-site 指标开展了模块消融实验。
+审核前暂存英文　The ablation study compares ResNet50 with configurations that add DFE, ARC, or both modules. ODIR Off-site results quantify their individual and combined contributions to recognition, and CAM visualizations show the regions associated with predictions.
+审核前暂存中文　消融实验将 ResNet50 与单加 DFE、单加 ARC 或同时加入二者的配置进行比较。ODIR Off-site 结果衡量两个模块单用及联用对识别的贡献，CAM 可视化展示与预测相关的图像区域。
+通过稿英文　The ablation study compares ResNet50 with configurations that add DFE, ARC, or both modules to assess their individual and combined contributions to recognition on ODIR Off-site. We also compare the regions highlighted by the baseline and the full model to examine how CAM guidance supports model interpretability.
+通过稿中文　消融实验将 ResNet50 与单加 DFE、单加 ARC 或同时加入二者的配置进行比较，以评估两个模块单用及联用对 ODIR Off-site 识别表现的贡献。我们还比较基线模型和完整模型所关注的区域，以考察 CAM 引导如何帮助解释模型的预测。
+审核要点　通过稿让识别和可解释性各占一句，第二句将“比较关注区域”的做法与研究目的连起来。
+
+第 4.5 节　综合得分与图 10（04_experiments_trans.tex 第 162、172、191 行）
+
+原英文　binocular scores ｜ The monocular metrics also increase ｜ target-domain feature distributions
+原中文　双眼得分；各单眼指标也提高；目标域的特征分布。
+现英文　binocular Final scores ｜ The monocular Final scores also increase ｜ source- and target-domain feature distributions
+现中文　双眼 Final 综合得分；单眼 Final 综合得分也提高；源域与目标域的特征分布。
+判断　表 8 报告 Final。以双眼为例，Off-site 的比较为 76.19 与 78.79，On-site 为 75.23 与 77.49。图 10 图注将圆点标作源域、三角标作目标域，所以正文和图注开头都补入“源域”。
+
+第 4.5 节及表 11　隐私实验的参数、结果和单位（04_experiments_trans.tex 第 208、230 行，table3_privacy_scan_trans.tex 第 9、11–18 行）
+
+原英文　eight combinations of initial noise multiplier and noise decay rate, ranging from 5.01 to 20.01
+原中文　八组初始噪声乘数与噪声衰减率的组合，范围从 5.01 到 20.01。区间紧跟在参数组合之后，所指不清。
+现英文　eight combinations of initial noise multiplier and noise decay rate. The recorded ε values after 80 epochs range from 5.01 to 20.01.
+现中文　比较初始噪声乘数和噪声衰减率的八种组合。训练 80 轮后记录的隐私预算 ε 介于 5.01 和 20.01 之间。
+判断　与表 11 最后一列一致。表头也由“ε / 80 epoch”改为“ε after 80 epochs”。八组参数、八个预算值均与上版逐行相等。原表题指明标红的 Setting 5 为最终采用的配置。
+
+原英文　linear decay followed by constant training
+原中文　线性衰减后进行恒定训练。
+现英文　linear decay followed by a constant learning rate
+现中文　学习率先线性衰减，随后保持恒定。
+判断　与紧接的说明一致，前 75% 的训练轮次内学习率降至初值的 80%，此后保持恒定。
+
+可合并审核的排版差异
+
+· 主文件 main_cas.tex 修改子图引用宏及关键词栏对齐。图 1、2、10 的子图用括号标号，图 4 至图 6 连续子图写作 Fig. 4(a)–(h) 等，各图注逐项列出类别并去掉重复引导语。摘要和 Highlights 的三句英文在上一提交中已经是当前文本，独立 highlights.pdf 的第二条才在本轮同步为 transferable features。结论文件没有本轮差异。
+· 方法文件的公式（1）、（4）、（6）至（9）、（11）、（12）按句法补句号，公式（2）后的 where 接同句，公式（6）的两条等式及后面的投影矩阵说明调整间距。逐式比较，两版公式的运算、变量和编号一致。图 2 内部另有一处子图标号空格和一处 CAM 大小写，位于配图 PDF。
+· 第 4.1 节调整表 1 浮动位置，让正文先引入。表 11 的行名统一为 Setting 1 至 Setting 8，衰减率改按科学记数法排版。
+· 参考文献文件 06_references_trans.tex 有 36 行替换。还原页码横线、期刊名大小写、高亮及 DOI 可断行标记后，两版条目逐字相同。沿用原有条目、排列、页码值和 DOI。
+
+11 月 19 日的范围审核记录
+
+2026-11-19。当前阶段为修改范围审核。中文回复的论证和预期完成口吻已获认可，以下各项为待审建议。页码指服务器工作区现有 31 页清洁版和高亮版，文件行号指 submit/build/ 下当前源码。审核覆盖主文件、五节正文、13 张表、11 幅图及图注、公式和参考文献；两版 PDF 均已逐页查看版面，疑点另与页面原图、文字位置及源文件核对。此次没有写入论文或重新编译。
+
+一、建议优先处理的语言和排版问题
+
+1. 第 1 节首段，第 1–2 页，sections/01_introduction_trans.tex 第 4 行。三类方法写成 “Machine Learning (ML), Vision-Language Model (VLM), and Convolutional Neural Network (CNN)”，混用研究领域名称和单个模型名称。后文 “VLM has … However, their training …” 单复数也不一致。建议把并列三项都写成方法类别，并让名词、谓语和代词一致，例如以 “vision-language models (VLMs)” 对应 “their”。同段 “limited by its time cost, dependence on expert experience, and shortage of primary medical resources” 把三种限制都接在 its 后，建议分别写清筛查所需的时间、对专业经验的依赖，以及 “a shortage of resources in primary care”。该位置只列入内部校对，不作为对审稿人的错误举例。
+
+2. 第 1 节同段，第 2 页，同文件第 4 行。“medical report generation” 后相邻两次引用在 PDF 中排成一行末尾的 “[3]” 和下一行开头的 “[4].”。建议将支持同一论述的两条文献放入同一引用命令，以模板的数字引文格式成组显示。两条文献及其支撑的论述均保留。
+
+3. 第 2.2 节首段及下一段，第 5 页，sections/02_related_work_trans.tex 第 16、18 行。“a model may perform well … but degrade when deployed on data collected by new institutions or devices” 容易读成模型本身退化，且机构和设备与 collected by 的搭配不同。建议明确下降的是识别性能，将采集地点与采集设备分开表述。同节 “non-independent and identically distributed data” 的否定范围有歧义，建议写成 “data that are not independent and identically distributed (non-IID)” 或采用等义的简洁表述。
+
+4. 第 2.3 节，第 6 页，同文件第 28、30 行。“stronger privacy preservation against privacy leakage” 反复表达“防泄露”，stronger 的比较对象也未指明；“makes the … assumption even harder to hold” 搭配生硬。前者建议直接引出加密计算如何保护参与方数据，后者改为多机构协作所需的条件更难满足。第 30 行随后已通过的单源训练和梯度保护说明可以原样衔接。
+
+5. 第 3.1 节首段，第 7 页，sections/03_method_trans.tex 第 17 行。“Inspired by contrastive learning, original source-domain images are transformed …” 的句首分词在语法上修饰 images。建议让方法或作者作主语，直接说明如何由源图像生成增强视图。“transformed into augmented … through augmentation techniques” 的重复可在同一句消除。
+
+6. 图 2(a) 和图右侧图例，第 8 页。实际图件 images/media/image2_padded.pdf，由 sections/03_method_trans.tex 第 10 行引入。图内为 “(a)Backbone feature extraction”，同图其余分图标签均在右括号后留空；“Cam guidance feature” 与全文缩写 CAM 不一致。建议改成 “(a) Backbone feature extraction” 和 “CAM guidance feature”。两处字样嵌在图内，改单独的 LaTeX 图注不会改变显示。
+
+7. 第 3.1–3.3 节，公式（1）至（12）附近，第 8–12 页，sections/03_method_trans.tex。第 30–33 行公式（2）末尾是逗号，后面的 “where Z denotes …” 仍承接同一句，却因空行作为新段缩进。清洁版和高亮版都能看到。建议让 where 紧接公式、回到正文左边界。另一种情形是公式末尾为逗号，下一句却以大写 “Here” 或新的独立陈述开始，如（1）、（4）、（6）、（7）、（8）、（9）、（11）、（12），分别见第 24、37、57、69、77、90、129、135 行。应按每处句法选择句号另起句，或逗号加小写续句。公式（3）连接同组的公式（4），公式（10）本已用句号结束，均无需统一改写。公式数值、运算和编号另行保留。
+
+8. 第 3.1 节公式（6）及其说明，第 9 页，同文件第 57、60 行。两条并列等式在 PDF 中只用逗号紧接，读者容易把第二个等式的开头看成前一项的一部分。建议在逗号后给出明确的数学间隔；“pixel-wise element-wise multiplication” 同义修饰重叠，保留 “element-wise multiplication” 即可。
+
+9. 第 4.1 节 RFMiD、EDID 数据段和图 4–6 图注，第 13–15 页，sections/04_experiments_trans.tex 第 13、19、24、33、37 行。“1,907 D/A/M training images are constructed on the ODIR side” 容易被理解成合成了图像。实际是从已有数据组成训练子集，建议以 “training subset” 为主语，EDID 方向亦用相同句法。三幅图的图注均先写 “(a)–(h) denote/correspond to”，随后逐项再列 (a) 至 (h)，最后又加 respectively；每个标签和类别列一次即可。数据集、图内标注、类别和计数沿用现稿。
+
+10. 表 1 左上列表头，第 13 页，tables/src/table1_dataset_distribution_trans.tex 第 10 行。第一列标题是 “Labels”，下方列的却是 Training、On-site test、Off-site test 和 All；疾病标签在后续各列。建议首列表头写 “Dataset split” 或 “Subset”，末行可写 “Total”，使行、列含义清楚。
+
+11. 第 4.2 节训练设置与参数扫描，第 15 页，sections/04_experiments_trans.tex 第 45、47、49 行。同一 GPU 在相邻两段分别写 “RTX 4080 Super” 和 “RTX 4080 SUPER”，建议统一为后者，保留训练用两张 GPU 和测量用同一张 GPU 的区别。“with each parameter value trained in a separate run” 把超参数取值写成训练对象，建议改为 “with a separate training run for each value”。保持两组独立扫描和选模规则。
+
+12. 第 4.3 节首段及 Gour、He 两段，第 16 页，同文件第 61、63、65 行。“To compare …, the comparison includes …” 重复，且不定式的执行者不明；可直接写本文比较四种已发表方法，并保留文献结果与自有实验的来源区分。“The ODIR dataset is expanded …” 紧随 Gour 和 Khanna 的工作，建议明确是该研究对其训练数据实施了增强；叙述已实施的步骤使用过去时，模型组成仍可用现在时。“model disease co-occurrence such as DR and AMD” 列出的是疾病名称，句中要举例的是两种疾病的共现，宜明确写出 “the co-occurrence of DR and AMD”。
+
+13. 表 4 表题与第 4.4 节开头，第 18 页，tables/src/table6_ablation_trans.tex 第 5 行及 sections/04_experiments_trans.tex 第 84 行。表题中的 “introducing DFE or ARC alone and combining the two both yield performance improvements” 并列不清。可明确写成分别加入 DFE、ARC 或同时加入二者时，Final 得分均高于基线。正文首句在主句前叠加两个目的从句，又完整展开两个模块名称，建议拆成一句说比较哪些配置，一句说在 ODIR Off-site 评估什么，随后衔接现有的单眼、双眼说明。
+
+14. 第 4.5 节域内结果及图 10 的引入和图注，第 23–25 页，sections/04_experiments_trans.tex 第 161、171、190 行。76.19、75.23 等在上下文中是 Final 得分，而 “binocular scores” 和 “The monocular metrics also increase …” 容易读成多项分指标均取这些值。建议就近写 “binocular Final scores” 和 “monocular Final scores”。图 10 引入和图注开头均只称 “target-domain” 特征，同一图注后半段却明确圆点为源域、三角为目标域；建议两处开头都指明图中展示源域和目标域的样本特征。图件及其比较设置沿用现稿。
+
+15. 第 4.5 节隐私配置与优化策略，第 26 页，同文件第 207、216、229 行。“eight combinations of initial noise multiplier and noise decay rate, ranging from 5.01 to 20.01” 让区间紧跟在两项训练参数之后，实际 5.01 至 20.01 指记录的 ε，建议把范围直接放在 ε 后。“are intuitively presented” 可直接改为图展示何种关系。“linear decay followed by constant training” 实际是之后的学习率保持恒定，建议写 “linear decay followed by a constant learning rate”。这些都是同一组配置和数值的表述调整。
+
+16. 表 11，第 27 页，tables/src/table3_privacy_scan_trans.tex 第 5、9、11–18 行。PDF 的八个行名为 “setting1” 至 “setting8”，与表题和正文的 “Setting 5” 不同。统一成 “Setting 1” 至 “Setting 8”。表头 “ε / 80 epoch” 的斜线容易被读成除法，epoch 也应为复数，建议 “ε after 80 epochs”。“noise_multiplier” 和 “noise_decay_rate” 宜用表头文字 “Initial noise multiplier” 和 “Noise decay rate”，例如 “1.5e-6” 可按正文习惯排作 1.5 × 10⁻⁶。相邻表题的 “The red Setting 5” 可改为 “Setting 5, shown in red, …”。
+
+17. 正文的子图引用，分布在第 1、3、4 节。现稿并用 “Fig. 1.a1”“Fig. 2.a”“Fig. 5.a to Fig. 5.h”“Fig. 10.b” 和 “Figure 9(f)”。建议随图内的括号统一为 “Fig. 1(a1)”“Fig. 2(a)”“Fig. 5(a)–(h)”“Fig. 10(b)” 等；句首可保留完整的 “Figure”。位置在 main_cas.tex 第 35–36 行，sections/01_introduction_trans.tex 第 10、25 行，03_method_trans.tex 第 19、21、42、64 行，04_experiments_trans.tex 第 6、19、28、135、171 行。大部分子图引用是直接写入的，只改宏无法覆盖全部位置。
+
+18. 参考文献，第 29–31 页，sections/06_references_trans.tex。例如 [12] 第 25 行和 [54] 第 109 行是同一期刊，刊名一处写 “Biomedical Signal Processing and Control”，另一处写 “Biomedical signal processing and control”。页码范围中旧条目的单连字符（如第 23 行）与 [49]、[59] 第 99、119 行的范围横线也不同。建议统一出版物名称的大小写和页码范围符号。第 29 页的 [8]、[9]（第 17、19 行）还可见少数行的词距明显拉宽，长 DOI 移到下一行；两版 PDF 和编译记录均吻合。建议允许 DOI 在合适位置断行，并在最终行版上复核。
+
+二、与已有修改合并，或等全文定稿后处理的位置
+
+19. 摘要，第 1 页，main_cas.tex 第 83 行。“require target-domain or multi-source data, often infeasible” 省去了不可行的动作，容易被读成“数据本身不可行”。建议在已安排的摘要统改中明确实践中难以取得这类数据；可同时拆开列举三项挑战的长句，保留已确认结果与代码链接。
+
+20. 引言的第 2 项挑战，第 2 页，sections/01_introduction_trans.tex 第 8、10 行。“However, a single source domain …” 和第 2 项的首段在 PDF 中都按普通段落起行，续行又退回正文左边界，第 2 项的归属不如第 4 页的正式编号列表清楚。R2 次要意见 5 已通过“两段同属一个编号项”的排版方向，可随该点落实，再核对图 1 和第 3 项的位置。现稿第 1、2.1、3.2 和 4.1 节等标题后的首段可见正常缩进，正文没有逐段补空格的需要。
+
+21. 第 4.4 节图 9 前，第 20–21 页，sections/04_experiments_trans.tex 第 122–129 行。两版第 20 页正文都在约三分之一页高处结束，完整九例的图 9 排在第 21 页。源码同时用了浮动屏障和固定位置，图的高度也需要较大空间。建议在最终段落长度稳定后试排允许浮动的位置，以完整图、图注、框线辨识度和邻近分析为验收依据。第 20 页这片空白属于分页问题。
+
+22. 结论，第 28–29 页，sections/05_conclusion_trans.tex 第 4 行。三个模块的贡献塞在一个长句中，随即转入实验结果和未来工作；末尾相邻句重复 “future work can explore”。建议随已约定的结论整体审核，按研究结论与后续方向分段，拆开长句。第 3 节总述的精简也已有 R2 次要意见 5 的通过稿，避免另起一套。
+
+三、需要确认、或可按最终版式决定的事项
+
+23. 第 1 页作者单位 b、c，main_cas.tex 第 68–74 行。两处地址末尾均显示 “Hong Kong, Hong Kong”，来自 city 和 country 两个字段值相同。建议作者确认投稿所需的完整地址，再处理重复显示。关键词栏第二项较长，在窄栏中两端对齐，第一行 “Multi-Label Ocular Disease” 的词距较宽；若终稿仍明显，可仅调整该栏的对齐方式。
+
+24. 第 3.1 节图 2(c)、公式（5）及其后第 54 行，第 8–9 页。公式分母写作 √(σ² + ε)，随文却将 σ 称作 variance，符号与解释需核对。另，公式中的阈值判断是 ≤ τ，图内写 < τ，当前外层 ODIR 的 lib/models/query2label.py 第 154 行的掩码构造也使用严格小于。建议作者先确认公式（5）应报告的统计量及边界条件，再决定统一哪一处。当前代码提供核查线索，不能单独证明所有历史实验的运行版本。
+
+25. 第 3.2 节公式（8）前，第 10 页，sections/03_method_trans.tex 第 74 行。“Since Transformer requires sequential input” 中 Transformer 的冠词及用词可改善。该句后半句涉及 Key、Value 和 Query 来源，与项目已登记的公式（7）—（8）及图 2(d) 结构对应问题重合；建议留在该项事实核对时一起审。
+
+26. 第 4.5 节，第 22–28 页，sections/04_experiments_trans.tex 第 147、149、207、216、235 行。开头的 “three stages” 指三种评价任务，而下文实际排了四个编号条目，隐私评估占第 2–4 项。建议在过渡句中点明任务和下文条目的对应关系，或将第 2–4 项视觉上归在隐私评估之下。此处涉及章节层次，待核对现有各点已批准的隐私段落后再定。
+
+以上是范围审核，尚未逐处定英文、写入正文或验证修改后的 PDF。首页关键词和个别参考文献行的词距应依据实际页面判断，源码空白和 PDF 文本提取产生的间隔不能直接视为应删字符。
