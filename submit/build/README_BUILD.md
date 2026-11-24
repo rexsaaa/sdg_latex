@@ -30,15 +30,9 @@ The compiled full CAS PDF is `main_cas_full.pdf`. The separate highlights PDF is
 - Remaining submission metadata to confirm before direct journal upload: full postal affiliation addresses, funding statement, declaration of competing interests, data availability statement, and author biographies/photos if requested by the submission system.
 - Original article-style float options such as `[!htb]` and `[H]` were removed in the copied build files so that CAS controls float placement.
 
-## Revision highlighting and Git history
+## Revision highlighting
 
-Following the supervisor's guidance confirmed on 2026-11-04, accumulate all reviewer-driven changes in one PDF using yellow highlighting. The baseline for this round is the Git tag `准备审稿人意见返修`.
-
-Use `\revision{Revised text}` for each changed passage. Keep earlier revisions highlighted as later reviewer comments are addressed. When a passage changes again, highlight its final wording relative to the revision baseline.
-
-Keep the response letter organized by reviewer and comment. Locate changes using section and final page references. Record each completed revision group in a Git commit identified by the reviewer and relevant points so that its changes can be inspected separately. The primary editing and build checkout is now `ODIR/sdg_latex` on the server, with its own Git history. The Mac checkout is synchronized at review milestones. Use `git -C sdg_latex ...` from ODIR; manuscript files are excluded from the outer experiment repository.
-
-Defining `\RevisionClean` before loading the manuscript hides the yellow highlighting for the clean version.
+The manuscript uses `\revision{Revised text}` to highlight a passage. Defining `\RevisionClean` before loading the manuscript hides the highlighting in the clean version. For the baseline and marking conventions used in the November 2026 submission, see the [round record](../revision/round_2026-11-23.md).
 
 ## Revision builds
 
@@ -71,4 +65,4 @@ python scripts/build_revision.py --check
 
 `--check` builds and splits the PDFs inside `build/revision/` without replacing the review PDFs. This is useful for environment validation. Logs, auxiliary files, drivers, and dependency state stay in the ignored `build/revision/` directory and are reused between runs.
 
-Keep the approved reply and bilingual comparison for each point in the existing `submit/revision/` files. Review individual text changes before applying them; compile at review milestones or when a layout check is needed. Preserve earlier yellow highlighting, then check the relevant pages and response-letter locations. Do not create a new full manuscript snapshot for every wording change or automatically transfer both PDFs after each edit. Integrate any manual Mac edits into the server checkout before continuing.
+Compile at review milestones or when a layout check is needed. Inspect the affected pages in each requested version, including figure and table references. For point-by-point approval, response letters and recording changes, see the [revision workflow](../../docs/revision_workflow_zh.md).
